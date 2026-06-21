@@ -1,0 +1,432 @@
+/* 修仙主题 · 暗色 · 衬线字体 */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0d0f17;
+  --bg-card: #161926;
+  --bg-elevated: #1e2233;
+  --fg: #e8e6df;
+  --fg-muted: #8a8d9b;
+  --accent: #d4a574;       /* 暖金（仙家符箓） */
+  --accent-2: #7a9bcf;     /* 冷蓝（灵气） */
+  --danger: #c75c5c;
+  --border: #2a2e40;
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+  --sans:  "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* 背景装饰：淡墨山影 */
+.bg-decoration {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at top, #1a1e30 0%, transparent 60%),
+    radial-gradient(ellipse at bottom, #1f1a2a 0%, transparent 60%);
+  opacity: 0.6;
+}
+.bg-decoration::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background:
+    linear-gradient(180deg, transparent 0%, var(--bg) 100%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 20px,
+      rgba(212, 165, 116, 0.03) 20px,
+      rgba(212, 165, 116, 0.03) 21px
+    );
+}
+
+header {
+  text-align: center;
+  padding: 3rem 1rem 1.5rem;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
+}
+
+.subtitle {
+  color: var(--fg-muted);
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+.page {
+  animation: fadeIn 0.4s ease;
+}
+
+.page.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ───────── 故事卡片 ───────── */
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin: 1.5rem 0 1rem;
+  letter-spacing: 0.05em;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 165, 116, 0.2);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-title {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  min-height: 2.5em;
+}
+
+.card-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--accent-2);
+}
+
+/* ───────── 游戏页 ───────── */
+
+.game-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.btn-back {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+}
+.btn-back:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.game-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .game-body { grid-template-columns: 1fr; }
+}
+
+.story-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  min-height: 400px;
+}
+
+.node-id {
+  font-family: var(--serif);
+  color: var(--accent);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.story-text {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--fg);
+  white-space: pre-wrap;
+  margin-bottom: 1.5rem;
+}
+
+.refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: rgba(122, 155, 207, 0.05);
+  border-left: 2px solid var(--accent-2);
+  border-radius: 4px;
+}
+
+.refs-label {
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  align-self: center;
+}
+
+.ref {
+  font-size: 0.8rem;
+  color: var(--accent-2);
+  background: rgba(122, 155, 207, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.ref:hover {
+  background: rgba(122, 155, 207, 0.2);
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.choice {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  color: var(--fg);
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: all 0.2s;
+}
+
+.choice:hover {
+  background: rgba(212, 165, 116, 0.08);
+  border-left-color: var(--accent);
+  border-left-width: 5px;
+  padding-left: calc(1.25rem - 2px);
+  transform: translateX(2px);
+}
+
+.choice .if-clause {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  margin-top: 0.4rem;
+  font-family: var(--sans);
+}
+
+.ending {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.15) 0%, rgba(122, 155, 207, 0.1) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.ending.hidden {
+  display: none;
+}
+
+.btn-restart {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  transition: all 0.2s;
+}
+.btn-restart:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ───────── 状态面板 ───────── */
+
+.state-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  align-self: start;
+  position: sticky;
+  top: 1rem;
+}
+
+.state-panel h3 {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.state-panel h3:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+#state-view {
+  font-size: 0.85rem;
+  font-family: ui-monospace, "SF Mono", monospace;
+}
+
+.state-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  border-bottom: 1px dotted var(--border);
+}
+
+.state-key {
+  color: var(--accent-2);
+}
+
+.state-val {
+  color: var(--fg);
+  text-align: right;
+  word-break: break-all;
+  max-width: 60%;
+}
+
+#history-view {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  padding-left: 1.2rem;
+  line-height: 1.8;
+}
+
+#history-view li.current {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+#history-view li::marker {
+  color: var(--fg-muted);
+}
+
+.muted {
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+}
+
+footer a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+#loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--fg-muted);
+  font-size: 1.1rem;
+}
+#loading.hidden {
+  display: none;
+}
+
+/* 闪烁的"思考"指示 */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.loading-pulse {
+  animation: pulse 1.4s ease-in-out infinite;
+}

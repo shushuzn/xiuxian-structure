@@ -24,6 +24,11 @@ xiuxian-structure/
 │   └── 大乘期.md
 ├── 灵根体系/灵根.md            # 先天资质
 ├── 天地灵气/灵气.md            # 世界资源
+├── 妖兽体系/                   # 妖族
+│   ├── 妖兽.md
+│   └── 灵兽.md
+├── 势力体系/势力.md            # 宗门、家族、散修、王朝、妖修
+├── 灵石体系/灵石.md            # 通用货币
 ├── 功法体系/                   # 修炼方法
 │   ├── 功法.md
 │   ├── 长生诀.md               # 天级无属性示例
@@ -48,6 +53,9 @@ xiuxian-structure/
 │   ├── aether.yaml             # 灵气
 │   ├── techniques.yaml         # 功法
 │   ├── artifacts.yaml          # 法器
+│   ├── monsters.yaml           # 妖兽/灵兽
+│   ├── factions.yaml           # 势力
+│   ├── spirit_stones.yaml      # 灵石
 │   └── relations.yaml          # 跨体系关联
 │
 ├── docs/                       # 元文档

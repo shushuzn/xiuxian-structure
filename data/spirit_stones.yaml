@@ -1,0 +1,76 @@
+# spirit_stones.yaml — 灵石体系权威数据
+
+# 灵石品级
+tiers:
+  - id: xia_pin
+    name: 下品灵石
+    energy_unit: 1
+    exchange_ratio: 1           # 基准
+    used_in_realm: lianqi
+    description: "最常见的灵石，炼气期日常使用"
+  - id: zhong_pin
+    name: 中品灵石
+    energy_unit: 10
+    exchange_ratio: 100
+    used_in_realm: zhuji
+    description: "筑基期常用，1 颗约换 100 颗下品"
+  - id: shang_pin
+    name: 上品灵石
+    energy_unit: 100
+    exchange_ratio: 10000
+    used_in_realm: jiedan
+    description: "结丹期修士使用，大额交易标准"
+  - id: ji_pin
+    name: 极品灵石
+    energy_unit: 1000
+    exchange_ratio: 100000
+    used_in_realm: yuanying
+    description: "元婴期以上，一颗可换一座小型灵脉一年产出"
+  - id: xian_pin
+    name: 仙品灵石
+    energy_unit: 10000
+    exchange_ratio: "极稀有，无法固定兑换"
+    used_in_realm: huashen_or_above
+    description: "化神期以上，传说级货币"
+
+# 灵石属性
+attributes:
+  - id: wu_shuxing
+    name: 无属性
+    description: 通用货币，最常见
+  - id: wu_xing
+    name: 五行属性
+    description: 蕴含特定属性灵气，炼丹炼器用
+  - id: bian_yi
+    name: 变异属性
+    description: 雷、冰、风等稀有属性
+
+# 灵石用途
+purposes:
+  - id: huo_bi
+    name: 货币
+    description: 购买物资
+  - id: xiu_lian
+    name: 修炼
+    description: 辅助打坐，加速吸收
+  - id: zhen_fa
+    name: 阵法
+    description: 阵法能量源
+  - id: jiao_yi
+    name: 交易
+    description: 跨势力通用媒介
+
+# 灵石来源
+sources:
+  - id: kuang_mai
+    name: 灵脉矿脉
+    description: 主要来源
+  - id: ning_ju
+    name: 灵气凝聚
+    description: 天然形成，漫长时间
+  - id: jiao_yi_liu_tong
+    name: 修士交易
+    description: 流通中的存量
+
+references:
+  - ../灵石体系/灵石.md

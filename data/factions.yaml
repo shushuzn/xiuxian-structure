@@ -1,0 +1,86 @@
+# 宗门.yaml — 势力体系权威数据
+
+# 势力规模
+scales:
+  - id: san_xiu
+    name: 散修/小家族
+    member_count: "1-10"
+    max_realm: lianqi
+    lingmai_required: wei_xing_lingmai
+  - id: xiao_sect
+    name: 小型宗门
+    member_count: "10-500"
+    max_realm: zhuji
+    lingmai_required: xiao_xing_lingmai
+  - id: zhong_sect
+    name: 中型宗门
+    member_count: "500-5000"
+    max_realm: jiedan
+    lingmai_required: zhong_xing_lingmai
+  - id: da_sect
+    name: 大型宗门
+    member_count: "5000-50000"
+    max_realm: yuanying
+    lingmai_required: da_xing_lingmai
+  - id: top_sect
+    name: 顶级宗门
+    member_count: "50000+"
+    max_realm: huashen_or_above
+    lingmai_required: chao_ji_lingmai
+
+# 势力形态
+forms:
+  - id: zong_men
+    name: 宗门
+    description: 最常见的修仙组织
+  - id: jia_zu
+    name: 家族
+    description: 血缘为纽带
+  - id: san_xiu_lian_meng
+    name: 散修联盟
+    description: 无组织个体或松散联盟
+  - id: wang_chao
+    name: 王朝
+    description: 凡人统治的世俗国家
+  - id: yao_xiu
+    name: 妖修势力
+    description: 妖族建立的领地
+
+# 弟子等级（宗门内部）
+disciple_levels:
+  - id: wai_men
+    name: 外门弟子
+    description: 入门弟子，承担杂务
+  - id: nei_men
+    name: 内门弟子
+    description: 通过考核的核心弟子
+  - id: he_xin
+    name: 核心弟子
+    description: 重点培养对象
+  - id: zhen_chuan
+    name: 真传弟子
+    description: 掌门亲传，传承衣钵
+
+# 示例势力（待扩展）
+examples:
+  - id: qing_xu_gong
+    name: 青虚宫
+    scale: top_sect
+    form: zong_men
+    lingmai: chao_ji_lingmai
+    note: "顶级宗门示例，化神期坐镇"
+  - id: tian_xia_shan
+    name: 天霞山
+    scale: zhong_sect
+    form: zong_men
+    lingmai: zhong_xing_lingmai
+    note: "中型宗门示例，结丹期为顶"
+  - id: wan_yao_lin
+    name: 万妖林
+    scale: da_sect
+    form: yao_xiu
+    lingmai: da_xing_lingmai
+    note: "妖修势力示例，元婴期妖王坐镇"
+
+references:
+  - ../势力体系/势力.md

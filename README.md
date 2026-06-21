@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v1.4.0** · 11 体系 · 61 篇 .md · 11 yaml · 17 PR 已 merge · [📖 阅读 v1.4.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v1.4.0)
+**v1.4.0** · 11 体系 · 61 篇 .md · 11 yaml · 18 PR 已 merge · [📖 阅读 v1.4.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v1.4.0)
 
 ## 架构
 
@@ -221,6 +221,37 @@ curl -X POST http://localhost:8000/story/demo_measuring_spirit/session \
   -H "Content-Type: application/json" -d '{"initial_state": {"灵石": 1}}'
 # → 返回 sid + 起点节点（"求长老推荐" 选项被条件过滤掉）
 ```
+
+## 程序化消费（v1.4.0+）
+
+`examples/consume-interactive.py` 提供 4 个高层 API，让前端 / LLM 工具 / CI 校验
+不用创建 Engine 也能分析故事结构：
+
+```bash
+# 1. 统计 — 节点数/分支/可达性/结局
+python3 examples/consume-interactive.py analyze stories/hanli_vol1_mochui.md
+
+# 2. 遍历所有路径（11 条完整剧情线）
+python3 examples/consume-interactive.py walk stories/hanli_vol1_mochui.md
+
+# 3. BFS 找最短决策链
+python3 examples/consume-interactive.py path stories/hanli_vol1_mochui.md \
+  --from 托付 --to 杀墨
+
+# 4. 导出 JSON（供前端 / LLM 用）
+python3 examples/consume-interactive.py export stories/hanli_vol1_mochui.md \
+  -o /tmp/hanli.json
+```
+
+或作为 Python 模块调用：
+
+```python
+from consume_interactive import analyze_story, walk_all_paths, find_shortest_path
+stats = analyze_story("stories/hanli_vol1_mochui.md")
+# {"node_count": 18, "ending_count": 5, "is_well_formed": True, ...}
+```
+
+详见 [`examples/README.md`](examples/README.md)。
 
 ## 导出与消费
 

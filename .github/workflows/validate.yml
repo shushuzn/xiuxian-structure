@@ -148,6 +148,16 @@ jobs:
           print('✅ 所有 generated 节点通过 NodeValidator')
           "
 
+      - name: Verify consume-interactive API
+        run: |
+          echo "🧰 校验 consume-interactive 4 个 API（analyze/walk/path/export）："
+          python examples/consume-interactive.py analyze stories/hanli_vol1_mochui.md
+          python examples/consume-interactive.py walk stories/demo_measuring_spirit.md
+          python examples/consume-interactive.py path stories/hanli_vol1_mochui.md --from 托付 --to 杀墨
+          python examples/consume-interactive.py export stories/hanli_vol1_mochui.md -o /tmp/hanli-consumer.json
+          ls -la /tmp/hanli-consumer.json
+          echo "✅ consume-interactive API 全部正常"
+
       - name: Verify Web API endpoints
         run: |
           set +e

@@ -65,6 +65,9 @@ jobs:
           stories_dir = Path('stories')
           errors = []
           for md in sorted(stories_dir.glob('*.md')):
+              # 跳过 README（不是剧本）
+              if md.name == 'README.md':
+                  continue
               story = Story.from_file(md)
               # 1. 起点存在
               if story.start_node not in story.nodes:

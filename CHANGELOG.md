@@ -7,6 +7,36 @@
 ### 计划
 - 暂无。等待社区反馈或新需求。
 
+## [1.2.0] - 2025-06-21
+
+### 新增
+- 🎮 **互动小说引擎 `scripts/interactive.py`**（547 行）
+  - `World` 从 `data/*.yaml` 构建内存世界（`lookup` / `find_by_id` / `render_template`）
+  - `Story` 解析 `stories/*.md`（自创轻量 DSL：`## 节点 <id> [(type)]` + YAML 字段块）
+  - `Engine` 状态机 + 条件求值 + data 初始化
+  - `State` 玩家属性 + 标志位 + `check(expr)` 条件表达式求值
+  - CLI：交互模式 / headless 模式（CI 用）
+  - 程序化 API：`Engine.play()` / `Engine.step()` / `Engine.save()` / `Engine.load()`
+- 📖 **2 个互动故事**
+  - `stories/demo_measuring_spirit.md` — 4 节点 / 2 结局（入李家 / 自立于坊市）
+  - `stories/hanli_vol1_mochui.md` — 10 节点 / 5 结局（远走 / 流落 / 杀墨 / 灵兽 / 借药筑基）
+- 📚 **互动小说文档**：`interactive/README.md`（DSL 文档 + API 指南）
+
+### 设计亮点
+- **数据驱动**：剧情里写 `{realms.炼气期.lifespan}` 自动从 yaml 拉值 — 剧情永远跟数据一致
+- **状态机分支**：`if: 灵石 >= 3` / `flag.拜师` / `set: { 境界: 筑基初期 }`
+- **`?` 前缀机制**：`?灵石: 5` 仅在未设置时初始化（保护玩家存档不被覆盖）
+- **条件求值**：支持 `>=` / `<=` / `==` / `!=` / `>` / `<` / `and` / `or` / `not`
+
+### 变更
+- `scripts/validate.py`：`stories/` 加白名单（剧本非知识库）
+- `.github/workflows/validate.yml`：CI 增加 2 个新步骤
+  - `Run interactive engine (smoke test)` — 跑 headless 模式
+  - `Verify all stories are well-formed` — 连通性 + 完整性 + 至少 1 ending + 无孤儿节点
+- `.gitignore`：`interactive/saves/`（存档不入仓）
+- `README.md`：新增「互动小说」章节 + 架构图新增 `stories/` / `interactive/` / `scripts/interactive.py`
+- `索引.md`：知识库 → 创作示例 新增「互动」条目
+
 ## [1.1.0] - 2025-06-21
 
 ### 新增
@@ -210,7 +240,8 @@
 - README.md
 - LICENSE
 
-[Unreleased]: https://github.com/shushuzn/xiuxian-structure/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/shushuzn/xiuxian-structure/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/shushuzn/xiuxian-structure/compare/v0.9.0...v1.0.0
 [0.9.0]: https://github.com/shushuzn/xiuxian-structure/compare/v0.8.0...v0.9.0

@@ -65,6 +65,9 @@ jobs:
           stories_dir = Path('stories')
           errors = []
           for md in sorted(stories_dir.glob('*.md')):
+              # 跳过 README（不是剧本）
+              if md.name == 'README.md':
+                  continue
               story = Story.from_file(md)
               # 1. 起点存在
               if story.start_node not in story.nodes:
@@ -157,6 +160,58 @@ jobs:
           python examples/consume-interactive.py export stories/hanli_vol1_mochui.md -o /tmp/hanli-consumer.json
           ls -la /tmp/hanli-consumer.json
           echo "✅ consume-interactive API 全部正常"
+
+      - name: Verify vol2 + aoyue stories
+        run: |
+          echo "📖 校验 hanli_vol2（韩立第二卷）+ aoyue_npc_fanpai（多主角）："
+          set -e
+          python examples/consume-interactive.py analyze stories/hanli_vol2_yuanzou.md
+          python examples/consume-interactive.py analyze stories/aoyue_npc_fanpai.md
+          echo ""
+          echo "🔗 跨剧本关联检查（vol1 ↔ vol2 ↔ aoyue 共享墨大夫/落云宗/寒焰宗/潮汐宫 等势力）："
+          python -c "
+          import sys
+          sys.path.insert(0, 'scripts')
+          from pathlib import Path
+          import importlib.util
+          spec = importlib.util.spec_from_file_location('ci', 'examples/consume-interactive.py')
+          ci = importlib.util.module_from_spec(spec); spec.loader.exec_module(ci)
+
+          # 1. vol2 必须能落到至少 4 个 ending
+          vol2 = ci.walk_all_paths('stories/hanli_vol2_yuanzou.md', max_paths=10000)
+          vol2_endings = set(p['steps'][-1] for p in vol2)
+          assert len(vol2_endings) >= 4, f'vol2 只有 {len(vol2_endings)} 个 ending'
+          print(f'  ✅ vol2: {len(vol2)} 路径, {len(vol2_endings)} 个 ending')
+
+          # 2. aoyue 必须能落到至少 3 个 ending
+          aoyue = ci.walk_all_paths('stories/aoyue_npc_fanpai.md', max_paths=10000)
+          aoyue_endings = set(p['steps'][-1] for p in aoyue)
+          assert len(aoyue_endings) >= 3, f'aoyue 只有 {len(aoyue_endings)} 个 ending'
+          print(f'  ✅ aoyue: {len(aoyue)} 路径, {len(aoyue_endings)} 个 ending')
+
+          # 3. vol2 最短路径到「落云宗交差」必须存在
+          vol2_best = ci.find_shortest_path('stories/hanli_vol2_yuanzou.md', '离府启程', '落云宗交差')
+          assert vol2_best is not None, 'vol2 无法到达落云宗交差'
+          print(f'  ✅ vol2 最短链: 离府启程 → 落云宗交差 ({vol2_best[\"length\"]} 节点)')
+
+          # 4. aoyue 最短路径到「元婴成功」必须存在
+          aoyue_best = ci.find_shortest_path('stories/aoyue_npc_fanpai.md', '墨府血夜', '元婴成功')
+          assert aoyue_best is not None, 'aoyue 无法到达元婴成功'
+          print(f'  ✅ aoyue 最短链: 墨府血夜 → 元婴成功 ({aoyue_best[\"length\"]} 节点)')
+
+          # 5. 跨剧本势力共享检查（refs 引用）
+          from collections import Counter
+          all_refs = Counter()
+          for p in ['stories/hanli_vol1_mochui.md', 'stories/hanli_vol2_yuanzou.md', 'stories/aoyue_npc_fanpai.md']:
+              data = ci.export_to_json(p)
+              for n in data['nodes'].values():
+                  all_refs.update(n['refs'])
+          shared = sum(1 for _, c in all_refs.items() if c >= 2)
+          print(f'  ✅ 跨剧本共享引用: {shared} 个体系被多剧本引用')
+          print(f'     总引用: {sum(all_refs.values())} 次 / {len(all_refs)} 个不同条目')
+          print('✅ vol2 + aoyue 跨剧本关联全部通过')
+          "
+          echo "✅ 新剧本校验通过"
 
       - name: Verify Web API endpoints
         run: |

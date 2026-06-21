@@ -149,6 +149,16 @@ class Story:
             raise ValueError(f"{source_name}: 起点节点 '{story.start_node}' 不存在")
         return story
 
+    @classmethod
+    def parse_nodes_only(cls, text: str, source_name: str = "<text>") -> dict[str, "Node"]:
+        """只解析节点（不校验 start），给 generate_node.py 这种场景用"""
+        _meta, body = _split_front_matter(text)
+        nodes_raw = _split_nodes(body)
+        result: dict[str, "Node"] = {}
+        for nid, (type_hint, raw) in nodes_raw.items():
+            result[nid] = _parse_node(nid, type_hint, raw)
+        return result
+
     def get(self, node_id: str) -> Node | None:
         return self.nodes.get(node_id)
 

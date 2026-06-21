@@ -114,7 +114,9 @@ xiuxian-structure/
 │
 ├── examples/                   # 示例作品（小说/使用 demo）
 │   ├── README.md
-│   └── 第一章_散修韩立.md      # ~2000 字小说片段，串联 8 体系
+│   ├── 第一章_散修韩立.md      # ~2000 字小说片段，串联 8 体系
+│   ├── feed-to-llm.md          # 🆕 LLM 协作工作流指南
+│   └── generated/              # 🆕 LLM 生成的节点（mock 示例）
 ├── stories/                    # 互动小说剧本（v1.2.0+）
 │   └── demo_measuring_spirit.md
 ├── interactive/                # 互动小说引擎文档（v1.2.0+）
@@ -122,7 +124,8 @@ xiuxian-structure/
 ├── scripts/
 │   ├── validate.py             # 校验脚本
 │   ├── export.py               # 导出工具（JSON / CSV / Markdown 手册）
-│   └── interactive.py          # 互动小说引擎（v1.2.0+）
+│   ├── interactive.py          # 互动小说引擎（v1.2.0+）
+│   └── generate_node.py        # 🆕 LLM 协作生成节点（v1.3.0+）
 │
 ├── .github/
 │   ├── workflows/validate.yml  # GitHub Actions CI
@@ -161,6 +164,29 @@ python3 scripts/interactive.py --story stories/demo_measuring_spirit.md --headle
 - **条件分支**：`if: 灵石 >= 3` / `flag.拜师` — 状态机过滤可用选项
 - **DSL 简洁**：自创轻量剧本格式（`stories/*.md`），见 [interactive/README.md](interactive/README.md)
 - **可程序化**：`World` / `Story` / `Engine` / `State` 全 Python API，可嵌入 Web / CI / LLM 工作流
+
+## LLM 协作（v1.3.0+）
+
+让大语言模型半自动扩展互动故事节点：
+
+```bash
+# Dry-run：只看 prompt（不需要 key）
+python3 scripts/generate_node.py \
+  --story stories/hanli_vol1_mochui.md \
+  --requirement "在发现天霞山牌位后，加一个'夜探禁地'节点" \
+  --dry-run
+
+# 正式跑（设 OPENAI_API_KEY 或 LLM_API_KEY）
+python3 scripts/generate_node.py \
+  --story stories/hanli_vol1_mochui.md \
+  --requirement "..."
+```
+
+- **自动喂 yaml**：脚本读 `data/*.yaml` 生成世界摘要（11 体系 + 关键 ID）
+- **NodeValidator 5 项校验**：id 冲突 / 解析 / goto 存在 / refs 文件 / 数值范围
+- **失败自动反馈重试**：3 轮内把错误传给 LLM 修复
+- **示例**：`examples/feed-to-llm.md`（工作流）+ `examples/generated/夜探禁地.md`（mock 输出）
+- **CI 自动校验**：`examples/generated/*.md` 必须过 NodeValidator
 
 ## 导出与消费
 

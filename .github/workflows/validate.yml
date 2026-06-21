@@ -18,7 +18,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install pyyaml
+        run: pip install -r requirements.txt
 
       - name: Run validation
         run: python scripts/validate.py
@@ -147,3 +147,104 @@ jobs:
               sys.exit(1)
           print('✅ 所有 generated 节点通过 NodeValidator')
           "
+
+      - name: Verify Web API endpoints
+        run: |
+          set +e
+          echo "🌐 启动 FastAPI Web API（uvicorn），用 curl 测端点："
+          uvicorn scripts.web_app:app --host 127.0.0.1 --port 8765 --log-level info > /tmp/uvicorn.log 2>&1 &
+          SERVER_PID=$!
+          for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+            if curl -fsS http://127.0.0.1:8765/health > /dev/null 2>&1; then
+              echo "  ✅ server up (after ${i}s)"
+              break
+            fi
+            sleep 1
+          done
+
+          if ! curl -fsS http://127.0.0.1:8765/health > /dev/null 2>&1; then
+            echo "❌ server failed to start"
+            cat /tmp/uvicorn.log
+            kill $SERVER_PID 2>/dev/null || true
+            exit 1
+          fi
+
+          errors=0
+
+          check() {
+            local actual
+            actual=$(curl -s -o /dev/null -w '%{http_code}' "$3" 2>/dev/null || echo "000")
+            if [ "$2" = "$actual" ]; then
+              echo "  ✅ $1: $actual"
+            else
+              echo "  ❌ $1: expected $2, got $actual"
+              errors=$((errors + 1))
+            fi
+          }
+
+          check_post() {
+            local actual
+            actual=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$2" -H 'Content-Type: application/json' -d "$3" 2>/dev/null || echo "000")
+            if [ "$1" = "$actual" ]; then
+              echo "  ✅ POST $3 → $actual"
+            else
+              echo "  ❌ POST $3: expected $1, got $actual"
+              echo "    响应: $(curl -s -X POST "$2" -H 'Content-Type: application/json' -d "$3")"
+              errors=$((errors + 1))
+            fi
+          }
+
+          # 1. health
+          check "health" 200 "http://127.0.0.1:8765/health"
+
+          # 2. 列出 stories
+          check "list stories" 200 "http://127.0.0.1:8765/"
+
+          # 3. 拿单个 story
+          check "get story" 200 "http://127.0.0.1:8765/story/hanli_vol1"
+
+          # 4. 404
+          check "404 story" 404 "http://127.0.0.1:8765/story/nonexistent"
+
+          # 5. 创建 session
+          SESSION_JSON=$(curl -s -X POST http://127.0.0.1:8765/story/demo_measuring_spirit/session -H 'Content-Type: application/json' -d '{}')
+          SID=$(echo "$SESSION_JSON" | python3 -c "import json,sys; print(json.load(sys.stdin)['sid'])" 2>/dev/null || echo "")
+          if [ -z "$SID" ]; then
+            echo "  ❌ create session: $SESSION_JSON"
+            errors=$((errors + 1))
+          else
+            echo "  ✅ create session: 200 (sid=${SID:0:8}...)"
+
+            # 6. 选第一个选项
+            check_post 200 "http://127.0.0.1:8765/session/$SID/choice" '{"choice_index": 0}'
+
+            # 7. 不合法 choice → 400
+            check_post 400 "http://127.0.0.1:8765/session/$SID/choice" '{"choice_index": 99}'
+
+            # 10. restart
+            check_post 200 "http://127.0.0.1:8765/session/$SID/restart" '{}'
+          fi
+
+          # 8. 条件过滤
+          COND_JSON=$(curl -s -X POST http://127.0.0.1:8765/story/demo_measuring_spirit/session -H 'Content-Type: application/json' -d '{"initial_state": {"灵石": 1}}')
+          if echo "$COND_JSON" | grep -q "小家族"; then
+            echo "  ❌ 条件过滤失效：灵石=1 时仍包含'小家族'选项"
+            errors=$((errors + 1))
+          else
+            echo "  ✅ 条件过滤：灵石=1 → '小家族' 被剔除"
+          fi
+
+          # 9. 404 session
+          check "404 session" 404 "http://127.0.0.1:8765/session/nonexistent"
+
+          kill $SERVER_PID 2>/dev/null || true
+          wait $SERVER_PID 2>/dev/null || true
+
+          if [ $errors -gt 0 ]; then
+            echo ""
+            echo "📋 server log tail:"
+            tail -20 /tmp/uvicorn.log
+            echo "❌ $errors 个 Web API 端点失败"
+            exit 1
+          fi
+          echo "✅ Web API 端点全部正常"

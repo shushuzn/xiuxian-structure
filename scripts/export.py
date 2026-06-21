@@ -275,21 +275,27 @@ def main():
     results = []
     fmt = args.format
 
+    def _rel(p):
+        try:
+            return p.relative_to(ROOT)
+        except ValueError:
+            return p  # 输出目录在 ROOT 之外，原样显示
+
     if fmt in ("all", "json"):
         p = export_json(data, out_dir)
         results.append(("JSON", p))
-        print(f"✅ JSON     → {p.relative_to(ROOT)}")
+        print(f"✅ JSON     → {_rel(p)}")
 
     if fmt in ("all", "csv"):
         paths = export_csv(data, out_dir)
         for p in paths:
             results.append(("CSV", p))
-        print(f"✅ CSV      → {len(paths)} 个文件于 {out_dir.relative_to(ROOT)}/")
+        print(f"✅ CSV      → {len(paths)} 个文件于 {_rel(paths[0]).parent}/")
 
     if fmt in ("all", "md"):
         p = export_handbook(data, out_dir)
         results.append(("MD", p))
-        print(f"✅ Markdown → {p.relative_to(ROOT)}")
+        print(f"✅ Markdown → {_rel(p)}")
 
     print(f"\n🎉 导出完成：{len(results)} 个产物")
     return 0

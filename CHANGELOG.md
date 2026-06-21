@@ -7,6 +7,35 @@
 ### 计划
 - 暂无。等待社区反馈或新需求。
 
+## [1.3.0] - 2025-06-21
+
+### 新增
+- 🤖 **LLM 协作 `scripts/generate_node.py`**（~340 行）
+  - `build_world_summary` 从 `data/*.yaml` 自动生成 11 体系 + 关键 ID 摘要
+  - `build_prompt` 严格 prompt 模板（7 条硬性规则）
+  - `call_llm` OpenAI 兼容 API 调用
+  - `NodeValidator` 5 项校验（id 冲突 / 解析 / goto 存在 / refs 文件 / 数值范围）
+  - 失败自动反馈重试：3 轮内把错误传给 LLM 修复
+  - 成功节点写 `examples/generated/<id>.md`
+- 📖 **LLM 协作指南 `examples/feed-to-llm.md`**
+  - 3 阶段工作流（提取需求 / LLM 生成 / 验证入库）
+  - 快速开始（dry-run / 正式跑 / 改 LLM）
+  - 7 条最佳实践
+- 🆕 **mock LLM 输出 `examples/generated/夜探禁地.md`**
+  - 2 个节点（夜探禁地 + 杀火鳞蜥 ending）
+  - NodeValidator 校验通过示例
+
+### 设计亮点
+- **数据驱动（防幻觉）**：自动从 yaml 生成体系 + ID 摘要，LLM 写 refs 时知道文件存在
+- **严格 prompt（结构化输出）**：7 条硬性规则保证输出格式一致
+- **失败自动反馈**：3 轮内把 ERROR 传给 LLM 修复，重试用尽后 dump 到 stderr
+
+### 变更
+- `scripts/interactive.py`：新增 `Story.parse_nodes_only()` API（绕过 start_node 校验）
+- `.github/workflows/validate.yml`：CI 新增 `Verify LLM-generated examples are parseable` 步骤
+- `README.md`：新增「LLM 协作」章节 + 架构图更新
+- `索引.md`：知识库 → 创作示例 新增「LLM 节点」条目
+
 ## [1.2.0] - 2025-06-21
 
 ### 新增
@@ -240,7 +269,8 @@
 - README.md
 - LICENSE
 
-[Unreleased]: https://github.com/shushuzn/xiuxian-structure/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/shushuzn/xiuxian-structure/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/shushuzn/xiuxian-structure/compare/v0.9.0...v1.0.0

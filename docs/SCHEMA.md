@@ -145,6 +145,56 @@ relations:
 
 ---
 
+## 妖兽体系 — `data/monsters.yaml`
+
+```yaml
+grades:                       # 妖兽品级（对应修士境界）
+  - id: yao_wang
+    name: 妖王
+    realm_equivalent: yuanying
+
+attributes:                   # 妖兽属性
+  - id: wu_xing
+    name: 五行属性
+
+spirit_beasts:                # 灵兽品级
+  - id: ling_pin
+    name: 灵品灵兽
+    owner_realm: zhuji
+```
+
+## 势力体系 — `data/factions.yaml`
+
+```yaml
+scales:                       # 势力规模
+  - id: top_sect
+    name: 顶级宗门
+    member_count: "50000+"
+    max_realm: huashen
+    lingmai_required: chao_ji_lingmai
+
+forms:                        # 势力形态
+  - id: zong_men
+    name: 宗门
+```
+
+## 灵石体系 — `data/spirit_stones.yaml`
+
+```yaml
+tiers:                        # 灵石品级
+  - id: xia_pin
+    name: 下品灵石
+    energy_unit: 1
+    exchange_ratio: 1
+    used_in_realm: lianqi
+
+attributes:                   # 灵石属性
+  - id: wu_shuxing
+    name: 无属性
+```
+
+---
+
 ## ID 命名约定
 
 - 全小写英文 + 下划线

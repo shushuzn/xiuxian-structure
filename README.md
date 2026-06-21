@@ -109,6 +109,10 @@ xiuxian-structure/
 │   ├── validate.py             # 校验脚本
 │   └── export.py               # 导出工具（JSON / CSV / Markdown 手册）
 │
+├── examples/                   # 示例作品（小说/使用 demo）
+│   ├── README.md
+│   └── 第一章_散修韩立.md      # ~2000 字小说片段，串联 8 体系
+│
 ├── .github/
 │   ├── workflows/validate.yml  # GitHub Actions CI
 │   ├── pull_request_template.md
@@ -189,3 +193,10 @@ python3 scripts/export.py --output /tmp/xiuxian
 - 🔒 [SECURITY.md](SECURITY.md) — 安全漏洞报告流程
 - 🤝 [.github/CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md) — 社区公约
 - 🛡️ [BRANCH_PROTECTION.md](docs/BRANCH_PROTECTION.md) — 分支保护建议
+
+## 示例作品
+
+知识库的实际应用展示：
+
+- 📖 [examples/第一章_散修韩立.md](examples/第一章_散修韩立.md) — 散修韩立的修仙故事，串联 8 体系（灵根/境界/灵气/符箓/丹药/灵石/势力/妖兽）
+- 📝 [examples/README.md](examples/README.md) — 写作指南 + 串联体系密度建议

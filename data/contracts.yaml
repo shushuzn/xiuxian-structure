@@ -1,0 +1,145 @@
+# 契约体系权威数据（v1.7 新增）
+# 契约是修士与灵兽/妖修/人/法器/势力之间的灵魂绑定关系
+
+# 契约类型
+types:
+  - id: soul_contract
+    name: 灵魂契约（本命契约）
+    applicable_to: [ling_beast, yao_xiu]
+    relationship_strength: 极强
+    freedom: 灵兽受限
+    cost: 主人死则灵兽亡，灵兽死则主人重创
+    combat_synergy: 极高
+    perception: 远程感知位置、状态、生死
+    rarity: 常见
+    forbidden: false
+    references:
+      - ../契约体系/灵魂契约.md
+
+  - id: equal_contract
+    name: 平等契约
+    applicable_to: [ling_beast, yao_xiu, person, faction]
+    relationship_strength: 弱-中
+    freedom: 双方自由
+    cost: 关系易破裂
+    combat_synergy: 中
+    perception: 感知大致位置、状态
+    rarity: 常见
+    forbidden: false
+    references:
+      - ../契约体系/平等契约.md
+
+  - id: master_servant
+    name: 主从契约
+    applicable_to: [ling_beast, monster]
+    relationship_strength: 中
+    freedom: 灵兽严重受限
+    cost: 灵兽常反抗、需频繁维护
+    combat_synergy: 低（灵兽消极怠工）
+    perception: 主人可感知灵兽位置与状态
+    rarity: 常见
+    forbidden: false
+    references:
+      - ../契约体系/主从契约.md
+
+  - id: soul_bond
+    name: 魂契
+    applicable_to: [ling_beast, yao_xiu, person, artifact]
+    relationship_strength: 最强（极端）
+    freedom: 双方深度绑定
+    cost: 修为倒退 1-3 小境界 + 折寿 + 突破概率降低
+    combat_synergy: 超越灵魂契约
+    perception: 心灵感应级别
+    rarity: 极罕见
+    forbidden: true           # 正道视为禁忌
+    note: "一方死亡，另一方必然重创或同死"
+    references:
+      - ../契约体系/魂契.md
+
+# 契约效果（按类型）
+effects:
+  perception:
+    soul_contract: 远程感知位置、状态、生死
+    equal_contract: 感知大致位置、状态
+    master_servant: 主人可感知灵兽位置与状态
+    soul_bond: 心灵感应级别（完全同步）
+
+  combat_synergy:
+    soul_contract: 极高
+    equal_contract: 中
+    master_servant: 低
+    soul_bond: 超越灵魂契约
+
+  resource_sharing:
+    soul_contract: 共同修炼时速度 +20%
+    equal_contract: 可约定共享部分资源
+    master_servant: 灵兽资源归主人支配
+    soul_bond: 法力互通，寿元共享
+
+# 解除代价
+dissolution_cost:
+  soul_contract:
+    by_mutual_consent: 中（灵兽修为倒退）
+    by_master_death: 灵兽重伤
+    by_beast_death: 主人神魂重创
+    by_force: 极难（需化神期以上介入）
+  equal_contract:
+    by_mutual_consent: 几乎无代价
+    by_breach: 违约方赔偿
+    by_neglect: 自动失效
+  master_servant:
+    by_master_active: 仪式简单
+    by_master_death: 灵兽恢复自由
+    by_beast_escape: 极难
+  soul_bond:
+    note: "几乎不可解除"
+    by_force: 传说级秘法，双方修为大损
+    by_mutual_death: 双方同死
+
+# 适用对象
+applicable_targets:
+  - id: ling_beast
+    name: 灵兽
+    common_contracts: [soul_contract, equal_contract, master_servant]
+    note: "本命灵兽多走灵魂契约"
+  - id: yao_xiu
+    name: 妖修（化形期+）
+    common_contracts: [equal_contract, soul_bond]
+    note: "极少接受主从契约"
+  - id: person
+    name: 其他修士
+    common_contracts: [equal_contract, soul_bond]
+    note: "平等契约多用于合作，魂契多用于道侣/至亲"
+  - id: artifact
+    name: 法器
+    common_contracts: [soul_bond]
+    note: "法器多走器灵认主，魂契极少"
+  - id: faction
+    name: 势力
+    common_contracts: [equal_contract]
+    note: "平等盟约"
+  - id: monster
+    name: 妖兽（未化形）
+    common_contracts: [master_servant]
+    note: "未化形妖兽多走主从契约"
+
+# 禁忌用法
+forbidden_methods:
+  - id: forced_soul_bond
+    name: 强行魂契
+    description: 强行从对方灵魂中抽取碎片签订魂契
+    consequence: 被签者必死
+    rarity: 极罕见
+    taboo_level: 极重
+  - id: soul_bond_transfer
+    name: 魂契转嫁
+    description: 将已有魂契转嫁到第三方
+    consequence: 原双方重创，第三方可能死亡
+    rarity: 传说级
+    taboo_level: 重
+  - id: soul_bond_devour
+    name: 魂契吞噬
+    description: 利用魂契共享灵魂的特性，吞噬对方灵魂
+    consequence: 被吞噬者必死
+    rarity: 极罕见
+    taboo_level: 重

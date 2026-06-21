@@ -288,3 +288,43 @@ relations:
     to: spirit_weapon:communication_xin_xi
     type: enables
     description: "化神神识可与大成器灵心意相通"
+
+  # ── v1.7: 灵兽 → 契约 ──
+  - from: spirit_beast:ling_pin
+    to: contract:soul_contract
+    type: enables
+    description: "灵兽多走灵魂契约（本命契约）"
+  - from: spirit_beast:ling_pin
+    to: contract:master_servant
+    type: enables
+    description: "被俘灵兽多走主从契约"
+  - from: yao_xiu:hua_xing
+    to: contract:equal_contract
+    type: enables
+    description: "化形期妖修与人类修士多走平等契约"
+  - from: faction:top_sect
+    to: contract:equal_contract
+    type: enables
+    description: "宗门之间多走平等盟约"
+
+  # ── v1.7: 契约 ↔ 心魔 ──
+  - from: contract:master_servant
+    to: heart_demon:chi_mo
+    type: triggers
+    description: "主从契约的灵兽易积怨，激发嗔魔"
+  - from: contract:soul_bond
+    to: heart_demon:zhi_nian_mo
+    type: triggers
+    description: "魂契的极端绑定易转化为执念魔"
+
+  # ── v1.7: 法器 → 灵兽袋（主从契约载体） ──
+  - from: artifact:ling_shou_dai
+    to: contract:master_servant
+    type: requires
+    description: "灵兽袋内的灵兽自动签主从契约"
+
+  # ── v1.7: 魂契 ↔ 器灵认主 ──
+  - from: contract:soul_bond
+    to: spirit_weapon:recognition_ping_deng
+    type: parallels
+    description: "魂契是契约体系的极致，与器灵体系的平等共生互为镜像"

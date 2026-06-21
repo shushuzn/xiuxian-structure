@@ -9,7 +9,7 @@
 
 **v1.4.0** · **13 体系** · **82 篇体系 .md** (含 122 总数) · 11 yaml · 20 PR 已 merge · [📖 阅读 v1.4.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v1.4.0)
 
-> 🚧 v1.5 草案：新增 **心魔体系** + **雷劫体系**（2 体系 / 11 篇），参见 [PR #21](https://github.com/shushuzn/xiuxian-structure/pulls)（占位）
+> 🚧 v1.5/v1.6 草案：新增 **心魔体系** + **雷劫体系** + **神识体系**（3 体系 / 17 篇）
 
 ## 架构
 
@@ -138,6 +138,13 @@ xiuxian-structure/
 │   ├── 九九天劫.md
 │   ├── 雷劫淬体.md
 │   └── 散功.md
+├── 神识体系/                   # 🆕 v1.6 精神力外延
+│   ├── 神识.md
+│   ├── 炼气神识.md
+│   ├── 筑基神识.md
+│   ├── 结丹神识.md
+│   ├── 元婴神识.md
+│   └── 神识攻击.md
 │
 ├── data/                       # 结构化数据（程序可读）
 │   ├── realms.yaml             # 境界

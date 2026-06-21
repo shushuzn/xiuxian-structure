@@ -174,3 +174,65 @@ relations:
     to: tribulation:jiu_jiu_tian_jie
     type: weakens
     description: "高阶渡劫阵可削弱九九天劫（仅部分）"
+
+  # ── v1.6: 境界 → 神识 ──
+  - from: realm:lianqi
+    to: divine_sense:lianqi
+    type: enables
+    description: "炼气期开启微神识（3-10 丈，模糊感知）"
+  - from: realm:zhuji
+    to: divine_sense:zhuji
+    type: enables
+    description: "筑基期神识扩展至 30-100 丈，可画符/炼丹/布阵"
+  - from: realm:jiedan
+    to: divine_sense:jiedan
+    type: enables
+    description: "结丹期神识质变（穿墙透视、可附身低阶）"
+  - from: realm:yuanying
+    to: divine_sense:yuanying
+    type: enables
+    description: "元婴期神识离体化（识战、夺舍、可触及天地法则）"
+
+  # ── v1.6: 神识 → 应用 ──
+  - from: divine_sense:jiedan
+    to: artifact:tier_gao_jie
+    type: enables
+    description: "结丹神识可驱动高阶法器"
+  - from: divine_sense:yuanying
+    to: artifact:tier_fa_bao
+    type: enables
+    description: "元婴神识可驱动法宝，可与器灵沟通"
+  - from: divine_sense:zhuji
+    to: talisman:tier_ling_fu
+    type: enables
+    description: "筑基神识可画制灵品符箓"
+  - from: divine_sense:jiedan
+    to: talisman:tier_bao_fu
+    type: enables
+    description: "结丹神识可画制宝品符箓"
+  - from: divine_sense:zhuji
+    to: elixir:tier_ling_pin
+    type: enables
+    description: "筑基神识可炼制灵品丹药"
+  - from: divine_sense:jiedan
+    to: elixir:tier_bao_pin
+    type: enables
+    description: "结丹神识可炼制宝品丹药"
+  - from: divine_sense:zhuji
+    to: formation:tier_ling_zhen
+    type: enables
+    description: "筑基神识可布置灵阵"
+  - from: divine_sense:jiedan
+    to: formation:tier_bao_zhen
+    type: enables
+    description: "结丹神识可布置宝阵"
+
+  # ── v1.6: 心魔 ↔ 神识 ──
+  - from: divine_sense:yuanying
+    to: heart_demon:all
+    type: blocks
+    description: "元婴期强大神识更难被心魔攻破"
+  - from: heart_demon:chi_mo
+    to: divine_sense:yuanying
+    type: weakens
+    description: "嗔魔爆发可短暂削弱神识强度"

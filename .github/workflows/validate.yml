@@ -18,7 +18,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install pyyaml
+        run: pip install -r requirements.txt
 
       - name: Run validation
         run: python scripts/validate.py
@@ -146,4 +146,66 @@ jobs:
               for e in errors: print(e)
               sys.exit(1)
           print('✅ 所有 generated 节点通过 NodeValidator')
+          "
+
+      - name: Verify Web API endpoints
+        run: |
+          echo "🌐 校验 FastAPI Web API 端点（scripts/web_app.py）："
+          python -c "
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from fastapi.testclient import TestClient
+          from web_app import app
+
+          client = TestClient(app)
+          errors = []
+
+          # 1. health
+          r = client.get('/health')
+          if r.status_code != 200 or r.json()['status'] != 'ok':
+              errors.append(f'health: {r.status_code} {r.text}')
+
+          # 2. 列出 stories
+          r = client.get('/')
+          if r.status_code != 200 or len(r.json()) < 1:
+              errors.append(f'list stories: {r.status_code} {r.text}')
+
+          # 3. 拿单个 story
+          r = client.get('/story/hanli_vol1')
+          if r.status_code != 200:
+              errors.append(f'get story: {r.status_code}')
+
+          # 4. 404
+          r = client.get('/story/nonexistent')
+          if r.status_code != 404:
+              errors.append(f'expected 404, got {r.status_code}')
+
+          # 5. 创建 session
+          r = client.post('/story/demo_measuring_spirit/session')
+          if r.status_code != 200:
+              errors.append(f'create session: {r.status_code} {r.text}')
+          else:
+              sid = r.json()['sid']
+              # 6. 选第一个选项
+              r = client.post(f'/session/{sid}/choice', json={'choice_index': 0})
+              if r.status_code != 200:
+                  errors.append(f'choice: {r.status_code} {r.text}')
+
+              # 7. 不合法 choice
+              r = client.post(f'/session/{sid}/choice', json={'choice_index': 99})
+              if r.status_code != 400:
+                  errors.append(f'bad choice: expected 400, got {r.status_code}')
+
+              # 8. 条件过滤（灵石=1）
+              r = client.post('/story/demo_measuring_spirit/session', json={'initial_state': {'灵石': 1}})
+              if r.status_code == 200:
+                  choices = r.json()['current']['choices']
+                  if any('小家族' in c['label'] for c in choices):
+                      errors.append('条件过滤失效：灵石=1 时仍包含"小家族"选项')
+
+          if errors:
+              for e in errors: print(f'❌ {e}')
+              sys.exit(1)
+          print('✅ Web API 8 个端点全部正常')
           "

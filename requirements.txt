@@ -1,0 +1,4 @@
+pyyaml>=6.0
+# Web API (v1.4.0+, 可选)
+fastapi>=0.110
+uvicorn>=0.27

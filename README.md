@@ -125,7 +125,8 @@ xiuxian-structure/
 │   ├── validate.py             # 校验脚本
 │   ├── export.py               # 导出工具（JSON / CSV / Markdown 手册）
 │   ├── interactive.py          # 互动小说引擎（v1.2.0+）
-│   └── generate_node.py        # 🆕 LLM 协作生成节点（v1.3.0+）
+│   ├── generate_node.py        # LLM 协作生成节点（v1.3.0+）
+│   └── web_app.py              # 🆕 FastAPI Web API（v1.4.0+）
 │
 ├── .github/
 │   ├── workflows/validate.yml  # GitHub Actions CI
@@ -187,6 +188,35 @@ python3 scripts/generate_node.py \
 - **失败自动反馈重试**：3 轮内把错误传给 LLM 修复
 - **示例**：`examples/feed-to-llm.md`（工作流）+ `examples/generated/夜探禁地.md`（mock 输出）
 - **CI 自动校验**：`examples/generated/*.md` 必须过 NodeValidator
+
+## Web API（v1.4.0+）
+
+FastAPI 把互动小说引擎包装成 REST API：
+
+```bash
+# 安装 + 启动
+pip install -r requirements.txt
+python3 scripts/web_app.py
+# → http://localhost:8000
+# → API 文档：/docs
+# → 前端入口：/play
+```
+
+8 个端点：
+- `GET /health` — 健康检查
+- `GET /` — 列出所有 stories
+- `GET /story/{id}` — 故事元数据
+- `POST /story/{id}/session` — 创建会话（可选 `initial_state`）
+- `GET /session/{sid}` — 读当前状态
+- `POST /session/{sid}/choice` — 选选项（传 `choice_index`）
+- `POST /session/{sid}/restart` — 重启
+
+```bash
+# 快速体验（curl）
+curl -X POST http://localhost:8000/story/demo_measuring_spirit/session \
+  -H "Content-Type: application/json" -d '{"initial_state": {"灵石": 1}}'
+# → 返回 sid + 起点节点（"求长老推荐" 选项被条件过滤掉）
+```
 
 ## 导出与消费
 

@@ -53,7 +53,7 @@ realms:
     name: 结丹期
     order: 3
     lifespan: 500
-    sub_stages: [early, mid, late, peak]
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
     abilities:
       divine_sense_range: "数百丈"
       can_fly: true
@@ -68,13 +68,13 @@ realms:
       - 神识仍受肉身局限
       - 无法触及空间法则
     references:
-      - ../境界体系/结丹期.md  # 文档待补
+      - ../境界体系/结丹期.md
 
   - id: yuanying
     name: 元婴期
     order: 4
     lifespan: 1000
-    sub_stages: [early, mid, late, peak]
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
     abilities:
       divine_sense_range: "数里"
       can_fly: "长时间御空"
@@ -89,13 +89,13 @@ realms:
       - 元婴离体有时间限制
       - 无法突破天地法则压制
     references:
-      - ../境界体系/元婴期.md  # 文档待补
+      - ../境界体系/元婴期.md
 
   - id: huashen
     name: 化神期
     order: 5
     lifespan: 2000
-    sub_stages: [early, mid, late, peak]
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
     abilities:
       divine_sense_range: "数十里"
       can_fly: "瞬移 / 空间挪移"
@@ -105,47 +105,81 @@ realms:
       to: lianxu
       recommended_env: lingmai_super
       risk: "神魂俱灭"
+    restrictions:
+      - 每次瞬移消耗极大，不可滥用
+      - 法则运用仍属"入门"，无法创造法则
+      - 肉身仍是软肋，受重创仍会陨落
     references:
-      - ../境界体系/化神期.md  # 文档待补
+      - ../境界体系/化神期.md
 
   - id: lianxu
     name: 炼虚期
     order: 6
     lifespan: 5000
-    sub_stages: [early, mid, late, peak]
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
     abilities:
       divine_sense_range: "数百里"
       can_fly: "撕裂虚空"
       can_wield_high_tier: "灵宝"
+    breakthrough:
+      to: heti
+      risk: "神魂被法则反噬，轻则重伤，重则身死道消"
+    restrictions:
+      - 撕裂虚空消耗巨大，不可作为常规手段
+      - 法则融合尚浅，无法改变法则本身
+      - 跨界面穿行仍受界面壁障限制
     references:
-      - ../境界体系/炼虚期.md  # 文档待补
+      - ../境界体系/炼虚期.md
 
   - id: heti
     name: 合体期
     order: 7
     lifespan: 10000
-    sub_stages: [early, mid, late, peak]
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
     abilities:
       divine_sense_range: "千里"
       can_fly: "法则运用"
+    breakthrough:
+      to: dujie
+      recommended_env: ling_jie_or_above
+      risk: "神肉分离，修为倒退"
+    restrictions:
+      - 界面壁障仍是软肋
+      - 法则领域范围有限
+      - 仍需渡劫才能真正踏入大乘
     references:
-      - ../境界体系/合体期.md  # 文档待补
+      - ../境界体系/合体期.md
 
   - id: dujie
     name: 渡劫期
     order: 8
     lifespan: "近乎无限"
-    sub_stages: [early, mid, late, peak]
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
     abilities:
       divine_sense_range: "万里"
       can_fly: "界域穿梭"
+    breakthrough:
+      to: dacheng
+      recommended_env: xian_jie
+      risk: "形神俱灭，连转世机会都没有"
+    restrictions:
+      - 每次渡劫都是生死关
+      - 天地压制最强，凡界停留过久会招来更强天劫
+      - 无法规避天劫，只能选择何时何地承受
     references:
-      - ../境界体系/渡劫期.md  # 文档待补
+      - ../境界体系/渡劫期.md
 
   - id: dacheng
     name: 大乘期
     order: 9
     lifespan: "近乎无限"
-    sub_stages: [early, mid, late, peak]
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
+    breakthrough:
+      to: feisheng
+      risk: "飞升过程本身也是一种渡劫"
+    restrictions:
+      - 凡界停留越久，天地压制越强
+      - 不可干预凡界运转（否则遭天谴）
+      - 飞升仙界后需重新适应仙界法则
     references:
-      - ../境界体系/大乘期.md  # 文档待补
+      - ../境界体系/大乘期.md

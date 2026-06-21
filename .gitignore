@@ -8,6 +8,7 @@ __pycache__/
 
 # 工具输出
 dist/
+interactive/saves/
 
 # 编辑器
 .vscode/

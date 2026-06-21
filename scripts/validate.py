@@ -83,6 +83,9 @@ def check_md_structure():
         # .release-notes-*.md 是发布管理文件，不强制
         if rel.name.startswith(".release-notes-"):
             continue
+        # stories/ 是互动小说剧本（不是知识库文档），不强制
+        if rel.parts[0] == "stories":
+            continue
         content = md.read_text(encoding="utf-8")
         sections = extract_sections(content)
         if "关联" not in sections:

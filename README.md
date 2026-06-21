@@ -112,13 +112,17 @@ xiuxian-structure/
 │   ├── BRANCH_PROTECTION.md    # 分支保护配置建议
 │   └── 图谱.md                  # mermaid 关系图
 │
-├── scripts/
-│   ├── validate.py             # 校验脚本
-│   └── export.py               # 导出工具（JSON / CSV / Markdown 手册）
-│
 ├── examples/                   # 示例作品（小说/使用 demo）
 │   ├── README.md
 │   └── 第一章_散修韩立.md      # ~2000 字小说片段，串联 8 体系
+├── stories/                    # 互动小说剧本（v1.2.0+）
+│   └── demo_measuring_spirit.md
+├── interactive/                # 互动小说引擎文档（v1.2.0+）
+│   └── README.md
+├── scripts/
+│   ├── validate.py             # 校验脚本
+│   ├── export.py               # 导出工具（JSON / CSV / Markdown 手册）
+│   └── interactive.py          # 互动小说引擎（v1.2.0+）
 │
 ├── .github/
 │   ├── workflows/validate.yml  # GitHub Actions CI
@@ -140,6 +144,23 @@ python3 scripts/validate.py
 
 # 应该输出：✅ 全部通过
 ```
+
+## 互动小说（v1.2.0+）
+
+把 11 体系 yaml 当作运行时世界数据库，状态机驱动修仙互动叙事：
+
+```bash
+# 试玩 demo 故事
+python3 scripts/interactive.py --story stories/demo_measuring_spirit.md
+
+# 引擎 headless 模式（自动选第一有效选项，CI 用）
+python3 scripts/interactive.py --story stories/demo_measuring_spirit.md --headless
+```
+
+- **数据驱动**：`data/*.yaml` 是唯一真相，剧情节点用 `{realms.炼气期.lifespan}` 占位符从 yaml 拉取
+- **条件分支**：`if: 灵石 >= 3` / `flag.拜师` — 状态机过滤可用选项
+- **DSL 简洁**：自创轻量剧本格式（`stories/*.md`），见 [interactive/README.md](interactive/README.md)
+- **可程序化**：`World` / `Story` / `Engine` / `State` 全 Python API，可嵌入 Web / CI / LLM 工作流
 
 ## 导出与消费
 

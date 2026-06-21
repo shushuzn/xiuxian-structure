@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+### 新增
+- 🧰 **Consumer API `examples/consume-interactive.py`**（~330 行 · 零依赖）
+  - 4 个高层 API：`analyze_story` / `walk_all_paths` / `find_shortest_path` / `export_to_json`
+  - CLI 4 子命令：`analyze` / `walk` / `path` / `export`
+  - Python 模块调用友好（`sys.path.insert(0, "examples")`）
+  - 死循环防护（单路径 > 50 步 → `loop_or_invalid`）
+  - 孤儿节点检测（`is_well_formed` + exit_code 1）
+- 📖 **`examples/README.md`** 重写为 Consumer API 教程（用法 + Python 调用 + 输出示例 + CI 集成）
+- 🔧 **CI 新 step** `Verify consume-interactive API`（4 个 CLI 全跑 + 临时 JSON 导出）
+
 ### 计划
 - 暂无。等待社区反馈或新需求。
 

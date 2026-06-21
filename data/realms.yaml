@@ -1,0 +1,151 @@
+# 境界体系权威数据
+# 修真境界按顺序排列，从炼气到渡劫
+# id 全小写英文，供跨文件引用
+
+realms:
+  - id: lianqi
+    name: 炼气期
+    order: 1
+    lifespan: 120
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
+    abilities:
+      divine_sense_range: "数丈"
+      can_fly: false
+      can_wield_high_tier: false
+      can_use_high_tier_pills: false
+    breakthrough:
+      to: zhuji
+      requires: [zhuji_dan]
+      recommended_env: lingmai_micro_or_above
+      risk: "经脉受损，修为倒退"
+    restrictions:
+      - 不能御空飞行
+      - 神识无法离体
+      - 无法驱动中高阶法器
+      - 无法承受高阶丹药药力
+    references:
+      - ../境界体系/炼气期.md
+
+  - id: zhuji
+    name: 筑基期
+    order: 2
+    lifespan: 200
+    sub_stages: [chuqi, zhongqi, houqi, fengfeng]
+    abilities:
+      divine_sense_range: "数十丈"
+      can_fly: "短暂御器飞行"
+      can_wield_high_tier: "可驱动中阶法器"
+      can_use_high_tier_pills: false
+    breakthrough:
+      to: jiedan
+      requires: [jiedan_dan]
+      recommended_env: lingmai_small_or_above
+      risk: "道基受损，需重修"
+    restrictions:
+      - 无法长时间御空飞行
+      - 神识探查范围有限
+      - 无法驱动高阶法器
+      - 无法承受高阶丹药药力
+    references:
+      - ../境界体系/筑基期.md
+
+  - id: jiedan
+    name: 结丹期
+    order: 3
+    lifespan: 500
+    sub_stages: [early, mid, late, peak]
+    abilities:
+      divine_sense_range: "数百丈"
+      can_fly: true
+      can_wield_high_tier: "可驱动高阶法器"
+      can_use_high_tier_pills: "宝品丹药"
+    breakthrough:
+      to: yuanying
+      requires: [peiyu_dan]
+      recommended_env: lingmai_medium_or_above
+      risk: "金丹碎裂，魂飞魄散"
+    restrictions:
+      - 神识仍受肉身局限
+      - 无法触及空间法则
+    references:
+      - ../境界体系/结丹期.md  # 文档待补
+
+  - id: yuanying
+    name: 元婴期
+    order: 4
+    lifespan: 1000
+    sub_stages: [early, mid, late, peak]
+    abilities:
+      divine_sense_range: "数里"
+      can_fly: "长时间御空"
+      can_wield_high_tier: "可驱动法宝"
+      can_use_high_tier_pills: "仙品丹药"
+    breakthrough:
+      to: huashen
+      requires: [huashen_auxiliary]
+      recommended_env: lingmai_large
+      risk: "元婴溃散，转世难成"
+    restrictions:
+      - 元婴离体有时间限制
+      - 无法突破天地法则压制
+    references:
+      - ../境界体系/元婴期.md  # 文档待补
+
+  - id: huashen
+    name: 化神期
+    order: 5
+    lifespan: 2000
+    sub_stages: [early, mid, late, peak]
+    abilities:
+      divine_sense_range: "数十里"
+      can_fly: "瞬移 / 空间挪移"
+      can_wield_high_tier: "可驱动灵宝"
+      can_use_high_tier_pills: "仙品丹药"
+    breakthrough:
+      to: lianxu
+      recommended_env: lingmai_super
+      risk: "神魂俱灭"
+    references:
+      - ../境界体系/化神期.md  # 文档待补
+
+  - id: lianxu
+    name: 炼虚期
+    order: 6
+    lifespan: 5000
+    sub_stages: [early, mid, late, peak]
+    abilities:
+      divine_sense_range: "数百里"
+      can_fly: "撕裂虚空"
+      can_wield_high_tier: "灵宝"
+    references:
+      - ../境界体系/炼虚期.md  # 文档待补
+
+  - id: heti
+    name: 合体期
+    order: 7
+    lifespan: 10000
+    sub_stages: [early, mid, late, peak]
+    abilities:
+      divine_sense_range: "千里"
+      can_fly: "法则运用"
+    references:
+      - ../境界体系/合体期.md  # 文档待补
+
+  - id: dujie
+    name: 渡劫期
+    order: 8
+    lifespan: "近乎无限"
+    sub_stages: [early, mid, late, peak]
+    abilities:
+      divine_sense_range: "万里"
+      can_fly: "界域穿梭"
+    references:
+      - ../境界体系/渡劫期.md  # 文档待补
+
+  - id: dacheng
+    name: 大乘期
+    order: 9
+    lifespan: "近乎无限"
+    sub_stages: [early, mid, late, peak]
+    references:
+      - ../境界体系/大乘期.md  # 文档待补

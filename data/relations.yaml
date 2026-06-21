@@ -1,0 +1,90 @@
+# 跨体系关联关系
+# 用于生成 mermaid 关系图
+# 格式: { from: "{体系}:{id}", to: "{体系}:{id}", type, description }
+
+relations:
+  # ── 灵根 → 境界 ──
+  - from: spirit_root:tian_ling_gen
+    to: realm:lianqi
+    type: influences
+    description: "天灵根突破瓶颈天生占优"
+  - from: spirit_root:wei_ling_gen
+    to: realm:zhuji
+    type: blocks
+    description: "伪灵根每突破一个境界都比天灵根难数倍"
+
+  # ── 灵根 → 功法 ──
+  - from: spirit_root:tian_ling_gen
+    to: technique:chang_sheng_jue
+    type: enables
+    description: "天灵根与天级无属性功法匹配"
+  - from: spirit_root:jin_ling_gen
+    to: technique:jin_jian_jue
+    type: enables
+    description: "金属性灵根与金属性功法匹配"
+
+  # ── 灵气 → 境界 ──
+  - from: aether:xi_bao
+    to: realm:lianqi
+    type: enables
+    description: "稀薄灵气下炼气期尚可"
+  - from: aether:nong_yu
+    to: realm:jiedan
+    type: enables
+    description: "浓郁灵气支持高阶修士修炼"
+
+  # ── 灵气 → 灵脉 → 势力 ──
+  - from: aether:wei_xing_lingmai
+    to: org:san_xiu
+    type: enables
+    description: "微型灵脉支持散修或小家族"
+
+  # ── 功法 → 境界 ──
+  - from: technique:tier_huang
+    to: realm:zhuji
+    type: blocks
+    description: "黄级功法最高到筑基"
+  - from: technique:tier_xuan
+    to: realm:jiedan
+    type: enables
+    description: "玄级可到结丹"
+  - from: technique:tier_di
+    to: realm:huashen
+    type: enables
+    description: "地级可到元婴甚至化神"
+  - from: technique:tier_tian
+    to: realm:dacheng
+    type: enables
+    description: "天级才能走得更远"
+
+  # ── 丹药 → 境界 ──
+  - from: elixir:tier_fan_pin
+    to: realm:lianqi
+    type: enables
+    description: "凡品丹药 → 炼气期"
+  - from: elixir:tier_ling_pin
+    to: realm:zhuji
+    type: enables
+    description: "灵品丹药 → 筑基期"
+  - from: elixir:tier_bao_pin
+    to: realm:jiedan
+    type: enables
+    description: "宝品丹药 → 结丹期"
+  - from: elixir:tier_xian_pin
+    to: realm:yuanying
+    type: enables
+    description: "仙品丹药 → 元婴期及以上"
+
+  # ── 丹药 → 突破 ──
+  - from: elixir:zhuji_dan
+    to: realm:zhuji
+    type: enables
+    description: "筑基丹辅助炼气突破筑基"
+  - from: elixir:jiedan_dan
+    to: realm:jiedan
+    type: enables
+    description: "结丹丹辅助筑基突破结丹"
+  - from: elixir:peiyu_dan
+    to: realm:yuanying
+    type: enables
+    description: "培婴丹辅助结丹突破元婴"

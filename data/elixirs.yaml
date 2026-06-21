@@ -1,0 +1,98 @@
+# 丹药体系权威数据
+
+elixirs:
+  # ── 突破类（最重要） ──
+  - id: zhuji_dan
+    name: 筑基丹
+    tier: ling_pin
+    used_in_realm: lianqi
+    purpose: tuopo
+    description: "辅助炼气期突破筑基，是低阶修士的关键丹药"
+    rarity: "稀有（主药难得）"
+    recipe_difficulty: high
+    references:
+      - ../丹药体系/丹药.md
+
+  - id: jiedan_dan
+    name: 结丹丹
+    tier: bao_pin
+    used_in_realm: zhuji
+    purpose: tuopo
+    description: "辅助筑基期突破结丹"
+    rarity: "稀有"
+    recipe_difficulty: very_high
+    references:
+      - ../丹药体系/丹药.md
+
+  - id: peiyu_dan
+    name: 培婴丹
+    tier: xian_pin
+    used_in_realm: jiedan
+    purpose: tuopo
+    description: "辅助结丹期突破元婴"
+    rarity: "极稀有"
+    recipe_difficulty: extreme
+    references:
+      - ../丹药体系/丹药.md
+
+  # ── 增益类 ──
+  - id: huang_long_dan
+    name: 黄龙丹
+    tier: ling_pin
+    used_in_realm: zhuji
+    purpose: zengyi
+    description: "提升修为，加速修炼"
+    rarity: "常见"
+    recipe_difficulty: medium
+    references:
+      - ../丹药体系/丹药.md
+
+  # ── 恢复类 ──
+  - id: xiao_huan_dan
+    name: 小还丹
+    tier: fan_pin
+    used_in_realm: lianqi
+    purpose: huifu
+    description: "恢复法力，治疗轻伤"
+    rarity: "常见"
+    recipe_difficulty: low
+    references:
+      - ../丹药体系/丹药.md
+
+  # ── 辟谷类 ──
+  - id: pigu_dan
+    name: 辟谷丹
+    tier: fan_pin
+    used_in_realm: lianqi
+    purpose: pigu
+    description: "替代进食，维持生机"
+    rarity: "常见"
+    recipe_difficulty: low
+    references:
+      - ../丹药体系/丹药.md
+
+# 丹药品级
+tiers:
+  - id: fan_pin
+    name: 凡品
+    realm_min: lianqi
+  - id: ling_pin
+    name: 灵品
+    realm_min: zhuji
+  - id: bao_pin
+    name: 宝品
+    realm_min: jiedan
+  - id: xian_pin
+    name: 仙品
+    realm_min: yuanying
+
+# 丹药用途
+purposes:
+  - id: tuopo
+    name: 突破类
+  - id: zengyi
+    name: 增益类
+  - id: huifu
+    name: 恢复类
+  - id: pigu
+    name: 辟谷类

@@ -1,0 +1,82 @@
+# 灵根体系权威数据
+
+spirit_roots:
+  - id: fei_ling_gen
+    name: 废灵根
+    grade: 1
+    attribute_count: 4-5
+    speed_modifier: 0.1
+    breakthrough_modifier: 0.1
+    description: "几乎无法感应灵气，修仙无望"
+    references:
+      - ../灵根体系/灵根.md
+
+  - id: wei_ling_gen
+    name: 伪灵根
+    grade: 2
+    attribute_count: 3-4
+    speed_modifier: 1.0
+    breakthrough_modifier: 0.3
+    description: "三种以上属性混杂，修炼速度极慢"
+    references:
+      - ../灵根体系/灵根.md
+
+  - id: zhen_ling_gen
+    name: 真灵根
+    grade: 3
+    attribute_count: 2-3
+    speed_modifier: 3.0
+    breakthrough_modifier: 1.0
+    description: "两到三种属性，资质尚可"
+    references:
+      - ../灵根体系/灵根.md
+
+  - id: tian_ling_gen
+    name: 天灵根
+    grade: 4
+    attribute_count: 1
+    speed_modifier: 10.0
+    breakthrough_modifier: 3.0
+    description: "单一属性，修炼速度极快"
+    references:
+      - ../灵根体系/灵根.md
+
+  - id: bian_yi_ling_gen
+    name: 变异灵根
+    grade: 5
+    attribute_count: 1
+    speed_modifier: 8.0
+    breakthrough_modifier: 2.5
+    description: "单一变异属性，威力超常，传承稀少"
+    references:
+      - ../灵根体系/灵根.md
+
+# 灵根属性
+attributes:
+  - id: jin
+    name: 金
+    trait: 杀伐
+  - id: mu
+    name: 木
+    trait: 生机
+  - id: shui
+    name: 水
+    trait: 变化
+  - id: huo
+    name: 火
+    trait: 爆发
+  - id: tu
+    name: 土
+    trait: 防御
+  - id: lei
+    name: 雷
+    trait: 雷罚（变异）
+    parent: jin
+  - id: bing
+    name: 冰
+    trait: 寒冻（变异）
+    parent: shui
+  - id: feng
+    name: 风
+    trait: 急速（变异）
+    parent: mu

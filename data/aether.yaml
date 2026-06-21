@@ -1,0 +1,78 @@
+# 天地灵气权威数据
+
+# 灵气浓度
+concentrations:
+  - id: xi_bao
+    name: 稀薄
+    supports_realm: lianqi
+    description: "仅够维持炼气期修炼，突破筑基困难"
+  - id: pu_tong
+    name: 普通
+    supports_realm: zhuji
+    description: "可支撑筑基期，结丹需灵脉辅助"
+  - id: nong_yu
+    name: 浓郁
+    supports_realm: jiedan
+    description: "适合高阶修士修炼，往往存在于灵脉之上"
+  - id: hua_ye
+    name: 化液
+    supports_realm: yuanying
+    description: "灵气浓郁到化为灵液，罕见"
+
+# 灵脉等级
+veins:
+  - id: wei_xing_lingmai
+    name: 微型灵脉
+    coverage_km: 5
+    supports_realm: lianqi
+    suitable_org: san_xiu
+  - id: xiao_xing_lingmai
+    name: 小型灵脉
+    coverage_km: 50
+    supports_realm: zhuji
+    suitable_org: small_sect
+  - id: zhong_xing_lingmai
+    name: 中型灵脉
+    coverage_km: 100
+    supports_realm: jiedan
+    suitable_org: medium_sect
+  - id: da_xing_lingmai
+    name: 大型灵脉
+    coverage_km: 500
+    supports_realm: yuanying
+    suitable_org: large_sect
+  - id: chao_ji_lingmai
+    name: 超级灵脉
+    coverage_km: 1000
+    supports_realm: huashen
+    suitable_org: top_sect
+
+# 灵气属性
+attribute_modifiers:
+  - id: wu_shuxing
+    name: 无属性
+    description: "天地间的普遍灵气，任何灵根均可吸收"
+  - id: wu_xing_pianxiang
+    name: 五行偏向
+    description: "特定地域灵气偏向某一属性，对应灵根修炼效率更高"
+
+# 界面
+realms:
+  - id: ren_jie
+    name: 人界
+    default_concentration: xi_bao
+    has_top_veins: false
+    description: "灵气稀薄到普通，大型灵脉罕见"
+  - id: ling_jie
+    name: 灵界
+    default_concentration: nong_yu
+    has_top_veins: true
+    description: "灵气浓郁，普通区域堪比人间灵脉"
+  - id: xian_jie
+    name: 仙界
+    default_concentration: hua_ye
+    has_top_veins: true
+    description: "灵气化液，本质远超凡界"
+
+references:
+  - ../天地灵气/灵气.md

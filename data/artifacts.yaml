@@ -1,0 +1,56 @@
+# 法器体系权威数据
+
+# 法器品级
+tiers:
+  - id: di_jie
+    name: 低阶法器
+    required_realm: lianqi
+    description: "炼气期可驱动，威力有限"
+  - id: zhong_jie
+    name: 中阶法器
+    required_realm: zhuji
+    description: "筑基期可驱动，威力较强"
+  - id: gao_jie
+    name: 高阶法器
+    required_realm: jiedan
+    description: "结丹期可驱动，威力霸道"
+  - id: fa_bao
+    name: 法宝
+    required_realm: yuanying
+    description: "元婴期及以上，蕴含器灵雏形"
+  - id: ling_bao
+    name: 灵宝
+    required_realm: huashen
+    description: "化神期及以上，器灵完整，可自主行动"
+
+# 认主方式
+recognitions:
+  - id: fali
+    name: 法力烙印
+    description: "以自身法力在法器上留下印记，最基础的方式"
+  - id: jingxue
+    name: 精血祭炼
+    description: "以精血与法器建立更深联系，驱动更顺畅"
+  - id: shenshi
+    name: 神识绑定
+    description: "以神识与法器器灵沟通，高阶法器所需"
+
+# 示例法器（待扩展）
+artifacts:
+  - id: qing_feng_jian
+    name: 青锋剑
+    tier: zhong_jie
+    attribute: jin
+    required_realm: zhuji
+    recognition: fali
+    note: "中阶金属性飞剑示例"
+  - id: lei_ding_zhu
+    name: 雷鼎珠
+    tier: gao_jie
+    attribute: lei
+    required_realm: jiedan
+    recognition: jingxue
+    note: "高阶雷属性法宝示例"
+
+references:
+  - ../法器体系/法器.md

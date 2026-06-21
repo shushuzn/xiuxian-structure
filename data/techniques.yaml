@@ -1,0 +1,67 @@
+# 功法体系权威数据
+
+# 功法品级
+tiers:
+  - id: huang
+    name: 黄级
+    max_realm: zhuji
+    description: "基础功法，炼气期主流"
+  - id: xuan
+    name: 玄级
+    max_realm: jiedan
+    description: "中级功法，可修炼至结丹期"
+  - id: di
+    name: 地级
+    max_realm: huashen
+    description: "高级功法，可修炼至元婴期甚至化神期"
+  - id: tian
+    name: 天级
+    max_realm: dacheng
+    description: "顶级功法，直指大道"
+
+# 修炼方式
+styles:
+  - id: jinggong
+    name: 静功
+    description: "打坐吐纳，引灵气入体"
+  - id: donggong
+    name: 动功
+    description: "配合动作运转法力"
+  - id: kuxiu
+    name: 苦修
+    description: "在极端环境下锤炼肉身与法力"
+
+# 传承方式
+inheritances:
+  - id: shitu
+    name: 师徒传承
+    description: "口传心授，最为正统"
+  - id: yujian
+    name: 玉简传承
+    description: "神识读取功法信息"
+  - id: zangjingge
+    name: 宗门藏经阁
+    description: "按贡献开放不同层级功法"
+  - id: jiyuan
+    name: 机缘获得
+    description: "秘境、古修洞府所得"
+
+# 示例功法（待扩展）
+techniques:
+  - id: chang_sheng_jue
+    name: 长生诀
+    tier: tian
+    attribute: wu
+    max_realm: dacheng
+    style: jinggong
+    note: "天级无属性功法示例"
+  - id: jin_jian_jue
+    name: 金剑诀
+    tier: di
+    attribute: jin
+    max_realm: huashen
+    style: donggong
+    note: "地级金属性功法示例"
+
+references:
+  - ../功法体系/功法.md

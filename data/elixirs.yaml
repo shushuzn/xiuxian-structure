@@ -71,6 +71,52 @@ elixirs:
     references:
       - ../丹药体系/丹药.md
 
+  # ── 抗心魔类（v1.5 新增） ──
+  - id: qing_xin_dan
+    name: 清心丹
+    tier: ling_pin
+    used_in_realm: zhuji
+    purpose: kangxinmo
+    description: "抵御贪嗔痴类心魔，压制心魔触发"
+    rarity: "稀有"
+    recipe_difficulty: high
+    references:
+      - ../丹药体系/清心丹.md
+
+  - id: qing_xin_dan_advanced
+    name: 清心丹（宝品）
+    tier: bao_pin
+    used_in_realm: jiedan
+    purpose: kangxinmo
+    description: "高级版清心丹，可抵御执念魔"
+    rarity: "极稀有"
+    recipe_difficulty: very_high
+    references:
+      - ../丹药体系/清心丹.md
+
+  # ── 神魂稳固类（v1.5 新增） ──
+  - id: ning_shen_dan
+    name: 凝神丹
+    tier: ling_pin
+    used_in_realm: zhuji
+    purpose: kangxinmo
+    description: "稳固神魂，抵御痴魔、执念魔"
+    rarity: "稀有"
+    recipe_difficulty: high
+    references:
+      - ../丹药体系/凝神丹.md
+
+  - id: ning_shen_dan_advanced
+    name: 凝神丹（宝品）
+    tier: bao_pin
+    used_in_realm: jiedan
+    purpose: kangxinmo
+    description: "高级版凝神丹，元婴凝结更稳固"
+    rarity: "极稀有"
+    recipe_difficulty: very_high
+    references:
+      - ../丹药体系/凝神丹.md
+
 # 丹药品级
 tiers:
   - id: fan_pin
@@ -96,3 +142,5 @@ purposes:
     name: 恢复类
   - id: pigu
     name: 辟谷类
+  - id: kangxinmo
+    name: 抗心魔类

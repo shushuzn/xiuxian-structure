@@ -9,6 +9,8 @@
 
 **v1.4.0** · **13 体系** · **82 篇体系 .md** (含 122 总数) · 11 yaml · 20 PR 已 merge · [📖 阅读 v1.4.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v1.4.0)
 
+> 🚧 v1.5 草案：新增 **心魔体系** + **雷劫体系**（2 体系 / 11 篇），参见 [PR #21](https://github.com/shushuzn/xiuxian-structure/pulls)（占位）
+
 ## 架构
 
 ```
@@ -123,6 +125,19 @@ xiuxian-structure/
 │   ├── 秘境.md
 │   ├── 灵药岛.md
 │   └── 雷师之墓.md
+├── 心魔体系/                   # 🆕 v1.5 突破心障
+│   ├── 心魔.md
+│   ├── 贪魔.md
+│   ├── 嗔魔.md
+│   ├── 痴魔.md
+│   └── 执念魔.md
+├── 雷劫体系/                   # 🆕 v1.5 天劫考验
+│   ├── 雷劫.md
+│   ├── 三九天劫.md
+│   ├── 六九天劫.md
+│   ├── 九九天劫.md
+│   ├── 雷劫淬体.md
+│   └── 散功.md
 │
 ├── data/                       # 结构化数据（程序可读）
 │   ├── realms.yaml             # 境界

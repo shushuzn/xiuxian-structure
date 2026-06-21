@@ -80,6 +80,9 @@ def check_md_structure():
         # examples/ 是示例作品（小说/使用 demo），不强制
         if rel.parts[0] == "examples":
             continue
+        # .release-notes-*.md 是发布管理文件，不强制
+        if rel.name.startswith(".release-notes-"):
+            continue
         content = md.read_text(encoding="utf-8")
         sections = extract_sections(content)
         if "关联" not in sections:

@@ -38,8 +38,17 @@ jobs:
       - name: Verify file inventory
         run: |
           echo "📁 目录结构："
-          find . -type f -not -path "./.git/*" -not -path "./dist/*" | sort
+          find . -type f -not -path "./.git/*" -not -path "./dist/*" -not -path "./interactive/saves/*" | sort
           echo ""
           echo "📊 文件计数："
-          echo "Markdown: $(find . -name '*.md' -not -path './.git/*' -not -path './dist/*' | wc -l)"
+          echo "Markdown: $(find . -name '*.md' -not -path './.git/*' -not -path './dist/*' -not -path './interactive/saves/*' | wc -l)"
           echo "YAML: $(find . -name '*.yaml' -not -path './.git/*' | wc -l)"
+
+      - name: Run interactive engine (smoke test)
+        run: |
+          echo "🎮 跑互动小说引擎（验证状态机 + 剧本解析 + 条件求值）："
+          python scripts/interactive.py \
+            --story stories/demo_measuring_spirit.md \
+            --headless
+          echo ""
+          echo "✅ 引擎 smoke test 通过"

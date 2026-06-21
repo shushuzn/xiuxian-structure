@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v1.4.0** · 11 体系 · 61 篇 .md · 11 yaml · 19 PR 已 merge · [📖 阅读 v1.4.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v1.4.0)
+**v1.4.0** · **13 体系** · **82 篇体系 .md** (含 122 总数) · 11 yaml · 20 PR 已 merge · [📖 阅读 v1.4.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v1.4.0)
 
 ## 架构
 
@@ -52,12 +52,26 @@ xiuxian-structure/
 │   └── 超级灵脉.md
 ├── 妖兽体系/                   # 妖族
 │   ├── 妖兽.md
-│   └── 灵兽.md
+│   ├── 灵兽.md
+│   ├── 海妖.md                  # 🆕 乱星海域水族
+│   ├── 九幽寒蟒.md              # 🆕 aoyue 本命灵兽
+│   ├── 化形妖修.md              # 🆕 化形后身份
+│   └── 妖丹.md                  # 🆕 妖兽核心资源
+├── 妖修体系/                   # 🆕 妖修身份与境界
+│   ├── 妖修.md
+│   └── 化形期.md
 ├── 势力体系/                   # 宗门、家族、散修、王朝、妖修
 │   ├── 势力.md
 │   ├── 散修联盟.md
 │   ├── 修仙家族.md
-│   └── 天霞山.md
+│   ├── 天霞山.md
+│   ├── 墨府.md                  # 🆕 vol1/vol2 墨大夫
+│   ├── 落云宗.md                # 🆕 元婴期大型宗门
+│   ├── 寒焰宗.md                # 🆕 aoyue 自创
+│   ├── 潮汐宫.md                # 🆕 化形妖修宗门
+│   ├── 天星城商会.md            # 🆕 中立商会
+│   ├── 黑岩海盗.md              # 🆕 乱星海域海盗
+│   └── 妖修海域.md              # 🆕 妖修聚集地
 ├── 灵石体系/                   # 通用货币
 │   ├── 灵石.md
 │   ├── 下品灵石.md
@@ -67,7 +81,12 @@ xiuxian-structure/
 │   ├── 阵法.md
 │   ├── 攻击型阵法.md
 │   ├── 防御型阵法.md
-│   └── 聚灵型阵法.md
+│   ├── 聚灵型阵法.md
+│   ├── 护山大阵.md              # 🆕 宗门必备
+│   ├── 雾阵.md                  # 🆕 乱星海域海雾
+│   ├── 寒泉阵.md                # 🆕 灵药岛寒泉
+│   ├── 召唤阵.md                # 🆕 灵兽召唤
+│   └── 渡劫阵.md                # 🆕 突破辅助
 ├── 符箓体系/                   # 符箓（一次性法术载体）
 │   ├── 符箓.md
 │   ├── 火球符.md
@@ -77,7 +96,9 @@ xiuxian-structure/
 ├── 功法体系/                   # 修炼方法
 │   ├── 功法.md
 │   ├── 长生诀.md               # 天级无属性示例
-│   └── 金剑诀.md               # 地级金属性示例
+│   ├── 金剑诀.md               # 地级金属性示例
+│   ├── 长春功.md               # 🆕 雷师一脉传承
+│   └── 雷法.md                 # 🆕 雷师亲创
 ├── 丹药体系/                   # 辅助外物
 │   ├── 丹药.md
 │   ├── 筑基丹.md               # 突破类
@@ -85,11 +106,23 @@ xiuxian-structure/
 │   ├── 培婴丹.md               # 突破类
 │   ├── 黄龙丹.md               # 增益类
 │   ├── 小还丹.md               # 恢复类
-│   └── 辟谷丹.md               # 辟谷类
+│   ├── 辟谷丹.md               # 辟谷类
+│   ├── 疗伤丹.md               # 🆕 基础疗伤
+│   ├── 九幽还魂草.md           # 🆕 千年灵药
+│   ├── 渡劫丹.md               # 🆕 突破元婴辅助
+│   └── 千年灵药.md             # 🆕 灵药品级
 ├── 法器体系/                   # 战斗器物
 │   ├── 法器.md
 │   ├── 青锋剑.md               # 中阶金属性剑
-│   └── 雷鼎珠.md               # 高阶雷属性法宝
+│   ├── 雷鼎珠.md               # 高阶雷属性法宝
+│   ├── 养魂木.md               # 🆕 温养残魂
+│   ├── 雷师印.md               # 🆕 雷师传承法器
+│   ├── 易容符.md               # 🆕 幻形符（跨体系）
+│   └── 灵兽袋.md               # 🆕 灵兽收纳
+├── 秘境体系/                   # 🆕 独立小世界
+│   ├── 秘境.md
+│   ├── 灵药岛.md
+│   └── 雷师之墓.md
 │
 ├── data/                       # 结构化数据（程序可读）
 │   ├── realms.yaml             # 境界
@@ -118,7 +151,11 @@ xiuxian-structure/
 │   ├── feed-to-llm.md          # 🆕 LLM 协作工作流指南
 │   └── generated/              # 🆕 LLM 生成的节点（mock 示例）
 ├── stories/                    # 互动小说剧本（v1.2.0+）
-│   └── demo_measuring_spirit.md
+│   ├── README.md
+│   ├── demo_measuring_spirit.md # 5 节点 demo
+│   ├── hanli_vol1_mochui.md     # 18 节点 / 韩立第一卷
+│   ├── hanli_vol2_yuanzou.md    # 🆕 30 节点 / 韩立第二卷
+│   └── aoyue_npc_fanpai.md      # 🆕 22 节点 / 敖越 NPC 视角
 ├── interactive/                # 互动小说引擎文档（v1.2.0+）
 │   ├── README.md
 │   └── web/                    # 🆕 Web UI（v1.4.0+）

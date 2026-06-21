@@ -4,8 +4,23 @@
 
 ## [Unreleased]
 
-### 计划中
-- 工具化（scripts/export.py）
+## [1.0.0] - 2025-06-21
+
+### 新增
+- 📦 **导出工具 `scripts/export.py`**
+  - JSON：整本知识库（44K，含 12 体系元信息 + 数据）
+  - CSV：每段数据一张表（共 42 个 CSV）
+  - Markdown：单文件手册 `HANDBOOK.md`（1053 行）
+  - 支持 `--format {all,json,csv,md}` 和 `--output DIR` 参数
+- 🔧 **CI smoke test**（`.github/workflows/validate.yml`）
+  - PR/CI 自动跑 export.py 验证工具可执行
+  - 显示产物统计
+- 🚫 **`.gitignore`**：排除 dist/、__pycache__、IDE 文件
+
+### 变更
+- `validate.py`：`dist/` 目录跳过 `## 关联` 强制检查
+- `README.md`：新增「导出与消费」章节，列 3 种产物用法
+- 架构图：scripts/ 下新增 `export.py`
 
 ## [0.9.0] - 2025-06-21
 

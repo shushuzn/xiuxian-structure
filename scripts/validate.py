@@ -74,6 +74,9 @@ def check_md_structure():
         # .github/ 下的元文件不强制（PR/Issue 模板、CODE_OF_CONDUCT、CODEOWNERS）
         if rel.parts[0] == ".github":
             continue
+        # dist/ 是 export.py 工具产物，不强制
+        if rel.parts[0] == "dist":
+            continue
         content = md.read_text(encoding="utf-8")
         sections = extract_sections(content)
         if "关联" not in sections:

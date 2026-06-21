@@ -23,11 +23,23 @@ jobs:
       - name: Run validation
         run: python scripts/validate.py
 
+      - name: Run export (smoke test)
+        run: |
+          python scripts/export.py --output /tmp/dist-test
+          echo ""
+          echo "📦 Export 产物："
+          ls -la /tmp/dist-test/ | head -10
+          echo ""
+          echo "📊 产物统计："
+          echo "JSON: $(ls /tmp/dist-test/*.json 2>/dev/null | wc -l) 个"
+          echo "CSV:  $(ls /tmp/dist-test/*.csv 2>/dev/null | wc -l) 个"
+          echo "MD:   $(ls /tmp/dist-test/*.md 2>/dev/null | wc -l) 个"
+
       - name: Verify file inventory
         run: |
           echo "📁 目录结构："
-          find . -type f -not -path "./.git/*" | sort
+          find . -type f -not -path "./.git/*" -not -path "./dist/*" | sort
           echo ""
           echo "📊 文件计数："
-          echo "Markdown: $(find . -name '*.md' -not -path './.git/*' | wc -l)"
+          echo "Markdown: $(find . -name '*.md' -not -path './.git/*' -not -path './dist/*' | wc -l)"
           echo "YAML: $(find . -name '*.yaml' -not -path './.git/*' | wc -l)"

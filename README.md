@@ -106,7 +106,8 @@ xiuxian-structure/
 │   └── 图谱.md                  # mermaid 关系图
 │
 ├── scripts/
-│   └── validate.py             # 校验脚本
+│   ├── validate.py             # 校验脚本
+│   └── export.py               # 导出工具（JSON / CSV / Markdown 手册）
 │
 ├── .github/
 │   ├── workflows/validate.yml  # GitHub Actions CI
@@ -128,6 +129,33 @@ python3 scripts/validate.py
 
 # 应该输出：✅ 全部通过
 ```
+
+## 导出与消费
+
+把 11 个 yaml 转换为可分发的产物：
+
+```bash
+# 导出全部格式到 dist/
+python3 scripts/export.py
+
+# 只导出 JSON / CSV / MD 中的一种
+python3 scripts/export.py --format json
+python3 scripts/export.py --format csv
+python3 scripts/export.py --format md
+
+# 指定输出目录
+python3 scripts/export.py --output /tmp/xiuxian
+```
+
+导出产物（每次运行生成于 `dist/`）：
+
+| 文件 | 用途 |
+|---|---|
+| `dist/xiuxian.json` | 整本知识库（喂给 LLM / 导入工具）|
+| `dist/*__*.csv` | 每段数据一张表（Excel / Pandas 分析）|
+| `dist/HANDBOOK.md` | 单文件 Markdown 手册（阅读 / 分享）|
+
+`dist/` 在 `.gitignore` 中（工具产物，不入仓）。需要时本地运行 `export.py` 即得。
 
 ## 贡献
 

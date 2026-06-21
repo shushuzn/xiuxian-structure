@@ -5,6 +5,15 @@
 ## [Unreleased]
 
 ### 新增
+- 📖 **`stories/hanli_vol2_yuanzou.md`**（韩立第二卷 · 30 节点 / 5 结局 / 662 路径 / 9 体系）
+  - 承接 vol1「借药筑基」结局，韩立已筑基远走
+  - 主题：护送南陇侯残魂回落云宗 + 墨府追杀 + 妖修海域 + 雷师传承
+- 📖 **`stories/aoyue_npc_fanpai.md`**（敖越 · 多主角 / NPC 反派视角 · 22 节点 / 4 结局 / 316 路径 / 9 体系）
+  - 敖越是墨大夫的表妹，结丹后期，反出墨府自立寒焰宗
+  - 与 vol1/vol2 共享同一世界观（墨大夫、潮汐宫、天星城商会）
+  - 主题：三方博弈（元婴/化形/商会）+ 元婴渡劫 + 反派崛起
+- 📚 **`stories/README.md`** 介绍现有剧本 + 写作约定 + 跨卷关联
+- 🔧 **CI 新 step** `Verify vol2 + aoyue stories`（跨剧本路径覆盖 + 共享引用统计）
 - 🧰 **Consumer API `examples/consume-interactive.py`**（~330 行 · 零依赖）
   - 4 个高层 API：`analyze_story` / `walk_all_paths` / `find_shortest_path` / `export_to_json`
   - CLI 4 子命令：`analyze` / `walk` / `path` / `export`
@@ -12,7 +21,7 @@
   - 死循环防护（单路径 > 50 步 → `loop_or_invalid`）
   - 孤儿节点检测（`is_well_formed` + exit_code 1）
 - 📖 **`examples/README.md`** 重写为 Consumer API 教程（用法 + Python 调用 + 输出示例 + CI 集成）
-- 🔧 **CI 新 step** `Verify consume-interactive API`（4 个 CLI 全跑 + 临时 JSON 导出）
+- 🔧 **CI step** `Verify consume-interactive API`（4 个 CLI 全跑 + 临时 JSON 导出）
 
 ### 计划
 - 暂无。等待社区反馈或新需求。

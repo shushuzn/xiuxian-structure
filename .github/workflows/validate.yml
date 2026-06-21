@@ -1,0 +1,33 @@
+name: Validate Knowledge Base
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Run validation
+        run: python scripts/validate.py
+
+      - name: Verify file inventory
+        run: |
+          echo "📁 目录结构："
+          find . -type f -not -path "./.git/*" | sort
+          echo ""
+          echo "📊 文件计数："
+          echo "Markdown: $(find . -name '*.md' -not -path './.git/*' | wc -l)"
+          echo "YAML: $(find . -name '*.yaml' -not -path './.git/*' | wc -l)"

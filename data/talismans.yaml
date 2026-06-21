@@ -1,0 +1,89 @@
+# talismans.yaml — 符箓体系权威数据
+
+# 符箓品级
+grades:
+  - id: fan_fu
+    name: 凡符
+    spell_realm: lianqi
+    maker_realm: lianqi
+  - id: ling_fu
+    name: 灵符
+    spell_realm: zhuji
+    maker_realm: zhuji
+  - id: bao_fu
+    name: 宝符
+    spell_realm: jiedan
+    maker_realm: jiedan
+  - id: xian_fu
+    name: 仙符
+    spell_realm: yuanying_or_above
+    maker_realm: yuanying_or_above
+
+# 符箓类别
+categories:
+  - id: gong_ji
+    name: 攻击符
+    description: 激发攻击法术
+  - id: fang_yu
+    name: 防御符
+    description: 激发护罩
+  - id: fu_zhu
+    name: 辅助符
+    description: 加速、增幅、隐匿
+  - id: dun
+    name: 遁符
+    description: 瞬间移动、逃命
+  - id: feng_yin
+    name: 封印符
+    description: 封印妖兽或物品
+  - id: chuan_xun
+    name: 传讯符
+    description: 远距离传信
+
+# 制作方式
+production:
+  - id: shou_gong
+    name: 手工绘制
+    description: 制符师亲手绘制，品质可控
+  - id: pi_liang
+    name: 批量印制
+    description: 用模板大批量制作
+  - id: yi_ci
+    name: 一次成型
+    description: 以法力直接凝聚，难复刻
+
+# 构成要素
+components:
+  - id: fu_zhi
+    name: 符纸
+    description: 载体，普通黄纸到灵纸
+  - id: fu_mo
+    name: 符墨
+    description: 特殊墨水，含灵药成分
+  - id: fu_bi
+    name: 符笔
+    description: 绘制工具
+  - id: fu_wen
+    name: 符文
+    description: 核心，决定功效
+
+# 示例符箓（待扩展）
+examples:
+  - id: huo_qiu_fu
+    name: 火球符
+    grade: fan_fu
+    category: gong_ji
+    note: "最基础的炼气期攻击符"
+  - id: jin_gang_fu
+    name: 金刚符
+    grade: ling_fu
+    category: fang_yu
+    note: "筑基期防御符示例"
+  - id: shan_dian_fu
+    name: 闪电符
+    grade: bao_fu
+    category: gong_ji
+    note: "结丹期雷属性攻击符"
+
+references:
+  - ../符箓体系/符箓.md

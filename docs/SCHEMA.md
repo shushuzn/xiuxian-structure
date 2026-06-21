@@ -193,6 +193,37 @@ attributes:                   # 灵石属性
     name: 无属性
 ```
 
+## 阵法体系 — `data/formations.yaml`
+
+```yaml
+categories:                   # 阵法类别
+  - id: gong_ji
+    name: 攻击型阵法
+
+grades:                       # 阵法等级
+  - id: ling_zhen
+    name: 灵阵
+    realm: zhuji
+
+examples:                     # 示例阵法
+  - id: jiu_xiao_lei_zhen
+    name: 九霄雷阵
+    category: gong_ji
+```
+
+## 符箓体系 — `data/talismans.yaml`
+
+```yaml
+grades:                       # 符箓品级
+  - id: ling_fu
+    name: 灵符
+    spell_realm: zhuji
+
+categories:                   # 符箓类别
+  - id: gong_ji
+    name: 攻击符
+```
+
 ---
 
 ## ID 命名约定

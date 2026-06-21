@@ -29,6 +29,8 @@ xiuxian-structure/
 │   └── 灵兽.md
 ├── 势力体系/势力.md            # 宗门、家族、散修、王朝、妖修
 ├── 灵石体系/灵石.md            # 通用货币
+├── 阵法体系/阵法.md            # 阵法（攻防、聚灵）
+├── 符箓体系/符箓.md            # 符箓（一次性法术载体）
 ├── 功法体系/                   # 修炼方法
 │   ├── 功法.md
 │   ├── 长生诀.md               # 天级无属性示例
@@ -56,6 +58,8 @@ xiuxian-structure/
 │   ├── monsters.yaml           # 妖兽/灵兽
 │   ├── factions.yaml           # 势力
 │   ├── spirit_stones.yaml      # 灵石
+│   ├── formations.yaml         # 阵法
+│   ├── talismans.yaml          # 符箓
 │   └── relations.yaml          # 跨体系关联
 │
 ├── docs/                       # 元文档

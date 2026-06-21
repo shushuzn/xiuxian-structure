@@ -1,0 +1,92 @@
+# formations.yaml — 阵法体系权威数据
+
+# 阵法类别
+categories:
+  - id: gong_ji
+    name: 攻击型阵法
+    description: 以阵法激发攻击法术
+  - id: fang_yu
+    name: 防御型阵法
+    description: 形成护罩阻挡攻击
+  - id: kun_di
+    name: 困敌型阵法
+    description: 困住敌人无法脱身
+  - id: ju_ling
+    name: 聚灵型阵法
+    description: 聚集天地灵气加速修炼
+  - id: huan_shu
+    name: 幻术型阵法
+    description: 制造幻境迷惑敌人
+  - id: fu_zhu
+    name: 辅助型阵法
+    description: 加速炼丹炼器、增幅法术
+
+# 阵法等级
+grades:
+  - id: fan_zhen
+    name: 凡阵
+    realm: lianqi
+    difficulty: low
+  - id: ling_zhen
+    name: 灵阵
+    realm: zhuji
+    difficulty: medium
+  - id: bao_zhen
+    name: 宝阵
+    realm: jiedan
+    difficulty: high
+  - id: xian_zhen
+    name: 仙阵
+    realm: yuanying_or_above
+    difficulty: extreme
+
+# 布阵方式
+deploy_types:
+  - id: lin_shi
+    name: 临时布阵
+    description: 战前快速布置
+  - id: yong_jiu
+    name: 永久布阵
+    description: 长期布设，威力大但成本高
+  - id: sui_shen
+    name: 随身布阵
+    description: 刻在法器上随身携带
+
+# 阵法构成要素
+components:
+  - id: zhen_qi
+    name: 阵旗/阵盘
+    description: 布阵的物理媒介
+  - id: zhen_yan
+    name: 阵眼
+    description: 阵法核心，放置灵石或法器
+  - id: zhen_ji
+    name: 阵基
+    description: 阵法根基
+  - id: zhen_tu
+    name: 阵图
+    description: 布阵的图纸与规律
+
+# 示例阵法（待扩展）
+examples:
+  - id: jing_hai_shen_deng_zhen
+    name: 净海神灯阵
+    category: fang_yu
+    grade: bao_zhen
+    deploy: yong_jiu
+    note: "顶级宗门的护山大阵示例"
+  - id: jiu_xiao_lei_zhen
+    name: 九霄雷阵
+    category: gong_ji
+    grade: bao_zhen
+    deploy: lin_shi
+    note: "雷属性攻击阵法示例"
+  - id: mi_tian_huan_zhen
+    name: 迷天幻阵
+    category: huan_shu
+    grade: ling_zhen
+    deploy: sui_shen
+    note: "幻术阵法示例"
+
+references:
+  - ../阵法体系/阵法.md

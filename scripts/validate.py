@@ -77,6 +77,9 @@ def check_md_structure():
         # dist/ 是 export.py 工具产物，不强制
         if rel.parts[0] == "dist":
             continue
+        # examples/ 是示例作品（小说/使用 demo），不强制
+        if rel.parts[0] == "examples":
+            continue
         content = md.read_text(encoding="utf-8")
         sections = extract_sections(content)
         if "关联" not in sections:

@@ -236,3 +236,55 @@ relations:
     to: divine_sense:yuanying
     type: weakens
     description: "嗔魔爆发可短暂削弱神识强度"
+
+  # ── v1.7: 法器 → 器灵 ──
+  - from: artifact:tier_fa_bao
+    to: spirit_weapon:chu_xing
+    type: enables
+    description: "法宝级法器可蕴含器灵雏形"
+  - from: artifact:tier_ling_bao
+    to: spirit_weapon:wan_zheng
+    type: enables
+    description: "灵宝级法器蕴含完整器灵，可自主行动"
+  - from: artifact:tier_fa_bao
+    to: spirit_weapon:recognition_yi_shi
+    type: requires
+    description: "法宝级以上法器需仪式认主"
+
+  # ── v1.7: 器灵 ↔ 心魔 ──
+  - from: heart_demon:chi_mo
+    to: spirit_weapon:backlash
+    type: triggers
+    description: "嗔魔爆发可激发器灵反噬"
+  - from: heart_demon:zhi_nian_mo
+    to: spirit_weapon:backlash
+    type: triggers
+    description: "执念魔爆发可激发器灵反噬"
+  - from: spirit_weapon:recognition_zi_yuan
+    to: heart_demon:all
+    type: blocks
+    description: "自愿认主的器灵关系稳固，不易受心魔激发反噬"
+
+  # ── v1.7: 雷劫 → 器灵成长 ──
+  - from: tribulation:san_jiu_tian_jie
+    to: spirit_weapon:growth_du_jie
+    type: enables
+    description: "三九天劫可催生器灵雏形"
+  - from: tribulation:liu_jiu_tian_jie
+    to: spirit_weapon:growth_du_jie
+    type: enables
+    description: "六九天劫可使器灵跃升至完整"
+  - from: tribulation:jiu_jiu_tian_jie
+    to: spirit_weapon:growth_du_jie
+    type: enables
+    description: "九九天劫可使器灵跃升至大成"
+
+  # ── v1.7: 神识 → 器灵沟通 ──
+  - from: divine_sense:yuanying
+    to: spirit_weapon:communication_dui_hua
+    type: enables
+    description: "元婴神识可与完整器灵神识对话"
+  - from: divine_sense:huashen
+    to: spirit_weapon:communication_xin_xi
+    type: enables
+    description: "化神神识可与大成器灵心意相通"

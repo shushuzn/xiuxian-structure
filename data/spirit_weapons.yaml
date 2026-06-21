@@ -1,0 +1,224 @@
+# 器灵体系权威数据（v1.7 新增）
+# 器灵是法器内部孕育的意识体，是法宝/灵宝的核心标志
+
+# 器灵等级
+grades:
+  - id: chu_xing
+    name: 雏形
+    artifact_tier: fa_bao              # 法宝
+    consciousness: 微弱
+    required_realm_min: yuanying
+    capabilities:
+      - 传信
+      - 警示
+    growth_years_typical: 0
+    references:
+      - ../器灵体系/器灵.md
+
+  - id: xiao_cheng
+    name: 小成
+    artifact_tier: fa_bao_to_ling_bao  # 法宝-灵宝之间
+    consciousness: 较完整
+    required_realm_min: yuanying
+    capabilities:
+      - 单向传信
+      - 辅助操控
+    growth_years_typical: "100-500"
+    references:
+      - ../器灵体系/器灵.md
+
+  - id: wan_zheng
+    name: 完整
+    artifact_tier: ling_bao             # 灵宝
+    consciousness: 完整
+    required_realm_min: huashen
+    capabilities:
+      - 神识对话
+      - 部分自主行动
+    growth_years_typical: "500-2000"
+    references:
+      - ../器灵体系/器灵.md
+
+  - id: da_cheng
+    name: 大成
+    artifact_tier: chuan_shuo           # 传说级
+    consciousness: 与主人心意相通
+    required_realm_min: huashen
+    capabilities:
+      - 心意相通
+      - 独立战斗
+      - 自主护主
+    growth_years_typical: "2000-5000"
+    references:
+      - ../器灵体系/器灵.md
+
+  - id: zhi_zhen
+    name: 至臻
+    artifact_tier: xian_qi              # 仙器
+    consciousness: 灵魂融合
+    required_realm_min: feisheng         # 飞升期
+    capabilities:
+      - 灵魂融合
+      - 意识寄存
+      - 记忆继承
+    growth_years_typical: "10000+"
+    references:
+      - ../器灵体系/器灵.md
+
+# 认主方式
+recognition_methods:
+  - id: zi_yuan
+    name: 自愿认主
+    stability: 极稳固
+    combat_synergy: "+50%"
+    backlash_probability: "<5%"
+    rarity: 极低
+    description: "器灵认可主人后自愿结契"
+    references:
+      - ../器灵体系/器灵认主.md
+
+  - id: yi_shi
+    name: 仪式认主
+    stability: 稳固
+    combat_synergy: "标准"
+    backlash_probability: "10-20%"
+    rarity: 常见
+    description: "通过特定仪式（血祭、神识烙印、魂契）让器灵被动接受"
+    references:
+      - ../器灵体系/器灵认主.md
+
+  - id: qiang_po
+    name: 强迫认主
+    stability: 紧张
+    combat_synergy: "-20%"
+    backlash_probability: "30-50%"
+    rarity: 少
+    description: "主人以绝对实力压制器灵意识，强行打上烙印"
+    references:
+      - ../器灵体系/器灵认主.md
+
+  - id: ping_deng
+    name: 平等共生
+    stability: 最理想
+    combat_synergy: "+100%"
+    backlash_probability: "<1%"
+    rarity: 传说级
+    description: "主人与器灵平等契约，类似道友"
+    references:
+      - ../器灵体系/器灵认主.md
+
+# 反噬等级
+backlash_levels:
+  - id: qing
+    name: 轻反噬
+    manifestation: "偶有不服从，拒绝配合"
+    consequence: "战斗效率下降"
+    mitigation: 加强沟通
+    references:
+      - ../器灵体系/器灵反噬.md
+
+  - id: zhong
+    name: 中反噬
+    manifestation: "主动抗拒操控，关键时刻掉链子"
+    consequence: "错过战机，可能被牵制"
+    mitigation: 神识压制或解除契约
+    references:
+      - ../器灵体系/器灵反噬.md
+
+  - id: zhong_da
+    name: 重反噬
+    manifestation: "开始吞噬主人神识"
+    consequence: "神魂重创，修为倒退"
+    mitigation: 同阶修士协助镇压
+    references:
+      - ../器灵体系/器灵反噬.md
+
+  - id: wan_quan
+    name: 完全反噬
+    manifestation: "完全吞噬主人神魂，夺取法器"
+    consequence: "主人神魂俱灭，肉身成为器灵傀儡"
+    mitigation: 高阶修士抹杀器灵意识
+    references:
+      - ../器灵体系/器灵反噬.md
+
+# 沟通方式
+communication_methods:
+  - id: jing_shi
+    name: 警示
+    spirit_grade_min: chu_xing
+    capability: "传递基本信号（危险/敌意/灵物）"
+    references:
+      - ../器灵体系/器灵沟通.md
+
+  - id: chuan_xin
+    name: 单向传信
+    spirit_grade_min: xiao_cheng
+    capability: "传递复杂信息片段"
+    references:
+      - ../器灵体系/器灵沟通.md
+
+  - id: dui_hua
+    name: 神识对话
+    spirit_grade_min: wan_zheng
+    capability: "双向对话复杂想法、战术、情感"
+    requirement: "主人神识强度足够"
+    references:
+      - ../器灵体系/器灵沟通.md
+
+  - id: xin_xi
+    name: 心意相通
+    spirit_grade_min: da_cheng
+    capability: "无需语言即可感知彼此意图"
+    requirement: "长期相处（数十年以上）"
+    references:
+      - ../器灵体系/器灵沟通.md
+
+  - id: rong_he
+    name: 灵魂融合
+    spirit_grade_min: zhi_zhen
+    capability: "意识寄存、记忆继承"
+    references:
+      - ../器灵体系/器灵沟通.md
+
+# 成长机制
+growth_methods:
+  - id: zi_ran
+    name: 自然孕育
+    probability: 极低
+    duration_years: 数千
+    description: "法器长期存放于灵脉之上自然温养"
+    references:
+      - ../器灵体系/器灵成长.md
+
+  - id: tian_cai
+    name: 天材地宝催化
+    probability: 中
+    duration_years: 数百
+    description: "炼制时加入万年灵木、化形期妖丹等"
+    references:
+      - ../器灵体系/器灵成长.md
+
+  - id: du_jie
+    name: 雷劫淬炼
+    probability: 高
+    duration_years: 1 次雷劫
+    description: "主人渡劫时法器受劫雷激发"
+    references:
+      - ../器灵体系/器灵成长.md
+
+  - id: zhan_dou
+    name: 战斗觉醒
+    probability: 中
+    duration_years: 关键时刻
+    description: "生死之战中激发潜能"
+    references:
+      - ../器灵体系/器灵成长.md
+
+  - id: xie_xue
+    name: 血祭邪法
+    probability: 极高
+    duration_years: 即时
+    description: "以修士精血或魂魄强行灌注（多为凶器）"
+    taboo: true
+    references:
+      - ../器灵体系/器灵成长.md

@@ -101,3 +101,49 @@ jobs:
               sys.exit(1)
           print('✅ 所有 stories 校验通过')
           "
+
+      - name: Verify LLM-generated examples are parseable
+        run: |
+          echo "🤖 校验 examples/generated/ LLM 风格节点（解析 + NodeValidator 5 项）："
+          python -c "
+          import sys
+          import re
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from interactive import World, Story
+          from generate_node import NodeValidator
+
+          world = World.from_yaml_dir('data')
+          # 取一个参考 story 做 goto 校验
+          ref_story = Story.from_file('stories/hanli_vol1_mochui.md')
+
+          gen_dir = Path('examples/generated')
+          if not gen_dir.exists():
+              print('  (examples/generated/ 不存在，跳过)')
+              sys.exit(0)
+          errors = []
+          for md in sorted(gen_dir.glob('*.md')):
+              text = md.read_text(encoding='utf-8')
+              # 提取所有 '## 节点 ...' 段
+              matches = list(re.finditer(r'^## 节点 (\S+)', text, re.MULTILINE))
+              if not matches:
+                  errors.append(f'❌ {md.name}: 没有找到任何节点')
+                  continue
+              for i, m in enumerate(matches):
+                  start = m.start()
+                  end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+                  node_md = text[start:end]
+                  v = NodeValidator(ref_story, world)
+                  ok, nid = v.validate(node_md)
+                  if ok:
+                      print(f'  ✅ {md.name} :: {nid} 校验通过')
+                  else:
+                      for e in v.errors:
+                          errors.append(f'❌ {md.name} :: {nid}: {e}')
+                      for w in v.warnings:
+                          print(f'  ⚠️  {md.name} :: {nid}: {w}')
+          if errors:
+              for e in errors: print(e)
+              sys.exit(1)
+          print('✅ 所有 generated 节点通过 NodeValidator')
+          "

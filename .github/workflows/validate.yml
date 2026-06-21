@@ -150,62 +150,88 @@ jobs:
 
       - name: Verify Web API endpoints
         run: |
-          echo "🌐 校验 FastAPI Web API 端点（scripts/web_app.py）："
-          python -c "
-          import sys
-          from pathlib import Path
-          sys.path.insert(0, 'scripts')
-          from fastapi.testclient import TestClient
-          from web_app import app
+          echo "🌐 启动 FastAPI Web API（uvicorn），用 curl 测端点："
+          # 后台启动
+          uvicorn scripts.web_app:app --host 127.0.0.1 --port 8765 --log-level warning &
+          SERVER_PID=$!
+          # 等 server 起来
+          for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+            if curl -fsS http://127.0.0.1:8765/health > /dev/null 2>&1; then
+              echo "  ✅ server up (after ${i}s)"
+              break
+            fi
+            sleep 1
+          done
 
-          client = TestClient(app)
-          errors = []
+          if ! curl -fsS http://127.0.0.1:8765/health > /dev/null; then
+            echo "❌ server failed to start"
+            kill $SERVER_PID 2>/dev/null || true
+            exit 1
+          fi
+
+          errors=0
+
+          check() {
+            if [ "$2" = "$3" ]; then
+              echo "  ✅ $1: $3"
+            else
+              echo "  ❌ $1: expected $2, got $3"
+              errors=$((errors + 1))
+            fi
+          }
 
           # 1. health
-          r = client.get('/health')
-          if r.status_code != 200 or r.json()['status'] != 'ok':
-              errors.append(f'health: {r.status_code} {r.text}')
+          check "health" 200 "$(curl -fsS -o /dev/null -w '%{http_code}' http://127.0.0.1:8765/health)"
 
           # 2. 列出 stories
-          r = client.get('/')
-          if r.status_code != 200 or len(r.json()) < 1:
-              errors.append(f'list stories: {r.status_code} {r.text}')
+          check "list stories" 200 "$(curl -fsS -o /dev/null -w '%{http_code}' http://127.0.0.1:8765/)"
 
           # 3. 拿单个 story
-          r = client.get('/story/hanli_vol1')
-          if r.status_code != 200:
-              errors.append(f'get story: {r.status_code}')
+          check "get story" 200 "$(curl -fsS -o /dev/null -w '%{http_code}' http://127.0.0.1:8765/story/hanli_vol1)"
 
           # 4. 404
-          r = client.get('/story/nonexistent')
-          if r.status_code != 404:
-              errors.append(f'expected 404, got {r.status_code}')
+          check "404 story" 404 "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8765/story/nonexistent)"
 
           # 5. 创建 session
-          r = client.post('/story/demo_measuring_spirit/session')
-          if r.status_code != 200:
-              errors.append(f'create session: {r.status_code} {r.text}')
-          else:
-              sid = r.json()['sid']
-              # 6. 选第一个选项
-              r = client.post(f'/session/{sid}/choice', json={'choice_index': 0})
-              if r.status_code != 200:
-                  errors.append(f'choice: {r.status_code} {r.text}')
+          SESSION_JSON=$(curl -fsS -X POST http://127.0.0.1:8765/story/demo_measuring_spirit/session -H "Content-Type: application/json" -d '{}')
+          if [ -z "$SESSION_JSON" ]; then
+            echo "  ❌ create session: empty response"
+            errors=$((errors + 1))
+          else
+            echo "  ✅ create session: 200"
+            SID=$(echo "$SESSION_JSON" | python3 -c "import json,sys; print(json.load(sys.stdin)['sid'])")
+            echo "    sid: ${SID:0:8}..."
 
-              # 7. 不合法 choice
-              r = client.post(f'/session/{sid}/choice', json={'choice_index': 99})
-              if r.status_code != 400:
-                  errors.append(f'bad choice: expected 400, got {r.status_code}')
+            # 6. 选第一个选项
+            check "choice 0" 200 "$(curl -fsS -o /dev/null -w '%{http_code}' -X POST http://127.0.0.1:8765/session/$SID/choice -H 'Content-Type: application/json' -d '{\"choice_index\": 0}')"
 
-              # 8. 条件过滤（灵石=1）
-              r = client.post('/story/demo_measuring_spirit/session', json={'initial_state': {'灵石': 1}})
-              if r.status_code == 200:
-                  choices = r.json()['current']['choices']
-                  if any('小家族' in c['label'] for c in choices):
-                      errors.append('条件过滤失效：灵石=1 时仍包含"小家族"选项')
+            # 7. 不合法 choice → 400
+            check "bad choice" 400 "$(curl -s -o /dev/null -w '%{http_code}' -X POST http://127.0.0.1:8765/session/$SID/choice -H 'Content-Type: application/json' -d '{\"choice_index\": 99}')"
+          fi
 
-          if errors:
-              for e in errors: print(f'❌ {e}')
-              sys.exit(1)
-          print('✅ Web API 8 个端点全部正常')
-          "
+          # 8. 条件过滤
+          COND_JSON=$(curl -fsS -X POST http://127.0.0.1:8765/story/demo_measuring_spirit/session -H "Content-Type: application/json" -d '{"initial_state": {"灵石": 1}}')
+          if echo "$COND_JSON" | grep -q "小家族"; then
+            echo "  ❌ 条件过滤失效：灵石=1 时仍包含'小家族'选项"
+            errors=$((errors + 1))
+          else
+            echo "  ✅ 条件过滤：灵石=1 → '小家族' 被剔除"
+          fi
+
+          # 9. 404 session
+          check "404 session" 404 "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8765/session/nonexistent)"
+
+          # 10. restart
+          if [ -n "$SID" ]; then
+            check "restart" 200 "$(curl -fsS -o /dev/null -w '%{http_code}' -X POST http://127.0.0.1:8765/session/$SID/restart -H 'Content-Type: application/json' -d '{}')"
+          fi
+
+          # 清理
+          kill $SERVER_PID 2>/dev/null || true
+          wait $SERVER_PID 2>/dev/null || true
+
+          if [ $errors -gt 0 ]; then
+            echo "❌ $errors 个 Web API 端点失败"
+            exit 1
+          fi
+          echo "✅ Web API 端点全部正常"

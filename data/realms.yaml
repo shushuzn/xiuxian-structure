@@ -63,6 +63,8 @@ realms:
       to: yuanying
       requires: [peiyu_dan]
       recommended_env: lingmai_medium_or_above
+      tribulation: san_jiu_tian_jie
+      heart_demon_risk: "中（贪魔、执念魔常见）"
       risk: "金丹碎裂，魂飞魄散"
     restrictions:
       - 神识仍受肉身局限
@@ -84,6 +86,8 @@ realms:
       to: huashen
       requires: [huashen_auxiliary]
       recommended_env: lingmai_large
+      tribulation: liu_jiu_tian_jie
+      heart_demon_risk: "高（执念魔、嗔魔高发）"
       risk: "元婴溃散，转世难成"
     restrictions:
       - 元婴离体有时间限制
@@ -104,6 +108,8 @@ realms:
     breakthrough:
       to: lianxu
       recommended_env: lingmai_super
+      tribulation: liu_jiu_tian_jie
+      heart_demon_risk: "高（嗔魔、痴魔高发：对天道之愤）"
       risk: "神魂俱灭"
     restrictions:
       - 每次瞬移消耗极大，不可滥用
@@ -123,6 +129,8 @@ realms:
       can_wield_high_tier: "灵宝"
     breakthrough:
       to: heti
+      tribulation: jiu_jiu_tian_jie
+      heart_demon_risk: "高（痴魔、嗔魔高发：对法则之疑）"
       risk: "神魂被法则反噬，轻则重伤，重则身死道消"
     restrictions:
       - 撕裂虚空消耗巨大，不可作为常规手段
@@ -142,6 +150,8 @@ realms:
     breakthrough:
       to: dujie
       recommended_env: ling_jie_or_above
+      tribulation: jiu_jiu_tian_jie
+      heart_demon_risk: "极高（所有心魔并发）"
       risk: "神肉分离，修为倒退"
     restrictions:
       - 界面壁障仍是软肋
@@ -161,6 +171,8 @@ realms:
     breakthrough:
       to: dacheng
       recommended_env: xian_jie
+      tribulation: jiu_jiu_tian_jie_feisheng  # 飞升之劫
+      heart_demon_risk: "至高（所有心魔并发）"
       risk: "形神俱灭，连转世机会都没有"
     restrictions:
       - 每次渡劫都是生死关

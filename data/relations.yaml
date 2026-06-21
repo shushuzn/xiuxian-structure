@@ -88,3 +88,89 @@ relations:
     to: realm:yuanying
     type: enables
     description: "培婴丹辅助结丹突破元婴"
+
+  # ── v1.5: 境界 → 雷劫 ──
+  - from: realm:jiedan
+    to: tribulation:san_jiu_tian_jie
+    type: requires
+    description: "结丹突破元婴必经三九天劫（9 道雷）"
+  - from: realm:yuanying
+    to: tribulation:liu_jiu_tian_jie
+    type: requires
+    description: "元婴突破化神必经六九天劫（18 道雷）"
+  - from: realm:huashen
+    to: tribulation:liu_jiu_tian_jie
+    type: requires
+    description: "化神突破炼虚亦经六九天劫"
+  - from: realm:lianxu
+    to: tribulation:jiu_jiu_tian_jie
+    type: requires
+    description: "炼虚突破合体必经九九天劫（27 道雷）"
+  - from: realm:heti
+    to: tribulation:jiu_jiu_tian_jie
+    type: requires
+    description: "合体突破渡劫亦经九九天劫"
+  - from: realm:dujie
+    to: tribulation:jiu_jiu_tian_jie_feisheng
+    type: requires
+    description: "渡劫突破大乘经飞升之劫（九九天劫的极巅）"
+
+  # ── v1.5: 境界 → 心魔 ──
+  - from: realm:zhuji
+    to: heart_demon:tan_mo
+    type: blocks
+    description: "筑基突破结丹时贪魔较常见"
+  - from: realm:jiedan
+    to: heart_demon:zhi_nian_mo
+    type: blocks
+    description: "结丹突破元婴时执念魔高发"
+  - from: realm:yuanying
+    to: heart_demon:chi_mo
+    type: blocks
+    description: "元婴突破化神时嗔魔高发（对天道之愤）"
+  - from: realm:huashen
+    to: heart_demon:chi_mo
+    type: blocks
+    description: "化神突破炼虚亦高发嗔魔、痴魔"
+
+  # ── v1.5: 雷劫 ↔ 心魔 ──
+  - from: tribulation:san_jiu_tian_jie
+    to: heart_demon:tan_mo
+    type: triggers
+    description: "三九天劫常与贪魔、执念魔并发"
+  - from: tribulation:liu_jiu_tian_jie
+    to: heart_demon:chi_mo
+    type: triggers
+    description: "六九天劫常与嗔魔、痴魔并发"
+  - from: tribulation:jiu_jiu_tian_jie
+    to: heart_demon:all
+    type: triggers
+    description: "九九天劫常与所有心魔并发"
+
+  # ── v1.5: 丹药 → 心魔（新增抗心魔类） ──
+  - from: elixir:qing_xin_dan
+    to: heart_demon:tan_mo
+    type: enables
+    description: "清心丹压制贪魔、嗔魔、痴魔"
+  - from: elixir:qing_xin_dan_advanced
+    to: heart_demon:zhi_nian_mo
+    type: enables
+    description: "宝品清心丹可抵御执念魔"
+  - from: elixir:ning_shen_dan
+    to: heart_demon:chi_mo
+    type: enables
+    description: "凝神丹稳固神魂，抵御痴魔、执念魔"
+
+  # ── v1.5: 阵法 → 雷劫 ──
+  - from: formation:du_jie_zhen
+    to: tribulation:san_jiu_tian_jie
+    type: weakens
+    description: "渡劫阵可削弱三九天劫 30% 威力"
+  - from: formation:du_jie_zhen
+    to: tribulation:liu_jiu_tian_jie
+    type: weakens
+    description: "仙阵级别渡劫阵可削弱六九天劫"
+  - from: formation:du_jie_zhen
+    to: tribulation:jiu_jiu_tian_jie
+    type: weakens
+    description: "高阶渡劫阵可削弱九九天劫（仅部分）"

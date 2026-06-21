@@ -52,3 +52,52 @@ jobs:
             --headless
           echo ""
           echo "✅ 引擎 smoke test 通过"
+
+
+      - name: Verify all stories are well-formed
+        run: |
+          echo "🔍 校验所有 stories/ 剧本（连通性 + 节点完整性）："
+          python -c "
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from interactive import Story
+          stories_dir = Path('stories')
+          errors = []
+          for md in sorted(stories_dir.glob('*.md')):
+              story = Story.from_file(md)
+              # 1. 起点存在
+              if story.start_node not in story.nodes:
+                  errors.append(f'❌ {md.name}: 起点 {story.start_node!r} 不存在')
+                  continue
+              # 2. BFS 验证所有跳转目标都在
+              visited = set()
+              queue = [story.start_node]
+              while queue:
+                  nid = queue.pop(0)
+                  if nid in visited: continue
+                  visited.add(nid)
+                  n = story.get(nid)
+                  if n is None:
+                      errors.append(f'❌ {md.name}: 节点 {nid!r} 不存在')
+                      continue
+                  for c in n.choices:
+                      tgt = c.get('goto')
+                      if tgt not in story.nodes:
+                          errors.append(f'❌ {md.name}: {nid} → {tgt!r} 不存在')
+                      elif tgt not in visited:
+                          queue.append(tgt)
+              # 3. 至少一个 ending
+              endings = [nid for nid, n in story.nodes.items() if n.type == 'ending']
+              if not endings:
+                  errors.append(f'❌ {md.name}: 没有任何 ending 节点')
+              # 4. 全部连通
+              unvisited = set(story.nodes.keys()) - visited
+              if unvisited:
+                  errors.append(f'❌ {md.name}: 孤儿节点 {unvisited}')
+              print(f'  ✅ {md.name}: {len(story.nodes)} 节点 / {len(endings)} 结局 / 全部连通')
+          if errors:
+              for e in errors: print(e)
+              sys.exit(1)
+          print('✅ 所有 stories 校验通过')
+          "

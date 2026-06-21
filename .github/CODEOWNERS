@@ -1,0 +1,20 @@
+# CODEOWNERS — 自动审查请求规则
+# 谁拥有某路径的修改，PR 会自动 @ 他们请求 review
+
+# 默认 owner
+*       @shushuzn
+
+# 核心体系 — 严审
+/境界体系/    @shushuzn
+/灵根体系/    @shushuzn
+/天地灵气/    @shushuzn
+/功法体系/    @shushuzn
+/丹药体系/    @shushuzn
+/法器体系/    @shushuzn
+
+# 数据 — 关键
+/data/        @shushuzn
+
+# CI 和脚本 — 工程
+/scripts/     @shushuzn
+/.github/     @shushuzn

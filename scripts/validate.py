@@ -61,14 +61,18 @@ def extract_links_to_md(content):
 # ────────────────────────────────────────────────────────
 
 def check_md_structure():
-    """每个 .md 必须包含 `## 关联`（索引类除外）"""
-    skip_files = {"README.md", "索引.md", "CONTRIBUTING.md"}
+    """每个 .md 必须包含 `## 关联`（体系类文档）"""
+    skip_files = {"README.md", "索引.md", "CONTRIBUTING.md", "LICENSE",
+                  "CHANGELOG.md", "SECURITY.md"}
     for md in all_md_files():
         rel = md.relative_to(ROOT)
         if rel.name in skip_files:
             continue
-        # 模板/图谱/schema 文档不强制
+        # 模板/schema/图谱/ADR 不强制
         if rel.parts[0] in ("docs",):
+            continue
+        # .github/ 下的元文件不强制（PR/Issue 模板、CODE_OF_CONDUCT、CODEOWNERS）
+        if rel.parts[0] == ".github":
             continue
         content = md.read_text(encoding="utf-8")
         sections = extract_sections(content)
@@ -142,14 +146,15 @@ def check_index_consistency():
         if m:
             name = m.group(1)
             # 不强校验，只是警告
-    # 同时校验 README 中列出的目录
+    # 同时校验 README 中列出的目录（仅顶层，缩进为 0）
     readme = ROOT / "README.md"
     if readme.exists():
         content = readme.read_text(encoding="utf-8")
-        for m in re.finditer(r"├──\s+(\S+)/", content):
+        # 只匹配顶层目录（不在 │ 之后）
+        for m in re.finditer(r"^├──\s+(\S+)/", content, re.MULTILINE):
             d = ROOT / m.group(1)
             if not d.exists():
-                err("README.md", f"README 列出目录 {m.group(1)} 但不存在")
+                err("README.md", f"README 列出顶层目录 {m.group(1)} 但不存在")
 
 
 # ────────────────────────────────────────────────────────

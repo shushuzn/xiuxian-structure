@@ -33,13 +33,23 @@ xiuxian-structure/
 ├── docs/                       # 元文档
 │   ├── TEMPLATE.md             # .md 模板规范
 │   ├── SCHEMA.md               # YAML schema 规范
+│   ├── ARCHITECTURE.md         # 架构决策记录（ADR）
+│   ├── BRANCH_PROTECTION.md    # 分支保护配置建议
 │   └── 图谱.md                  # mermaid 关系图
 │
 ├── scripts/
 │   └── validate.py             # 校验脚本
 │
-└── .github/workflows/
-    └── validate.yml            # GitHub Actions CI
+├── .github/
+│   ├── workflows/validate.yml  # GitHub Actions CI
+│   ├── pull_request_template.md
+│   ├── ISSUE_TEMPLATE/         # Issue 模板（4 种）
+│   ├── CODEOWNERS
+│   └── CODE_OF_CONDUCT.md      # 贡献者公约
+│
+├── CHANGELOG.md                # 变更日志
+├── CONTRIBUTING.md             # 贡献指南
+└── SECURITY.md                 # 安全策略
 ```
 
 ## 快速上手
@@ -76,3 +86,10 @@ python3 scripts/validate.py
 ## 许可
 
 见 [LICENSE](LICENSE)。
+
+## 决策与治理
+
+- 📐 [ARCHITECTURE.md](docs/ARCHITECTURE.md) — 7 个架构决策的来龙去脉
+- 🔒 [SECURITY.md](SECURITY.md) — 安全漏洞报告流程
+- 🤝 [.github/CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md) — 社区公约
+- 🛡️ [BRANCH_PROTECTION.md](docs/BRANCH_PROTECTION.md) — 分支保护建议

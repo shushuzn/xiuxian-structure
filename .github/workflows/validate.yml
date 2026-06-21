@@ -237,6 +237,21 @@ jobs:
           # 9. 404 session
           check "404 session" 404 "http://127.0.0.1:8765/session/nonexistent"
 
+          # 11. Web UI 静态文件
+          check "static/style.css" 200 "http://127.0.0.1:8765/static/style.css"
+          check "static/app.js" 200 "http://127.0.0.1:8765/static/app.js"
+          check "play (SPA)" 200 "http://127.0.0.1:8765/play"
+          check "play/demo_measuring_spirit" 200 "http://127.0.0.1:8765/play/demo_measuring_spirit"
+
+          # 12. SPA HTML 必须包含挂载点
+          SPA_HTML=$(curl -s http://127.0.0.1:8765/play)
+          if echo "$SPA_HTML" | grep -q 'id="app"'; then
+            echo "  ✅ SPA HTML 含 #app 挂载点"
+          else
+            echo "  ❌ SPA HTML 缺 #app 挂载点"
+            errors=$((errors + 1))
+          fi
+
           kill $SERVER_PID 2>/dev/null || true
           wait $SERVER_PID 2>/dev/null || true
 

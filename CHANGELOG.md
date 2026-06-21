@@ -7,6 +7,31 @@
 ### 计划
 - 暂无。等待社区反馈或新需求。
 
+## [1.4.0] - 2025-06-21
+
+### 新增
+- 🌐 **Web API `scripts/web_app.py`**（~310 行 · FastAPI）
+  - 8 个 REST 端点（health / list / get / session CRUD）
+  - Pydantic 模型：NodeView / StoryView / SessionView / ChoiceRequest
+  - 内存 sessions（`dict[sid, Engine]`，重启丢失）
+  - 静态文件挂载（`/static` + `/play` SPA）
+- 🎨 **Web UI `interactive/web/`**（3 文件 · 零依赖）
+  - `index.html` — SPA 骨架（3 块布局）
+  - `style.css` — 暗色修仙主题（衬线字体 + 暖金/冷蓝调色板）
+  - `app.js` — vanilla JS（6 个 API 函数）
+- 📦 **`requirements.txt`**：pyyaml + fastapi + uvicorn
+
+### 设计亮点
+- **API-only**：server 持 state，client 只持 sid
+- **零依赖前端**：单 HTML + 单 CSS + 单 JS（gzip 后 ~5KB）
+- **响应式**：< 900px 折叠为单列
+- **严格 CI**：8 REST + 4 UI + 1 HTML 挂载点
+
+### 变更
+- `.github/workflows/validate.yml`：新增 `Verify Web API endpoints`（CI 加 12 个端点检查）
+- `README.md`：新增「Web API」章节 + 架构图加 `web_app.py` + `interactive/web/`
+- `scripts/interactive.py`：无改动（v1.2 引擎直接被 web_app 复用）
+
 ## [1.3.0] - 2025-06-21
 
 ### 新增
@@ -269,7 +294,8 @@
 - README.md
 - LICENSE
 
-[Unreleased]: https://github.com/shushuzn/xiuxian-structure/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/shushuzn/xiuxian-structure/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/shushuzn/xiuxian-structure/compare/v1.0.0...v1.1.0

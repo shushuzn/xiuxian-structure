@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v1.3.0** · 11 体系 · 61 篇 .md · 11 yaml · 14 PR 已 merge · [📖 阅读 v1.3.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v1.3.0)
+**v1.4.0** · 11 体系 · 61 篇 .md · 11 yaml · 17 PR 已 merge · [📖 阅读 v1.4.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v1.4.0)
 
 ## 架构
 
@@ -120,7 +120,11 @@ xiuxian-structure/
 ├── stories/                    # 互动小说剧本（v1.2.0+）
 │   └── demo_measuring_spirit.md
 ├── interactive/                # 互动小说引擎文档（v1.2.0+）
-│   └── README.md
+│   ├── README.md
+│   └── web/                    # 🆕 Web UI（v1.4.0+）
+│       ├── index.html          # SPA 入口
+│       ├── style.css           # 暗色主题
+│       └── app.js              # vanilla JS（零依赖）
 ├── scripts/
 │   ├── validate.py             # 校验脚本
 │   ├── export.py               # 导出工具（JSON / CSV / Markdown 手册）

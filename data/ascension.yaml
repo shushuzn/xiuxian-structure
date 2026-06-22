@@ -1,0 +1,112 @@
+# 飞升体系权威数据（v2.0 新增）
+# 飞升是大乘期突破后的本质跃迁，进入仙界
+
+# 飞升之劫（九九天劫的最后 3 道）
+ascension_tribulation:
+  - id: ascension_tribulation
+    name: 飞升之劫
+    rank: 至高阶·特殊
+    thunder_count: 3
+    parent: jiu_jiu_tian_jie
+    description: "九九天劫 27 道后的最后 3 道，每道相当于一次六九天劫"
+    first_thunder: 肉身成仙
+    second_thunder: 神魂飞升
+    third_thunder: 法则融合
+    success_rate: "约 10%"
+    references:
+      - ../飞升体系/飞升之劫.md
+
+# 三道雷
+thunders:
+  - id: lei_28
+    name: 第 28 道雷（肉身成仙）
+    failure_consequence: 肉身崩溃，可被救下
+  - id: lei_29
+    name: 第 29 道雷（神魂飞升）
+    failure_consequence: 神魂溃散，几乎无法救回
+  - id: lei_30
+    name: 第 30 道雷（法则融合）
+    failure_consequence: 形神俱灭，连转世机会都没有
+
+# 界面壁障类型
+barrier_types:
+  - id: unidirectional
+    name: 单向壁障
+    example: 人界→仙界（飞升）
+  - id: bidirectional
+    name: 双向壁障
+    example: 人界↔灵界（代价极高）
+  - id: sealed
+    name: 封印壁障
+    example: 上古魔界（被大能封印）
+
+# 三大界面
+realms:
+  - id: ren_jie
+    name: 人界
+    level: 低
+    resource: 普通灵气
+    main_residents: 凡人与低阶修士
+  - id: ling_jie
+    name: 灵界
+    level: 中
+    resource: 浓郁灵气
+    main_residents: 高阶修士与化形妖修
+  - id: xian_jie
+    name: 仙界
+    level: 高
+    resource: 仙气
+    main_residents: 仙人
+
+# 壁障强度
+barrier_strengths:
+  - pair: 人界↔灵界
+    strength: 中
+    breakthrough: 需合体期以上
+  - pair: 灵界↔仙界
+    strength: 高
+    breakthrough: 需大乘期
+  - pair: 仙界↔神界
+    strength: 极高
+    breakthrough: 几乎不可
+  - pair: 人界↔魔界
+    strength: 极高
+    breakthrough: 几乎不可
+
+# 飞升者类型
+ascension_types:
+  - id: ordinary
+    name: 普通飞升者
+    rate: "90%"
+    description: 沦为普通散仙
+  - id: talented
+    name: 天才飞升者
+    rate: "8%"
+    description: 数千年内成为仙官
+  - id: legendary
+    name: 传说飞升者
+    rate: "2%"
+    description: 万年内成为仙君或仙王
+  - id: emperor
+    name: 仙帝飞升者
+    rate: 极罕见
+    description: 传说级
+
+# 飞升路径
+paths:
+  - id: join_sect
+    name: 拜入仙门
+    rarity: 最常见
+    description: 飞升到接引台后拜入仙门
+  - id: independent
+    name: 自立门户
+    rarity: 罕见
+    description: 寻找无主仙山，自立仙门
+  - id: join_empire
+    name: 加入仙朝
+    rarity: 稳健
+    description: 加入天庭等仙朝，逐步晋升
+  - id: free_cultivator
+    name: 逍遥散仙
+    rarity: 自由
+    description: 不加入任何势力，自由度高

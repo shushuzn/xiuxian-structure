@@ -323,8 +323,96 @@ relations:
     type: requires
     description: "灵兽袋内的灵兽自动签主从契约"
 
-  # ── v1.7: 魂契 ↔ 器灵认主 ──
+# ── v1.7: 魂契 ↔ 器灵认主 ──
   - from: contract:soul_bond
-    to: spirit_weapon:ping_deng
+    to: recognition_methods:ping_deng
     type: parallels
     description: "魂契是契约体系的极致，与器灵体系的平等共生互为镜像"
+
+  # ── v2.0: 境界 → 飞升 ──
+  - from: realm:dujie
+    to: ascension:ascension_tribulation
+    type: requires
+    description: "渡劫期→大乘期突破时需渡飞升之劫"
+  - from: realm:dacheng
+    to: ascension:ascension_tribulation
+    type: triggers
+    description: "大乘期成功渡过飞升之劫方可飞升"
+
+  # ── v2.0: 飞升 → 仙界 ──
+  - from: ascension:ascension_tribulation
+    to: ascension:unidirectional
+    type: requires
+    description: "飞升需穿越单向界面壁障"
+  - from: ascension:unidirectional
+    to: realms:xian_jie
+    type: enables
+    description: "穿越单向壁障后进入仙界"
+
+  # ── v2.0: 雷劫 → 飞升之劫 ──
+  - from: tribulation:jiu_jiu_tian_jie_feisheng
+    to: ascension:ascension_tribulation
+    type: equals
+    description: "飞升之劫即九九天劫的最后 3 道（28-30 道）"
+
+  # ── v2.0: 心魔 → 飞升 ──
+  - from: heart_demon:zhi_nian_mo
+    to: ascension:ascension_tribulation
+    type: blocks
+    description: "执念魔未除者无法成功飞升"
+  - from: heart_demon:chi_mo
+    to: ascension:ascension_tribulation
+    type: blocks
+    description: "嗔魔爆发可使飞升失败（道消）"
+
+  # ── v2.0: 仙界 ↔ 下界 ──
+  - from: realms:xian_jie
+    to: ascension:unidirectional
+    type: blocks
+    description: "单向壁障阻止飞升者返回下界"
+  - from: realms:xian_jie
+    to: factions:tian_ting
+    type: enables
+    description: "仙界正统王朝管理所有飞升者"
+
+  # ── v2.0: 仙灵石 ↔ 下界灵石 ──
+  - from: spirit_stone:ji_pin
+    to: spirit_stone:xian_pin
+    type: parallels
+    description: "极品灵石是仙灵石的下界对应物"
+
+  # ── v2.0: 功法 → 仙界功法 ──
+  - from: technique:tian
+    to: techniques:tian_yan_xian_dian
+    type: parallels
+    description: "下界天级功法是仙界仙级功法的雏形"
+
+  # ── v2.0: 下界势力 → 飞升 ──
+  - from: org:top_sect
+    to: factions:tian_ting
+    type: parallels
+    description: "下界顶级宗门对应仙界天庭"
+
+  # ── v2.0: 飞升者 → 仙职 ──
+  - from: ascension:ordinary
+    to: titles:san_xian
+    type: enables
+    description: "普通飞升者飞升后从散仙做起"
+
+  # ── v2.0: 仙界势力 → 下界飞升者 ──
+  - from: factions:tian_ting
+    to: ascension:join_sect
+    type: enables
+    description: "仙界天庭提供飞升者最常见的加入路径"
+
+  # ── v2.0: 仙劫 → 仙界功法 ──
+  - from: immortal_tribulations:lei_xian_jie
+    to: techniques:tian_yan_xian_dian
+    type: requires
+    description: "雷仙劫需要法则感悟类功法应对"
+
+  # ── v2.0: 仙灵石 → 仙界功法 ──
+  - from: spirit_stone:xian_pin
+    to: techniques:jiu_zhuan_xuan_xian_jue
+    type: enables
+    description: "仙灵石是修炼九转玄仙诀的资源基础"

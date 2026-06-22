@@ -1,0 +1,194 @@
+# 仙界权威数据（v2.0 新增）
+
+# 仙灵石等级
+spirit_stones:
+  - id: xian_pin
+    name: 下品仙灵石
+    energy_unit: 1
+    usage: 普通仙人日常修炼
+    exchange_ratio: 1
+  - id: xian_zhong_pin
+    name: 中品仙灵石
+    energy_unit: 100
+    usage: 高阶仙人修炼
+    exchange_ratio: 100
+  - id: xian_shang_pin
+    name: 上品仙灵石
+    energy_unit: 10000
+    usage: 仙人长老/仙官修炼
+    exchange_ratio: 10000
+  - id: xian_ji_pin
+    name: 极品仙灵石
+    energy_unit: 1000000
+    usage: 仙帝级别/特殊用途
+    exchange_ratio: 1000000
+  - id: xian_jing
+    name: 仙晶
+    energy_unit: 100000000
+    usage: 传说级，几乎不可得
+    exchange_ratio: 100000000
+
+# 仙职等级
+titles:
+  - id: san_xian
+    name: 散仙
+    level: 1
+    status: 无官方身份
+    resources: 极少
+    description: "飞升即得，无官方身份"
+  - id: xian_tu
+    name: 仙徒
+    level: 2
+    status: 最低
+    resources: 基础
+    description: "拜入仙门"
+  - id: xian_shi
+    name: 仙使
+    level: 3
+    status: 低
+    resources: 较少
+    description: "执行仙官命令"
+  - id: xian_guan
+    name: 仙官
+    level: 4
+    status: 中
+    resources: 中等
+    description: "管理仙界事务"
+  - id: xian_jiang
+    name: 仙将
+    level: 5
+    status: 中高
+    resources: 较多
+    description: "镇守仙山"
+  - id: xian_jun
+    name: 仙君
+    level: 6
+    status: 高
+    resources: 多
+    description: "一方诸侯"
+  - id: xian_wang
+    name: 仙王
+    level: 7
+    status: 极高
+    resources: 极多
+    description: "仙界顶级势力"
+  - id: xian_di
+    name: 仙帝
+    level: 8
+    status: 至高
+    resources: 无限
+    description: "仙界之主"
+
+# 仙劫类型
+immortal_tribulations:
+  - id: lei_xian_jie
+    name: 雷仙劫
+    frequency: 5000
+    type: 雷
+    effect: 肉身与神魂进一步融合
+    failure: 肉身崩溃，神魂勉强留存
+  - id: huo_xian_jie
+    name: 火仙劫
+    frequency: 8000
+    type: 火
+    effect: 神魂强度大幅提升
+    failure: 神魂焚毁
+  - id: feng_xian_jie
+    name: 风仙劫
+    frequency: 12000
+    type: 风
+    effect: 心境圆满
+    failure: 心境崩溃，沦为魔头
+  - id: xin_mo_xian_jie
+    name: 心魔仙劫
+    frequency: 20000
+    type: 心魔
+    effect: 道心坚固
+    failure: 道心崩溃，修为倒退或道消
+  - id: fu_he_xian_jie
+    name: 复合仙劫
+    frequency: 50000
+    type: 复合
+    effect: 法则大成
+    failure: 形神俱灭
+
+# 仙界势力
+factions:
+  - id: tian_ting
+    name: 天庭
+    type: 仙朝
+    status: 仙界正统
+    scale: 数百万仙人
+    leader: 仙帝（传说级）
+  - id: jiu_chong_tian_gong
+    name: 九重天宫
+    type: 顶级仙门
+    status: 天庭下属
+    scale: 数十万仙人
+    leader: 多位仙王
+  - id: chang_sheng_xian_zong
+    name: 长生仙宗
+    type: 仙门
+    status: 中立
+    scale: 数万名仙人
+    leader: 仙君
+    note: 专研长生之道，吸纳下界飞升者
+  - id: xiao_yao_xian_meng
+    name: 逍遥仙盟
+    type: 仙盟
+    status: 独立
+    scale: 覆盖整个仙界
+    leader: 多位仙王
+    note: 由不愿受天庭管辖的仙人组成
+
+# 仙级功法
+techniques:
+  - id: jiu_zhuan_xuan_xian_jue
+    name: 九转玄仙诀
+    tier: 仙级
+    type: 仙气淬体类
+    description: 分 9 转，每转淬炼一个层次
+    effect: 肉身成仙、神魂飞升
+    suitable: 初飞升仙人
+  - id: tian_yan_xian_dian
+    name: 天衍仙典
+    tier: 仙级
+    type: 法则感悟类
+    description: 推演天道运行的 108 种法则
+    effect: 悟得多种法则，应对复合仙劫
+    suitable: 高阶仙人
+  - id: du_jie_xin_jing
+    name: 渡劫心经
+    tier: 仙级
+    type: 仙劫应对类
+    description: 削弱仙劫威力
+    effect: 仙劫渡过率大幅提升
+    suitable: 所有仙人
+  - id: jie_ling_gan_ying_jue
+    name: 界灵感应诀
+    tier: 仙级
+    type: 跨界通灵类
+    description: 可感知下界亲人状态
+    effect: 有限跨界感知
+    suitable: 怀念下界羁绊的飞升者
+
+# 神级功法
+divine_techniques:
+  - id: hun_yuan_wu_ji_xian_dian
+    name: 混元无极仙典
+    tier: 神级
+    note: 仙帝专属
+    effect: 彻底悟得混元法则
+    rarity: 传说级
+  - id: dao_zhi_ben_yuan
+    name: 道之本源
+    tier: 神级
+    note: 直指「道」的本质
+    effect: 悟得「道」的本质
+    rarity: 已失传
+  - id: yong_sheng_jue
+    name: 永生诀
+    tier: 神级
+    note: 与天地同寿
+    effect: 永生
+    rarity: 仅存于传说

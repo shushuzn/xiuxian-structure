@@ -15,7 +15,7 @@
    "在发现天霞山牌位后，加一个'夜探禁地'节点"
         ↓
 [2. scripts/generate_node.py 自动]
-   a. 读 data/*.yaml → 生成世界摘要（11 体系 + 关键 ID）
+   a. 读 data/*.yaml → 生成世界摘要（18 体系 + 关键 ID）
    b. 读 stories/*.md → 提取现有节点和跳转
    c. 喂给 LLM 一个严格 prompt（见下文）
    d. 解析 LLM 输出 → NodeValidator 5 项校验
@@ -87,7 +87,7 @@ ERROR 会触发重试；WARNING 只给反馈不阻塞。
 
 1. **只输出 1 个新节点**（不要解释、不要其它格式）
 2. **id 命名用中文短语**（"夜探禁地" / "杀墨大夫"）
-3. **refs 用仓库的 11 个体系目录名**（`境界体系/炼气期.md`）
+3. **refs 用仓库的 18 个体系目录名**（`境界体系/炼气期.md` / `心魔体系/嗔魔.md` / `神识体系/神识攻击.md` 等）
 4. **text 用第二人称**（"你..."）
 5. **data 用 `?` 前缀**（保护玩家存档）
 6. **goto 必须是已有节点**（否则校验失败）
@@ -124,6 +124,29 @@ print(f'ok={ok}, nid={nid}')
 ## 📂 examples/generated/
 
 LLM 生成的节点默认写到这里。**不会被 validate 当作知识库**（白名单 `examples/` 跳过关联检查），但会被 `interactive.py` 当作 story 加载（如果你想直接用作 story，需要手动移到 `stories/`）。
+
+## 🌐 v1.5-v1.7 新体系的 LLM 生成示例
+
+自 v1.5 起，知识库新增 5 个体系（心魔 / 雷劫 / 神识 / 器灵 / 契约），可作为新需求的目标：
+
+```bash
+# 演示心魔爆发（v1.5）
+python3 scripts/generate_node.py \
+  --story stories/hanli_vol1_mochui.md \
+  --requirement "在借药筑基前，加一个'心魔爆发'节点，需清心丹≥1才可渡过"
+
+# 演示器灵反噬（v1.7）
+python3 scripts/generate_node.py \
+  --story stories/aoyue_npc_fanpai.md \
+  --requirement "在元婴渡劫前，加一个'器灵反噬'节点，选择强迫认主触发嗔魔+反噬"
+
+# 演示契约选择（v1.7）
+python3 scripts/generate_node.py \
+  --story stories/aoyue_npc_fanpai.md \
+  --requirement "在寒焰宗建宗后，加一个'幼狼抉择'节点，演示灵魂/平等/主从契约"
+```
+
+每个示例生成的节点都应通过 `NodeValidator`，并可在 `examples/generated/` 找到 mock 输出参考。
 
 ## 🤝 与其他工具的协作
 

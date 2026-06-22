@@ -351,6 +351,30 @@ if WEB_DIR.exists():
         return FileResponse(str(WEB_DIR / "index.html"))
 
 
+# ── v2.2 E. 数据可视化 ──
+
+
+@app.get("/graph")
+def graph_viewer():
+    """关系图可视化页面（vis-network）"""
+    if not (WEB_DIR / "graph.html").exists():
+        raise HTTPException(404, "graph.html 不存在")
+    return FileResponse(str(WEB_DIR / "graph.html"))
+
+
+@app.get("/graph-data")
+def graph_data(filter_system: str | None = None):
+    """关系图数据（从 relations.yaml 实时生成）
+
+    支持查询参数：
+      - filter_system=realm  只返回某体系相关的节点/边
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from build_graph import build_graph  # noqa: E402
+    graph = build_graph(ROOT / "data", filter_system=filter_system)
+    return graph
+
+
 # ────────────────────────────────────────────────────────
 # 5. CLI 启动
 # ────────────────────────────────────────────────────────

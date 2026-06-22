@@ -109,10 +109,7 @@ def test_cli_stats():
         [sys.executable, str(ROOT / "scripts" / "build_graph.py"), "--stats"],
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=10,
     )
-    # Py3.6 会有 future annotations 报错，跳过
-    if "future feature annotations is not defined" in result.stderr:
-        pytest.skip("Py3.6 不支持 future annotations")
-    assert result.returncode == 0, f"stderr: {result.stderr}"
+    # Py3.6 会有 future annotations 报错，跳过    assert result.returncode == 0, f"stderr: {result.stderr}"
     assert "节点" in result.stdout
     assert "边" in result.stdout
 
@@ -125,8 +122,6 @@ def test_cli_output_json(tmp_path):
          "--output", str(out_path)],
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=10,
     )
-    if "future feature annotations is not defined" in result.stderr:
-        pytest.skip("Py3.6 不支持 future annotations")
     assert result.returncode == 0, f"stderr: {result.stderr}"
     assert out_path.exists()
     data = json.loads(out_path.read_text(encoding="utf-8"))
@@ -144,8 +139,6 @@ def test_cli_filter(tmp_path):
          "--filter-system", "realm"],
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=10,
     )
-    if "future feature annotations is not defined" in result.stderr:
-        pytest.skip("Py3.6 不支持 future annotations")
     assert result.returncode == 0
     data = json.loads(out_path.read_text(encoding="utf-8"))
     assert all(n["system"] == "realm" for n in data["nodes"])

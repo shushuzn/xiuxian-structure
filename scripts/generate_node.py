@@ -16,15 +16,13 @@ generate_node.py — LLM 协作生成互动小说节点
     --after-node 藏经阁 \
     --requirement "在发现天霞山牌位后，加一个'夜探禁地'节点"
 """
-from __future__ import annotations
-
 import argparse
 import json
 import os
 import re
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, List, Optional, Set, Tuple
 import urllib.request
 import urllib.error
 
@@ -44,9 +42,9 @@ def build_world_summary(world: World) -> str:
     跨多个体系）。只列出仓库里 11 个体系目录 + 一些关键 ID 名，让 LLM 据此写 refs。
     错误的 refs 会被 NodeValidator 兜底拒绝。
     """
-    lines: list[str] = ["## 仓库的 11 个体系目录（refs 必须用这些名字）"]
+    lines: List[str] = ["## 仓库的 11 个体系目录（refs 必须用这些名字）"]
     # 扫 ROOT 找 11 个体系目录
-    system_dirs: list[str] = []
+    system_dirs: List[str] = []
     for d in sorted(ROOT.iterdir()):
         if d.is_dir() and list(d.glob("*.md")) and d.name not in (
             "data", "scripts", "docs", "examples", "stories",
@@ -58,7 +56,7 @@ def build_world_summary(world: World) -> str:
 
     lines.append("\n## 关键 ID 名（可作 yaml 引用）")
     for system, payload in world.data.items():
-        records: list[dict] = []
+        records: List[dict] = []
         if isinstance(payload, list):
             for item in payload:
                 if isinstance(item, dict) and "id" in item:
@@ -137,7 +135,7 @@ def build_prompt(story: Story, world: World, requirement: str) -> str:
         f"- {nid} ({n.type}): {(n.text[:60] + '...') if len(n.text) > 60 else n.text}"
         for nid, n in story.nodes.items()
     )
-    edges: set[str] = set()
+    edges: Set[str] = set()
     for nid, n in story.nodes.items():
         for c in n.choices:
             edges.add(f"{nid} → {c.get('goto')}")
@@ -195,10 +193,10 @@ class NodeValidator:
     def __init__(self, story: Story, world: World):
         self.story = story
         self.world = world
-        self.errors: list[str] = []
-        self.warnings: list[str] = []
+        self.errors: List[str] = []
+        self.warnings: List[str] = []
 
-    def validate(self, node_md: str, new_node_id_hint: str | None = None) -> tuple[bool, str]:
+    def validate(self, node_md: str, new_node_id_hint: Optional[str] = None) -> Tuple[bool, str]:
         """返回 (ok, parsed_node_id)"""
         self.errors.clear()
         self.warnings.clear()
@@ -279,7 +277,7 @@ class NodeValidator:
 # 5. CLI 入口
 # ────────────────────────────────────────────────────────
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(description="LLM 协作生成互动小说节点")
     p.add_argument("--story", type=Path, required=True)
     p.add_argument("--requirement", required=True, help="自然语言需求描述")

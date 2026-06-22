@@ -8,9 +8,8 @@ batch_generate.py — 批量扩写脚本（v2.2 新增）
     --prompts tests/eval_prompts.yaml \
     --output examples/generated_batch/
 """
-from __future__ import annotations
-
 import argparse
+from typing import Any, Dict, List, Optional, Tuple
 import sys
 from pathlib import Path
 
@@ -23,7 +22,7 @@ from interactive import Story, World  # noqa: E402
 from generate_node import NodeValidator, build_prompt, call_llm  # noqa: E402
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(description="批量扩写节点")
     p.add_argument("--prompts", type=Path, required=True, help="批量 prompt YAML")
     p.add_argument("--output", type=Path, default=ROOT / "examples" / "generated_batch",

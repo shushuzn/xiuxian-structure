@@ -14,6 +14,7 @@ build_graph.py — 关系图数据生成器（v2.2 E. 数据可视化）
 """
 
 import argparse
+from typing import Dict, List
 import json
 import sys
 from collections import defaultdict
@@ -72,13 +73,13 @@ def build_graph(yaml_dir, filter_system=None):
     relations = relations_data.get("relations", [])
 
     # 收集节点
-    nodes: dict[str, dict] = {}
-    edges: list[dict] = []
+    nodes: Dict[str, dict] = {}
+    edges: List[dict] = []
     edge_id = 0
 
     # 关系类型计数
-    type_counts: dict[str, int] = defaultdict(int)
-    system_counts: dict[str, int] = defaultdict(int)
+    type_counts: Dict[str, int] = defaultdict(int)
+    system_counts: Dict[str, int] = defaultdict(int)
 
     for rel in relations:
         for key in ("from", "to"):

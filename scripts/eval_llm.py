@@ -16,8 +16,6 @@ eval_llm.py — LLM 评测脚本（v2.2 新增）
     --models gpt-4o-mini,deepseek-chat \
     --report dist/eval_report.json
 """
-from __future__ import annotations
-
 import argparse
 import json
 import os
@@ -25,7 +23,7 @@ import re
 import sys
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 
@@ -81,7 +79,7 @@ def evaluate_one(prompt_cfg: dict, model: str, base_url: str, api_key: str,
         )
 
     validator = NodeValidator(story, world)
-    errors: list[str] = []
+    errors: List[str] = []
     last_md = ""
     retries = 0
     start = time.time()
@@ -135,7 +133,7 @@ def evaluate_one(prompt_cfg: dict, model: str, base_url: str, api_key: str,
     }
 
 
-def print_summary(results: list[dict]) -> None:
+def print_summary(results: List[dict]) -> None:
     """打印汇总报告"""
     if not results:
         print("⚠️  无评测结果")
@@ -146,7 +144,7 @@ def print_summary(results: list[dict]) -> None:
     print("=" * 80)
 
     # 按模型聚合
-    by_model: dict[str, list[dict]] = {}
+    by_model: Dict[str, List[dict]] = {}
     for r in results:
         by_model.setdefault(r["model"], []).append(r)
 
@@ -171,7 +169,7 @@ def print_summary(results: list[dict]) -> None:
     print("\n" + "=" * 80)
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(description="LLM 评测脚本")
     p.add_argument("--prompts", type=Path, default=ROOT / "tests" / "eval_prompts.yaml",
                    help="评测集 YAML 路径")
@@ -198,7 +196,7 @@ def main(argv: list[str] | None = None) -> int:
     # 加载世界
     world = World.from_yaml_dir(ROOT / "data")
 
-    results: list[dict] = []
+    results: List[dict] = []
 
     if args.dry_run:
         print(f"🔍 Dry-run: {len(prompts)} 个 prompt × {len(models)} 个模型")

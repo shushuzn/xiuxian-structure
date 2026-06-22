@@ -20,12 +20,10 @@ API：
   pip install fastapi uvicorn
   uvicorn scripts.web_app:app --reload --port 8000
 """
-from __future__ import annotations
-
 import sys
 import uuid
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, List, Optional, Tuple
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
@@ -51,9 +49,9 @@ app = FastAPI(
 )
 
 # 启动时加载所有 stories（cache）
-_stories: dict[str, Story] = {}
+_stories: Dict[str, Story] = {}
 _world: World = World.from_yaml_dir(DATA_DIR)
-_sessions: dict[str, Engine] = {}
+_sessions: Dict[str, Engine] = {}
 
 
 def _load_stories() -> None:
@@ -88,8 +86,8 @@ class NodeView(BaseModel):
     id: str
     type: str
     text: str
-    choices: list[dict]  # [{label, index, goto, if_clause}]
-    refs: list[str] = []
+    choices: List[dict]  # [{label, index, goto, if_clause}]
+    refs: List[str] = []
 
 
 class StoryView(BaseModel):
@@ -102,14 +100,14 @@ class StoryView(BaseModel):
 
 
 class SessionCreate(BaseModel):
-    initial_state: dict[str, Any] = {}  # 可选初始 state
+    initial_state: Dict[str, Any] = {}  # 可选初始 state
 
 
 class SessionView(BaseModel):
     sid: str
     story_id: str
     state: dict
-    history: list[str]
+    history: List[str]
     current: NodeView
 
 
@@ -127,8 +125,8 @@ def health() -> dict:
 
 
 @app.get("/")
-def list_stories() -> list[StoryView]:
-    out: list[StoryView] = []
+def list_stories() -> List[StoryView]:
+    out: List[StoryView] = []
     for sid, story in _stories.items():
         endings = [n for n in story.nodes.values() if n.type == "ending"]
         out.append(StoryView(
@@ -170,7 +168,7 @@ def _render_node(engine: Engine) -> NodeView:
     saved_attrs = dict(engine.state.attrs)
     engine._apply_state(node)
     text = engine.world.render_template(node.text)
-    valid: list[dict] = []
+    valid: List[dict] = []
     for i, c in enumerate(node.choices):
         if engine.state.check(c.get("if", "")):
             valid.append({
@@ -191,7 +189,7 @@ def _render_node(engine: Engine) -> NodeView:
 
 
 @app.post("/story/{story_id}/session")
-def create_session(story_id: str, body: SessionCreate | None = None) -> SessionView:
+def create_session(story_id: str, body: Optional[SessionCreate] = None) -> SessionView:
     story = _stories.get(story_id)
     if not story:
         raise HTTPException(404, f"故事 '{story_id}' 不存在")
@@ -275,7 +273,7 @@ def make_choice(sid: str, body: ChoiceRequest) -> SessionView:
 
 
 @app.post("/session/{sid}/restart")
-def restart(sid: str, body: SessionCreate | None = None) -> SessionView:
+def restart(sid: str, body: Optional[SessionCreate] = None) -> SessionView:
     engine = _sessions.get(sid)
     if not engine:
         raise HTTPException(404, f"会话 '{sid}' 不存在")
@@ -363,7 +361,7 @@ def graph_viewer():
 
 
 @app.get("/graph-data")
-def graph_data(filter_system: str | None = None):
+def graph_data(filter_system: Optional[str] = None):
     """关系图数据（从 relations.yaml 实时生成）
 
     支持查询参数：

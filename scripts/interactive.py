@@ -23,14 +23,12 @@ interactive.py — 互动小说引擎
 知识引用：
 - 节点里 refs: [境界/炼气期, 符箓/火球符]  引擎自动加跳转链接
 """
-from __future__ import annotations
-
 import json
 import re
 import sys
 from pathlib import Path
 from dataclasses import dataclass, field
-from typing import Any, Callable
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 
 import yaml
 
@@ -44,7 +42,7 @@ ROOT = Path(__file__).resolve().parent.parent
 class World:
     """运行时世界数据库：11 个 yaml → 内存 dict"""
 
-    def __init__(self, data: dict[str, Any]):
+    def __init__(self, data: Dict[str, Any]):
         self.data = data  # {"realms": {"realms": [...], ...}, ...}
 
     @classmethod
@@ -75,7 +73,7 @@ class World:
                 return None
         return node
 
-    def find_by_id(self, system: str, target_id: str) -> dict | None:
+    def find_by_id(self, system: str, target_id: str):  # → Optional[Dict]
         """按 id 找记录：find_by_id('realms', 'lianqi') → {...}"""
         for v in self.data.get(system, {}).values():
             if isinstance(v, list):
@@ -109,8 +107,8 @@ class Node:
     type: str  # "scene" | "ending"
     text: str
     data: dict = field(default_factory=dict)   # 进入时设置/修改的状态
-    refs: list[str] = field(default_factory=list)  # 知识引用
-    choices: list[dict] = field(default_factory=list)  # [{label, goto, if, set, flag}]
+    refs: List[str] = field(default_factory=list)  # 知识引用
+    choices: List[dict] = field(default_factory=list)  # [{label, goto, if, set, flag}]
 
 
 @dataclass
@@ -119,7 +117,7 @@ class Story:
     title: str
     description: str = ""
     start_node: str = "start"
-    nodes: dict[str, Node] = field(default_factory=dict)
+    nodes: Dict[str, Node] = field(default_factory=dict)
 
     @classmethod
     def from_file(cls, path: Path) -> "Story":
@@ -151,16 +149,16 @@ class Story:
         return story
 
     @classmethod
-    def parse_nodes_only(cls, text: str, source_name: str = "<text>") -> dict[str, "Node"]:
+    def parse_nodes_only(cls, text: str, source_name: str = "<text>") -> Dict[str, "Node"]:
         """只解析节点（不校验 start），给 generate_node.py 这种场景用"""
         _meta, body = _split_front_matter(text)
         nodes_raw = _split_nodes(body)
-        result: dict[str, "Node"] = {}
+        result: Dict[str, "Node"] = {}
         for nid, (type_hint, raw) in nodes_raw.items():
             result[nid] = _parse_node(nid, type_hint, raw)
         return result
 
-    def get(self, node_id: str) -> Node | None:
+    def get(self, node_id):  # → Optional["Node"]
         return self.nodes.get(node_id)
 
 
@@ -171,12 +169,12 @@ class Story:
 class State:
     """玩家状态：属性 + 物品 + 标志位"""
 
-    def __init__(self, initial: dict | None = None):
-        self.attrs: dict[str, Any] = dict(initial or {})
-        self.flags: set[str] = set()
-        self.items: list[str] = []              # 背包（物品列表）
-        self.npc_favor: dict[str, int] = {}     # NPC 好感度（0-100）
-        self.time: dict[str, int] = {"年": 1, "月": 1, "日": 1}  # 游戏内时间
+    def __init__(self, initial: Optional[Dict] = None):
+        self.attrs: Dict[str, Any] = dict(initial or {})
+        self.flags: Set[str] = set()
+        self.items: List[str] = []              # 背包（物品列表）
+        self.npc_favor: Dict[str, int] = {}     # NPC 好感度（0-100）
+        self.time: Dict[str, int] = {"年": 1, "月": 1, "日": 1}  # 游戏内时间
 
     def get(self, key: str, default: Any = None) -> Any:
         return self.attrs.get(key, default)
@@ -349,18 +347,18 @@ class EngineEvent:
     """每一步的输出（用于程序化 / CI 测试）"""
     node_id: str
     text: str
-    choices: list[dict]  # [{label, goto}]
+    choices: List[dict]  # [{label, goto}]
     ending: bool = False
-    refs: list[str] = field(default_factory=list)
+    refs: List[str] = field(default_factory=list)
 
 
 class Engine:
-    def __init__(self, world: World, story: Story, state: State | None = None):
+    def __init__(self, world: World, story: Story, state: Optional[State] = None):
         self.world = world
         self.story = story
         self.state = state or State()
-        self.history: list[str] = []
-        self.log: list[str] = []
+        self.history: List[str] = []
+        self.log: List[str] = []
 
     def play(self) -> None:
         """交互式（CLI）"""
@@ -411,7 +409,7 @@ class Engine:
                     break
                 print("  无效输入")
 
-    def step(self, choice_index: int | None = None) -> EngineEvent:
+    def step(self, choice_index: Optional[int] = None) -> EngineEvent:
         """单步（程序化）。choice_index=None 时自动选第一个有效选项。
         返回事件并推进到下一节点。"""
         if not self.history:
@@ -538,7 +536,7 @@ NODE_HEADER = re.compile(r"^##\s+节点\s+(\S+)(?:\s+\((\S+)\))?\s*$", re.MULTIL
 SECTION_HEADER = re.compile(r"^(type|text|data|next|refs|choices):\s*(.*)$")
 
 
-def _split_front_matter(text: str) -> tuple[dict, str]:
+def _split_front_matter(text: str) -> Tuple[dict, str]:
     """简单 front matter：第一个 ## 节点 之前的所有 # / ## 元数据 段"""
     lines = text.split("\n")
     meta: dict = {}
@@ -563,9 +561,9 @@ def _split_front_matter(text: str) -> tuple[dict, str]:
     return meta, body
 
 
-def _split_nodes(body: str) -> dict[str, str]:
+def _split_nodes(body: str) -> Dict[str, str]:
     """按 `## 节点 <id> [(type)]` 切分"""
-    parts: dict[str, str] = {}
+    parts: Dict[str, str] = {}
     matches = list(NODE_HEADER.finditer(body))
     for i, m in enumerate(matches):
         nid = m.group(1)
@@ -577,7 +575,7 @@ def _split_nodes(body: str) -> dict[str, str]:
     return parts
 
 
-def _parse_node(nid: str, type_hint: str | None, raw: str) -> Node:
+def _parse_node(nid: str, type_hint: Optional[str], raw: str) -> Node:
     # 简单 YAML 风格解析（type/text/data/next/refs）
     lines = raw.split("\n")
     node = Node(id=nid, type=type_hint or "scene", text="")
@@ -635,9 +633,9 @@ def _parse_node(nid: str, type_hint: str | None, raw: str) -> Node:
     return node
 
 
-def _collect_indented(lines: list[str], start: int) -> tuple[str, int]:
+def _collect_indented(lines: List[str], start: int) -> Tuple[str, int]:
     """从 start 开始收集缩进行（>= 2 空格），遇到非缩进/EOF 停止"""
-    buf: list[str] = []
+    buf: List[str] = []
     i = start
     while i < len(lines):
         ln = lines[i]
@@ -656,7 +654,7 @@ def _collect_indented(lines: list[str], start: int) -> tuple[str, int]:
 # 6. CLI 入口
 # ────────────────────────────────────────────────────────
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Optional[List[str]] = None) -> int:
     import argparse
     p = argparse.ArgumentParser(description="互动小说引擎")
     p.add_argument("--story", type=Path, required=True, help="剧本 .md 路径")

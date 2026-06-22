@@ -60,12 +60,7 @@ def test_relations_yaml_references_valid_ids():
     字段名前缀映射见下方 FILENAME_TO_PREFIX。
     """
     relations_file = DATA_DIR / "relations.yaml"
-    if not relations_file.exists():
-        pytest.skip("relations.yaml 不存在")
     relations = yaml.safe_load(relations_file.read_text(encoding="utf-8"))
-    if not relations or "relations" not in relations:
-        pytest.skip("relations.yaml 为空或无 relations 字段")
-
     # 文件名（复数）→ 默认 relations 前缀
     # 但实际 relations 引用多以「字段名」为前缀（artifact/tier/elixir 等），
     # 因此下面的索引会同时记录「文件前缀:id」和「字段前缀:id」。
@@ -144,8 +139,6 @@ def test_relations_yaml_references_valid_ids():
 def test_realm_ids_consistent():
     """所有 realm 引用应存在于 realms.yaml"""
     realms_file = DATA_DIR / "realms.yaml"
-    if not realms_file.exists():
-        pytest.skip("realms.yaml 不存在")
     realms_data = yaml.safe_load(realms_file.read_text(encoding="utf-8"))
     valid_ids = {r["id"] for r in realms_data.get("realms", [])}
 

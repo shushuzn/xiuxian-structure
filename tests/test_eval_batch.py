@@ -88,7 +88,7 @@ def test_eval_llm_dry_run():
          "--prompts", str(ROOT / "tests" / "eval_prompts.yaml"),
          "--models", "gpt-4o-mini,deepseek-chat",
          "--dry-run"],
-        capture_output=True, text=True, timeout=30,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=30,
     )
     assert result.returncode == 0, f"stderr: {result.stderr}"
     # 报告应包含 10 prompts × 2 models = 20 results
@@ -107,7 +107,7 @@ def test_eval_llm_missing_key():
         [sys.executable, str(ROOT / "scripts" / "eval_llm.py"),
          "--prompts", str(ROOT / "tests" / "eval_prompts.yaml"),
          "--models", "gpt-4o-mini"],
-        capture_output=True, text=True, timeout=30, env=env,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=30, env=env,
     )
     assert result.returncode != 0
     assert "API key" in result.stdout or "API key" in result.stderr
@@ -123,7 +123,7 @@ def test_batch_generate_dry_run():
          "--prompts", str(ROOT / "tests" / "eval_prompts.yaml"),
          "--dry-run",
          "--output", "/tmp/batch_test/"],
-        capture_output=True, text=True, timeout=30,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=30,
     )
     assert result.returncode == 0, f"stderr: {result.stderr}"
     assert "批量生成" in result.stdout

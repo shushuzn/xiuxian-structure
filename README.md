@@ -13,6 +13,8 @@
 
 English readers: see [README_EN.md](README_EN.md).
 
+📖 **文档站**：<https://shushuzn.github.io/xiuxian-structure/>（mkdocs 自动部署）
+
 ## 架构
 
 ```

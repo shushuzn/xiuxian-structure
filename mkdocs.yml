@@ -5,6 +5,11 @@ repo_url: https://github.com/shushuzn/xiuxian-structure
 repo_name: shushuzn/xiuxian-structure
 edit_uri: edit/main/
 
+# 使用 docs_src/ 作为 docs 源（包含指向真实 .md 的 symlink）
+# 这样既保留项目原始目录结构，又满足 mkdocs 的目录约束
+docs_dir: docs_src
+site_dir: site
+
 theme:
   name: material
   language: zh
@@ -57,7 +62,7 @@ markdown_extensions:
       custom_checkbox: true
 
 nav:
-  - 首页: README.md
+  - 首页: index.md
   - 总索引: 索引.md
   - 体系:
       - 境界体系:
@@ -111,9 +116,6 @@ nav:
           - 架构: docs/ARCHITECTURE.md
           - 分支保护: docs/BRANCH_PROTECTION.md
           - 关系图谱: docs/图谱.md
-  - 示例: examples/README.md
-  - 故事: stories/README.md
-  - 互动小说: interactive/README.md
   - 贡献: CONTRIBUTING.md
   - 更新日志: CHANGELOG.md
   - 安全: SECURITY.md

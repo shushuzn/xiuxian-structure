@@ -11,3 +11,6 @@ mkdocs-material>=9.4
 
 # Lint / Format
 ruff>=0.1
+
+# Coverage 上传（CI 用）
+codecov>=2.1

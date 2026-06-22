@@ -4,10 +4,11 @@
 
 [![Version](https://img.shields.io/github/v/release/shushuzn/xiuxian-structure?include_prereleases)](https://github.com/shushuzn/xiuxian-structure/releases)
 [![CI](https://github.com/shushuzn/xiuxian-structure/actions/workflows/validate.yml/badge.svg)](https://github.com/shushuzn/xiuxian-structure/actions/workflows/validate.yml)
+[![codecov](https://codecov.io/gh/shushuzn/xiuxian-structure/branch/main/graph/badge.svg)](https://codecov.io/gh/shushuzn/xiuxian-structure)
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v2.0.0** · **19 体系** · **120 篇体系 .md** · 19 yaml · 31 PR 已 merge · [📖 阅读 v2.0.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v2.0.0)
+**v2.0.0** · **19 体系** · **120 篇体系 .md** · 19 yaml · 33 PR 已 merge · [📖 阅读 v2.0.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v2.0.0)
 
 > 🆕 v2.0 大版本：新增 **飞升体系**（10 篇）— 大乘之上 → 仙界
 > v1.5/v1.6/v1.7：心魔 + 雷劫 + 神识 + 器灵 + 契约（27 篇）

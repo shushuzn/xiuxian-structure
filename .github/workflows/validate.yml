@@ -25,12 +25,31 @@ jobs:
       - name: Run validation
         run: python scripts/validate.py
 
+      - name: Ruff lint
+        run: |
+          echo "🔍 ruff lint（脚本 + 测试）："
+          ruff check scripts/ tests/
+          echo "✅ ruff 通过"
+
       - name: Run pytest unit tests
         run: |
           echo "🧪 跑 pytest 单测（v1.7+ D. 工程化补强）："
           python -m pytest tests/ -v --tb=short
           echo ""
           echo "✅ pytest 通过"
+
+      - name: Coverage report
+        run: |
+          echo "📊 覆盖率报告："
+          # 测试通过 subprocess 调用 scripts/，不直接 import，所以 scripts 覆盖率 0
+          # 此步骤主要是产出 coverage.xml 供 codecov 集成
+          # 待后续增加直接 import 的单元测试后再加 fail-under
+          python -m pytest tests/ \
+            --cov=scripts \
+            --cov-report=term-missing \
+            --cov-report=xml:coverage.xml
+          echo ""
+          echo "✅ coverage.xml 已生成"
 
       - name: Run export (smoke test)
         run: |

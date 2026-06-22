@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 120
+target-version = "py37"
+src = ["scripts", "tests"]
+extend-exclude = ["docs_src", "site"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "N"]
+ignore = [
+    "E402",   # 允许非常规 import 顺序
+    "E501",   # line too long
+    "E731",   # 允许 lambda 赋值
+    "B007",   # 允许未使用的循环变量
+    "B008",   # 允许函数调用作为默认参数
+    "B023",   # 允许 loop variable 不绑定
+    "F401",   # 允许未使用的 import
+    "F541",   # 允许 f-string 无占位符
+    "F841",   # 允许未使用的本地变量赋值
+    "I001",   # 允许 unsorted imports
+    "N806",   # 允许变量大写（项目常量风格）
+    "N802",   # 允许函数名大写
+    "UP021",  # 允许 universal_newlines（Py3.6 兼容）
+    "UP022",  # 允许 stdout=PIPE 模式（Py3.6 兼容）
+    "UP037",  # 允许 quoted type annotation（Py3.6 兼容）
+    "W292",   # 允许文件末尾无换行
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]
+"scripts/interactive.py" = ["E402"]
+"scripts/web_app.py" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

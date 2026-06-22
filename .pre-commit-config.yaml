@@ -1,0 +1,30 @@
+# pre-commit hooks
+# 本地提交前自动运行：
+#   - ruff check（语法 / 风格）
+#   - scripts/validate.py（知识库完整性）
+#   - pytest tests/（单元测试）
+#
+# 安装：pip install pre-commit && pre-commit install
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: validate-kb
+        name: Validate Knowledge Base
+        entry: python scripts/validate.py
+        language: system
+        pass_filenames: false
+        files: \.(md|yaml)$
+
+      - id: pytest
+        name: Run pytest
+        entry: python -m pytest tests/ -v
+        language: system
+        pass_filenames: false

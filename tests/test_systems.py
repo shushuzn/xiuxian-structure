@@ -51,7 +51,8 @@ def test_all_expected_systems_exist():
 def test_no_extra_top_level_system_dirs():
     """顶层不应有未列入 EXPECTED_SYSTEMS 的体系目录"""
     skip = {".git", ".github", "data", "docs", "docs_src", "site", "examples", "interactive",
-            "scripts", "stories", "tests", "dist", ".pytest_cache", "__pycache__"}
+            "scripts", "stories", "tests", "dist", ".pytest_cache", "__pycache__",
+            ".ruff_cache", ".mypy_cache"}
     skip |= set(EXPECTED_SYSTEMS)
     actual = {p.name for p in ROOT.iterdir() if p.is_dir()}
     extras = actual - skip

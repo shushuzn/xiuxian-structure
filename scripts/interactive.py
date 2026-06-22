@@ -25,6 +25,7 @@ interactive.py — 互动小说引擎
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -173,6 +174,9 @@ class State:
     def __init__(self, initial: dict | None = None):
         self.attrs: dict[str, Any] = dict(initial or {})
         self.flags: set[str] = set()
+        self.items: list[str] = []              # 背包（物品列表）
+        self.npc_favor: dict[str, int] = {}     # NPC 好感度（0-100）
+        self.time: dict[str, int] = {"年": 1, "月": 1, "日": 1}  # 游戏内时间
 
     def get(self, key: str, default: Any = None) -> Any:
         return self.attrs.get(key, default)
@@ -193,13 +197,112 @@ class State:
         self.flags.discard(name)
 
     def to_dict(self) -> dict:
-        return {"attrs": dict(self.attrs), "flags": sorted(self.flags)}
+        return {
+            "attrs": dict(self.attrs),
+            "flags": sorted(self.flags),
+            "items": list(self.items),
+            "npc_favor": dict(self.npc_favor),
+            "time": dict(self.time),
+            "score": self.score_breakdown(),
+        }
 
     @classmethod
     def from_dict(cls, d: dict) -> "State":
         s = cls(d.get("attrs", {}))
         s.flags = set(d.get("flags", []))
+        s.items = list(d.get("items", []))
+        s.npc_favor = dict(d.get("npc_favor", {}))
+        s.time = dict(d.get("time", {"年": 1, "月": 1, "日": 1}))
         return s
+
+    def save(self, path) -> None:
+        """存档到 JSON 文件"""
+        from pathlib import Path
+        p = Path(path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(p, "w", encoding="utf-8") as f:
+            json.dump(self.to_dict(), f, ensure_ascii=False, indent=2)
+
+    @classmethod
+    def load(cls, path) -> "State":
+        """从 JSON 文件读档"""
+        from pathlib import Path
+        with open(Path(path), encoding="utf-8") as f:
+            return cls.from_dict(json.load(f))
+
+    # ── 背包 ──
+    def add_item(self, item: str) -> None:
+        if item and item not in self.items:
+            self.items.append(item)
+
+    def remove_item(self, item: str) -> bool:
+        if item in self.items:
+            self.items.remove(item)
+            return True
+        return False
+
+    def has_item(self, item: str) -> bool:
+        return item in self.items
+
+    @property
+    def item_count(self) -> int:
+        return len(self.items)
+
+    # ── NPC 好感度 ──
+    def modify_npc_favor(self, npc: str, delta: int) -> int:
+        """调整 NPC 好感度，返回调整后的值"""
+        cur = self.npc_favor.get(npc, 50)  # 默认 50（中性）
+        cur = max(0, min(100, cur + delta))
+        self.npc_favor[npc] = cur
+        return cur
+
+    def get_npc_favor(self, npc: str) -> int:
+        return self.npc_favor.get(npc, 50)
+
+    # ── 时间推进 ──
+    def advance_time(self, years: int = 0, months: int = 0, days: int = 0) -> dict:
+        """推进时间（年/月/日），自动处理进位"""
+        y = self.time.get("年", 1) + years
+        m = self.time.get("月", 1) + months
+        d = self.time.get("日", 1) + days
+        # 处理日进位
+        while d > 30:
+            d -= 30
+            m += 1
+        # 处理月进位
+        while m > 12:
+            m -= 12
+            y += 1
+        self.time = {"年": y, "月": m, "日": d}
+        return dict(self.time)
+
+    def get_time_str(self) -> str:
+        t = self.time
+        return f"{t.get('年', 1)}年{t.get('月', 1):02d}月{t.get('日', 1):02d}日"
+
+    # ── 结局评分 ──
+    def score_breakdown(self) -> dict:
+        """计算结局评分（0-100）"""
+        breakdown = {}
+        # 灵石评分（最多 30 分）
+        lingshi = self.attrs.get("灵石", 0)
+        breakdown["灵石"] = min(30, lingshi // 100)
+        # 声望评分（最多 25 分）
+        shengwang = self.attrs.get("声望", 0)
+        breakdown["声望"] = min(25, shengwang // 4)
+        # 物品评分（最多 20 分，每件 2 分）
+        items = self.item_count
+        breakdown["物品"] = min(20, items * 2)
+        # NPC 好感评分（最多 15 分）
+        avg_favor = sum(self.npc_favor.values()) / max(len(self.npc_favor), 1) if self.npc_favor else 50
+        breakdown["好感"] = min(15, int((avg_favor - 50) / 50 * 15))
+        # 修为评分（最多 10 分）
+        realm = self.attrs.get("境界", "")
+        realm_score = {"炼气期": 1, "筑基期": 3, "结丹期": 5, "元婴期": 7,
+                      "化神期": 8, "炼虚期": 9, "合体期": 10, "渡劫期": 10, "大乘期": 10}
+        breakdown["修为"] = realm_score.get(realm, 0)
+        breakdown["总分"] = sum(breakdown.values())
+        return breakdown
 
     def check(self, expr: str) -> bool:
         """求值一个简单表达式：'灵石 >= 10' / '灵根 == "伪灵根"' / 'flag.遇见妖兽'"""
@@ -301,10 +404,7 @@ class Engine:
                     continue
                 if raw.isdigit() and 1 <= int(raw) <= len(valid):
                     chosen = valid[int(raw) - 1]
-                    if "set" in chosen:
-                        self.state.attrs.update(chosen["set"])
-                    if "flag" in chosen:
-                        self.state.set_flag(chosen["flag"])
+                    self._apply_choice_actions(chosen)
                     node_id = chosen["goto"]
                     self.history.append(node_id)
                     self.log.append(f"→ {chosen['label']} → {node_id}")
@@ -338,18 +438,10 @@ class Engine:
             return EngineEvent(node_id, text, [], ending=True, refs=node.refs)
 
         chosen = valid[choice_index]
-        if "set" in chosen:
-            self.state.attrs.update(chosen["set"])
-        if "flag" in chosen:
-            self.state.set_flag(chosen["flag"])
+        self._apply_choice_actions(chosen)
 
         next_id = chosen["goto"]
-        # 立即递归一步：让调用方拿到下一步事件
-        next_node = self.story.get(next_id)
-        if not next_node:
-            return EngineEvent(node_id, text,
-                               [{"label": c["label"], "goto": c["goto"]} for c in valid],
-                               ending=True, refs=node.refs)
+        # 立即前进一步：迭代而非递归，避免深度爆栈
         return self._step_to(next_id)
 
     def _step_to(self, node_id: str) -> EngineEvent:
@@ -379,6 +471,37 @@ class Engine:
             else:
                 self.state.attrs[k] = v
 
+    def _apply_choice_actions(self, chosen: dict) -> None:
+        """应用选项的副作用（set / flag / pickup / drop / favor / advance）。"""
+        if "set" in chosen:
+            self.state.attrs.update(chosen["set"])
+        if "flag" in chosen:
+            self.state.set_flag(chosen["flag"])
+        if "pickup" in chosen:
+            item = chosen["pickup"]
+            if isinstance(item, list):
+                for it in item:
+                    self.state.add_item(it)
+            else:
+                self.state.add_item(item)
+        if "drop" in chosen:
+            item = chosen["drop"]
+            if isinstance(item, list):
+                for it in item:
+                    self.state.remove_item(it)
+            else:
+                self.state.remove_item(item)
+        if "favor" in chosen:
+            for npc, delta in chosen["favor"].items():
+                self.state.modify_npc_favor(npc, delta)
+        if "advance" in chosen:
+            adv = chosen["advance"]
+            self.state.advance_time(
+                years=adv.get("years", 0),
+                months=adv.get("months", 0),
+                days=adv.get("days", 0),
+            )
+
     def save(self) -> dict:
         """返回可序列化的存档"""
         return {
@@ -387,11 +510,24 @@ class Engine:
             "history": list(self.history),
         }
 
+    def save_to_file(self, path) -> None:
+        """存档到 JSON 文件"""
+        self.state.save(path)
+
     @classmethod
     def load(cls, world: World, story: Story, save: dict) -> "Engine":
         e = cls(world, story, State.from_dict(save["state"]))
         e.history = list(save.get("history", []))
         return e
+
+    @classmethod
+    def load_from_file(cls, world: World, story: Story, path) -> "Engine":
+        """从 JSON 文件读档"""
+        return cls.load(world, story, {"story": story.id, "state": State.load(path).to_dict()})
+
+    def get_score(self) -> dict:
+        """获取结局评分（在 ending 节点调用）"""
+        return self.state.score_breakdown()
 
 
 # ────────────────────────────────────────────────────────
@@ -526,12 +662,20 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--story", type=Path, required=True, help="剧本 .md 路径")
     p.add_argument("--data-dir", type=Path, default=ROOT / "data", help="yaml 目录")
     p.add_argument("--headless", action="store_true", help="不进入交互，直接选第一选项走到结尾（CI 用）")
-    p.add_argument("--save", type=Path, help="保存到 JSON 存档")
+    p.add_argument("--save", type=Path, help="保存到 JSON 存档（结束时）")
+    p.add_argument("--load", type=Path, help="从 JSON 存档继续游戏")
+    p.add_argument("--score", action="store_true", help="结束时打印结局评分")
     args = p.parse_args(argv)
 
     world = World.from_yaml_dir(args.data_dir)
     story = Story.from_file(args.story)
-    engine = Engine(world, story)
+
+    # 读档优先：用存档中的 state 初始化
+    if args.load:
+        engine = Engine.load_from_file(world, story, args.load)
+        print(f"📂 已从存档加载: {args.load}")
+    else:
+        engine = Engine(world, story)
 
     if args.headless:
         # 自动路径：始终选第一个有效选项
@@ -548,10 +692,7 @@ def main(argv: list[str] | None = None) -> int:
                 break
             chosen = valid[0]
             print(f"  {node.id} → {chosen['label']} → {chosen['goto']}")
-            if "set" in chosen:
-                engine.state.attrs.update(chosen["set"])
-            if "flag" in chosen:
-                engine.state.set_flag(chosen["flag"])
+            engine._apply_choice_actions(chosen)
             node_id = chosen["goto"]
             engine.history.append(node_id)
             steps += 1
@@ -559,8 +700,13 @@ def main(argv: list[str] | None = None) -> int:
                 print("❌ 步数过多，可能循环")
                 return 1
         if args.save:
-            import json
-            args.save.write_text(json.dumps(engine.save(), ensure_ascii=False, indent=2), encoding="utf-8")
+            engine.save_to_file(args.save)
+            print(f"💾 已存档: {args.save}")
+        if args.score:
+            score = engine.get_score()
+            print(f"\n📊 结局评分:")
+            for k, v in score.items():
+                print(f"   {k}: {v}")
         return 0
     else:
         engine.play()

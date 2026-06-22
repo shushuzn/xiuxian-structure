@@ -79,17 +79,77 @@ data:
   声望: 5
 next: []
 
-## 节点 market (ending)
+## 节点 market (scene)
 
-refs: 灵石体系/下品灵石.md
+refs: 灵石体系/下品灵石.md, 符箓体系/火球符.md, 丹药体系/辟谷丹.md
 text: |
   你离开测灵殿，走进坊市。
 
   你的灵石不多，灵根又差，但坊市里什么人都有——卖符箓的、卖情报的、收购妖兽材料的……
 
-  也许，你能在坊市里找到属于伪灵根散修的另一条路。
-
-  🏁 结局二：自立于坊市。
+  你在摊位间闲逛，遇到三个机会：
 data:
-  声望: 1
+  ?声望: 1
+next:
+  - label: "向符箓摊主学画火球符（消耗 2 灵石 + 3 月）"
+    goto: learn_fu
+    set: { 灵石: 3, 声望: 2 }
+    favor: { 符箓摊主: 20 }
+    advance: { months: 3 }
+    if: 灵石 >= 2
+  - label: "替药铺打杂换辟谷丹（消耗 1 月）"
+    goto: learn_dan
+    set: { 声望: 1 }
+    advance: { months: 1 }
+    pickup: 辟谷丹
+  - label: "继续闲逛，看看还有什么机会"
+    goto: market_ending
+
+## 节点 learn_fu (scene)
+
+refs: 符箓体系/火球符.md, 符箓体系/符箓.md
+text: |
+  符箓摊主看你虽是伪灵根，但手巧心细，便收你为徒。
+
+  3 个月后，你学会了画火球符。
+data:
+  符箓:
+    火球符: 3
+  声望: 3
+next:
+  - label: "继续画符箓卖"
+    goto: market_ending
+    advance: { months: 6 }
+    pickup: 火球符
+    pickup: 金刚符
+
+## 节点 learn_dan (ending)
+
+refs: 丹药体系/辟谷丹.md
+text: |
+  你在药铺打杂 1 个月，老板见你老实，送你 10 颗辟谷丹。
+
+  这些丹药足够你半年不愁吃喝，可以专心修炼了。
+
+  🏁 结局三：药铺打杂换辟谷丹。
+data:
+  ?声望: 2
+  ?符箓:
+    火球符: 1
+next: []
+
+## 节点 market_ending (ending)
+
+refs: 符箓体系/符箓.md
+text: |
+  又过了 6 个月，你的画符手艺越来越好。
+
+  你在坊市摆摊卖符箓，渐渐攒下了一些灵石，攒了些人脉。
+
+  长老看你成长，赐你一部黄级功法。
+
+  🏁 结局四：自立符箓师。
+data:
+  ?声望: 10
+  ?灵石: 20
 next: []

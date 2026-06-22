@@ -294,6 +294,46 @@ def restart(sid: str, body: SessionCreate | None = None) -> SessionView:
     )
 
 
+# ── v2.1 互动引擎升级（B）──
+
+
+@app.post("/session/{sid}/save")
+def save_session(sid: str):
+    """导出存档（JSON 响应，前端可下载）。"""
+    engine = _sessions.get(sid)
+    if not engine:
+        raise HTTPException(404, f"会话 '{sid}' 不存在")
+    return engine.save()
+
+
+@app.post("/session/{sid}/load")
+def load_session(sid: str, body: dict) -> SessionView:
+    """从存档恢复会话。"""
+    engine = _sessions.get(sid)
+    if not engine:
+        raise HTTPException(404, f"会话 '{sid}' 不存在")
+    if "state" not in body:
+        raise HTTPException(400, "缺少 state 字段")
+    engine.state = State.from_dict(body["state"])
+    engine.history = list(body.get("history", []))
+    return SessionView(
+        sid=sid,
+        story_id=engine.story.id,
+        state=engine.state.to_dict(),
+        history=list(engine.history),
+        current=_render_node(engine),
+    )
+
+
+@app.get("/session/{sid}/score")
+def get_score(sid: str):
+    """获取结局评分（0-100 + 各维度细分）。"""
+    engine = _sessions.get(sid)
+    if not engine:
+        raise HTTPException(404, f"会话 '{sid}' 不存在")
+    return engine.get_score()
+
+
 # ────────────────────────────────────────────────────────
 # 4. 静态文件（前端 SPA — v1.4 PR2 接入）
 # ────────────────────────────────────────────────────────

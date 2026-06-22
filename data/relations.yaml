@@ -18,7 +18,7 @@ relations:
     to: technique:chang_sheng_jue
     type: enables
     description: "天灵根与天级无属性功法匹配"
-  - from: spirit_root:jin_ling_gen
+  - from: attributes:jin
     to: technique:jin_jian_jue
     type: enables
     description: "金属性灵根与金属性功法匹配"
@@ -40,37 +40,37 @@ relations:
     description: "微型灵脉支持散修或小家族"
 
   # ── 功法 → 境界 ──
-  - from: technique:tier_huang
+  - from: technique:huang
     to: realm:zhuji
     type: blocks
     description: "黄级功法最高到筑基"
-  - from: technique:tier_xuan
+  - from: technique:xuan
     to: realm:jiedan
     type: enables
     description: "玄级可到结丹"
-  - from: technique:tier_di
+  - from: technique:di
     to: realm:huashen
     type: enables
     description: "地级可到元婴甚至化神"
-  - from: technique:tier_tian
+  - from: technique:tian
     to: realm:dacheng
     type: enables
     description: "天级才能走得更远"
 
   # ── 丹药 → 境界 ──
-  - from: elixir:tier_fan_pin
+  - from: elixir:fan_pin
     to: realm:lianqi
     type: enables
     description: "凡品丹药 → 炼气期"
-  - from: elixir:tier_ling_pin
+  - from: elixir:ling_pin
     to: realm:zhuji
     type: enables
     description: "灵品丹药 → 筑基期"
-  - from: elixir:tier_bao_pin
+  - from: elixir:bao_pin
     to: realm:jiedan
     type: enables
     description: "宝品丹药 → 结丹期"
-  - from: elixir:tier_xian_pin
+  - from: elixir:xian_pin
     to: realm:yuanying
     type: enables
     description: "仙品丹药 → 元婴期及以上"
@@ -195,35 +195,35 @@ relations:
 
   # ── v1.6: 神识 → 应用 ──
   - from: divine_sense:jiedan
-    to: artifact:tier_gao_jie
+    to: artifact:gao_jie
     type: enables
     description: "结丹神识可驱动高阶法器"
   - from: divine_sense:yuanying
-    to: artifact:tier_fa_bao
+    to: artifact:fa_bao
     type: enables
     description: "元婴神识可驱动法宝，可与器灵沟通"
   - from: divine_sense:zhuji
-    to: talisman:tier_ling_fu
+    to: talisman:ling_fu
     type: enables
     description: "筑基神识可画制灵品符箓"
   - from: divine_sense:jiedan
-    to: talisman:tier_bao_fu
+    to: talisman:bao_fu
     type: enables
     description: "结丹神识可画制宝品符箓"
   - from: divine_sense:zhuji
-    to: elixir:tier_ling_pin
+    to: elixir:ling_pin
     type: enables
     description: "筑基神识可炼制灵品丹药"
   - from: divine_sense:jiedan
-    to: elixir:tier_bao_pin
+    to: elixir:bao_pin
     type: enables
     description: "结丹神识可炼制宝品丹药"
   - from: divine_sense:zhuji
-    to: formation:tier_ling_zhen
+    to: formation:ling_zhen
     type: enables
     description: "筑基神识可布置灵阵"
   - from: divine_sense:jiedan
-    to: formation:tier_bao_zhen
+    to: formation:bao_zhen
     type: enables
     description: "结丹神识可布置宝阵"
 
@@ -238,16 +238,16 @@ relations:
     description: "嗔魔爆发可短暂削弱神识强度"
 
   # ── v1.7: 法器 → 器灵 ──
-  - from: artifact:tier_fa_bao
+  - from: artifact:fa_bao
     to: spirit_weapon:chu_xing
     type: enables
     description: "法宝级法器可蕴含器灵雏形"
-  - from: artifact:tier_ling_bao
+  - from: artifact:ling_bao
     to: spirit_weapon:wan_zheng
     type: enables
     description: "灵宝级法器蕴含完整器灵，可自主行动"
-  - from: artifact:tier_fa_bao
-    to: spirit_weapon:recognition_yi_shi
+  - from: artifact:fa_bao
+    to: spirit_weapon:yi_shi
     type: requires
     description: "法宝级以上法器需仪式认主"
 
@@ -260,32 +260,32 @@ relations:
     to: spirit_weapon:backlash
     type: triggers
     description: "执念魔爆发可激发器灵反噬"
-  - from: spirit_weapon:recognition_zi_yuan
+  - from: spirit_weapon:zi_yuan
     to: heart_demon:all
     type: blocks
     description: "自愿认主的器灵关系稳固，不易受心魔激发反噬"
 
   # ── v1.7: 雷劫 → 器灵成长 ──
   - from: tribulation:san_jiu_tian_jie
-    to: spirit_weapon:growth_du_jie
+    to: spirit_weapon:du_jie
     type: enables
     description: "三九天劫可催生器灵雏形"
   - from: tribulation:liu_jiu_tian_jie
-    to: spirit_weapon:growth_du_jie
+    to: spirit_weapon:du_jie
     type: enables
     description: "六九天劫可使器灵跃升至完整"
   - from: tribulation:jiu_jiu_tian_jie
-    to: spirit_weapon:growth_du_jie
+    to: spirit_weapon:du_jie
     type: enables
     description: "九九天劫可使器灵跃升至大成"
 
   # ── v1.7: 神识 → 器灵沟通 ──
   - from: divine_sense:yuanying
-    to: spirit_weapon:communication_dui_hua
+    to: spirit_weapon:dui_hua
     type: enables
     description: "元婴神识可与完整器灵神识对话"
-  - from: divine_sense:huashen
-    to: spirit_weapon:communication_xin_xi
+  - from: realm:huashen
+    to: spirit_weapon:xin_xi
     type: enables
     description: "化神神识可与大成器灵心意相通"
 
@@ -302,7 +302,7 @@ relations:
     to: contract:equal_contract
     type: enables
     description: "化形期妖修与人类修士多走平等契约"
-  - from: faction:top_sect
+  - from: org:top_sect
     to: contract:equal_contract
     type: enables
     description: "宗门之间多走平等盟约"
@@ -325,6 +325,6 @@ relations:
 
   # ── v1.7: 魂契 ↔ 器灵认主 ──
   - from: contract:soul_bond
-    to: spirit_weapon:recognition_ping_deng
+    to: spirit_weapon:ping_deng
     type: parallels
     description: "魂契是契约体系的极致，与器灵体系的平等共生互为镜像"

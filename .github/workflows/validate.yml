@@ -18,10 +18,19 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
 
       - name: Run validation
         run: python scripts/validate.py
+
+      - name: Run pytest unit tests
+        run: |
+          echo "🧪 跑 pytest 单测（v1.7+ D. 工程化补强）："
+          python -m pytest tests/ -v --tb=short
+          echo ""
+          echo "✅ pytest 通过"
 
       - name: Run export (smoke test)
         run: |

@@ -387,9 +387,9 @@ relations:
     type: parallels
     description: "下界天级功法是仙界仙级功法的雏形"
 
-  # ── v2.0: 下界势力 → 飞升 ──
+# ── v2.0: 下界势力 → 飞升 ──
   - from: org:top_sect
-    to: factions:tian_ting
+    to: immortal_realm:tian_ting
     type: parallels
     description: "下界顶级宗门对应仙界天庭"
 
@@ -416,3 +416,69 @@ relations:
     to: techniques:jiu_zhuan_xuan_xian_jue
     type: enables
     description: "仙灵石是修炼九转玄仙诀的资源基础"
+
+  # ── v2.3: 神界 → 仙界 ──
+  - from: barrier_types:sealed
+    to: divine_grades:fan_ren
+    type: parallels
+    description: "飞升需渡神劫后获神格"
+  - from: titles:xian_di
+    to: titles:shen_min
+    type: parallels
+    description: "仙帝级存在渡神劫后从神民起步"
+
+  # ── v2.3: 仙界 → 神界 ──
+  - from: titles:xian_di
+    to: tribulations:lei_shen_jie
+    type: requires
+    description: "仙帝需渡雷神劫才能进入神界"
+  - from: titles:xian_di
+    to: tribulations:fu_he_shen_jie
+    type: parallels
+    description: "仙帝级存在面临最严苛的复合神劫"
+
+  # ── v2.3: 神格 → 神职 ──
+  - from: divine_grades:fan_ren
+    to: titles:shen_min
+    type: enables
+    description: "凡人神格起步只能任神民"
+  - from: divine_grades:zhi_shen
+    to: titles:shen_di
+    type: enables
+    description: "至神格可任神帝"
+
+  # ── v2.3: 神界资源 ──
+  - from: spirit_stones:xian_jing
+    to: spirit_stones:shen_jing
+    type: parallels
+    description: "仙晶是神晶的下界对应物"
+  - from: aether:nong_yu
+    to: aether:nong_yu_shen
+    type: parallels
+    description: "浓郁灵气对应浓郁神气"
+
+  # ── v2.3: 神劫 ↔ 心魔 ──
+  - from: heart_demon:chi_mo
+    to: tribulations:xin_mo_shen_jie
+    type: triggers
+    description: "嗔魔在心魔神劫中具象化"
+  - from: heart_demon:zhi_nian_mo
+    to: tribulations:xin_mo_shen_jie
+    type: blocks
+    description: "执念魔未除者无法渡心魔神劫"
+
+  # ── v2.3: 飞神者路径 ──
+  - from: ascension:ordinary
+    to: ascension_types:ordinary_ascension
+    type: parallels
+    description: "普通飞升者到神界仍为普通飞神者"
+  - from: ascension:talented
+    to: ascension_types:talented_ascension
+    type: parallels
+    description: "天才飞升者到神界仍为天才飞神者"
+
+  # ── v2.3: 神界势力 → 神域 ──
+  - from: factions:tian_ting
+    to: domains:tian_ting
+    type: parallels
+    description: "仙界天庭对应神界天庭"

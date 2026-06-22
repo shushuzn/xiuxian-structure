@@ -10,7 +10,9 @@
 
 **v2.0.0** · **19 体系** · **120 篇体系 .md** · 19 yaml · 33 PR 已 merge · [📖 阅读 v2.0.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v2.0.0)
 
-> 🆕 v2.0 大版本：新增 **飞升体系**（10 篇）— 大乘之上 → 仙界
+> 🆕 v2.3 大版本：新增 **神界体系**（12 篇）— 仙帝之上 → 神界
+>
+> v2.0 大版本：新增 **飞升体系**（10 篇）— 大乘之上 → 仙界
 > v1.5/v1.6/v1.7：心魔 + 雷劫 + 神识 + 器灵 + 契约（27 篇）
 
 English readers: see [README_EN.md](README_EN.md).
@@ -164,6 +166,7 @@ xiuxian-structure/
 │   ├── 主从契约.md
 │   └── 魂契.md
 ├── 飞升体系/                   # 🆕 v2.0 大版本
+├── 神界体系/                   # 🆕 v2.3 大版本（仙帝之上 → 神界）
 │   ├── 飞升.md
 │   ├── 飞升之劫.md
 │   ├── 界面壁障.md

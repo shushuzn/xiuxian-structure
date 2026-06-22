@@ -1,0 +1,1 @@
+../../stories/demo_measuring_spirit.md

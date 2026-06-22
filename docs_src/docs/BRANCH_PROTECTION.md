@@ -1,0 +1,1 @@
+../../docs/BRANCH_PROTECTION.md

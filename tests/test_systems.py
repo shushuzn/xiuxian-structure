@@ -48,7 +48,7 @@ def test_all_expected_systems_exist():
 
 def test_no_extra_top_level_system_dirs():
     """顶层不应有未列入 EXPECTED_SYSTEMS 的体系目录"""
-    skip = {".git", ".github", "data", "docs", "examples", "interactive",
+    skip = {".git", ".github", "data", "docs", "docs_src", "site", "examples", "interactive",
             "scripts", "stories", "tests", "dist", ".pytest_cache", "__pycache__"}
     skip |= set(EXPECTED_SYSTEMS)
     actual = {p.name for p in ROOT.iterdir() if p.is_dir()}
@@ -65,8 +65,8 @@ def test_each_system_has_at_least_one_md():
 
 
 def test_each_system_md_has_关联_section():
-    """每篇体系 .md 必须含 ## 关联 章节（stories/ / examples/ / docs/ 除外）"""
-    skip_dirs = {"docs", "examples", "stories", ".github", "interactive"}
+    """每篇体系 .md 必须含 ## 关联 章节（stories/ / examples/ / docs/ / docs_src/ 除外）"""
+    skip_dirs = {"docs", "docs_src", "examples", "stories", ".github", "interactive", "site"}
     for md in ROOT.rglob("*.md"):
         rel = md.relative_to(ROOT)
         if rel.parts[0] in skip_dirs:

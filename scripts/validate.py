@@ -86,6 +86,9 @@ def check_md_structure():
         # stories/ 是互动小说剧本（不是知识库文档），不强制
         if rel.parts[0] == "stories":
             continue
+        # docs_src/ 是 mkdocs 文档站源（symlink 到真实 .md），不强制
+        if rel.parts[0] == "docs_src":
+            continue
         content = md.read_text(encoding="utf-8")
         sections = extract_sections(content)
         if "关联" not in sections:

@@ -87,6 +87,14 @@ examples:
     grade: ling_zhen
     deploy: sui_shen
     note: "幻术阵法示例"
+  - id: du_jie_zhen
+    name: 渡劫阵
+    category: fu_zhu
+    grade: bao_zhen
+    deploy: lin_shi
+    note: "修士突破大境界时使用的辅助阵法，可降低天劫威力"
+    references:
+      - ../阵法体系/渡劫阵.md
 
 references:
   - ../阵法体系/阵法.md

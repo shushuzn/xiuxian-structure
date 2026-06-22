@@ -1,0 +1,52 @@
+# 妖修体系权威数据
+
+# 妖修境界
+stages:
+  - id: kai_lei
+    name: 开灵期
+    order: 1
+    description: "妖兽开启灵智，可口吐人言"
+    references:
+      - ../妖修体系/妖修.md
+
+  - id: hua_xing
+    name: 化形期
+    order: 2
+    description: "妖修化为人形，保留部分妖兽特征"
+    references:
+      - ../妖修体系/化形期.md
+
+  - id: xiao_yao
+    name: 小妖期
+    order: 3
+    description: "修为相当于人类元婴期"
+    references:
+      - ../妖修体系/妖修.md
+
+  - id: yao_wang
+    name: 妖王期
+    order: 4
+    description: "修为相当于人类化神期"
+    references:
+      - ../妖修体系/妖修.md
+
+# 化形特征
+forms:
+  - id: ren_xing
+    name: 人形
+    description: "完全化形为人，保留部分妖兽特征"
+  - id: ban_hua
+    name: 半化形
+    description: "人首兽身"
+  - id: yuan_xing
+    name: 原形
+    description: "完全妖兽形态"
+
+# 妖丹
+core:
+  - id: yao_dan
+    name: 妖丹
+    rarity: 珍贵
+    description: "妖修的核心，蕴含妖力"
+    references:
+      - ../妖兽体系/妖丹.md

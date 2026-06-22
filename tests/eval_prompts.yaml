@@ -1,0 +1,107 @@
+# LLM 评测集（v2.2 新增）
+# 用于 scripts/eval_llm.py 批量评测多个 prompt 在一个或多个 LLM 上的表现
+#
+# 字段：
+#   id:          唯一标识
+#   story:       目标剧本（必须在 stories/ 存在）
+#   requirement: 自然语言需求（10-100 字）
+#   expected_refs: 期望引用的体系文件（至少 1 个）
+#   temperature: LLM 温度（0-1，默认 0.3）
+#   max_retries: NodeValidator 重试次数（默认 3）
+#   tags:        评测分类标签
+
+prompts:
+  - id: simple_npc_encounter
+    story: hanli_vol1_mochui
+    requirement: "在卖消息节点后，加一个'密探跟踪'节点，演示NPC偶遇"
+    expected_refs:
+      - 势力体系/散修联盟.md
+    temperature: 0.3
+    tags: [basic, npc]
+
+  - id: heart_demon_choice
+    story: hanli_vol1_mochui
+    requirement: "在服丹节点加心魔描写，需要清心丹 >= 1 才可渡过，否则散功"
+    expected_refs:
+      - 心魔体系/心魔.md
+      - 丹药体系/清心丹.md
+    temperature: 0.3
+    tags: [v1.5, heart_demon, breakthrough]
+
+  - id: spirit_weapon_recognition
+    story: hanli_vol2_yuanzou
+    requirement: "演示器灵自愿认主 vs 强迫认主的二选一，自愿认主无反噬，强迫认主有反噬风险"
+    expected_refs:
+      - 器灵体系/器灵认主.md
+      - 器灵体系/器灵反噬.md
+    temperature: 0.3
+    tags: [v1.7, spirit_weapon, choice]
+
+  - id: contract_lingbei_choice
+    story: aoyue_npc_fanpai
+    requirement: "在寒焰宗建宗后加一个'幼狼抉择'节点，演示灵兽契约（灵魂/平等/主从）"
+    expected_refs:
+      - 契约体系/契约.md
+      - 契约体系/灵魂契约.md
+    temperature: 0.3
+    tags: [v1.7, contract, lingbei]
+
+  - id: divine_sense_attack
+    story: hanli_vol1_mochui
+    requirement: "演示神识攻击场景：元婴期修士对结丹期修士使用识域压制"
+    expected_refs:
+      - 神识体系/神识攻击.md
+      - 神识体系/元婴神识.md
+    temperature: 0.3
+    tags: [v1.6, divine_sense, combat]
+
+  - id: tribulation_breakthrough
+    story: hanli_vol1_mochui
+    requirement: "演示筑基突破场景：3 道天雷 + 失败时经脉受损"
+    expected_refs:
+      - 雷劫体系/雷劫.md
+      - 丹药体系/筑基丹.md
+    temperature: 0.3
+    tags: [v1.5, tribulation, breakthrough]
+
+  - id: ascension_attempt
+    story: aoyue_npc_fanpai
+    requirement: "演示飞升场景：渡飞升之劫后进入仙界，散仙起步"
+    expected_refs:
+      - 飞升体系/飞升.md
+      - 飞升体系/飞升之劫.md
+    temperature: 0.3
+    tags: [v2.0, ascension, ending]
+
+  - id: inventory_interaction
+    story: demo_measuring_spirit
+    requirement: "演示 v2.1 互动引擎 DSL：pickup 物品 + favor 修改 NPC 好感度 + advance 推进时间"
+    expected_refs:
+      - 丹药体系/辟谷丹.md
+    temperature: 0.3
+    tags: [v2.1, engine, dsl]
+
+  - id: complex_branching
+    story: hanli_vol2_yuanzou
+    requirement: "在雷师传承节点后加一个'雷师考验'场景，至少 3 个分支选项对应 3 种后续"
+    expected_refs:
+      - 秘境体系/雷师之墓.md
+      - 法器体系/雷师印.md
+    temperature: 0.5
+    tags: [v1.7, complex, branching]
+
+  - id: heart_demon_zhi_nian
+    story: aoyue_npc_fanpai
+    requirement: "演示执念魔爆发场景：aoyue 因对韩立的执念在渡劫时心魔爆发"
+    expected_refs:
+      - 心魔体系/执念魔.md
+      - 心魔体系/嗔魔.md
+    temperature: 0.5
+    tags: [v1.5, heart_demon, plot]
+
+# 默认配置
+defaults:
+  temperature: 0.3
+  max_retries: 3
+  base_url: https://api.openai.com/v1
+  model: gpt-4o-mini

@@ -153,6 +153,37 @@ python3 scripts/generate_node.py \
 - **export.py**：先把 `data/*.yaml` 导出成 `dist/xiuxian.json`，喂 LLM 时用 JSON 替代 YAML 摘要（如果你想）
 - **interactive.py**：生成节点后，CI 的 `Verify all stories are well-formed` 步骤会自动校验连通性
 - **validate.py**：节点最终接入 story 后，跑一次确认整个仓库仍合规
+- **eval_llm.py**（v2.2）：批量评测多个 prompt 在多个 LLM 上的 NodeValidator 通过率
+- **batch_generate.py**（v2.2）：批量生成节点并自动保存到指定目录
+
+## 🧪 v2.2 评测集（tests/eval_prompts.yaml）
+
+`tests/eval_prompts.yaml` 收录 10 个评测 prompt，覆盖：
+
+- **v1.5 心魔 / 雷劫**（heart_demon_choice, tribulation_breakthrough, heart_demon_zhi_nian）
+- **v1.6 神识**（divine_sense_attack）
+- **v1.7 器灵 / 契约**（spirit_weapon_recognition, contract_lingbei_choice）
+- **v2.0 飞升**（ascension_attempt）
+- **v2.1 互动引擎**（inventory_interaction）
+
+用法：
+
+```bash
+# 批量评测（不调 LLM，只看配置）
+python3 scripts/eval_llm.py --prompts tests/eval_prompts.yaml --dry-run
+
+# 多模型对比（需 API key）
+export OPENAI_API_KEY=sk-...
+python3 scripts/eval_llm.py \
+  --prompts tests/eval_prompts.yaml \
+  --models gpt-4o-mini,deepseek-chat \
+  --report dist/eval_report.json
+
+# 批量生成节点到指定目录
+python3 scripts/batch_generate.py \
+  --prompts tests/eval_prompts.yaml \
+  --output examples/generated_batch/
+```
 
 ## 💡 最佳实践
 
@@ -164,7 +195,7 @@ python3 scripts/generate_node.py \
 
 ## 🚧 限制
 
-- **不调多个 LLM**：当前只支持单 LLM 调用（未来可加 ensemble）
 - **不存 LLM 偏好**：每次跑都是新对话，不存会话历史
 - **不跨故事**：每次只针对一个 `stories/*.md`
 - **不接 dist/**：dist/ 里的 JSON 是 export 工具产物，不是 source of truth
+- **v2.2+ 已支持多模型对比**：见 `scripts/eval_llm.py`

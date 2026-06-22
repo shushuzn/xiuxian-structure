@@ -125,6 +125,7 @@ nav:
       - 契约体系:
           - 框架: 契约体系/契约.md
   - 文档:
+      - 概念汇总: docs/概念汇总.md
       - 元文档:
           - 模板: docs/TEMPLATE.md
           - Schema: docs/SCHEMA.md

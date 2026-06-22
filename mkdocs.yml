@@ -1,0 +1,123 @@
+site_name: 修仙体系结构 · xiuxian-structure
+site_description: 基于《凡人修仙传》的修仙世界观架构知识库
+site_author: shushuzn
+repo_url: https://github.com/shushuzn/xiuxian-structure
+repo_name: shushuzn/xiuxian-structure
+edit_uri: edit/main/
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到夜间模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到日间模式
+
+extra:
+  generator: false
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - 首页: README.md
+  - 总索引: 索引.md
+  - 体系:
+      - 境界体系:
+          - 框架: 境界体系/境界.md
+          - 炼气期: 境界体系/炼气期.md
+          - 筑基期: 境界体系/筑基期.md
+          - 结丹期: 境界体系/结丹期.md
+          - 元婴期: 境界体系/元婴期.md
+          - 化神期: 境界体系/化神期.md
+          - 炼虚期: 境界体系/炼虚期.md
+          - 合体期: 境界体系/合体期.md
+          - 渡劫期: 境界体系/渡劫期.md
+          - 大乘期: 境界体系/大乘期.md
+      - 灵根体系: 灵根体系/灵根.md
+      - 天地灵气:
+          - 框架: 天地灵气/灵气.md
+      - 妖兽体系:
+          - 框架: 妖兽体系/妖兽.md
+      - 妖修体系:
+          - 框架: 妖修体系/妖修.md
+      - 势力体系:
+          - 框架: 势力体系/势力.md
+      - 灵石体系:
+          - 框架: 灵石体系/灵石.md
+      - 阵法体系:
+          - 框架: 阵法体系/阵法.md
+      - 符箓体系:
+          - 框架: 符箓体系/符箓.md
+      - 功法体系:
+          - 框架: 功法体系/功法.md
+      - 丹药体系:
+          - 框架: 丹药体系/丹药.md
+      - 法器体系:
+          - 框架: 法器体系/法器.md
+      - 秘境体系:
+          - 框架: 秘境体系/秘境.md
+      - 心魔体系:
+          - 框架: 心魔体系/心魔.md
+      - 雷劫体系:
+          - 框架: 雷劫体系/雷劫.md
+      - 神识体系:
+          - 框架: 神识体系/神识.md
+      - 器灵体系:
+          - 框架: 器灵体系/器灵.md
+      - 契约体系:
+          - 框架: 契约体系/契约.md
+  - 文档:
+      - 元文档:
+          - 模板: docs/TEMPLATE.md
+          - Schema: docs/SCHEMA.md
+          - 架构: docs/ARCHITECTURE.md
+          - 分支保护: docs/BRANCH_PROTECTION.md
+          - 关系图谱: docs/图谱.md
+  - 示例: examples/README.md
+  - 故事: stories/README.md
+  - 互动小说: interactive/README.md
+  - 贡献: CONTRIBUTING.md
+  - 更新日志: CHANGELOG.md
+  - 安全: SECURITY.md
+  - 许可: LICENSE
+
+plugins:
+  - search

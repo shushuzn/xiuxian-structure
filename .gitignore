@@ -19,3 +19,11 @@ interactive/saves/
 # OS
 .DS_Store
 Thumbs.db
+
+# D. 工程化补强（v1.7+）
+.pytest_cache/
+__pycache__/
+*.pyc
+.coverage
+htmlcov/
+site/  # mkdocs build 输出

@@ -13,7 +13,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# 项目当前应有的体系清单（v1.7）
+# 项目当前应有的体系清单（v2.0）
 EXPECTED_SYSTEMS = [
     "境界体系",
     "灵根体系",
@@ -36,6 +36,8 @@ EXPECTED_SYSTEMS = [
     # v1.7+
     "器灵体系",
     "契约体系",
+    # v2.0
+    "飞升体系",
 ]
 
 

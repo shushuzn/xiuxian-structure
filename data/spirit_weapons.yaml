@@ -109,6 +109,12 @@ recognition_methods:
 
 # 反噬等级
 backlash_levels:
+  - id: backlash
+    name: 反噬（聚合）
+    description: "所有反噬等级的总和，用于跨体系关联的占位"
+    references:
+      - ../器灵体系/器灵反噬.md
+
   - id: qing
     name: 轻反噬
     manifestation: "偶有不服从，拒绝配合"

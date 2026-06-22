@@ -60,6 +60,15 @@ artifacts:
     required_realm: jiedan
     recognition: jingxue
     note: "高阶雷属性法宝示例"
+  - id: ling_shou_dai
+    name: 灵兽袋
+    tier: ling_pin
+    attribute: wu
+    required_realm: zhuji
+    recognition: jingxue
+    note: "灵品收纳法器，关入灵兽时自动签订主从契约"
+    references:
+      - ../法器体系/灵兽袋.md
 
 references:
   - ../法器体系/法器.md

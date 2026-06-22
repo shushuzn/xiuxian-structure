@@ -53,7 +53,12 @@ def test_yaml_use_2_space_indent():
 
 
 def test_relations_yaml_references_valid_ids():
-    """data/relations.yaml 中的引用应在对应 yaml 文件中存在"""
+    """data/relations.yaml 中的引用应在对应 yaml 文件中存在。
+
+    严格模式：FAIL（不 skip）任何缺失引用。
+    项目约定：relations 用单数前缀，yaml 文件名用复数；
+    字段名前缀映射见下方 FILENAME_TO_PREFIX。
+    """
     relations_file = DATA_DIR / "relations.yaml"
     if not relations_file.exists():
         pytest.skip("relations.yaml 不存在")
@@ -61,8 +66,9 @@ def test_relations_yaml_references_valid_ids():
     if not relations or "relations" not in relations:
         pytest.skip("relations.yaml 为空或无 relations 字段")
 
-    # 文件名（复数）→ relations 前缀（单数）映射
-    # 项目约定：relations 用单数，文件名用复数
+    # 文件名（复数）→ 默认 relations 前缀
+    # 但实际 relations 引用多以「字段名」为前缀（artifact/tier/elixir 等），
+    # 因此下面的索引会同时记录「文件前缀:id」和「字段前缀:id」。
     FILENAME_TO_PREFIX = {
         "aether": "aether",
         "artifacts": "artifact",
@@ -71,38 +77,47 @@ def test_relations_yaml_references_valid_ids():
         "elixirs": "elixir",
         "factions": "org",
         "formations": "formation",
-        "monsters": "spirit_beast",   # 见 monsters.yaml 中的 spirit_beasts 字段
+        "heart_demons": "heart_demon",
+        "monsters": "spirit_beast",
         "realms": "realm",
         "spirit_roots": "spirit_root",
         "spirit_stones": "spirit_stone",
         "spirit_weapons": "spirit_weapon",
         "talismans": "talisman",
         "techniques": "technique",
+        "tribulations": "tribulation",
+        "yao_xiu": "yao_xiu",
     }
 
-    # 构建所有 yaml 的 id 索引（用 prefix）
+    # 构建 id 索引：
+    # - 每个 yaml 的所有「顶层 list[dict{id}]」按字段名建索引
+    # - 同时按文件名建索引（兼容旧风格）
     id_index = {}
     for yf in all_yaml_files():
         if yf.name == "relations.yaml":
             continue
         stem = yf.stem
-        prefix = FILENAME_TO_PREFIX.get(stem, stem)
+        file_prefix = FILENAME_TO_PREFIX.get(stem, stem)
         data = yaml.safe_load(yf.read_text(encoding="utf-8"))
         if not data:
             continue
+
+        def collect_items(items):
+            for item in items:
+                if isinstance(item, dict) and "id" in item:
+                    # 同时记录：文件前缀 和 字段前缀
+                    id_index.setdefault(f"{file_prefix}:{item['id']}", yf.name)
+                    id_index.setdefault(f"{field_name}:{item['id']}", yf.name)
+
         for field_name, field_value in data.items():
             if isinstance(field_value, list):
-                for item in field_value:
-                    if isinstance(item, dict) and "id" in item:
-                        id_index[f"{prefix}:{item['id']}"] = yf.name
+                collect_items(field_value)
             elif isinstance(field_value, dict):
                 for k, v in field_value.items():
                     if isinstance(v, list):
-                        for item in v:
-                            if isinstance(item, dict) and "id" in item:
-                                id_index[f"{prefix}:{item['id']}"] = yf.name
+                        collect_items(v)
 
-    # 检查 relations 中的所有引用
+    # 检查所有 relations 引用
     missing = []
     for rel in relations["relations"]:
         for key in ("from", "to"):
@@ -114,13 +129,15 @@ def test_relations_yaml_references_valid_ids():
                     f"relations.yaml 中 {key}={ref!r} 格式错误（应包含 system:id）"
                 )
             if ref not in id_index:
-                missing.append(ref)
+                missing.append((key, ref))
 
     if missing:
-        # 打印未找到的引用以便排查，但不强制失败（防止新加的引用还没补 yaml）
-        pytest.skip(
-            f"以下 {len(missing)} 个 relations 引用在 data/*.yaml 中未找到"
-            f"（可能跨体系聚合，无需逐一存在）：{missing[:5]}..."
+        msg = "\n".join(
+            f"  - {key}={ref}  (第 {i} 条 relation)"
+            for i, (key, ref) in enumerate(missing, 1)
+        )
+        pytest.fail(
+            f"relations.yaml 中有 {len(missing)} 个引用在 data/*.yaml 中未找到：\n{msg}"
         )
 
 

@@ -1,0 +1,74 @@
+# 雷劫体系权威数据（v1.5+）
+# 雷劫按强度分三档，每档与特定境界突破绑定
+
+# 雷劫档位
+grades:
+  - id: san_jiu_tian_jie
+    name: 三九天劫
+    rank: 中阶
+    thunder_count: 9
+    bind_realm: yuanying          # 突破到该境界时承受
+    references:
+      - ../雷劫体系/三九天劫.md
+
+  - id: liu_jiu_tian_jie
+    name: 六九天劫
+    rank: 高阶
+    thunder_count: 18
+    bind_realm: huashen           # 突破到该境界时承受
+    references:
+      - ../雷劫体系/六九天劫.md
+
+  - id: jiu_jiu_tian_jie
+    name: 九九天劫
+    rank: 至高阶
+    thunder_count: 27
+    bind_realm: dujie             # 突破到该境界时承受
+    references:
+      - ../雷劫体系/九九天劫.md
+
+# 特殊：飞升之劫（渡劫→大乘的最后阶段）
+special:
+  - id: jiu_jiu_tian_jie_feisheng
+    name: 九九天劫·飞升之劫
+    rank: 至高阶·特殊
+    thunder_count: 27
+    bind_realm: dacheng
+    note: "渡劫期→大乘的最后三道雷，渡过后须立即飞升仙界"
+    references:
+      - ../雷劫体系/九九天劫.md
+
+# 渡过收益
+benefits:
+  - id: lei_jie_cui_ti
+    name: 雷劫淬体
+    applies_to: [realm.body, realm.shenshi, realm.fali]
+    description: "肉身/神魂/法力三重升华"
+    references:
+      - ../雷劫体系/雷劫淬体.md
+
+# 失败代价
+costs:
+  - id: san_gong_qing
+    name: 轻散功
+    level: 1
+    consequence: "当前境界修为尽失，退回前一境界"
+    rate: 20
+    references:
+      - ../雷劫体系/散功.md
+
+  - id: san_gong_zhong
+    name: 重散功
+    level: 2
+    consequence: "当前境界、道基、根基尽毁，沦为废人"
+    rate: 50
+    references:
+      - ../雷劫体系/散功.md
+
+  - id: san_gong_wan
+    name: 形神俱灭
+    level: 3
+    consequence: "肉身、神魂、法力、元婴一同毁灭"
+    rate: 30
+    references:
+      - ../雷劫体系/散功.md

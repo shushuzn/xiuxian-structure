@@ -310,6 +310,7 @@ def main(argv: list[str] | None = None) -> int:
 
     print("🤖 调 LLM 生成节点...")
     last_node_md = ""
+    validator = NodeValidator(story, world)
     for attempt in range(1, args.max_retries + 1):
         print(f"\n🔄 尝试 {attempt}/{args.max_retries}")
         if attempt == 1:
@@ -336,7 +337,6 @@ def main(argv: list[str] | None = None) -> int:
         print(last_node_md[:500] + ("..." if len(last_node_md) > 500 else ""))
         print("─" * 60)
 
-        validator = NodeValidator(story, world)
         ok, nid = validator.validate(last_node_md)
 
         if ok:

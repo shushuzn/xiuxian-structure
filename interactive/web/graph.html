@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>修仙体系关系图 · xiuxian-structure</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 关系图页面专用样式 */
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .graph-header {
+      padding: 1rem 1.5rem;
+      background: #1e293b;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .graph-header h1 { margin: 0; font-size: 1.25rem; }
+    .graph-stats { font-size: 0.875rem; opacity: 0.8; }
+    .graph-controls {
+      padding: 0.75rem 1.5rem;
+      background: #f1f5f9;
+      border-bottom: 1px solid #cbd5e1;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .graph-controls label { font-size: 0.875rem; font-weight: 600; }
+    .graph-controls select, .graph-controls input {
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+    .legend {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-left: auto;
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+    #graph-canvas { width: 100%; height: calc(100vh - 110px); background: #fff; }
+    .tooltip {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.95);
+      color: #fff;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      pointer-events: none;
+      display: none;
+      z-index: 1000;
+      max-width: 280px;
+    }
+    .tooltip strong { display: block; margin-bottom: 0.25rem; }
+    .loading { text-align: center; padding: 2rem; color: #64748b; }
+  </style>
+</head>
+<body>
+  <div class="graph-header">
+    <h1>🌌 修仙体系关系图（v2.2 E. 数据可视化）</h1>
+    <div class="graph-stats" id="stats">加载中…</div>
+  </div>
+
+  <div class="graph-controls">
+    <label>体系过滤：
+      <select id="systemFilter">
+        <option value="">全部</option>
+      </select>
+    </label>
+    <label>关系类型：
+      <select id="typeFilter">
+        <option value="">全部</option>
+      </select>
+    </label>
+    <label>搜索：
+      <input id="searchBox" type="text" placeholder="节点名/ID…" />
+    </label>
+    <button id="resetBtn">重置视图</button>
+
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div id="graph-canvas">
+    <div class="loading">加载图数据中…</div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <!-- vis-network 来自 CDN（v9.x） -->
+  <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+  <script>
+    // ============= 关系图渲染器（v2.2） =============
+    const GRAPH_DATA_URL = '/graph-data';
+    let network = null;
+    let graphData = null;
+
+    async function init() {
+      try {
+        const resp = await fetch(GRAPH_DATA_URL);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        graphData = await resp.json();
+      } catch (e) {
+        document.getElementById('graph-canvas').innerHTML =
+          `<div class="loading">❌ 加载失败：${e.message}<br>尝试 <a href="${GRAPH_DATA_URL}">直接访问数据</a></div>`;
+        return;
+      }
+
+      // 显示统计
+      const m = graphData.metadata;
+      document.getElementById('stats').textContent =
+        `节点 ${m.total_nodes} · 边 ${m.total_edges}`;
+
+      // 填充体系过滤下拉
+      const sysFilter = document.getElementById('systemFilter');
+      Object.keys(m.system_counts).sort().forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s;
+        opt.textContent = `${s} (${m.system_counts[s]})`;
+        sysFilter.appendChild(opt);
+      });
+
+      // 填充关系类型下拉
+      const typeFilter = document.getElementById('typeFilter');
+      m.relation_types.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        typeFilter.appendChild(opt);
+      });
+
+      // 渲染图例
+      const legend = document.getElementById('legend');
+      legend.innerHTML = '<strong>关系类型:</strong> ' +
+        m.relation_types.map(t =>
+          `<span class="legend-item"><span class="legend-dot" style="background:${m.relation_colors[t]}"></span>${t}</span>`
+        ).join(' ');
+
+      renderGraph();
+      bindEvents();
+    }
+
+    function getVisData() {
+      const sysVal = document.getElementById('systemFilter').value;
+      const typeVal = document.getElementById('typeFilter').value;
+      const searchVal = document.getElementById('searchBox').value.trim().toLowerCase();
+
+      let nodes = graphData.nodes;
+      let edges = graphData.edges;
+
+      if (sysVal) {
+        // 显示与选中体系相关的所有节点
+        nodes = nodes.filter(n => n.system === sysVal);
+        const nodeIds = new Set(nodes.map(n => n.id));
+        edges = edges.filter(e =>
+          (nodeIds.has(e.source) || (e.source || '').split(':')[0] === sysVal) ||
+          (nodeIds.has(e.target) || (e.target || '').split(':')[0] === sysVal)
+        );
+      }
+
+      if (typeVal) {
+        edges = edges.filter(e => e.type === typeVal);
+        const nodeIds = new Set([
+          ...edges.map(e => e.source),
+          ...edges.map(e => e.target)
+        ].filter(Boolean));
+        nodes = nodes.filter(n => nodeIds.has(n.id));
+      }
+
+      if (searchVal) {
+        nodes = nodes.filter(n =>
+          n.id.toLowerCase().includes(searchVal) ||
+          (n.name || '').toLowerCase().includes(searchVal)
+        );
+        const nodeIds = new Set(nodes.map(n => n.id));
+        edges = edges.filter(e => nodeIds.has(e.source) && nodeIds.has(e.target));
+      }
+
+      return {
+        nodes: nodes.map(n => ({
+          id: n.id,
+          label: n.name,
+          color: { background: n.color, border: n.color },
+          title: `${n.system}: ${n.id}`,
+          font: { size: 12 },
+          shape: 'dot',
+          size: 12,
+        })),
+        edges: edges.map(e => ({
+          id: e.id,
+          from: e.source,
+          to: e.target,
+          color: { color: e.color },
+          label: e.type,
+          arrows: 'to',
+          font: { size: 9, color: '#666' },
+          smooth: { type: 'continuous' },
+          title: e.description || e.type,
+        })),
+      };
+    }
+
+    function renderGraph() {
+      const visData = getVisData();
+      const container = document.getElementById('graph-canvas');
+      container.innerHTML = '';
+
+      const data = {
+        nodes: new vis.DataSet(visData.nodes),
+        edges: new vis.DataSet(visData.edges),
+      };
+
+      const options = {
+        physics: {
+          enabled: true,
+          stabilization: { iterations: 200 },
+          barnesHut: { gravitationalConstant: -8000, springLength: 200 },
+        },
+        interaction: { hover: true, tooltipDelay: 100 },
+        nodes: { borderWidth: 1 },
+        edges: { width: 1, hoverWidth: 2 },
+      };
+
+      network = new vis.Network(container, data, options);
+
+      // tooltip
+      const tooltip = document.getElementById('tooltip');
+      network.on('hoverNode', function(params) {
+        const node = data.nodes.get(params.node);
+        tooltip.innerHTML = `<strong>${node.id}</strong>${node.title || ''}`;
+        tooltip.style.display = 'block';
+      });
+      network.on('blurNode', function() {
+        tooltip.style.display = 'none';
+      });
+      container.addEventListener('mousemove', function(e) {
+        tooltip.style.left = (e.pageX + 12) + 'px';
+        tooltip.style.top = (e.pageY + 12) + 'px';
+      });
+    }
+
+    function bindEvents() {
+      document.getElementById('systemFilter').addEventListener('change', renderGraph);
+      document.getElementById('typeFilter').addEventListener('change', renderGraph);
+      document.getElementById('searchBox').addEventListener('input',
+        debounce(renderGraph, 300));
+      document.getElementById('resetBtn').addEventListener('click', function() {
+        document.getElementById('systemFilter').value = '';
+        document.getElementById('typeFilter').value = '';
+        document.getElementById('searchBox').value = '';
+        if (network) network.fit();
+      });
+    }
+
+    function debounce(fn, ms) {
+      let t;
+      return function(...args) {
+        clearTimeout(t);
+        t = setTimeout(() => fn(...args), ms);
+      };
+    }
+
+    init();
+  </script>
+</body>
+</html>

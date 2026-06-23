@@ -1,146 +1,317 @@
-# 丹药体系权威数据
-
 elixirs:
-  # ── 突破类（最重要） ──
-  - id: zhuji_dan
-    name: 筑基丹
-    tier: ling_pin
-    used_in_realm: lianqi
-    purpose: tuopo
-    description: "辅助炼气期突破筑基，是低阶修士的关键丹药"
-    rarity: "稀有（主药难得）"
-    recipe_difficulty: high
-    references:
-      - ../丹药体系/丹药.md
-
-  - id: jiedan_dan
-    name: 结丹丹
-    tier: bao_pin
-    used_in_realm: zhuji
-    purpose: tuopo
-    description: "辅助筑基期突破结丹"
-    rarity: "稀有"
-    recipe_difficulty: very_high
-    references:
-      - ../丹药体系/丹药.md
-
-  - id: peiyu_dan
-    name: 培婴丹
-    tier: xian_pin
-    used_in_realm: jiedan
-    purpose: tuopo
-    description: "辅助结丹期突破元婴"
-    rarity: "极稀有"
-    recipe_difficulty: extreme
-    references:
-      - ../丹药体系/丹药.md
-
-  # ── 增益类 ──
-  - id: huang_long_dan
-    name: 黄龙丹
-    tier: ling_pin
-    used_in_realm: zhuji
-    purpose: zengyi
-    description: "提升修为，加速修炼"
-    rarity: "常见"
-    recipe_difficulty: medium
-    references:
-      - ../丹药体系/丹药.md
-
-  # ── 恢复类 ──
-  - id: xiao_huan_dan
-    name: 小还丹
-    tier: fan_pin
-    used_in_realm: lianqi
-    purpose: huifu
-    description: "恢复法力，治疗轻伤"
-    rarity: "常见"
-    recipe_difficulty: low
-    references:
-      - ../丹药体系/丹药.md
-
-  # ── 辟谷类 ──
-  - id: pigu_dan
-    name: 辟谷丹
-    tier: fan_pin
-    used_in_realm: lianqi
-    purpose: pigu
-    description: "替代进食，维持生机"
-    rarity: "常见"
-    recipe_difficulty: low
-    references:
-      - ../丹药体系/丹药.md
-
-  # ── 抗心魔类（v1.5 新增） ──
-  - id: qing_xin_dan
-    name: 清心丹
-    tier: ling_pin
-    used_in_realm: zhuji
-    purpose: kangxinmo
-    description: "抵御贪嗔痴类心魔，压制心魔触发"
-    rarity: "稀有"
-    recipe_difficulty: high
-    references:
-      - ../丹药体系/清心丹.md
-
-  - id: qing_xin_dan_advanced
-    name: 清心丹（宝品）
-    tier: bao_pin
-    used_in_realm: jiedan
-    purpose: kangxinmo
-    description: "高级版清心丹，可抵御执念魔"
-    rarity: "极稀有"
-    recipe_difficulty: very_high
-    references:
-      - ../丹药体系/清心丹.md
-
-  # ── 神魂稳固类（v1.5 新增） ──
-  - id: ning_shen_dan
-    name: 凝神丹
-    tier: ling_pin
-    used_in_realm: zhuji
-    purpose: kangxinmo
-    description: "稳固神魂，抵御痴魔、执念魔"
-    rarity: "稀有"
-    recipe_difficulty: high
-    references:
-      - ../丹药体系/凝神丹.md
-
-  - id: ning_shen_dan_advanced
-    name: 凝神丹（宝品）
-    tier: bao_pin
-    used_in_realm: jiedan
-    purpose: kangxinmo
-    description: "高级版凝神丹，元婴凝结更稳固"
-    rarity: "极稀有"
-    recipe_difficulty: very_high
-    references:
-      - ../丹药体系/凝神丹.md
-
-# 丹药品级
-tiers:
-  - id: fan_pin
-    name: 凡品
-    realm_min: lianqi
-  - id: ling_pin
-    name: 灵品
-    realm_min: zhuji
-  - id: bao_pin
-    name: 宝品
-    realm_min: jiedan
-  - id: xian_pin
-    name: 仙品
-    realm_min: yuanying
-
-# 丹药用途
+- description: 辅助炼气期突破筑基，是低阶修士的关键丹药
+  id: zhuji_dan
+  name: 筑基丹
+  purpose: tuopo
+  rarity: 稀有（主药难得）
+  recipe_difficulty: high
+  references:
+  - ../丹药体系/丹药.md
+  tier: ling_pin
+  used_in_realm: lianqi
+- description: 辅助筑基期突破结丹
+  id: jiedan_dan
+  name: 结丹丹
+  purpose: tuopo
+  rarity: 稀有
+  recipe_difficulty: very_high
+  references:
+  - ../丹药体系/丹药.md
+  tier: bao_pin
+  used_in_realm: zhuji
+- description: 辅助结丹期突破元婴
+  id: peiyu_dan
+  name: 培婴丹
+  purpose: tuopo
+  rarity: 极稀有
+  recipe_difficulty: extreme
+  references:
+  - ../丹药体系/丹药.md
+  tier: xian_pin
+  used_in_realm: jiedan
+- description: 提升修为，加速修炼
+  id: huang_long_dan
+  name: 黄龙丹
+  purpose: zengyi
+  rarity: 常见
+  recipe_difficulty: medium
+  references:
+  - ../丹药体系/丹药.md
+  tier: ling_pin
+  used_in_realm: zhuji
+- description: 恢复法力，治疗轻伤
+  id: xiao_huan_dan
+  name: 小还丹
+  purpose: huifu
+  rarity: 常见
+  recipe_difficulty: low
+  references:
+  - ../丹药体系/丹药.md
+  tier: fan_pin
+  used_in_realm: lianqi
+- description: 替代进食，维持生机
+  id: pigu_dan
+  name: 辟谷丹
+  purpose: pigu
+  rarity: 常见
+  recipe_difficulty: low
+  references:
+  - ../丹药体系/丹药.md
+  tier: fan_pin
+  used_in_realm: lianqi
+- description: 抵御贪嗔痴类心魔，压制心魔触发
+  id: qing_xin_dan
+  name: 清心丹
+  purpose: kangxinmo
+  rarity: 稀有
+  recipe_difficulty: high
+  references:
+  - ../丹药体系/清心丹.md
+  tier: ling_pin
+  used_in_realm: zhuji
+- description: 高级版清心丹，可抵御执念魔
+  id: qing_xin_dan_advanced
+  name: 清心丹（宝品）
+  purpose: kangxinmo
+  rarity: 极稀有
+  recipe_difficulty: very_high
+  references:
+  - ../丹药体系/清心丹.md
+  tier: bao_pin
+  used_in_realm: jiedan
+- description: 稳固神魂，抵御痴魔、执念魔
+  id: ning_shen_dan
+  name: 凝神丹
+  purpose: kangxinmo
+  rarity: 稀有
+  recipe_difficulty: high
+  references:
+  - ../丹药体系/凝神丹.md
+  tier: ling_pin
+  used_in_realm: zhuji
+- description: 高级版凝神丹，元婴凝结更稳固
+  id: ning_shen_dan_advanced
+  name: 凝神丹（宝品）
+  purpose: kangxinmo
+  rarity: 极稀有
+  recipe_difficulty: very_high
+  references:
+  - ../丹药体系/凝神丹.md
+  tier: bao_pin
+  used_in_realm: jiedan
+- description: 恢复仙元，仙界基础修炼丹药
+  id: xian_yuan_dan
+  name: 仙元丹
+  purpose: 修炼
+  rarity: 普通
+  recipe_difficulty: 中级
+  references:
+  - 飞升体系/仙界.md
+  tier: xian
+  used_in_realm: 仙界
+- description: 淬炼仙体，助散仙突破至仙徒
+  id: cui_xian_dan
+  name: 淬仙丹
+  purpose: 突破
+  rarity: 稀有
+  recipe_difficulty: 高级
+  references: []
+  tier: xian
+  used_in_realm: 仙界
+- description: 九转炼制，可起死回生
+  id: jiu_zhuan_huan_hun_dan
+  name: 九转还魂丹
+  purpose: 治疗
+  rarity: 传说
+  recipe_difficulty: 宗师
+  references: []
+  tier: xian
+  used_in_realm: 仙界
+- description: 仙帝级突破丹药，蕴含天道法则
+  id: tian_di_xian_dan
+  name: 天帝仙丹
+  purpose: 突破
+  rarity: 传说
+  recipe_difficulty: 宗师
+  references:
+  - 飞升体系/仙职.md
+  tier: xian
+  used_in_realm: 仙界
+- description: 稳固神格，提升神气亲和
+  id: shen_ge_dan
+  name: 神格丹
+  purpose: 修炼
+  rarity: 稀有
+  recipe_difficulty: 神级
+  references:
+  - 神界体系/神格.md
+  tier: shen
+  used_in_realm: 神界
+- description: 补充神力，神界基础修炼丹药
+  id: shen_li_dan
+  name: 神力丹
+  purpose: 修炼
+  rarity: 普通
+  recipe_difficulty: 神级
+  references:
+  - 神界体系/神气.md
+  tier: shen
+  used_in_realm: 神界
+- description: 蕴含轮回法则，助神君突破至神王
+  id: lun_hui_shen_dan
+  name: 轮回神丹
+  purpose: 突破
+  rarity: 传说
+  recipe_difficulty: 神级
+  references:
+  - 神界体系/神职.md
+  tier: shen
+  used_in_realm: 神界
+- description: 恢复魔元，魔界基础修炼丹药
+  id: mo_yuan_dan
+  name: 魔元丹
+  purpose: 修炼
+  rarity: 普通
+  recipe_difficulty: 中级
+  references:
+  - 魔界体系/魔气.md
+  tier: mo
+  used_in_realm: 魔界
+- description: 以精血炼制，大幅提升魔修修为
+  id: xue_sha_dan
+  name: 血煞丹
+  purpose: 突破
+  rarity: 稀有
+  recipe_difficulty: 高级
+  references:
+  - 魔界体系/魔修.md
+  tier: mo
+  used_in_realm: 魔界
+- description: 吞噬魔魂强化己身，副作用极大
+  id: mo_hun_dan
+  name: 魔魂丹
+  purpose: 修炼
+  rarity: 稀有
+  recipe_difficulty: 高级
+  references: []
+  tier: mo
+  used_in_realm: 魔界
+- description: 恢复冥气，冥界基础修炼丹药
+  id: ming_yuan_dan
+  name: 冥元丹
+  purpose: 修炼
+  rarity: 普通
+  recipe_difficulty: 中级
+  references:
+  - 冥界体系/冥气.md
+  tier: ming
+  used_in_realm: 冥界
+- description: 以魂晶炼制，稳固魂魄助鬼修突破
+  id: hun_jing_dan
+  name: 魂晶丹
+  purpose: 突破
+  rarity: 稀有
+  recipe_difficulty: 高级
+  references:
+  - 冥界体系/冥修.md
+  tier: ming
+  used_in_realm: 冥界
+- description: 服用后忘却前世记忆，入轮回投胎
+  id: wang_you_dan
+  name: 忘忧丹
+  purpose: 辅助
+  rarity: 普通
+  recipe_difficulty: 中级
+  references:
+  - 冥界体系/冥界轮回.md
+  tier: ming
+  used_in_realm: 冥界
+- description: 大幅提升突破瓶颈概率
+  id: po_jing_dan
+  name: 破境丹
+  purpose: 突破
+  rarity: 稀有
+  recipe_difficulty: 高级
+  references: []
+  tier: fan
+  used_in_realm: 通用
+- description: 短暂进入悟道状态，感悟法则
+  id: wu_dao_dan
+  name: 悟道丹
+  purpose: 修炼
+  rarity: 传说
+  recipe_difficulty: 宗师
+  references: []
+  tier: xian
+  used_in_realm: 通用
+- description: 辅助修士与天道法则合一
+  id: he_dao_dan
+  name: 合道丹
+  purpose: 突破
+  rarity: 传说
+  recipe_difficulty: 宗师
+  references: []
+  tier: xian
+  used_in_realm: 通用
+- description: 渡劫时服用可化解厄运
+  id: du_e_dan
+  name: 渡厄丹
+  purpose: 辅助
+  rarity: 稀有
+  recipe_difficulty: 高级
+  references:
+  - 雷劫体系/雷劫.md
+  tier: xian
+  used_in_realm: 通用
+- description: 保护神魂不受心魔侵蚀
+  id: hu_shen_dan
+  name: 护神丹
+  purpose: 治疗
+  rarity: 普通
+  recipe_difficulty: 中级
+  references:
+  - 心魔体系/心魔.md
+  tier: fan
+  used_in_realm: 通用
+- description: 快速恢复真元与伤势
+  id: gui_yuan_dan
+  name: 归元丹
+  purpose: 治疗
+  rarity: 普通
+  recipe_difficulty: 初级
+  references: []
+  tier: fan
+  used_in_realm: 通用
+- description: 汇聚天地灵气炼制的全能修炼丹药
+  id: tian_yuan_dan
+  name: 天元丹
+  purpose: 修炼
+  rarity: 稀有
+  recipe_difficulty: 高级
+  references: []
+  tier: xian
+  used_in_realm: 通用
 purposes:
-  - id: tuopo
-    name: 突破类
-  - id: zengyi
-    name: 增益类
-  - id: huifu
-    name: 恢复类
-  - id: pigu
-    name: 辟谷类
-  - id: kangxinmo
-    name: 抗心魔类
+- id: tuopo
+  name: 突破类
+- id: zengyi
+  name: 增益类
+- id: huifu
+  name: 恢复类
+- id: pigu
+  name: 辟谷类
+- id: kangxinmo
+  name: 抗心魔类
+tiers:
+- id: fan_pin
+  name: 凡品
+  realm_min: lianqi
+- id: ling_pin
+  name: 灵品
+  realm_min: zhuji
+- id: bao_pin
+  name: 宝品
+  realm_min: jiedan
+- id: xian_pin
+  name: 仙品
+  realm_min: yuanying

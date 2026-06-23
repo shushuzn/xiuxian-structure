@@ -39,6 +39,22 @@ quote-style = "double"
 indent-style = "space"
 line-ending = "lf"
 
+[tool.coverage.run]
+source = ["scripts"]
+omit = ["scripts/batch_generate.py", "scripts/eval_llm.py", "scripts/export.py", "scripts/generate_node.py", "scripts/web_app.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 70
+skip_empty = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.",
+    "raise NotImplementedError",
+    "raise AssertionError",
+    "return NotImplemented",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-v --tb=short"

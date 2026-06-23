@@ -1,89 +1,177 @@
-# talismans.yaml — 符箓体系权威数据
-
-# 符箓品级
-grades:
-  - id: fan_fu
-    name: 凡符
-    spell_realm: lianqi
-    maker_realm: lianqi
-  - id: ling_fu
-    name: 灵符
-    spell_realm: zhuji
-    maker_realm: zhuji
-  - id: bao_fu
-    name: 宝符
-    spell_realm: jiedan
-    maker_realm: jiedan
-  - id: xian_fu
-    name: 仙符
-    spell_realm: yuanying_or_above
-    maker_realm: yuanying_or_above
-
-# 符箓类别
 categories:
-  - id: gong_ji
-    name: 攻击符
-    description: 激发攻击法术
-  - id: fang_yu
-    name: 防御符
-    description: 激发护罩
-  - id: fu_zhu
-    name: 辅助符
-    description: 加速、增幅、隐匿
-  - id: dun
-    name: 遁符
-    description: 瞬间移动、逃命
-  - id: feng_yin
-    name: 封印符
-    description: 封印妖兽或物品
-  - id: chuan_xun
-    name: 传讯符
-    description: 远距离传信
-
-# 制作方式
-production:
-  - id: shou_gong
-    name: 手工绘制
-    description: 制符师亲手绘制，品质可控
-  - id: pi_liang
-    name: 批量印制
-    description: 用模板大批量制作
-  - id: yi_ci
-    name: 一次成型
-    description: 以法力直接凝聚，难复刻
-
-# 构成要素
+- description: 激发攻击法术
+  id: gong_ji
+  name: 攻击符
+- description: 激发护罩
+  id: fang_yu
+  name: 防御符
+- description: 加速、增幅、隐匿
+  id: fu_zhu
+  name: 辅助符
+- description: 瞬间移动、逃命
+  id: dun
+  name: 遁符
+- description: 封印妖兽或物品
+  id: feng_yin
+  name: 封印符
+- description: 远距离传信
+  id: chuan_xun
+  name: 传讯符
 components:
-  - id: fu_zhi
-    name: 符纸
-    description: 载体，普通黄纸到灵纸
-  - id: fu_mo
-    name: 符墨
-    description: 特殊墨水，含灵药成分
-  - id: fu_bi
-    name: 符笔
-    description: 绘制工具
-  - id: fu_wen
-    name: 符文
-    description: 核心，决定功效
-
-# 示例符箓（待扩展）
+- description: 载体，普通黄纸到灵纸
+  id: fu_zhi
+  name: 符纸
+- description: 特殊墨水，含灵药成分
+  id: fu_mo
+  name: 符墨
+- description: 绘制工具
+  id: fu_bi
+  name: 符笔
+- description: 核心，决定功效
+  id: fu_wen
+  name: 符文
 examples:
-  - id: huo_qiu_fu
-    name: 火球符
-    grade: fan_fu
-    category: gong_ji
-    note: "最基础的炼气期攻击符"
-  - id: jin_gang_fu
-    name: 金刚符
-    grade: ling_fu
-    category: fang_yu
-    note: "筑基期防御符示例"
-  - id: shan_dian_fu
-    name: 闪电符
-    grade: bao_fu
-    category: gong_ji
-    note: "结丹期雷属性攻击符"
-
+- category: gong_ji
+  grade: fan_fu
+  id: huo_qiu_fu
+  name: 火球符
+  note: 最基础的炼气期攻击符
+- category: fang_yu
+  grade: ling_fu
+  id: jin_gang_fu
+  name: 金刚符
+  note: 筑基期防御符示例
+- category: gong_ji
+  grade: bao_fu
+  id: shan_dian_fu
+  name: 闪电符
+  note: 结丹期雷属性攻击符
+- category: gong_ji
+  grade: fan_fu
+  id: bing_jian_fu
+  name: 冰箭符
+  note: 激发冰属性箭矢
+- category: gong_ji
+  grade: fan_fu
+  id: feng_ren_fu
+  name: 风刃符
+  note: 风属性范围攻击
+- category: gong_ji
+  grade: fan_fu
+  id: tuo_ta_fu
+  name: 落石符
+  note: 召唤巨石砸击
+- category: gong_ji
+  grade: ling_fu
+  id: zi_dian_fu
+  name: 紫电符
+  note: 紫色雷电，威力倍增
+- category: fu_zhu
+  grade: ling_fu
+  id: ding_shen_fu
+  name: 定神符
+  note: 稳固神魂，抵御幻术
+- category: fu_zhu
+  grade: fan_fu
+  id: qing_feng_fu
+  name: 轻身符
+  note: 减轻重量提升速度
+- category: fu_zhu
+  grade: fan_fu
+  id: bi_shui_fu
+  name: 避水符
+  note: 水中自由行动
+- category: feng_yin
+  grade: ling_fu
+  id: qi_suo_fu
+  name: 气锁符
+  note: 封锁灵气波动
+- category: gong_ji
+  grade: xian_fu
+  id: xian_mo_fu
+  name: 仙魔符
+  note: 仙魔之力凝聚，惊天一击
+- category: dun
+  grade: ling_fu
+  id: ti_qian_fu
+  name: 替身符
+  note: 危急时刻代替本体承受攻击
+- category: feng_yin
+  grade: ling_fu
+  id: dong_zhe_fu
+  name: 冻蛰符
+  note: 冰冻封印目标
+- category: dun
+  grade: fan_fu
+  id: teng_yun_fu
+  name: 腾云符
+  note: 召唤祥云短距离飞行
+- category: dun
+  grade: ling_fu
+  id: suo_di_fu
+  name: 缩地符
+  note: 缩地成寸，千里须臾
+- category: fu_zhu
+  grade: ling_fu
+  id: huan_xing_fu
+  name: 幻形符
+  note: 幻化成他人面貌身形
+- category: fu_zhu
+  grade: bao_fu
+  id: jie_zhou_fu
+  name: 解咒符
+  note: 解除诅咒封印之力
+- category: fu_zhu
+  grade: bao_fu
+  id: du_jie_fu
+  name: 渡劫符
+  note: 渡劫时使用可削弱天劫威力
+- category: gong_ji
+  grade: xian_fu
+  id: wan_fu_fu
+  name: 万符符
+  note: 同时激发万道符箓之力
+- category: gong_ji
+  grade: bao_fu
+  id: yan_tian_fu
+  name: 炎天符
+  note: 引炎天火海
+- category: fu_zhu
+  grade: bao_fu
+  id: yao_li_fu
+  name: 妖力符
+  note: 暂时获得妖兽之力
+- category: fang_yu
+  grade: lin_shi
+  id: jiu_zhu_fu
+  name: 救主符
+  note: 危急自动触发防御
+grades:
+- id: fan_fu
+  maker_realm: lianqi
+  name: 凡符
+  spell_realm: lianqi
+- id: ling_fu
+  maker_realm: zhuji
+  name: 灵符
+  spell_realm: zhuji
+- id: bao_fu
+  maker_realm: jiedan
+  name: 宝符
+  spell_realm: jiedan
+- id: xian_fu
+  maker_realm: yuanying_or_above
+  name: 仙符
+  spell_realm: yuanying_or_above
+production:
+- description: 制符师亲手绘制，品质可控
+  id: shou_gong
+  name: 手工绘制
+- description: 用模板大批量制作
+  id: pi_liang
+  name: 批量印制
+- description: 以法力直接凝聚，难复刻
+  id: yi_ci
+  name: 一次成型
 references:
-  - ../符箓体系/符箓.md
+- ../符箓体系/符箓.md

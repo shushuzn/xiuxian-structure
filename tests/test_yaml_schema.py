@@ -68,6 +68,7 @@ def test_relations_yaml_references_valid_ids():
         "aether": "aether",
         "artifacts": "artifact",
         "contracts": "contract",
+        "divine_powers": "divine_power",
         "divine_sense": "divine_sense",
         "elixirs": "elixir",
         "factions": "org",

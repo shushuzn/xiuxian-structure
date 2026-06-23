@@ -1,67 +1,197 @@
-# 功法体系权威数据
-
-# 功法品级
-tiers:
-  - id: huang
-    name: 黄级
-    max_realm: zhuji
-    description: "基础功法，炼气期主流"
-  - id: xuan
-    name: 玄级
-    max_realm: jiedan
-    description: "中级功法，可修炼至结丹期"
-  - id: di
-    name: 地级
-    max_realm: huashen
-    description: "高级功法，可修炼至元婴期甚至化神期"
-  - id: tian
-    name: 天级
-    max_realm: dacheng
-    description: "顶级功法，直指大道"
-
-# 修炼方式
-styles:
-  - id: jinggong
-    name: 静功
-    description: "打坐吐纳，引灵气入体"
-  - id: donggong
-    name: 动功
-    description: "配合动作运转法力"
-  - id: kuxiu
-    name: 苦修
-    description: "在极端环境下锤炼肉身与法力"
-
-# 传承方式
 inheritances:
-  - id: shitu
-    name: 师徒传承
-    description: "口传心授，最为正统"
-  - id: yujian
-    name: 玉简传承
-    description: "神识读取功法信息"
-  - id: zangjingge
-    name: 宗门藏经阁
-    description: "按贡献开放不同层级功法"
-  - id: jiyuan
-    name: 机缘获得
-    description: "秘境、古修洞府所得"
-
-# 示例功法（待扩展）
-techniques:
-  - id: chang_sheng_jue
-    name: 长生诀
-    tier: tian
-    attribute: wu
-    max_realm: dacheng
-    style: jinggong
-    note: "天级无属性功法示例"
-  - id: jin_jian_jue
-    name: 金剑诀
-    tier: di
-    attribute: jin
-    max_realm: huashen
-    style: donggong
-    note: "地级金属性功法示例"
-
+- description: 口传心授，最为正统
+  id: shitu
+  name: 师徒传承
+- description: 神识读取功法信息
+  id: yujian
+  name: 玉简传承
+- description: 按贡献开放不同层级功法
+  id: zangjingge
+  name: 宗门藏经阁
+- description: 秘境、古修洞府所得
+  id: jiyuan
+  name: 机缘获得
 references:
-  - ../功法体系/功法.md
+- ../功法体系/功法.md
+styles:
+- description: 打坐吐纳，引灵气入体
+  id: jinggong
+  name: 静功
+- description: 配合动作运转法力
+  id: donggong
+  name: 动功
+- description: 在极端环境下锤炼肉身与法力
+  id: kuxiu
+  name: 苦修
+techniques:
+- attribute: wu
+  id: chang_sheng_jue
+  max_realm: dacheng
+  name: 长生诀
+  note: 天级无属性功法示例
+  style: jinggong
+  tier: tian
+- attribute: jin
+  id: jin_jian_jue
+  max_realm: huashen
+  name: 金剑诀
+  note: 地级金属性功法示例
+  style: donggong
+  tier: di
+- attribute: wu
+  id: tai_yi_jue
+  max_realm: dacheng
+  name: 太一诀
+  note: 太一始祖传承，万法之源
+  style: jinggong
+  tier: tian
+- attribute: wu
+  id: wan_xiang_xin_jing
+  max_realm: dacheng
+  name: 万象心经
+  note: 观万象悟道，包罗万象
+  style: jinggong
+  tier: tian
+- attribute: wu
+  id: hun_yuan_gong
+  max_realm: dacheng
+  name: 混元功
+  note: 混元一体，返璞归真
+  style: jinggong
+  tier: tian
+- attribute: wu
+  id: tian_di_jue
+  max_realm: huashen
+  name: 天地诀
+  note: 引天地之力淬体
+  style: jinggong
+  tier: di
+- attribute: wu
+  id: can_tian_gong
+  max_realm: huashen
+  name: 参天功
+  note: 参悟天道
+  style: jinggong
+  tier: di
+- attribute: huo
+  id: lie_yan_gong
+  max_realm: jiedan
+  name: 烈焰功
+  note: 火属性修炼功法
+  style: donggong
+  tier: xuan
+- attribute: shui
+  id: cang_lang_jue
+  max_realm: jiedan
+  name: 沧浪诀
+  note: 水属性修炼功法
+  style: donggong
+  tier: xuan
+- attribute: mu
+  id: qing_mu_gong
+  max_realm: jiedan
+  name: 青木功
+  note: 木属性修炼功法
+  style: jinggong
+  tier: xuan
+- attribute: jin
+  id: jin_gang_gong
+  max_realm: jiedan
+  name: 金刚功
+  note: 金属性炼体功法
+  style: kuxiu
+  tier: xuan
+- attribute: tu
+  id: hou_tu_jue
+  max_realm: jiedan
+  name: 厚土诀
+  note: 土属性防御功法
+  style: jinggong
+  tier: xuan
+- attribute: jin
+  id: jun_tian_jue
+  max_realm: zhuji
+  name: 钧天诀
+  note: 金属性攻击功法
+  style: donggong
+  tier: huang
+- attribute: mo
+  id: mo_shen_jue
+  max_realm: dacheng
+  name: 魔神诀
+  note: 魔道至高功法，以血炼体
+  style: kuxiu
+  tier: tian
+- attribute: yin
+  id: you_ming_jue
+  max_realm: huashen
+  name: 幽冥诀
+  note: 冥界功法，引幽冥之力
+  style: jinggong
+  tier: di
+- attribute: xian
+  id: xian_jue
+  max_realm: dacheng
+  name: 仙诀
+  note: 仙界至高修炼法门
+  style: jinggong
+  tier: tian
+- attribute: wu
+  id: shen_jue
+  max_realm: dacheng
+  name: 神诀
+  note: 神界传承功法
+  style: jinggong
+  tier: tian
+- attribute: wu
+  id: hao_ran_gong
+  max_realm: huashen
+  name: 浩然功
+  note: 以浩然正气修炼
+  style: jinggong
+  tier: di
+- attribute: jin
+  id: jian_xiu_jue
+  max_realm: huashen
+  name: 剑修诀
+  note: 以剑入道
+  style: donggong
+  tier: di
+- attribute: wu
+  id: men_ren_gong
+  max_realm: zhuji
+  name: 门人功
+  note: 散修入门基础功法
+  style: jinggong
+  tier: huang
+- attribute: wu
+  id: wei_wo_du_zun_gong
+  max_realm: dacheng
+  name: 唯我独尊功
+  note: 霸道至极，唯我独尊
+  style: kuxiu
+  tier: tian
+- attribute: lei
+  id: lei_dian_jue
+  max_realm: huashen
+  name: 雷电诀
+  note: 引雷电之力淬体攻敌
+  style: donggong
+  tier: di
+tiers:
+- description: 基础功法，炼气期主流
+  id: huang
+  max_realm: zhuji
+  name: 黄级
+- description: 中级功法，可修炼至结丹期
+  id: xuan
+  max_realm: jiedan
+  name: 玄级
+- description: 高级功法，可修炼至元婴期甚至化神期
+  id: di
+  max_realm: huashen
+  name: 地级
+- description: 顶级功法，直指大道
+  id: tian
+  max_realm: dacheng
+  name: 天级

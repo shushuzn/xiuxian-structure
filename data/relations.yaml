@@ -608,27 +608,65 @@ relations:
     description: "青莲法相可承载烈火域"
 
   # ── v2.6: 战斗 ↔ 体系 ──
-  - from: zhen_fa_zhan:jiu_xiao_lei_zhen
-    to: examples:jiu_xiao_lei_zhen
+  - from: examples:jiu_xiao_lei_zhen
+    to: combat:jiu_xiao_lei_zhen
     type: parallels
     description: "九霄雷阵在战斗与阵法中通用"
-  - from: zhen_fa_zhan:ba_gua_mi_zong
-    to: examples:mi_tian_huan_zhen
+
+  # ── 体系深化 v2: 阵法 ← → 功法 / 符箓 / 神通 ──
+  - from: formation:tian_gang_zhen
+    to: technique:lei_dian_jue
+    type: enables
+    description: "天罡阵引雷，配合雷电诀修炼者威力倍增"
+  - from: formation:ju_ling_zhen
+    to: technique:huang
+    type: enhances
+    description: "聚灵阵提高黄级功法修炼速度"
+  - from: formation:du_jie_zhen
+    to: technique:tian
+    type: complements
+    description: "渡劫阵辅助天级功法修士渡劫"
+  - from: technique:jin_gang_gong
+    to: talisman:jin_gang_fu
+    type: enables
+    description: "金刚功修士使用金刚符防御翻倍"
+  - from: technique:lei_dian_jue
+    to: talisman:zi_dian_fu
+    type: enables
+    description: "雷电诀修士激发紫电符威力更强"
+  - from: technique:you_ming_jue
+    to: talisman:jie_zhou_fu
+    type: complements
+    description: "幽冥诀配合解咒符破除诅咒禁制"
+  - from: technique:mo_shen_jue
+    to: formation:mo_huang_zhen
+    type: enables
+    description: "魔神诀修炼者可布魔皇阵"
+  - from: divine_power:fa_tian_xiang_di
+    to: technique:wei_wo_du_zun_gong
+    type: correlates
+    description: "唯我独尊功大成者多领悟法天象地"
+  - from: divine_power:ling_yu_zhan_kai
+    to: technique:xian_jue
+    type: enables
+    description: "仙诀修炼者可领悟领域展开"
+  - from: divine_power:lun_hui_zhi_yan
+    to: technique:you_ming_jue
+    type: enables
+    description: "幽冥诀大成者可开轮回之眼"
+  - from: divine_power:xian_di_wei_ya
+    to: technique:xian_jue
+    type: requires
+    description: "仙诀圆满方可施展仙帝威压"
+  - from: technique:tai_yi_jue
+    to: divine_power:shi_jian_jing_zhi
+    type: enables
+    description: "太一诀至高境界可触及时间法则"
+  - from: talisman:wan_fu_fu
+    to: formation:zhou_tian_xing_dou_zhen
     type: parallels
-    description: "八卦迷踪与迷天幻阵原理相通"
-  - from: zhen_fa_zhan:wu_xing_sheng_mie
-    to: categories:kun_di
+    description: "万符符如同符箓版的周天星斗阵"
+  - from: talisman:du_jie_fu
+    to: formation:du_jie_zhen
     type: parallels
-    description: "五行生灭阵为困敌类阵法"
-  - from: zhen_fa_zhan:zhou_tian_xing_dou
-    to: categories:gong_ji
-    type: parallels
-    description: "周天星斗为攻击类阵法"
-  - from: zhen_fa_zhan:tai_xu_huan_jing
-    to: categories:huan_shu
-    type: parallels
-    description: "太虚幻境为幻术类阵法"
-  - from: zhen_fa_zhan:hun_dun_si_xiang
-    to: categories:fang_yu
-    type: parallels
-    description: "混沌四象为防御类阵法"
+    description: "渡劫符与渡劫阵异曲同工"

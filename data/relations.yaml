@@ -1230,3 +1230,113 @@ relations:
     to: heart_demon:sheng_si_mo
     type: blocks
     description: "万年太岁延寿以避生死魔"
+
+  # ── v2.12 宗门体系（25 体系） ──
+
+  # 宗门 ↔ 境界
+  - from: zong_men:luo_yun_zong
+    to: realm:huashen
+    type: parallels
+    description: "落云宗最高化神期坐镇"
+  - from: zong_men:tai_yi_gong
+    to: realm:huashen
+    type: parallels
+    description: "太一宫化神期坐镇"
+  - from: zong_men:han_yan_zong
+    to: realm:yuanying
+    type: parallels
+    description: "寒焰宗元婴期坐镇"
+  - from: zong_men:ji_yin_si
+    to: realm:yuanying
+    type: parallels
+    description: "极阴寺元婴期坐镇"
+
+  # 宗门 ↔ 灵脉
+  - from: zong_men:luo_yun_zong
+    to: aether:chao_ji_lingmai
+    type: enables
+    description: "落云宗占超级灵脉"
+  - from: zong_men:han_yan_zong
+    to: aether:da_xing_lingmai
+    type: enables
+    description: "寒焰宗占大型灵脉"
+  - from: zong_men:tian_xia_shan
+    to: aether:zhong_xing_lingmai
+    type: enables
+    description: "天霞山占中型灵脉"
+  - from: zong_men:luo_yan_zong
+    to: aether:zhong_xing_lingmai
+    type: enables
+    description: "落雁宗占中型灵脉"
+
+  # 宗门 ↔ 功法
+  - from: zong_men:luo_yun_zong
+    to: technique:tian
+    type: enables
+    description: "落云宗传天级功法"
+  - from: zong_men:qing_lian_jian_zong
+    to: technique:jian_xiu_jue
+    type: enables
+    description: "青莲剑宗传剑修诀"
+  - from: zong_men:han_yan_zong
+    to: technique:cang_lang_jue
+    type: enables
+    description: "寒焰宗传沧浪诀（冰水）"
+
+  # 宗门 ↔ 飞升
+  - from: zong_men:luo_yun_zong
+    to: ascension:legendary
+    type: enables
+    description: "落云宗出传说飞升者"
+  - from: zong_men:tai_yi_gong
+    to: ascension:emperor
+    type: enables
+    description: "太一宫出仙帝飞升者"
+  - from: zong_men:mo_jiao
+    to: ascension:evil
+    type: enables
+    description: "魔教出邪修飞升者"
+  - from: zong_men:ming_jiao
+    to: ascension:ghost
+    type: enables
+    description: "冥教出鬼修飞升者"
+
+  # 宗门 ↔ 心魔
+  - from: zong_men:mo_jiao
+    to: heart_demon:e_mo
+    type: triggers
+    description: "魔教弟子易生恶魔"
+  - from: zong_men:ji_yin_si
+    to: heart_demon:chi_mo
+    type: parallels
+    description: "极阴寺与痴魔同源"
+
+  # 宗门 ↔ 势力
+  - from: zong_men:luo_yun_zong
+    to: examples:tian_xia_shan
+    type: parallels
+    description: "落云宗与天霞山同源"
+  - from: zong_men:tai_yi_gong
+    to: examples:tai_yi_gong
+    type: parallels
+    description: "太一宫与示例同名"
+  - from: zong_men:mo_jiao
+    to: examples:mo_jiao
+    type: parallels
+    description: "魔教与示例同名"
+
+  # 宗门 ↔ 灵根
+  - from: zong_men:tian_shan_school
+    to: spirit_root:bian_yi_ling_gen
+    type: specializes_in
+    description: "天山派专收变异灵根"
+  - from: zong_men:qing_lian_jian_zong
+    to: spirit_root:jian_gen
+    type: specializes_in
+    description: "青莲剑宗专收剑灵根"
+
+  # 宗门 ↔ 阵法
+  - from: zong_men:luo_yun_zong
+    to: formation:shi_fang_jin_gang_zhen
+    type: enables
+    description: "落云宗布十方金刚阵"

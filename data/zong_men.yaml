@@ -1,0 +1,325 @@
+# zong_men.yaml — 宗门体系权威数据（v2.12 新增体系）
+
+# 宗门等级
+levels:
+  - id: top
+    name: 顶级宗门
+    member_count: "50000+"
+    max_realm: huashen
+    lingmai_required: chao_ji_lingmai
+    examples: [luo_yun_zong, tai_yi_gong]
+  - id: large
+    name: 大型宗门
+    member_count: "5000-50000"
+    max_realm: yuanying
+    lingmai_required: da_xing_lingmai
+    examples: [han_yan_zong, xiao_tian_lao_gong]
+  - id: medium
+    name: 中型宗门
+    member_count: "500-5000"
+    max_realm: jiedan
+    lingmai_required: zhong_xing_lingmai
+    examples: [tian_xia_shan, huo_yan_dong, luo_yan_zong]
+  - id: small
+    name: 小型宗门
+    member_count: "10-500"
+    max_realm: zhuji
+    lingmai_required: xiao_xing_lingmai
+    examples: [li_shi_jia, xuan_men]
+
+# 弟子等级
+disciple_levels:
+  - id: wai_men
+    name: 外门弟子
+    position: 1
+    privileges: 基础灵石
+    required_realm: lianqi
+  - id: nei_men
+    name: 内门弟子
+    position: 2
+    privileges: 中级灵石 + 黄/玄级功法
+    required_realm: zhuji
+  - id: he_xin
+    name: 核心弟子
+    position: 3
+    privileges: 高级灵石 + 地级功法
+    required_realm: jiedan
+  - id: zhen_chuan
+    name: 真传弟子
+    position: 4
+    privileges: 顶级灵石 + 天级功法
+    required_realm: yuanying
+
+# 长老类型
+elder_types:
+  - id: chuan_gong
+    name: 传功长老
+    duty: 传授弟子功法
+  - id: zhi_fa
+    name: 执法长老
+    duty: 执行宗规
+  - id: zi_yuan
+    name: 资源长老
+    duty: 管理灵脉、灵石
+  - id: wai_jiao
+    name: 外交长老
+    duty: 对外联络
+  - id: hu_shan
+    name: 护山长老
+    duty: 守护宗门
+
+# 掌门传承方式
+succession_methods:
+  - id: fu_zi
+    name: 父子传承
+    applicable: 家族式宗门
+    pros: 稳定
+    cons: 可能选错人
+  - id: shi_tu
+    name: 师徒传承
+    applicable: 师徒型宗门
+    pros: 培养成熟
+    cons: 可能绝后
+  - id: tui_ju
+    name: 长老会推举
+    applicable: 大型宗门
+    pros: 民主
+    cons: 可能分裂
+  - id: shi_li
+    name: 实力为王
+    applicable: 魔道宗门
+    pros: 强者为尊
+    cons: 血腥
+  - id: fei_sheng
+    name: 飞升禅让
+    applicable: 飞升型宗门
+    pros: 稳定
+    cons: 需提前规划
+
+# 任务类型
+task_types:
+  - id: xiu_lian
+    name: 修炼任务
+    risk: low
+    reward: 灵石、贡献点
+  - id: cai_ji
+    name: 采集任务
+    risk: mid
+    reward: 贡献点 + 采获分成
+  - id: tan_xian
+    name: 探险任务
+    risk: high
+    reward: 秘境内全部资源
+  - id: zhan_dou
+    name: 战斗任务
+    risk: high
+    reward: 战利品 + 军功
+  - id: shou_hu
+    name: 守护任务
+    risk: mid
+    reward: 固定贡献
+  - id: wai_jiao
+    name: 外交任务
+    risk: low
+    reward: 贡献 + 人脉
+
+# 外交关系
+foreign_relations:
+  - pair: 落云宗 ↔ 太一宫
+    type: friendly
+    note: 正道友好
+  - pair: 落云宗 ↔ 寒焰宗
+    type: competitive
+    note: 资源竞争
+  - pair: 落云宗 ↔ 潮汐宫
+    type: hostile
+    note: 妖修敌对
+  - pair: 太一宫 ↔ 魔教
+    type: hostile
+    note: 正邪对立
+  - pair: 落云宗 ↔ 天星城商会
+    type: economic
+    note: 经济合作
+  - pair: 海上门派 ↔ 潮汐宫
+    type: hostile
+    note: 海妖威胁
+
+# 宗盟
+alliances:
+  - id: zheng_dao_lian_meng
+    name: 正道联盟
+    members: [luo_yun_zong, tai_yi_gong, han_yan_zong]
+    purpose: 对抗魔道
+    founded: 上古
+  - id: san_xiu_lian_meng
+    name: 散修联盟
+    members: [ge_ren_san_xiu]
+    purpose: 互助互利
+    founded: 远古
+  - id: hai_shang_tong_meng
+    name: 海上同盟
+    members: [yan_hai_zong_men]
+    purpose: 抵御海妖
+    founded: 上古
+  - id: zheng_dao_qi_zong
+    name: 正道七宗
+    members: [7_ding_ji_zong_men]
+    purpose: 维持秩序
+    founded: 太古
+  - id: mo_dao_lian_meng
+    name: 魔道联盟
+    members: [mo_jiao, ming_jiao]
+    purpose: 对抗正道
+    founded: 上古
+
+# 著名宗门实例
+examples:
+  - id: luo_yun_zong
+    name: 落云宗
+    level: top
+    sect_type: 仙道正统
+    location: 灵界边缘
+    lingmai_count: 6
+    founder: 云姓先祖
+    current_master: 落云真人
+    specialty: 仙道正法
+    note: 乱星海域顶级宗门
+  - id: tai_yi_gong
+    name: 太一宫
+    level: top
+    sect_type: 太一道统
+    location: 灵界深处
+    lingmai_count: 4
+    founder: 太一真人
+    current_master: 太一真人
+    specialty: 太一正法
+    note: 太一道统传承
+  - id: han_yan_zong
+    name: 寒焰宗
+    level: large
+    sect_type: 上古传承
+    location: 北极之地
+    lingmai_count: 3
+    founder: 寒焰真人
+    specialty: 冰火双修
+    note: 上古冰火双修传承
+  - id: xiao_tian_lao_gong
+    name: 逍遥宫
+    level: top
+    sect_type: 逍遥道
+    location: 海外仙岛
+    lingmai_count: 3
+    founder: 逍遥真人
+    specialty: 逍遥道
+    note: 逍遥派传承
+  - id: tian_xia_shan
+    name: 天霞山
+    level: medium
+    sect_type: 仙霞门
+    location: 乱星海域
+    lingmai_count: 2
+    founder: 霞光真人
+    specialty: 霞光诀
+    note: 中型宗门示例
+  - id: huo_yan_dong
+    name: 火焰洞
+    level: medium
+    sect_type: 火修门
+    location: 火源山
+    lingmai_count: 2
+    founder: 火神真人
+    specialty: 火系功法
+    note: 火属性中型宗门
+  - id: luo_yan_zong
+    name: 落雁宗
+    level: medium
+    sect_type: 女修门
+    location: 落雁山
+    lingmai_count: 2
+    founder: 落雁真人
+    specialty: 阴柔功法
+    note: 女修居多
+  - id: zhu_que_men
+    name: 朱雀门
+    level: medium
+    sect_type: 火修门
+    location: 朱雀山
+    lingmai_count: 2
+    founder: 朱雀真人
+    specialty: 朱雀火法
+    note: 朱雀传承
+  - id: ji_yin_si
+    name: 极阴寺
+    level: large
+    sect_type: 鬼修门
+    location: 极阴山
+    lingmai_count: 3
+    founder: 极阴真人
+    specialty: 极阴大法
+    note: 鬼修大型宗门
+  - id: xuan_men
+    name: 玄门
+    level: small
+    sect_type: 玄学门
+    location: 玄山
+    lingmai_count: 1
+    founder: 玄真子
+    specialty: 玄学
+    note: 玄学专精
+  - id: tian_shan_school
+    name: 天山派
+    level: top
+    sect_type: 天山传承
+    location: 天山
+    lingmai_count: 3
+    founder: 天山真人
+    specialty: 天山秘法
+    note: 天山传说仙门
+  - id: shen_jiao
+    name: 神教
+    level: top
+    sect_type: 神道
+    location: 灵界
+    lingmai_count: 5
+    founder: 神祖
+    specialty: 神道
+    note: 神道传承
+  - id: mo_jiao
+    name: 魔教
+    level: top
+    sect_type: 魔道
+    location: 魔界入口
+    lingmai_count: 4
+    founder: 魔祖
+    specialty: 魔道
+    note: 魔道巨擘
+  - id: ming_jiao
+    name: 冥教
+    level: top
+    sect_type: 冥道
+    location: 冥界入口
+    lingmai_count: 4
+    founder: 冥祖
+    specialty: 冥道
+    note: 冥道巨擘
+  - id: qing_lian_jian_zong
+    name: 青莲剑宗
+    level: large
+    sect_type: 剑修门
+    location: 青莲山
+    lingmai_count: 3
+    founder: 青莲剑仙
+    specialty: 剑道
+    note: 剑道大型宗门
+  - id: yan_hai_zong_men
+    name: 沿海宗门联盟
+    level: alliance
+    sect_type: 海上联盟
+    location: 沿海
+    lingmai_count: 多
+    founder: 多家联合
+    specialty: 抵御海妖
+    note: 海上联盟
+
+references:
+  - ../宗门体系/宗门总览.md

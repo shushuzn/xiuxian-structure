@@ -49,6 +49,8 @@ EXPECTED_SYSTEMS = [
     "秘境体系",
     # v2.11
     "天材地宝体系",
+    # v2.12
+    "宗门体系",
 ]
 
 
@@ -205,3 +207,59 @@ def test_tian_cai_directory_has_at_least_8_files():
     """v2.11 后天材地宝体系/ 应至少有 8 篇 .md"""
     md_files = list((ROOT / "天材地宝体系").glob("*.md"))
     assert len(md_files) >= 8, f"天材地宝体系/ 仅有 {len(md_files)} 篇 .md，应 ≥8"
+
+
+# ── v2.12 宗门体系 ──
+
+def test_zong_men_directory_exists():
+    """v2.12 宗门体系目录必须存在"""
+    path = ROOT / "宗门体系"
+    assert path.is_dir(), "宗门体系/ 目录必须存在"
+
+
+def test_zong_men_yaml_exists():
+    """data/zong_men.yaml 必须存在"""
+    path = ROOT / "data" / "zong_men.yaml"
+    assert path.is_file(), "data/zong_men.yaml 必须存在"
+
+
+def test_zong_men_yaml_has_levels():
+    """zong_men.yaml 必须含 4+ 等级"""
+    import yaml
+    with open(ROOT / "data" / "zong_men.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "levels" in data
+    assert len(data["levels"]) >= 4
+
+
+def test_zong_men_yaml_has_disciple_levels():
+    """zong_men.yaml 必须含 4 弟子级别"""
+    import yaml
+    with open(ROOT / "data" / "zong_men.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "disciple_levels" in data
+    assert len(data["disciple_levels"]) >= 4
+
+
+def test_zong_men_yaml_has_examples():
+    """zong_men.yaml 必须含 10+ 宗门实例"""
+    import yaml
+    with open(ROOT / "data" / "zong_men.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "examples" in data
+    assert len(data["examples"]) >= 10
+
+
+def test_zong_men_yaml_has_alliances():
+    """zong_men.yaml 必须含 5+ 宗盟"""
+    import yaml
+    with open(ROOT / "data" / "zong_men.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "alliances" in data
+    assert len(data["alliances"]) >= 5
+
+
+def test_zong_men_directory_has_at_least_10_files():
+    """v2.12 后宗门体系/ 应至少有 10 篇 .md"""
+    md_files = list((ROOT / "宗门体系").glob("*.md"))
+    assert len(md_files) >= 10, f"宗门体系/ 仅有 {len(md_files)} 篇 .md，应 ≥10"

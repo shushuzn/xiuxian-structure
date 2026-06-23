@@ -1182,3 +1182,395 @@ def test_state_load_from_dict():
     assert s.has_item("a")
     assert s.get_npc_favor("n") == 70
     assert s.realm == "仙界"
+
+
+# ── v2.9 互动引擎深化：世界书 / 成就 / 多结局 / AI 叙事 ──
+
+from interactive import (
+    WorldBook, WorldBookEntry, Achievement, AchievementTracker,
+    EndingAnalyzer, EndInfo, AINarrator,
+)
+
+
+# ── WorldBook ──
+
+def test_worldbook_empty():
+    wb = WorldBook()
+    assert wb.entries == []
+    assert wb.lookup("any text") == []
+
+
+def test_worldbook_add_and_lookup():
+    wb = WorldBook()
+    entry = WorldBookEntry(
+        id="thunder",
+        keywords=["天劫", "雷劫"],
+        title="天劫",
+        content="渡劫时要小心",
+    )
+    wb.add(entry)
+    matches = wb.lookup("要小心天劫")
+    assert len(matches) == 1
+    assert matches[0].id == "thunder"
+
+
+def test_worldbook_keyword_no_match():
+    wb = WorldBook()
+    wb.add(WorldBookEntry(id="x", keywords=["天劫"], title="x", content="x"))
+    assert wb.lookup("无关文本") == []
+
+
+def test_worldbook_priority():
+    wb = WorldBook()
+    wb.add(WorldBookEntry(id="low", keywords=["x"], title="low", content="low", priority=1))
+    wb.add(WorldBookEntry(id="high", keywords=["x"], title="high", content="high", priority=10))
+    matches = wb.lookup("something x happens")
+    assert matches[0].id == "high"
+
+
+def test_worldbook_max_entries():
+    wb = WorldBook()
+    for i in range(5):
+        wb.add(WorldBookEntry(id=f"e{i}", keywords=["x"], title=f"e{i}", content="c"))
+    matches = wb.lookup("test x", max_entries=2)
+    assert len(matches) == 2
+
+
+def test_worldbook_disabled():
+    wb = WorldBook()
+    wb.add(WorldBookEntry(id="d", keywords=["x"], title="d", content="c", enabled=False))
+    assert wb.lookup("x") == []
+
+
+def test_worldbook_to_dict():
+    wb = WorldBook()
+    wb.add(WorldBookEntry(id="e1", keywords=["k1"], title="t1", content="c1"))
+    d = wb.to_dict()
+    assert "entries" in d
+    assert len(d["entries"]) == 1
+    assert d["entries"][0]["id"] == "e1"
+
+
+# ── Achievement ──
+
+def test_achievement_basic():
+    ach = Achievement(id="a", name="A", description="D", condition="state.attrs.get('x', 0) >= 10")
+    s = State({"x": 15})
+    assert ach.check(s) is True
+    assert ach.unlocked is False  # 还未解锁
+
+
+def test_achievement_unlock():
+    ach = Achievement(id="a", name="A", description="D", condition="state.attrs.get('x', 0) >= 10")
+    s = State({"x": 15})
+    if ach.check(s):
+        ach.unlocked = True
+    assert ach.unlocked is True
+
+
+def test_achievement_already_unlocked():
+    ach = Achievement(id="a", name="A", description="D", condition="True")
+    s = State()
+    assert ach.check(s) is True
+    ach.unlocked = True
+    assert ach.check(s) is False  # 已解锁不重复
+
+
+def test_achievement_invalid_condition():
+    ach = Achievement(id="a", name="A", description="D", condition="invalid syntax !@#")
+    s = State()
+    assert ach.check(s) is False  # 不抛异常
+
+
+def test_achievement_tracker_check_all():
+    tracker = AchievementTracker()
+    tracker.add(Achievement(id="a1", name="A1", description="", condition="state.attrs.get('x', 0) >= 5"))
+    tracker.add(Achievement(id="a2", name="A2", description="", condition="state.attrs.get('y', 0) >= 10"))
+    s = State({"x": 10, "y": 20})
+    newly = tracker.check_all(s)
+    assert len(newly) == 2
+
+
+def test_achievement_tracker_partial():
+    tracker = AchievementTracker()
+    tracker.add(Achievement(id="a1", name="A1", description="", condition="state.attrs.get('x', 0) >= 5"))
+    tracker.add(Achievement(id="a2", name="A2", description="", condition="state.attrs.get('y', 0) >= 100"))
+    s = State({"x": 10, "y": 0})
+    newly = tracker.check_all(s)
+    assert len(newly) == 1
+    assert newly[0].id == "a1"
+
+
+def test_achievement_tracker_score():
+    tracker = AchievementTracker()
+    tracker.add(Achievement(id="a1", name="A1", description="", condition="True", points=10))
+    tracker.add(Achievement(id="a2", name="A2", description="", condition="True", points=20))
+    s = State()
+    tracker.check_all(s)
+    assert tracker.get_score() == 30
+
+
+def test_achievement_tracker_progress():
+    tracker = AchievementTracker()
+    tracker.add(Achievement(id="a1", name="A1", description="", condition="True"))
+    tracker.add(Achievement(id="a2", name="A2", description="", condition="False"))
+    s = State()
+    tracker.check_all(s)
+    progress = tracker.get_progress()
+    assert progress["total"] == 2
+    assert progress["unlocked"] == 1
+    assert progress["percent"] == 50.0
+
+
+# ── EndingAnalyzer ──
+
+def test_ending_analyzer_story_with_endings():
+    story = _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (ending)
+text: success
+## 节点 b (ending)
+text: bad ending
+## 节点 c (ending)
+text: secret ending
+## 节点 d (ending)
+text: normal ending
+""")
+    analyzer = EndingAnalyzer(story)
+    endings = analyzer.get_endings()
+    assert len(endings) == 4
+
+
+def test_ending_analyzer_classify_types():
+    story = _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+## 节点 good_ending (ending)
+text: good
+## 节点 bad_ending (ending)
+text: bad
+## 节点 secret_ending (ending)
+text: secret
+## 节点 normal_ending (ending)
+text: normal
+""")
+    analyzer = EndingAnalyzer(story)
+    completeness = analyzer.get_completeness()
+    assert completeness["total_endings"] == 4
+    assert completeness["good_endings"] >= 1
+    assert completeness["bad_endings"] >= 1
+    assert completeness["secret_endings"] >= 1
+
+
+def test_ending_analyzer_predict():
+    story = _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+## 节点 a (ending)
+text: a
+""")
+    analyzer = EndingAnalyzer(story)
+    pred = analyzer.predict_ending(75)
+    assert pred.id == "a"
+
+
+def test_ending_analyzer_no_endings():
+    story = _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: scene
+next:
+  - label: next
+    goto: e
+## 节点 e (ending)
+text: end
+""")
+    analyzer = EndingAnalyzer(story)
+    assert len(analyzer.get_endings()) == 1
+
+
+# ── AINarrator ──
+
+def test_ai_narrator_basic():
+    w = _world()
+    narrator = AINarrator(w)
+    s = State({"境界": "炼气期", "灵根": "伪灵根", "灵石": 10})
+    narr = narrator.narrate_state(s)
+    assert "炼气期" in narr
+    assert "伪灵根" in narr
+
+
+def test_ai_narrator_jindan():
+    w = _world()
+    narrator = AINarrator(w)
+    s = State({"境界": "结丹期", "灵根": "天灵根", "灵石": 1000})
+    narr = narrator.narrate_state(s)
+    assert "结丹期" in narr
+    assert "天灵根" in narr
+
+
+def test_ai_narrator_with_context():
+    w = _world()
+    narrator = AINarrator(w)
+    s = State({"境界": "炼气期"})
+    narr = narrator.narrate_state(s, "你在山间发现了一座洞府")
+    assert "洞府" in narr
+
+
+def test_ai_narrator_change_lingshi():
+    w = _world()
+    narrator = AINarrator(w)
+    s = State()
+    narr = narrator.narrate_change(s, "灵石", 0, 50)
+    assert "50" in narr
+    assert "获得" in narr
+
+
+def test_ai_narrator_change_realm():
+    w = _world()
+    narrator = AINarrator(w)
+    s = State()
+    narr = narrator.narrate_change(s, "境界", "炼气期", "筑基期")
+    assert "炼气期" in narr
+    assert "筑基期" in narr
+
+
+def test_ai_narrator_change_lingshi_spend():
+    w = _world()
+    narrator = AINarrator(w)
+    s = State()
+    narr = narrator.narrate_change(s, "灵石", 100, 30)
+    assert "消耗" in narr or "70" in narr
+
+
+# ── Engine 集成 ──
+
+def test_engine_attach_worldbook():
+    w = _world()
+    s = State()
+    eng = Engine(w, _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (ending)
+text: end
+"""), s)
+    wb = WorldBook()
+    eng.attach_worldbook(wb)
+    assert eng._worldbook is wb
+
+
+def test_engine_attach_achievements():
+    w = _world()
+    s = State()
+    eng = Engine(w, _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (ending)
+text: end
+"""), s)
+    tracker = AchievementTracker()
+    eng.attach_achievements(tracker)
+    assert eng._achievements is tracker
+
+
+def test_engine_worldbook_action():
+    """worldbook choice action 应更新 state.last_worldbook"""
+    w = _world()
+    s = State()
+    eng = Engine(w, _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: wb
+    goto: e
+    worldbook: thunder
+## 节点 e (ending)
+text: end
+"""), s)
+    wb = WorldBook()
+    wb.add(WorldBookEntry(id="thunder", keywords=["x"], title="天劫", content="小心天劫"))
+    eng.attach_worldbook(wb)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert "last_worldbook" in s.attrs
+    assert s.attrs["last_worldbook"]["id"] == "thunder"
+
+
+def test_engine_achievement_action():
+    """achievement choice action 应直接解锁"""
+    w = _world()
+    s = State()
+    eng = Engine(w, _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: ach
+    goto: e
+    achievement: a1
+## 节点 e (ending)
+text: end
+"""), s)
+    tracker = AchievementTracker()
+    tracker.add(Achievement(id="a1", name="A1", description="", condition="True", points=10))
+    eng.attach_achievements(tracker)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert "last_achievement" in s.attrs
+    assert s.attrs["last_achievement"]["id"] == "a1"
+
+
+def test_engine_narrate_action():
+    """narrate choice action 应生成叙事"""
+    w = _world()
+    s = State({"境界": "炼气期", "灵根": "天灵根"})
+    eng = Engine(w, _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: narr
+    goto: e
+    narrate: 你在山间发现了一座洞府
+## 节点 e (ending)
+text: end
+"""), s)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert "last_narrative" in s.attrs
+    assert "洞府" in s.attrs["last_narrative"]
+
+
+def test_engine_check_achievements():
+    """engine.check_achievements() 应能触发解锁"""
+    w = _world()
+    s = State({"x": 100})
+    eng = Engine(w, _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (ending)
+text: end
+"""), s)
+    tracker = AchievementTracker()
+    tracker.add(Achievement(id="x100", name="百数", description="", condition="state.attrs.get('x', 0) >= 100"))
+    eng.attach_achievements(tracker)
+    newly = eng.check_achievements()
+    assert len(newly) == 1
+    assert newly[0].id == "x100"

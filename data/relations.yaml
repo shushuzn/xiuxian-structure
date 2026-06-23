@@ -570,3 +570,65 @@ relations:
     to: domains:tian_ting
     type: parallels
     description: "酆都对应天庭（阴阳两界的权力中心）"
+
+  # ── v2.6: 战斗 ↔ 境界/功法 ──
+  - from: shen_tong:zi_dian_shen_lei
+    to: realms:jiedan
+    type: requires
+    description: "紫电神雷需结丹期以上修为驱动"
+  - from: shen_tong:wan_xiang_tian_yin
+    to: realms:dacheng
+    type: requires
+    description: "万象天音需大乘期以上修为"
+  - from: shen_tong:zhu_shen_jian_jue
+    to: titles:xian_di
+    type: requires
+    description: "诛神剑诀需仙帝修为支撑"
+  - from: shen_tong:hun_yuan_shen_li
+    to: techniques:jiu_zhuan_xuan_xian_jue
+    type: enables
+    description: "混元神力可嵌入九转玄仙诀体系"
+
+  # ── v2.6: 战斗体系内部 ──
+  - from: dun_shu:jin_dun
+    to: dun_fa:kong_jian_tiao_yue
+    type: enables
+    description: "金遁是空间跳跃的前置基础"
+  - from: dun_shu:shui_dun
+    to: dun_fa:shi_jian_ning_lan
+    type: enables
+    description: "水遁是时间凝滞的前置基础"
+  - from: fa_xiang:jin_gang_fa_xiang
+    to: shen_tong:huo_yan_quan
+    type: enables
+    description: "金刚法相可增幅火焰拳"
+  - from: fa_xiang:qing_lian_fa_xiang
+    to: ling_yu:lie_huo_yu
+    type: enables
+    description: "青莲法相可承载烈火域"
+
+  # ── v2.6: 战斗 ↔ 体系 ──
+  - from: zhen_fa_zhan:jiu_xiao_lei_zhen
+    to: examples:jiu_xiao_lei_zhen
+    type: parallels
+    description: "九霄雷阵在战斗与阵法中通用"
+  - from: zhen_fa_zhan:ba_gua_mi_zong
+    to: examples:mi_tian_huan_zhen
+    type: parallels
+    description: "八卦迷踪与迷天幻阵原理相通"
+  - from: zhen_fa_zhan:wu_xing_sheng_mie
+    to: categories:kun_di
+    type: parallels
+    description: "五行生灭阵为困敌类阵法"
+  - from: zhen_fa_zhan:zhou_tian_xing_dou
+    to: categories:gong_ji
+    type: parallels
+    description: "周天星斗为攻击类阵法"
+  - from: zhen_fa_zhan:tai_xu_huan_jing
+    to: categories:huan_shu
+    type: parallels
+    description: "太虚幻境为幻术类阵法"
+  - from: zhen_fa_zhan:hun_dun_si_xiang
+    to: categories:fang_yu
+    type: parallels
+    description: "混沌四象为防御类阵法"

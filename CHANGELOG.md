@@ -50,6 +50,22 @@
 
 ## [Unreleased]
 
+### D.6 性能优化
+- 🚀 **pytest 总耗时：87s → 26s (70% 提速)**
+- 🔧 **World 实例缓存**：`_world()` 加 module-level cache
+  - 之前：69 个测试 × 25 yaml 文件 = 1725 次文件加载
+  - 现在：第一次加载后缓存复用
+- 📊 **新文件 `tests/test_performance.py`** (7 个性能基准测试)：
+  - `yaml_load_all_performance` < 2s
+  - `world_init_performance` < 2s
+  - `build_graph_performance` < 5s
+  - `story_parse_performance` < 1s
+  - `engine_init_performance` < 0.5s
+  - `world_cache_benefit` (验证缓存有效)
+  - `performance_summary` (打印报告)
+- ✅ **245 tests** 通过 (238 → 245, +7)
+- 📈 **覆盖率维持 83.69%**
+
 ### v3.1 新故事: 综合演示
 - 📖 **stories/v31_demo.md** (v3.1 综合演示 · 跨体系大冒险)
   - 246 行 / 11 节点 / 5 种结局

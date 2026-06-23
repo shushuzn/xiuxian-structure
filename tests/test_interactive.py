@@ -25,8 +25,14 @@ def _minimal_story(text):
     return Story.from_text(text)
 
 
+_WORLD_CACHE = None  # D.6 性能优化: 缓存 World 实例
+
 def _world():
-    return World.from_yaml_dir(DATA_DIR)
+    """加载并缓存 World 实例（D.6 性能优化: 避免 69 个测试重复加载 25 yaml）"""
+    global _WORLD_CACHE
+    if _WORLD_CACHE is None:
+        _WORLD_CACHE = World.from_yaml_dir(DATA_DIR)
+    return _WORLD_CACHE
 
 
 # ── World ──

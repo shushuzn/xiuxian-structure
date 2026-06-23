@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v3.0.0** · **27 体系** · 29 yaml · 445 .md · 336 关系 · 238 tests · [📖 阅读更新日志](docs/CHANGELOG.md)
+**v3.0.0** · **27 体系** · 29 yaml · 445 .md · 336 关系 · 238 tests · [📖 阅读更新日志](CHANGELOG.md)
 
 ---
 
@@ -48,7 +48,7 @@
 - **v2.15-v2.17**: 互动引擎深化 (世界书/成就/多结局/AI 叙事/试炼副本)
 - **v3.0**: 收官总结 🎯
 
-> 详见 [docs/CHANGELOG.md](docs/CHANGELOG.md) 完整变更日志
+> 详见 [CHANGELOG.md](CHANGELOG.md) 完整变更日志
 
 ---
 

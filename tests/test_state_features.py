@@ -287,3 +287,55 @@ def test_full_cycle(tmp_path):
     assert score["修为"] == 5
     assert score["好感"] == 9
     assert score["总分"] == 31
+
+
+# ── v2.5: 四大界面 ──
+
+
+def test_realm_default():
+    """State 默认界面应为 下界"""
+    s = State()
+    assert s.realm == "下界"
+
+
+def test_realm_serialization():
+    """realm 应被序列化和反序列化"""
+    s = State({"灵石": 100})
+    s.realm = "神界"
+    d = s.to_dict()
+    assert d["realm"] == "神界"
+    s2 = State.from_dict(d)
+    assert s2.realm == "神界"
+
+
+def test_realm_backwards_compatible():
+    """旧存档没有 realm 字段应默认为下界"""
+    d = {"attrs": {"灵石": 50}, "flags": [], "items": [], "npc_favor": {}, "time": {"年": 1, "月": 1, "日": 1}}
+    s = State.from_dict(d)
+    assert s.realm == "下界"
+
+
+def test_realm_in_engine():
+    """Engine 的 realm 选项应切换界面"""
+    from interactive import World, Story, Engine, State
+    ROOT = Path(__file__).resolve().parent.parent
+    world = World.from_yaml_dir(ROOT / "data")
+    story_text = """# Realm Test
+## 元数据
+id: realm_test
+start: start
+## 节点 start (scene)
+text: 测试
+next:
+  - label: 去仙界
+    goto: to_xianjie
+    realm: 仙界
+## 节点 to_xianjie (ending)
+text: 抵达仙界
+next: []
+"""
+    story = Story.from_text(story_text)
+    state = State()
+    engine = Engine(world, story, state)
+    engine.step(0)     # load start + choice 0 (realm: 仙界) → to_xianjie
+    assert engine.state.realm == "仙界"

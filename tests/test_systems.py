@@ -53,6 +53,8 @@ EXPECTED_SYSTEMS = [
     "宗门体系",
     # v2.13
     "因果体系",
+    # v2.14
+    "时空体系",
 ]
 
 
@@ -314,3 +316,73 @@ def test_karma_directory_has_at_least_8_files():
     """v2.13 后因果体系/ 应至少有 8 篇 .md"""
     md_files = list((ROOT / "因果体系").glob("*.md"))
     assert len(md_files) >= 8, f"因果体系/ 仅有 {len(md_files)} 篇 .md，应 ≥8"
+
+
+# ── v2.14 时空体系（最后一个体系） ──
+
+def test_time_space_directory_exists():
+    """v2.14 时空体系目录必须存在"""
+    path = ROOT / "时空体系"
+    assert path.is_dir(), "时空体系/ 目录必须存在"
+
+
+def test_time_space_yaml_exists():
+    """data/time_space.yaml 必须存在"""
+    path = ROOT / "data" / "time_space.yaml"
+    assert path.is_file(), "data/time_space.yaml 必须存在"
+
+
+def test_time_space_yaml_has_law_levels():
+    """time_space.yaml 必须含 6 法则等级"""
+    import yaml
+    with open(ROOT / "data" / "time_space.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "law_levels" in data
+    assert len(data["law_levels"]) >= 6
+
+
+def test_time_space_yaml_has_powers():
+    """time_space.yaml 必须含时间+空间类神通各 8+"""
+    import yaml
+    with open(ROOT / "data" / "time_space.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "time_powers" in data
+    assert "space_powers" in data
+    assert len(data["time_powers"]) >= 8
+    assert len(data["space_powers"]) >= 8
+
+
+def test_time_space_yaml_has_artifacts():
+    """time_space.yaml 必须含 10+ 时空宝物"""
+    import yaml
+    with open(ROOT / "data" / "time_space.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "time_artifacts" in data
+    assert "space_artifacts" in data
+    assert "dual_artifacts" in data
+    total = len(data["time_artifacts"]) + len(data["space_artifacts"]) + len(data["dual_artifacts"])
+    assert total >= 10
+
+
+def test_time_space_yaml_has_realms():
+    """time_space.yaml 必须含 4+ 时空秘境"""
+    import yaml
+    with open(ROOT / "data" / "time_space.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "realms" in data
+    assert len(data["realms"]) >= 4
+
+
+def test_time_space_directory_has_at_least_9_files():
+    """v2.14 后时空体系/ 应至少有 9 篇 .md"""
+    md_files = list((ROOT / "时空体系").glob("*.md"))
+    assert len(md_files) >= 9, f"时空体系/ 仅有 {len(md_files)} 篇 .md，应 ≥9"
+
+
+def test_time_space_yaml_has_masters():
+    """time_space.yaml 必须含著名时空大能"""
+    import yaml
+    with open(ROOT / "data" / "time_space.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "masters" in data
+    assert len(data["masters"]) >= 3

@@ -1432,3 +1432,85 @@ relations:
     to: zong_men:tian_shan_school
     type: parallels
     description: "功德金身与天山派同源"
+
+  # ── v2.14 时空体系（27 体系，最后一个体系） ──
+
+  # 时空 ↔ 境界
+  - from: law_levels:zhi_gao
+    to: realms:dacheng
+    type: parallels
+    description: "至高法则需大乘期"
+  - from: law_levels:chao_yue
+    to: realms:xian_di
+    type: parallels
+    description: "超越法则需仙帝期"
+  - from: law_levels:gao_ji
+    to: realms:heti
+    type: parallels
+    description: "高级法则需合体期"
+
+  # 时空 ↔ 神通
+  - from: time_powers:cha_na_yong_heng
+    to: divine_power:shi_jian_jing_zhi
+    type: parallels
+    description: "刹那永恒与时间静止同源"
+  - from: space_powers:kong_jian_shun_yi
+    to: divine_power:kong_jian_yi_dong
+    type: parallels
+    description: "空间瞬移与空间移动同源"
+  - from: space_powers:kong_jian_min_jie
+    to: divine_power:ling_yu_zhan_kai
+    type: parallels
+    description: "空间湮灭与领域展开同源"
+
+  # 时空 ↔ 法器
+  - from: space_artifacts:kong_jian_shi
+    to: artifact:hao_tian_ta
+    type: enables
+    description: "空间石炼昊天塔"
+  - from: time_artifacts:shi_guang_sha
+    to: artifact:qi_xing_jian
+    type: enables
+    description: "时光之沙炼七星剑"
+
+  # 时空 ↔ 秘境
+  - from: realms:kong_jian_luan_liu
+    to: secret_realm:kong_jian
+    type: parallels
+    description: "空间乱流是空间秘境之一"
+  - from: realms:xu_kong
+    to: secret_realm:kong_jian
+    type: parallels
+    description: "虚空是极端空间秘境"
+  - from: realms:shi_guang_he
+    to: secret_realm:xian_cao_pu
+    type: parallels
+    description: "时光之河藏仙草圃"
+
+  # 时空 ↔ 因果
+  - from: time_powers:guang_yin_ni_zhuan
+    to: divine_powers:yin_guo_ni_zhuan
+    type: parallels
+    description: "光阴逆转与因果逆转同源"
+
+  # 时空 ↔ 飞升
+  - from: law_levels:chao_yue
+    to: ascension:emperor
+    type: enables
+    description: "超越法则助仙帝飞升"
+
+  # 时空 ↔ 宗门
+  - from: masters:shi_kong_dao_ren
+    to: zong_men:luo_yun_zong
+    type: parallels
+    description: "时空道人与落云宗同源"
+  - from: masters:xiao_yao_xian_di
+    to: zong_men:xiao_tian_lao_gong
+    type: parallels
+    description: "逍遥仙帝与逍遥宫同源"
+
+  # 时空 ↔ 神界
+  - from: masters:shi_kong_zu_shen
+    to: divine_grades:dao_zu_ge
+    type: parallels
+    description: "时空祖神配道祖格"

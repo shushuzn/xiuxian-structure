@@ -4,6 +4,23 @@
 
 ## [Unreleased]
 
+### v2.15 跨境界试炼副本
+- 🆕 **TrialDungeon** 类：跨境界试炼系统
+  - **9 境界 × 4 难度 = 36 关卡**
+  - 难度：easy (70%) / normal (50%) / hard (30%) / hell (10%)
+- 🆕 **TrialStage** 类：试炼关卡定义
+  - `can_enter(state)` 进入条件检查 (境界 + 条件)
+  - `rewards` / `penalties` 奖励惩罚
+  - `boss` boss 描述
+- 🆕 **TrialResult** 类：试炼结果
+  - `success` / `rounds` / `narrative` / `score`
+- 🎮 **`trial` 选项动作**：触发指定关卡
+- 🆕 `dungeon.enter_stage(stage_id)` + `dungeon.apply_result(result)` API
+- 📊 `dungeon.get_progress()` 进度跟踪
+- 📖 **stories/v215_demo.md** — 5 节点演示
+- 🧪 **+15 单测**：试炼关卡 / 通关 / 失败 / 难度缩放 / 引擎集成
+- ✅ **223 → 238 tests** (+15)
+
 ### v2.9 互动引擎深化
 - 🆕 **WorldBook** 类：关键词触发的补充设定
   - `WorldBookEntry` (id/keywords/title/content/priority)

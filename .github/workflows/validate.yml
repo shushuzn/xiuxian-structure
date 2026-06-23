@@ -46,6 +46,7 @@ jobs:
           echo "📊 覆盖率报告（fail-under=70）："
           python -m pytest tests/ \
             --cov=scripts \
+            --cov-config=pyproject.toml \
             --cov-report=term-missing \
             --cov-report=xml:coverage.xml \
             --cov-fail-under=70

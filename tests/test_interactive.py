@@ -1574,3 +1574,167 @@ text: end
     newly = eng.check_achievements()
     assert len(newly) == 1
     assert newly[0].id == "x100"
+
+
+# ── v2.15 跨境界试炼副本 ──
+
+from interactive import TrialDungeon, TrialStage, TrialResult
+
+
+def test_trial_stage_can_enter_realm_match():
+    s = State({"境界": "炼气期"})
+    stage = TrialStage(
+        id="lianqi_easy", name="炼气期-easy", description="",
+        difficulty="easy", realm_required="炼气期",
+    )
+    assert stage.can_enter(s) is True
+
+
+def test_trial_stage_cannot_enter_wrong_realm():
+    s = State({"境界": "炼气期"})
+    stage = TrialStage(
+        id="zhuji_easy", name="筑基期-easy", description="",
+        difficulty="easy", realm_required="筑基期",
+    )
+    assert stage.can_enter(s) is False
+
+
+def test_trial_stage_can_enter_with_conditions():
+    s = State({"境界": "筑基期", "声望": 10})
+    stage = TrialStage(
+        id="test", name="t", description="",
+        difficulty="normal", realm_required="筑基期",
+        conditions={"声望": 10},
+    )
+    assert stage.can_enter(s) is True
+
+
+def test_trial_stage_condition_mismatch():
+    s = State({"境界": "筑基期", "声望": 5})
+    stage = TrialStage(
+        id="test", name="t", description="",
+        difficulty="normal", realm_required="筑基期",
+        conditions={"声望": 10},
+    )
+    assert stage.can_enter(s) is False
+
+
+def test_trial_dungeon_default_stages():
+    w = _world()
+    s = State()
+    d = TrialDungeon(w, s)
+    # 9 境界 × 4 难度 = 36 关卡
+    assert len(d.stages) == 36
+
+
+def test_trial_dungeon_list_stages_for_realm():
+    w = _world()
+    s = State({"境界": "炼气期"})
+    d = TrialDungeon(w, s)
+    stages = d.list_stages("炼气期")
+    assert len(stages) == 4  # easy/normal/hard/hell
+
+
+def test_trial_dungeon_realm_mismatch_no_access():
+    w = _world()
+    s = State({"境界": "炼气期"})
+    d = TrialDungeon(w, s)
+    stages = d.list_stages("大乘期")
+    assert len(stages) == 0
+
+
+def test_trial_enter_existing_stage():
+    w = _world()
+    s = State({"境界": "炼气期"})
+    d = TrialDungeon(w, s)
+    result = d.enter_stage("lianqi_easy")
+    assert result.stage_id == "lianqi_easy"
+    assert isinstance(result.success, bool)
+    assert result.narrative != ""
+
+
+def test_trial_enter_nonexistent_stage():
+    w = _world()
+    s = State()
+    d = TrialDungeon(w, s)
+    result = d.enter_stage("nonexistent")
+    assert result.success is False
+    assert "不存在" in result.narrative
+
+
+def test_trial_apply_result_success():
+    w = _world()
+    s = State({"境界": "炼气期", "灵石": 0})
+    d = TrialDungeon(w, s)
+    result = d.enter_stage("lianqi_easy")
+    if result.success:
+        d.apply_result(result)
+        # 灵石应增加
+        assert s.get("灵石", 0) > 0
+
+
+def test_trial_apply_result_failure():
+    w = _world()
+    s = State({"境界": "炼气期", "灵石": 100})
+    d = TrialDungeon(w, s)
+    result = d.enter_stage("lianqi_hell")  # 高难度容易失败
+    if not result.success:
+        d.apply_result(result)
+        # 灵石应减少
+        assert s.get("灵石", 100) < 100
+
+
+def test_trial_rewards_scale():
+    w = _world()
+    s = State()
+    d = TrialDungeon(w, s)
+    easy = d.stages["lianqi_easy"].rewards
+    normal = d.stages["lianqi_normal"].rewards
+    hard = d.stages["lianqi_hard"].rewards
+    hell = d.stages["lianqi_hell"].rewards
+    # 高难度奖励应更多
+    assert normal["灵石"] > easy["灵石"]
+    assert hard["灵石"] > normal["灵石"]
+    assert hell["灵石"] > hard["灵石"]
+
+
+def test_trial_penalties_scale():
+    w = _world()
+    s = State()
+    d = TrialDungeon(w, s)
+    easy = d.stages["lianqi_easy"].penalties
+    hell = d.stages["lianqi_hell"].penalties
+    # 高难度惩罚应更重
+    assert abs(hell["灵石"]) > abs(easy["灵石"])
+
+
+def test_trial_get_progress():
+    w = _world()
+    s = State({"境界": "炼气期"})
+    d = TrialDungeon(w, s)
+    progress = d.get_progress()
+    assert progress["total_stages"] == 36
+    assert progress["accessible"] == 4
+    assert progress["locked"] == 32
+
+
+def test_engine_trial_action():
+    """trial choice action 应触发试炼"""
+    w = _world()
+    s = State({"境界": "炼气期", "灵石": 0})
+    eng = Engine(w, _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: trial
+    goto: e
+    trial: lianqi_easy
+## 节点 e (ending)
+text: end
+"""), s)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert "last_trial" in s.attrs
+    assert s.attrs["last_trial"]["stage_id"] == "lianqi_easy"

@@ -357,6 +357,231 @@ class EngineEvent:
 
 
 # ────────────────────────────────────────────────────────
+# 4.6 跨境界试炼副本（v2.15 新增）
+# ────────────────────────────────────────────────────────
+
+@dataclass
+class TrialStage:
+    """试炼副本的关卡"""
+    id: str
+    name: str
+    description: str
+    difficulty: str  # "easy" / "normal" / "hard" / "hell"
+    realm_required: str  # "炼气期" / "筑基期" / etc.
+    duration_minutes: int = 60  # 预计耗时
+    conditions: Dict[str, Any] = field(default_factory=dict)  # 进入条件 (state 检查)
+    rewards: Dict[str, Any] = field(default_factory=dict)  # 通关奖励
+    penalties: Dict[str, Any] = field(default_factory=dict)  # 失败惩罚
+    boss: str = ""  # boss 怪物/场景
+    story: str = ""  # 剧情描述
+
+    def can_enter(self, state: "State") -> bool:
+        """检查玩家是否可进入此关卡"""
+        # 境界必须匹配
+        if state.get("境界") != self.realm_required:
+            return False
+        # 检查条件
+        for k, v in self.conditions.items():
+            if state.get(k) != v:
+                return False
+        return True
+
+
+@dataclass
+class TrialResult:
+    """试炼结果"""
+    stage_id: str
+    success: bool
+    rounds: int  # 持续回合数
+    rewards_gained: Dict[str, Any] = field(default_factory=dict)
+    penalties_applied: Dict[str, Any] = field(default_factory=dict)
+    narrative: str = ""  # 详细描述
+    score: int = 0  # 评分 0-100
+
+
+class TrialDungeon:
+    """跨境界试炼副本
+
+    按境界分层的试炼关卡，每层有不同难度。
+    通过试炼获得奖励，失败有惩罚。
+    """
+
+    REALM_STAGES = [
+        ("lianqi", "炼气期", "lianqi"),
+        ("zhuji", "筑基期", "zhuji"),
+        ("jiedan", "结丹期", "jiedan"),
+        ("yuanying", "元婴期", "yuanying"),
+        ("huashen", "化神期", "huashen"),
+        ("lianxu", "炼虚期", "lianxu"),
+        ("heti", "合体期", "heti"),
+        ("dujie", "渡劫期", "dujie"),
+        ("dacheng", "大乘期", "dacheng"),
+    ]
+
+    DIFFICULTY_MODIFIERS = {
+        "easy": 0.7,    # 通过率 70%
+        "normal": 0.5,  # 通过率 50%
+        "hard": 0.3,    # 通过率 30%
+        "hell": 0.1,    # 通过率 10%
+    }
+
+    def __init__(self, world: World, state: "State"):
+        self.world = world
+        self.state = state
+        self.stages: Dict[str, TrialStage] = {}
+        self._init_default_stages()
+
+    def _init_default_stages(self) -> None:
+        """初始化默认试炼关卡"""
+        for stage_id, name, realm_id in self.REALM_STAGES:
+            realm_name = self._realm_id_to_name(realm_id)
+            for difficulty in ("easy", "normal", "hard", "hell"):
+                full_id = f"{stage_id}_{difficulty}"
+                self.stages[full_id] = TrialStage(
+                    id=full_id,
+                    name=f"{name}-{difficulty}",
+                    description=f"{name}修士的{difficulty}试炼",
+                    difficulty=difficulty,
+                    realm_required=name,
+                    conditions={},
+                    rewards=self._make_rewards(realm_id, difficulty),
+                    penalties=self._make_penalties(realm_id, difficulty),
+                    boss=self._make_boss(realm_id, difficulty),
+                )
+
+    def _realm_id_to_name(self, realm_id: str) -> str:
+        """id → 中文名"""
+        mapping = {
+            "lianqi": "炼气期", "zhuji": "筑基期", "jiedan": "结丹期",
+            "yuanying": "元婴期", "huashen": "化神期", "lianxu": "炼虚期",
+            "heti": "合体期", "dujie": "渡劫期", "dacheng": "大乘期",
+        }
+        return mapping.get(realm_id, realm_id)
+
+    def _make_rewards(self, realm_id: str, difficulty: str) -> Dict[str, Any]:
+        """生成奖励"""
+        base = {"灵石": 50, "经验": 100, "声望": 5}
+        mult = {"easy": 1, "normal": 2, "hard": 4, "hell": 8}[difficulty]
+        realm_mult = list(self.REALM_STAGES).index((realm_id, self._realm_id_to_name(realm_id), realm_id)) + 1
+        return {
+            "灵石": base["灵石"] * mult * realm_mult,
+            "经验": base["经验"] * mult * realm_mult,
+            "声望": base["声望"] * mult * realm_mult,
+            "items": [f"{self._realm_id_to_name(realm_id)}-{difficulty}-奖励"] if mult >= 2 else [],
+        }
+
+    def _make_penalties(self, realm_id: str, difficulty: str) -> Dict[str, Any]:
+        """生成失败惩罚"""
+        base = {"灵石": 10, "声望": -2}
+        mult = {"easy": 1, "normal": 2, "hard": 4, "hell": 8}[difficulty]
+        return {
+            "灵石": -base["灵石"] * mult,
+            "声望": -2 * mult,
+        }
+
+    def _make_boss(self, realm_id: str, difficulty: str) -> str:
+        """生成 boss 描述"""
+        bosses = {
+            "lianqi": "山中虎妖",
+            "zhuji": "筑基大妖",
+            "jiedan": "结丹期魔修",
+            "yuanying": "元婴期心魔化身",
+            "huashen": "化神期天劫残影",
+            "lianxu": "炼虚期空间裂缝",
+            "hetong": "合体期时间乱流",
+            "dujie": "渡劫期仙界守卫",
+            "dacheng": "大乘期道心试炼",
+        }
+        return bosses.get(realm_id, "神秘试炼者")
+
+    def list_stages(self, realm_name: str = "") -> List[TrialStage]:
+        """列出可进入的关卡"""
+        results = []
+        for stage in self.stages.values():
+            if not realm_name or stage.realm_required == realm_name:
+                if stage.can_enter(self.state):
+                    results.append(stage)
+        return results
+
+    def enter_stage(self, stage_id: str) -> TrialResult:
+        """进入指定关卡"""
+        stage = self.stages.get(stage_id)
+        if not stage:
+            return TrialResult(
+                stage_id=stage_id, success=False, rounds=0,
+                narrative=f"❌ 关卡 '{stage_id}' 不存在",
+            )
+        if not stage.can_enter(self.state):
+            return TrialResult(
+                stage_id=stage_id, success=False, rounds=0,
+                narrative=f"❌ 无法进入 '{stage.name}': 境界不匹配或条件不满足",
+            )
+        # 根据难度计算通过率
+        modifier = self.DIFFICULTY_MODIFIERS.get(stage.difficulty, 0.5)
+        # 基础通过率受灵石、声望等影响
+        bonus = 0
+        if self.state.get("声望", 0) > 50:
+            bonus += 0.1
+        if self.state.get("灵石", 0) > 1000:
+            bonus += 0.1
+        final_rate = min(0.95, modifier + bonus)
+        # 模拟试炼
+        import random as _r
+        _r.seed(hash(stage_id) % 2**32)
+        success = _r.random() < final_rate
+        rounds = _r.randint(3, 12)
+        narrative = self._make_narrative(stage, success, rounds)
+        result = TrialResult(
+            stage_id=stage_id,
+            success=success,
+            rounds=rounds,
+            narrative=narrative,
+            score=int(final_rate * 100) if success else int((1 - final_rate) * 50),
+        )
+        if success:
+            result.rewards_gained = dict(stage.rewards)
+        else:
+            result.penalties_applied = dict(stage.penalties)
+        return result
+
+    def _make_narrative(self, stage: TrialStage, success: bool, rounds: int) -> str:
+        """生成试炼叙事"""
+        outcome = "✅ 通关！" if success else "❌ 失败..."
+        return (
+            f"【{stage.name}】{outcome}\n"
+            f"难度：{stage.difficulty}，持续 {rounds} 回合\n"
+            f"Boss：{stage.boss}\n"
+            f"{'奖励丰厚' if success else '损失惨重'}"
+        )
+
+    def apply_result(self, result: TrialResult) -> None:
+        """应用试炼结果到 state"""
+        if result.success:
+            for k, v in result.rewards_gained.items():
+                if k == "items":
+                    for item in v:
+                        self.state.add_item(item)
+                else:
+                    self.state.incr(k, v)
+        else:
+            for k, v in result.penalties_applied.items():
+                if k == "声望":
+                    self.state.modify_npc_favor("宗门", v)  # 简化
+                self.state.incr(k, v)
+
+    def get_progress(self) -> dict:
+        """获取试炼进度"""
+        total = len(self.stages)
+        accessible = len(self.list_stages())
+        return {
+            "total_stages": total,
+            "accessible": accessible,
+            "locked": total - accessible,
+            "current_realm": self.state.get("境界", "炼气期"),
+        }
+
+
+# ────────────────────────────────────────────────────────
 # 4.5 世界书 / 成就 / 多结局 / AI 叙事（v2.9 新增，定义在 Engine 之前）
 # ────────────────────────────────────────────────────────
 
@@ -812,6 +1037,21 @@ class Engine:
             ctx = chosen["narrate"] if isinstance(chosen["narrate"], str) else ""
             narrator = AINarrator(self.world)
             self.state.attrs["last_narrative"] = narrator.narrate_state(self.state, ctx)
+        # ── v2.15 新增：跨境界试炼副本 ──
+        if "trial" in chosen:
+            stage_id = chosen["trial"]
+            dungeon = TrialDungeon(self.world, self.state)
+            result = dungeon.enter_stage(stage_id)
+            dungeon.apply_result(result)
+            self.state.attrs["last_trial"] = {
+                "stage_id": result.stage_id,
+                "success": result.success,
+                "rounds": result.rounds,
+                "narrative": result.narrative,
+                "rewards": result.rewards_gained,
+                "penalties": result.penalties_applied,
+                "score": result.score,
+            }
 
     def save(self) -> dict:
         """返回可序列化的存档"""

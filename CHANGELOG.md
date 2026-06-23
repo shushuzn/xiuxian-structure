@@ -4,6 +4,19 @@
 
 ## [Unreleased]
 
+### D.4 文档站 CI 增强
+- 📝 **mkdocs.yml 增强**：
+  - 新增 6 个体系到 nav (天材地宝/宗门/战斗/因果/时空)
+  - 新增"互动故事" section (5 演示)
+  - 站点元数据 (description/keywords/site_url)
+- 🔧 **docs.yml CI 重构**：
+  - 拆分为 `validate` (校验) + `deploy` (部署) 两个 job
+  - validate 跑 `mkdocs build` 校验构建产物
+  - deploy 依赖 validate + 仅 main 分支部署
+  - 产物统计 (HTML 页数/总大小)
+- 📊 **构建产物**：243 HTML 页面 / 21MB (本地验证)
+- ✅ 22 个预存 warning 已记录 (后续 D.5 计划逐步修复)
+
 ### v2.15 跨境界试炼副本
 - 🆕 **TrialDungeon** 类：跨境界试炼系统
   - **9 境界 × 4 难度 = 36 关卡**

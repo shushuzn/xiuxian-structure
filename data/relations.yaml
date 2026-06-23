@@ -1124,3 +1124,109 @@ relations:
     to: secret_realm:san_xiu_yi_ji
     type: parallels
     description: "青莲剑宗承袭散修遗迹"
+
+  # ── v2.11 天材地宝体系（25 体系） ──
+
+  # 天材地宝 ↔ 丹药
+  - from: tian_cai:jiu_you_huan_hun_cao
+    to: elixir:jiu_zhuan_huan_hun_dan
+    type: enables
+    description: "九幽还魂草炼九转还魂丹"
+  - from: tian_cai:qian_nian_xue_shen
+    to: elixir:jiedan_dan
+    type: enables
+    description: "千年血参炼结丹丹"
+  - from: tian_cai:qian_nian_ling_zhi
+    to: elixir:peiyu_dan
+    type: enables
+    description: "千年灵芝炼培婴丹"
+  - from: tian_cai:wan_nian_tai_sui
+    to: elixir:hu_shen_dan
+    type: enables
+    description: "万年太岁炼护神丹"
+
+  # 天材地宝 ↔ 法器
+  - from: tian_cai:xuan_tie
+    to: artifact:qing_feng_jian
+    type: enables
+    description: "玄铁炼青锋剑"
+  - from: tian_cai:wan_nian_han_tie
+    to: artifact:zi_wei_jian
+    type: enables
+    description: "万年寒铁炼紫薇剑"
+  - from: tian_cai:xing_chen_tie
+    to: artifact:hao_tian_ta
+    type: enables
+    description: "星辰铁炼昊天塔"
+  - from: tian_cai:jiu_tian_xuan_tie
+    to: artifact:qi_xing_jian
+    type: enables
+    description: "九天玄铁炼七星剑"
+
+  # 天材地宝 ↔ 秘境
+  - from: tian_cai:jiu_you_huan_hun_cao
+    to: secret_realm:ling_yao_dao
+    type: parallels
+    description: "九幽还魂草产自灵药岛"
+  - from: tian_cai:xuan_tie
+    to: secret_realm:xuan_tie_kuang_mai
+    type: parallels
+    description: "玄铁产自玄铁矿脉"
+  - from: tian_cai:wan_nian_han_tie
+    to: secret_realm:wan_nian_han_tie_kuang
+    type: parallels
+    description: "万年寒铁产自万年寒铁矿"
+  - from: tian_cai:xing_chen_tie
+    to: secret_realm:xing_chen_tie_kuang
+    type: parallels
+    description: "星辰铁产自星辰铁矿"
+  - from: tian_cai:xian_cao
+    to: secret_realm:xian_cao_pu
+    type: parallels
+    description: "仙草产自仙草圃"
+
+  # 天材地宝 ↔ 妖兽
+  - from: tian_cai:feng_huang_jing_xue
+    to: examples:feng_huang
+    type: parallels
+    description: "凤凰精血取自凤凰"
+  - from: tian_cai:long_ni_lin
+    to: examples:jin_chi_da_peng
+    type: parallels
+    description: "龙族逆鳞取自龙族"
+
+  # 天材地宝 ↔ 境界
+  - from: tian_cai:bai_nian
+    to: realm:zhuji
+    type: enables
+    description: "百年灵材适合筑基期"
+  - from: tian_cai:qian_nian
+    to: realm:jiedan
+    type: enables
+    description: "千年灵材适合结丹期"
+  - from: tian_cai:wan_nian
+    to: realm:huashen
+    type: enables
+    description: "万年灵材适合化神期"
+
+  # 天材地宝 ↔ 神识
+  - from: tian_cai:yang_hun_mu
+    to: divine_sense:yuanying
+    type: enables
+    description: "养魂木强化元婴神识"
+
+  # 天材地宝 ↔ 神界
+  - from: tian_cai:shen_cao
+    to: divine_grades:dao_zu_ge
+    type: parallels
+    description: "神草配道祖格"
+  - from: tian_cai:shen_tie
+    to: divine_grades:zhi_shen
+    type: parallels
+    description: "神铁配至神格"
+
+  # 天材地宝 ↔ 心魔
+  - from: tian_cai:wan_nian_tai_sui
+    to: heart_demon:sheng_si_mo
+    type: blocks
+    description: "万年太岁延寿以避生死魔"

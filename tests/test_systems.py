@@ -45,6 +45,10 @@ EXPECTED_SYSTEMS = [
     "冥界体系",
     # v2.6
     "战斗体系",
+    # v2.10
+    "秘境体系",
+    # v2.11
+    "天材地宝体系",
 ]
 
 
@@ -142,3 +146,62 @@ def test_secret_realm_directory_has_at_least_8_files():
     """v2.10 后秘境体系/ 应至少有 8 篇 .md"""
     md_files = list((ROOT / "秘境体系").glob("*.md"))
     assert len(md_files) >= 8, f"秘境体系/ 仅有 {len(md_files)} 篇 .md，应 ≥8"
+
+
+# ── v2.11 天材地宝体系 ──
+
+def test_tian_cai_directory_exists():
+    """v2.11 天材地宝体系目录必须存在"""
+    path = ROOT / "天材地宝体系"
+    assert path.is_dir(), "天材地宝体系/ 目录必须存在"
+
+
+def test_tian_cai_yaml_exists():
+    """data/tian_cai.yaml 必须存在"""
+    path = ROOT / "data" / "tian_cai.yaml"
+    assert path.is_file(), "data/tian_cai.yaml 必须存在"
+
+
+def test_tian_cai_yaml_has_categories():
+    """tian_cai.yaml 必须含 7 个 categories"""
+    import yaml
+    with open(ROOT / "data" / "tian_cai.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "categories" in data
+    assert len(data["categories"]) >= 7
+
+
+def test_tian_cai_yaml_has_grades():
+    """tian_cai.yaml 必须含 6 个等级"""
+    import yaml
+    with open(ROOT / "data" / "tian_cai.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "grades" in data
+    assert len(data["grades"]) >= 6
+
+
+def test_tian_cai_yaml_has_attributes():
+    """tian_cai.yaml 必须含 15+ 属性"""
+    import yaml
+    with open(ROOT / "data" / "tian_cai.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "attributes" in data
+    assert len(data["attributes"]) >= 15
+
+
+def test_tian_cai_yaml_has_examples():
+    """tian_cai.yaml 必须含 herb/wood/metal/element/beast/exotic/celestial examples 各 ≥ 4"""
+    import yaml
+    with open(ROOT / "data" / "tian_cai.yaml") as f:
+        data = yaml.safe_load(f)
+    for field in ("herb_examples", "wood_examples", "metal_examples",
+                  "element_examples", "beast_examples",
+                  "exotic_examples", "celestial_examples"):
+        assert field in data, f"缺少 {field}"
+        assert len(data[field]) >= 4, f"{field} 少于 4 条"
+
+
+def test_tian_cai_directory_has_at_least_8_files():
+    """v2.11 后天材地宝体系/ 应至少有 8 篇 .md"""
+    md_files = list((ROOT / "天材地宝体系").glob("*.md"))
+    assert len(md_files) >= 8, f"天材地宝体系/ 仅有 {len(md_files)} 篇 .md，应 ≥8"

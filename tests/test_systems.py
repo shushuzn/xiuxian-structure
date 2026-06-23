@@ -96,3 +96,49 @@ def test_data_yaml_matches_system_dirs():
     yaml_files = [f.stem for f in data_dir.glob("*.yaml") if f.stem != "relations"]
     # 此测试较宽松：仅校验 yaml 文件数量 > 0
     assert len(yaml_files) >= 10, f"data/ 应有 ≥10 个 yaml，当前 {len(yaml_files)}"
+
+# ── v2.10 秘境体系（已存在但 24 体系）──
+
+def test_secret_realm_directory_exists():
+    """v2.10 秘境体系目录必须存在"""
+    path = ROOT / "秘境体系"
+    assert path.is_dir(), "秘境体系/ 目录必须存在"
+
+
+def test_secret_realm_yaml_exists():
+    """data/secret_realm.yaml 必须存在（v2.10 新增）"""
+    path = ROOT / "data" / "secret_realm.yaml"
+    assert path.is_file(), "data/secret_realm.yaml 必须存在"
+
+
+def test_secret_realm_yaml_has_forms():
+    """secret_realm.yaml 必须含 forms 字段"""
+    import yaml
+    with open(ROOT / "data" / "secret_realm.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "forms" in data
+    assert len(data["forms"]) >= 5
+
+
+def test_secret_realm_yaml_has_grades():
+    """secret_realm.yaml 必须含 5 个等级"""
+    import yaml
+    with open(ROOT / "data" / "secret_realm.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "grades" in data
+    assert len(data["grades"]) >= 5
+
+
+def test_secret_realm_yaml_has_examples():
+    """secret_realm.yaml 必须含至少 15 个实例"""
+    import yaml
+    with open(ROOT / "data" / "secret_realm.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "examples" in data
+    assert len(data["examples"]) >= 15
+
+
+def test_secret_realm_directory_has_at_least_8_files():
+    """v2.10 后秘境体系/ 应至少有 8 篇 .md"""
+    md_files = list((ROOT / "秘境体系").glob("*.md"))
+    assert len(md_files) >= 8, f"秘境体系/ 仅有 {len(md_files)} 篇 .md，应 ≥8"

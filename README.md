@@ -8,8 +8,12 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v2.8.0** · **23 体系** · 24 yaml · [📖 阅读更新日志](docs/CHANGELOG.md)
+**v2.10.0** · **23 体系** · 25 yaml · [📖 阅读更新日志](docs/CHANGELOG.md)
 
+> 🆕 v2.10 新增体系 — **秘境体系**（10 篇 .md + secret_realm.yaml）— 浮岛/空间/传承/灵药/矿脉/凶险/仙府
+>
+> 🆕 v2.9 关系图谱 — 跨体系 relations +53 条 / 221 总关系 / Mermaid 自动渲染
+>
 > 🆕 v2.8 互动引擎完善 — **境界突破模拟** / **回合制战斗** / **随机事件** 三大模块
 >
 > 🆕 v2.7 数据深化 — 4 轮扩展（阵法/符箓/功法/神通/灵气/灵根/心魔/雷劫/灵石/妖修/势力/契约/神识/飞升/境界/仙界/器灵/神界 9 大体系 +280 条）

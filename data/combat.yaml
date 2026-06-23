@@ -1,0 +1,266 @@
+# 战斗体系权威数据（v2.6 新增）
+# 涵盖修仙战斗的全部要素：神通/法相/领域/遁术/遁法/阵法战
+
+# 神通
+shen_tong:
+  - id: huo_yan_quan
+    name: 火焰拳
+    grade: 黄
+    realm: 下界
+    effect: 凝聚火属性灵力化为火焰拳影，范围攻击，威力随修为提升
+  - id: han_bing_zhang
+    name: 寒冰掌
+    grade: 玄
+    realm: 下界
+    effect: 掌出冰封，冻结敌人经脉与法力流转
+  - id: zi_dian_shen_lei
+    name: 紫电神雷
+    grade: 地
+    realm: 下界
+    effect: 引紫霄天雷化为电龙，破邪诛魔，对阴邪之力有额外克制
+  - id: qian_kun_yi_zhi
+    name: 乾坤一指
+    grade: 天
+    realm: 仙界
+    effect: 一指破万法，无视低阶防御，直指本源
+  - id: wan_xiang_tian_yin
+    name: 万象天印
+    grade: 仙
+    realm: 仙界
+    effect: 凝聚万象之力化为天印镇压，封印范围可达百里
+  - id: zhu_shen_jian_jue
+    name: 诛神剑诀
+    grade: 神
+    realm: 神界
+    effect: 以神念化剑，斩灭对手神魂，无视物理防御
+  - id: hun_yuan_shen_li
+    name: 混元神力
+    grade: 神
+    realm: 神界
+    effect: 引动混元之力强化自身，全属性大幅提升，持续期间免疫大部分控制
+  - id: mie_shi_tian_wei
+    name: 灭世天威
+    grade: 圣
+    realm: 神界
+    effect: 引天地规则共鸣，降下灭世之力，范围覆盖整个界面
+
+# 法相
+fa_xiang:
+  - id: jin_gang_fa_xiang
+    name: 金刚法相
+    min_realm: 结丹期
+    attribute: 防御
+    effect: 召唤金刚虚影护体，物理与法术防御大幅提升，持续一柱香
+  - id: mie_shi_fa_xiang
+    name: 灭世法相
+    min_realm: 元婴期
+    attribute: 攻击
+    effect: 化身修罗虚影，攻击力暴增三倍，但消耗寿元
+  - id: qing_lian_fa_xiang
+    name: 青莲法相
+    min_realm: 化神期
+    attribute: 净化
+    effect: 青莲绽放，净化负面状态，驱散诅咒与心魔干扰
+  - id: wu_xiang_fa_xiang
+    name: 无相法相
+    min_realm: 炼虚期
+    attribute: 变化
+    effect: 法相无形无相，可模仿对手招式，以彼之道还施彼身
+  - id: kun_peng_fa_xiang
+    name: 鲲鹏法相
+    min_realm: 合体期
+    attribute: 速度
+    effect: 化鲲鹏之翼，瞬间跨越千里，战斗中速度达到极致
+  - id: zhen_long_fa_xiang
+    name: 真龙法相
+    min_realm: 渡劫期
+    attribute: 威压
+    effect: 真龙降世，威压震慑低阶修士，可令对手战力大幅下降
+  - id: xian_lin_fa_xiang
+    name: 仙麟法相
+    min_realm: 大乘期
+    attribute: 祥瑞
+    effect: 仙麟现世，增幅自身气运，攻击附带因果之力
+  - id: shen_huang_fa_xiang
+    name: 神凰法相
+    min_realm: 仙人境
+    attribute: 涅槃
+    effect: 神凰浴火，濒死时触发涅槃重生，恢复全部状态
+
+# 领域
+ling_yu:
+  - id: lie_huo_yu
+    name: 烈火域
+    grade: 地
+    range: 百丈
+    effect: 领域内烈焰焚天，持续灼烧敌人，火属性功法威力倍增
+  - id: bing_yu
+    name: 冰域
+    grade: 玄
+    range: 五十丈
+    effect: 领域内温度骤降，冻结法力流动，减速并削弱敌人
+  - id: lei_ting_yu
+    name: 雷霆域
+    grade: 地
+    range: 八十丈
+    effect: 域内雷霆密布，对邪魔外道有额外克制，附带麻痹效果
+  - id: jian_yu
+    name: 剑域
+    grade: 天
+    range: 百丈
+    effect: 域内剑意纵横，以神御剑，可同时操控万千飞剑攻击
+  - id: zhong_li_yu
+    name: 重力域
+    grade: 玄
+    range: 三十丈
+    effect: 领域内重力倍增，压制对手移动速度与飞行能力
+  - id: shi_jian_yu
+    name: 时间域
+    grade: 仙
+    range: 十丈
+    effect: 领域内时间流速改变，施法者可加速自身或减速敌人
+  - id: mie_jie_yu
+    name: 灭界域
+    grade: 神
+    range: 千丈
+    effect: 领域内规则归零，所有法术与神通失效，仅凭肉身与意志战斗
+  - id: sheng_ling_yu
+    name: 生灵域
+    grade: 圣
+    range: 随心
+    effect: 领域即小世界，施法者即为领域之主，操控一切规则
+
+# 遁术
+dun_shu:
+  - id: jin_dun
+    element: 金
+    difficulty: 中等
+    speed: 极快
+    description: 借助金属性物质进行短距离瞬移，需有金属媒介
+  - id: mu_dun
+    element: 木
+    difficulty: 低等
+    speed: 中等
+    description: 借助草木植被转移身形，在森林中效果最佳
+  - id: shui_dun
+    element: 水
+    difficulty: 低等
+    speed: 中等
+    description: 化身为水融入江河湖泊，遇水则遁，无声无息
+  - id: huo_dun
+    element: 火
+    difficulty: 中等
+    speed: 快
+    description: 借火焰瞬移，遁走时伴有火光，隐蔽性较差但速度快
+  - id: tu_dun
+    element: 土
+    difficulty: 低等
+    speed: 慢
+    description: 遁入大地潜行，速度最慢但最为隐蔽，适合伏击
+  - id: feng_dun
+    element: 风
+    difficulty: 高等
+    speed: 极快
+    description: 化风而行，无形无影，高阶修士可乘风万里
+  - id: lei_dun
+    element: 雷
+    difficulty: 高等
+    speed: 瞬移
+    description: 以身化雷，瞬间跨越极大距离，但消耗巨大
+
+# 遁法（高阶遁术）
+dun_fa:
+  - id: shun_yi
+    type: 空间
+    difficulty: 极难
+    requirement: 分神期
+    description: 瞬间移动，无视地形障碍，距离受神识范围限制
+  - id: suo_di_cheng_cun
+    type: 空间
+    difficulty: 困难
+    requirement: 元婴期
+    description: 缩地成寸，一步可跨千里，长距离移动首选
+  - id: kong_jian_tiao_yue
+    type: 空间
+    difficulty: 极难
+    requirement: 化神期
+    description: 撕裂空间进行跳跃，可跨越小世界屏障
+  - id: shi_jian_ning_lan
+    type: 时间
+    difficulty: 传说
+    requirement: 渡劫期
+    description: 短暂凝滞局部时间，为自己创造出手机会
+  - id: shi_guang_dao_liu
+    type: 时间
+    difficulty: 传说
+    requirement: 大乘期
+    description: 小范围时光倒流，可逆转数息内的不利局面
+  - id: yin_guo_zhuan_yi
+    type: 因果
+    difficulty: 神话
+    requirement: 仙人境
+    description: 将自身所受伤害转移至因果关联目标，无视距离
+
+# 阵法战
+zhen_fa_zhan:
+  - id: jiu_xiao_lei_zhen
+    name: 九霄雷阵
+    type: 雷系攻击阵
+    effect: 引九霄天雷持续轰击，对魔道修士杀伤加倍
+    counter: 避雷法宝、土遁入地
+  - id: tian_ji_suan_zhen
+    name: 天机算阵
+    type: 推算型
+    effect: 预判对手所有动作，辅助我方闪避与反击
+    counter: 因果干扰、混沌遮蔽
+  - id: ba_gua_mi_zong
+    name: 八卦迷踪
+    type: 迷幻型
+    effect: 八卦方位不断变化，困敌于阵内无法脱身
+    counter: 破阵神识、天眼通
+  - id: wu_xing_sheng_mie
+    name: 五行生灭
+    type: 平衡型
+    effect: 五行相生相克，循环不息，攻防一体
+    counter: 五行俱全者可平分秋色
+  - id: wan_jian_gui_zong
+    name: 万剑归宗
+    type: 攻击型
+    effect: 以阵法催动万剑齐发，剑势如潮，连绵不绝
+    counter: 重甲防御、剑域对冲
+  - id: zhou_tian_xing_dou
+    name: 周天星斗
+    type: 星辰型
+    effect: 引周天星辰之力加持，威力与星象位置相关
+    counter: 遮蔽天机、昼时压制
+  - id: tai_xu_huan_jing
+    name: 太虚幻境
+    type: 幻阵
+    effect: 制造真实幻境，困敌于内心最深处的执念
+    counter: 清心诀、佛门慧眼
+  - id: hun_dun_si_xiang
+    name: 混沌四象
+    type: 上古阵
+    effect: 引混沌之力化四象神兽，攻防兼备，威力堪比神级
+    counter: 规则级破法
+
+# 战斗境界差异
+combat_realms:
+  - id: xia_jie
+    realm: 下界
+    description: 以法术与法器对轰为主，依赖法力总量与神通品级，神识辅助定位
+  - id: xian_jie
+    realm: 仙界
+    description: 法则初窥，战斗融入天地法则，领域与法相成为常规手段
+  - id: shen_jie
+    realm: 神界
+    description: 概念级对抗，战斗不再局限于物理层面，涉及时间、空间、因果
+  - id: mo_jie
+    realm: 魔界
+    description: 混乱法则主导，战斗以破坏与吞噬为核心，强者为王
+  - id: ming_jie
+    realm: 冥界
+    description: 灵魂层面的对抗，肉身无效，战斗结果取决于神魂强度与意志力
+  - id: hun_dun
+    realm: 混沌
+    description: 规则未定，原始之力碰撞，唯有掌握本源者方能在此战斗

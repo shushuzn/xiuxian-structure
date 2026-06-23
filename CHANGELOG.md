@@ -4,6 +4,31 @@
 
 ## [Unreleased]
 
+### v2.9 互动引擎深化
+- 🆕 **WorldBook** 类：关键词触发的补充设定
+  - `WorldBookEntry` (id/keywords/title/content/priority)
+  - `lookup(text, max_entries=3)` 按关键词匹配
+  - 按 priority 自动排序
+- 🆕 **AchievementTracker** 类：成就系统
+  - `Achievement` (id/name/description/condition/points)
+  - `check_all(state)` 批量检查解锁
+  - `get_score()` / `get_progress()` 统计
+- 🆕 **EndingAnalyzer** 类：多结局分析
+  - 自动从 Story 提取所有 ending 节点
+  - 按名字智能分类 (good/bad/secret/normal)
+  - `predict_ending(score)` 预测最可能结局
+  - `get_completeness()` 故事完整度
+- 🆕 **AINarrator** 类：AI 叙事
+  - `narrate_state(state, context)` 状态叙事
+  - `narrate_change(state, attr, old, new)` 变化叙事
+  - 9 境界模板 (炼气→大乘)
+- 🎮 **3 个新选项动作**：`worldbook` / `achievement` / `narrate`
+- 🆕 **Engine 扩展**：`attach_worldbook()` / `attach_achievements()` / `check_achievements()`
+- 📖 **stories/v29_demo.md** — v2.9 演示故事
+- 🧪 **+31 单测**：WorldBook (7) / Achievement (8) / EndingAnalyzer (4) / AINarrator (6) / Engine 集成 (6)
+- ✅ **192 → 223 tests** (+31)
+- ✅ **coverage 81.45% → 83.69%**
+
 ### D.3 CI 强化
 - 📈 **覆盖率阈值**：70% → **80%**（`pyproject.toml` `[tool.coverage.report].fail_under`）
 - 🆕 **mypy 类型检查**：新增 `[tool.mypy]` 配置 + `requirements-dev.txt` 加 `mypy>=0.991` + CI 新增 `Mypy type check` 步骤

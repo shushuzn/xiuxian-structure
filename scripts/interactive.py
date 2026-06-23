@@ -356,6 +356,209 @@ class EngineEvent:
     refs: List[str] = field(default_factory=list)
 
 
+# ────────────────────────────────────────────────────────
+# 4.5 世界书 / 成就 / 多结局 / AI 叙事（v2.9 新增，定义在 Engine 之前）
+# ────────────────────────────────────────────────────────
+
+@dataclass
+class WorldBookEntry:
+    """世界书条目：关键词触发的补充设定"""
+    id: str
+    keywords: List[str]
+    title: str
+    content: str
+    priority: int = 0
+    insert_position: str = "after"
+    enabled: bool = True
+
+    def matches(self, text: str) -> bool:
+        for kw in self.keywords:
+            if kw in text:
+                return True
+        return False
+
+
+class WorldBook:
+    def __init__(self):
+        self.entries: List[WorldBookEntry] = []
+
+    def add(self, entry: WorldBookEntry) -> None:
+        self.entries.append(entry)
+        self.entries.sort(key=lambda e: -e.priority)
+
+    def lookup(self, text: str, max_entries: int = 3) -> List[WorldBookEntry]:
+        matches = []
+        for entry in self.entries:
+            if entry.enabled and entry.matches(text):
+                matches.append(entry)
+                if len(matches) >= max_entries:
+                    break
+        return matches
+
+    def to_dict(self) -> dict:
+        return {"entries": [
+            {"id": e.id, "keywords": e.keywords, "title": e.title,
+             "content": e.content, "priority": e.priority,
+             "insert_position": e.insert_position, "enabled": e.enabled}
+            for e in self.entries
+        ]}
+
+
+@dataclass
+class Achievement:
+    id: str
+    name: str
+    description: str
+    condition: str
+    points: int = 10
+    unlocked: bool = False
+    unlock_message: str = ""
+
+    def check(self, state) -> bool:
+        if self.unlocked:
+            return False
+        try:
+            return bool(eval(self.condition, {"__builtins__": {}}, {"state": state}))
+        except Exception:
+            return False
+
+
+class AchievementTracker:
+    def __init__(self):
+        self.achievements: List[Achievement] = []
+        self.unlocked_history: List[dict] = []
+
+    def add(self, achievement: Achievement) -> None:
+        self.achievements.append(achievement)
+
+    def check_all(self, state) -> List[Achievement]:
+        newly = []
+        for ach in self.achievements:
+            if ach.check(state):
+                ach.unlocked = True
+                newly.append(ach)
+                self.unlocked_history.append({
+                    "id": ach.id, "name": ach.name,
+                    "message": ach.unlock_message or f"成就解锁：{ach.name}",
+                    "points": ach.points,
+                })
+        return newly
+
+    def get_score(self) -> int:
+        return sum(a.points for a in self.achievements if a.unlocked)
+
+    def get_progress(self) -> dict:
+        total = len(self.achievements)
+        unlocked = sum(1 for a in self.achievements if a.unlocked)
+        return {
+            "total": total, "unlocked": unlocked, "locked": total - unlocked,
+            "percent": (unlocked / total * 100) if total > 0 else 0,
+        }
+
+
+@dataclass
+class EndInfo:
+    id: str
+    title: str
+    type: str
+    rarity: str = "common"
+    score_min: int = 0
+    score_max: int = 100
+
+
+class EndingAnalyzer:
+    def __init__(self, story):
+        self.story = story
+        self.endings: List[EndInfo] = []
+        for nid, node in story.nodes.items():
+            if node.type == "ending":
+                etype = "normal"
+                rarity = "common"
+                if "good" in nid or "正" in nid or "happy" in nid:
+                    etype = "good"
+                    rarity = "epic"
+                elif "bad" in nid or "死" in nid or "fail" in nid or "败" in nid:
+                    etype = "bad"
+                elif "secret" in nid or "秘" in nid or "hidden" in nid:
+                    etype = "secret"
+                    rarity = "legendary"
+                self.endings.append(EndInfo(
+                    id=nid, title=node.text[:30] or nid,
+                    type=etype, rarity=rarity,
+                ))
+
+    def get_endings(self) -> List[EndInfo]:
+        return self.endings
+
+    def predict_ending(self, current_score: int) -> EndInfo:
+        for e in self.endings:
+            if e.score_min <= current_score <= e.score_max:
+                return e
+        return self.endings[0] if self.endings else EndInfo(
+            id="unknown", title="未知", type="normal"
+        )
+
+    def get_completeness(self) -> dict:
+        return {
+            "total_endings": len(self.endings),
+            "good_endings": sum(1 for e in self.endings if e.type == "good"),
+            "bad_endings": sum(1 for e in self.endings if e.type == "bad"),
+            "secret_endings": sum(1 for e in self.endings if e.type == "secret"),
+            "normal_endings": sum(1 for e in self.endings if e.type == "normal"),
+            "legendary_endings": sum(1 for e in self.endings if e.rarity == "legendary"),
+        }
+
+
+class AINarrator:
+    REALM_TEMPLATES = {
+        "炼气期": "你是一名{realm_desc}的炼气期修士，灵根{linggen}，灵石{lingshi}。",
+        "筑基期": "你已踏入{realm_desc}的筑基期，{linggen}修士，{lingshi}枚灵石。",
+        "结丹期": "金丹已成，你迈入{realm_desc}的结丹期，{linggen}，{lingshi}枚灵石。",
+        "元婴期": "元婴初成，你已踏入{realm_desc}的元婴期。",
+        "化神期": "神识化形，你已踏入{realm_desc}的化神期。",
+        "炼虚期": "虚空中有道，你已踏入{realm_desc}的炼虚期。",
+        "合体期": "天人之境，你已踏入{realm_desc}的合体期。",
+        "渡劫期": "天劫将至，你已踏入{realm_desc}的渡劫期。",
+        "大乘期": "大道将成，你已踏入{realm_desc}的大乘期。",
+    }
+
+    def __init__(self, world):
+        self.world = world
+
+    def narrate_state(self, state, context: str = "") -> str:
+        realm = state.get("境界", "炼气期")
+        linggen = state.get("灵根", "伪灵根")
+        lingshi = state.get("灵石", 0)
+        realm_desc = "下界"
+        if realm in ("元婴期", "化神期", "炼虚期", "合体期", "渡劫期", "大乘期"):
+            realm_desc = "灵界"
+        elif realm in ("人仙期", "地仙期", "天仙期", "玄仙期", "真仙期", "仙君期", "仙王期", "仙帝期"):
+            realm_desc = "仙界"
+        elif realm in ("神人期", "神王期", "神帝期"):
+            realm_desc = "神界"
+        template = self.REALM_TEMPLATES.get(realm, "境界 {realm}，{linggen}，{灵石} 灵石。")
+        narrative = template.format(realm=realm, realm_desc=realm_desc, linggen=linggen, lingshi=lingshi)
+        if context:
+            narrative += "\n" + context
+        return narrative
+
+    def narrate_change(self, state, attr: str, old_val, new_val) -> str:
+        delta = (new_val - old_val) if isinstance(new_val, (int, float)) and isinstance(old_val, (int, float)) else 0
+        if attr == "灵石":
+            if delta > 0:
+                return f"你获得了 {delta} 枚灵石（当前：{new_val}）。"
+            elif delta < 0:
+                return f"你消耗了 {-delta} 枚灵石（剩余：{new_val}）。"
+        elif attr == "境界":
+            return f"你的境界提升了：{old_val} → {new_val}！"
+        elif attr == "声望":
+            if delta > 0:
+                return f"你的声望提高了 {delta} 点（当前：{new_val}）。"
+            elif delta < 0:
+                return f"你的声望降低了 {-delta} 点（当前：{new_val}）。"
+        return f"{attr} 变化：{old_val} → {new_val}"
+
+
 class Engine:
     def __init__(self, world: World, story: Story, state: Optional[State] = None):
         self.world = world
@@ -363,6 +566,24 @@ class Engine:
         self.state = state or State()
         self.history: List[str] = []
         self.log: List[str] = []
+        # v2.9 新增：世界书、成就、AI 叙事器
+        self._worldbook: Optional[WorldBook] = None
+        self._achievements: Optional[AchievementTracker] = None
+        self._narrator: Optional[AINarrator] = AINarrator(world)
+
+    def attach_worldbook(self, wb: WorldBook) -> None:
+        """附加世界书"""
+        self._worldbook = wb
+
+    def attach_achievements(self, tracker: AchievementTracker) -> None:
+        """附加成就追踪器"""
+        self._achievements = tracker
+
+    def check_achievements(self) -> List[Achievement]:
+        """检查并解锁新成就"""
+        if not self._achievements:
+            return []
+        return self._achievements.check_all(self.state)
 
     def play(self) -> None:
         """交互式（CLI）"""
@@ -562,6 +783,35 @@ class Engine:
                 "changes": changes,
                 "choices": ev.choices,
             }
+        # ── v2.9 新增：世界书 / 成就 / AI 叙事 ──
+        if "worldbook" in chosen:
+            wb_id = chosen["worldbook"]
+            if hasattr(self, "_worldbook") and self._worldbook:
+                for entry in self._worldbook.entries:
+                    if entry.id == wb_id:
+                        self.state.attrs["last_worldbook"] = {
+                            "id": entry.id,
+                            "title": entry.title,
+                            "content": entry.content,
+                        }
+                        break
+        if "achievement" in chosen:
+            ach_id = chosen["achievement"]
+            if hasattr(self, "_achievements") and self._achievements:
+                for ach in self._achievements.achievements:
+                    if ach.id == ach_id:
+                        ach.unlocked = True
+                        self.state.attrs["last_achievement"] = {
+                            "id": ach.id,
+                            "name": ach.name,
+                            "message": ach.unlock_message or f"成就解锁：{ach.name}",
+                            "points": ach.points,
+                        }
+                        break
+        if "narrate" in chosen:
+            ctx = chosen["narrate"] if isinstance(chosen["narrate"], str) else ""
+            narrator = AINarrator(self.world)
+            self.state.attrs["last_narrative"] = narrator.narrate_state(self.state, ctx)
 
     def save(self) -> dict:
         """返回可序列化的存档"""

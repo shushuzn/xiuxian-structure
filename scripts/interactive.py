@@ -24,6 +24,7 @@ interactive.py — 互动小说引擎
 - 节点里 refs: [境界/炼气期, 符箓/火球符]  引擎自动加跳转链接
 """
 import json
+import random
 import re
 import sys
 from pathlib import Path
@@ -504,6 +505,63 @@ class Engine:
             )
         if "realm" in chosen:
             self.state.realm = chosen["realm"]
+        # ── v2.8 新增：突破 / 战斗 / 随机事件 ──
+        if "breakthrough" in chosen:
+            to_realm = chosen["breakthrough"].get("to") if isinstance(chosen["breakthrough"], dict) else chosen["breakthrough"]
+            sim = BreakthroughSimulator(self.world, self.state)
+            result = sim.attempt(to_realm)
+            # 把结果存到 state.attrs.last_breakthrough，供下一节点渲染
+            self.state.attrs["last_breakthrough"] = {
+                "success": result.success,
+                "from": result.from_realm,
+                "to": result.to_realm,
+                "message": result.message,
+                "heart_demon": result.heart_demon_encountered,
+                "tribulation_passed": result.tribulation_passed,
+            }
+            # 应用状态变更
+            self.state.attrs.update(result.new_attrs)
+            for k, v in result.lost_attrs.items():
+                if k == "breakthrough_pills":
+                    self.state.attrs[k] = v
+                else:
+                    self.state.attrs[k] = v
+        if "combat" in chosen:
+            enemy = chosen["combat"].get("enemy") if isinstance(chosen["combat"], dict) else chosen["combat"]
+            cs = CombatSystem(self.world, self.state, enemy)
+            # 自动战斗（玩家攻击 1 次，敌人反击）
+            cs.player_turn("attack")
+            if not cs.is_over():
+                cs.enemy_turn()
+            result = cs.result()
+            self.state.attrs["last_combat"] = {
+                "enemy_id": result.enemy_id,
+                "enemy_name": result.enemy_name,
+                "victory": result.victory,
+                "fled": result.fled,
+                "turns": [{"actor": t.attacker, "action": t.action, "damage": t.damage, "crit": t.crit, "message": t.message} for t in result.turns],
+                "player_hp": result.player_hp,
+                "enemy_hp": result.enemy_hp,
+            }
+            # 应用奖励
+            for k, v in result.rewards.items():
+                if k == "item":
+                    self.state.add_item(v)
+                else:
+                    self.state.incr(k, v)
+        if "random_event" in chosen:
+            ev_type = chosen["random_event"].get("type") if isinstance(chosen["random_event"], dict) else None
+            seed = chosen["random_event"].get("seed") if isinstance(chosen["random_event"], dict) else None
+            eng = RandomEventEngine(self.world, self.state, seed=seed)
+            ev = eng.trigger(ev_type)
+            changes = eng.apply(ev)
+            self.state.attrs["last_event"] = {
+                "type": ev.event_type,
+                "title": ev.title,
+                "description": ev.description,
+                "changes": changes,
+                "choices": ev.choices,
+            }
 
     def save(self) -> dict:
         """返回可序列化的存档"""
@@ -534,7 +592,420 @@ class Engine:
 
 
 # ────────────────────────────────────────────────────────
-# 5. 剧本解析（DSL）
+# 5. 突破模拟（v2.8 新增）
+# ────────────────────────────────────────────────────────
+
+@dataclass
+class BreakthroughResult:
+    """突破结果"""
+    success: bool
+    from_realm: str
+    to_realm: str
+    heart_demon_encountered: Optional[str] = None  # 遭遇的心魔
+    tribulation_passed: bool = False                # 是否渡过天劫
+    new_attrs: Dict[str, Any] = field(default_factory=dict)  # 新增属性
+    lost_attrs: Dict[str, Any] = field(default_factory=dict)  # 失去属性
+    message: str = ""                                # 提示信息
+
+
+class BreakthroughSimulator:
+    """境界突破模拟器
+
+    根据玩家当前状态 (境界、灵根、丹药、心境) 和目标境界，
+    计算突破成功率、心魔遭遇、天劫渡过、最终结果。
+    """
+
+    # 灵根 → 突破加成（简化版）
+    SPIRIT_ROOT_BONUS = {
+        "tian_ling_gen": 0.3,
+        "bian_yi_ling_gen": 0.25,
+        "jian_gen": 0.2,
+        "dao_gen": 0.3,
+        "shen_gen": 0.4,
+        "xian_gen": 0.4,
+        "zhen_ling_gen": 0.1,
+        "wei_ling_gen": -0.2,
+        "fei_ling_gen": -0.4,
+        "天灵根": 0.3,
+        "变异灵根": 0.25,
+        "剑灵根": 0.2,
+        "道灵根": 0.3,
+        "神灵根": 0.4,
+        "仙灵根": 0.4,
+        "真灵根": 0.1,
+        "伪灵根": -0.2,
+        "废灵根": -0.4,
+    }
+
+    # 境界 → 基础成功率（中英双键）
+    REALM_BASE_SUCCESS = {
+        "lianqi": 0.95, "zhuji": 0.85, "jiedan": 0.7,
+        "yuanying": 0.5, "huashen": 0.3, "lianxu": 0.2,
+        "heti": 0.1, "dujie": 0.05, "dacheng": 0.01,
+        "炼气期": 0.95, "筑基期": 0.85, "结丹期": 0.7,
+        "元婴期": 0.5, "化神期": 0.3, "炼虚期": 0.2,
+        "合体期": 0.1, "渡劫期": 0.05, "大乘期": 0.01,
+    }
+
+    # 境界顺序（中英双键）
+    BIG_REALM_ORDER = [
+        "lianqi", "zhuji", "jiedan", "yuanying",
+        "huashen", "lianxu", "heti", "dujie", "dacheng",
+        "炼气期", "筑基期", "结丹期", "元婴期",
+        "化神期", "炼虚期", "合体期", "渡劫期", "大乘期",
+    ]
+
+    def __init__(self, world: World, state: State):
+        self.world = world
+        self.state = state
+
+    def attempt(self, to_realm: str) -> BreakthroughResult:
+        """尝试突破到 to_realm"""
+        from_realm = self.state.get("境界", "炼气期")
+        # 基础成功率
+        base = self.REALM_BASE_SUCCESS.get(from_realm, 0.5)
+        # 灵根加成
+        linggen = self.state.get("灵根", "伪灵根")
+        bonus = self.SPIRIT_ROOT_BONUS.get(linggen, 0.0)
+        # 丹药加成（每颗 +0.05，最多 +0.3）
+        pills = self.state.attrs.get("breakthrough_pills", 0)
+        pill_bonus = min(0.3, pills * 0.05)
+        # 心境加成（基于 npc_favor / items / 修为）
+        heart_bonus = self._calc_heart_bonus()
+        # 渡劫
+        tribulation_passed = self._pass_tribulation(from_realm, to_realm)
+        if not tribulation_passed:
+            return BreakthroughResult(
+                success=False, from_realm=from_realm, to_realm=to_realm,
+                tribulation_passed=False,
+                lost_attrs={"境界": from_realm, "breakthrough_pills": max(0, pills - 1)},
+                message=f"雷劫失败，{from_realm}跌回"
+            )
+        # 心魔遭遇
+        heart_demon = self._encounter_heart_demon(from_realm)
+        if heart_demon and not self._overcome_heart_demon(heart_demon):
+            return BreakthroughResult(
+                success=False, from_realm=from_realm, to_realm=to_realm,
+                heart_demon_encountered=heart_demon, tribulation_passed=True,
+                lost_attrs={"breakthrough_pills": max(0, pills - 1)},
+                message=f"心魔『{heart_demon}』侵袭，突破失败"
+            )
+        # 成功率
+        final = min(0.99, base + bonus + pill_bonus + heart_bonus)
+        success = random.random() < final
+        if not success:
+            return BreakthroughResult(
+                success=False, from_realm=from_realm, to_realm=to_realm,
+                heart_demon_encountered=heart_demon, tribulation_passed=True,
+                lost_attrs={"breakthrough_pills": max(0, pills - 1)},
+                message=f"突破失败，气运不济"
+            )
+        return BreakthroughResult(
+            success=True, from_realm=from_realm, to_realm=to_realm,
+            heart_demon_encountered=heart_demon, tribulation_passed=True,
+            new_attrs={"境界": to_realm, "breakthrough_pills": 0},
+            message=f"突破成功：{from_realm} → {to_realm}！"
+        )
+
+    def _calc_heart_bonus(self) -> float:
+        """心境加成：基于 NPC 好感度（-0.1~+0.1）"""
+        if not self.state.npc_favor:
+            return 0.0
+        avg = sum(self.state.npc_favor.values()) / len(self.state.npc_favor)
+        # 50 中性，0-100 映射到 -0.1~+0.1
+        return (avg - 50) / 500.0
+
+    def _pass_tribulation(self, from_r: str, to_r: str) -> bool:
+        """天劫渡过判定"""
+        # 大境界突破才需要渡劫
+        if from_r not in self.BIG_REALM_ORDER or to_r not in self.BIG_REALM_ORDER:
+            return True
+        fi = self.BIG_REALM_ORDER.index(from_r)
+        ti = self.BIG_REALM_ORDER.index(to_r)
+        if ti - fi != 1:
+            return True  # 跨境界直接通过
+        # 渡劫概率 80%（可通过 anti_tribulation 道具提升）
+        anti = self.state.attrs.get("anti_tribulation", 0)
+        return random.random() < (0.8 + min(0.15, anti * 0.05))
+
+    def _encounter_heart_demon(self, from_r: str) -> Optional[str]:
+        """按境界遭遇心魔"""
+        demons_by_realm = {
+            "lianqi": ["qie_mo", "you_zi_mo"],
+            "zhuji": ["qie_mo", "you_zi_mo", "pan_ju_mo"],
+            "jiedan": ["tan_mo", "zhi_nian_mo", "yu_mo", "ai_mo"],
+            "yuanying": ["chen_mo", "tan_mo", "ai_guo_mo"],
+            "huashen": ["chi_mo", "wu_mo", "sheng_si_mo"],
+            "lianxu": ["chi_mo", "wu_mo"],
+            "heti": ["e_mo", "wu_mo"],
+            "dujie": ["e_mo"],
+        }
+        pool = demons_by_realm.get(from_r, [])
+        if not pool or random.random() > 0.5:
+            return None
+        return random.choice(pool)
+
+    def _overcome_heart_demon(self, demon: str) -> bool:
+        """心魔对抗（基于状态）"""
+        # 简单判定：每 3 个 NPC 好感 ≥70 提升 20% 几率
+        good_npcs = sum(1 for f in self.state.npc_favor.values() if f >= 70)
+        base = 0.5 + good_npcs * 0.1
+        return random.random() < base
+
+
+# ────────────────────────────────────────────────────────
+# 6. 战斗系统（v2.8 新增）
+# ────────────────────────────────────────────────────────
+
+@dataclass
+class CombatTurn:
+    """单回合结果"""
+    attacker: str  # "player" / "enemy"
+    action: str    # "attack" / "defend" / "skill" / "flee"
+    damage: int
+    crit: bool
+    message: str
+
+
+@dataclass
+class CombatResult:
+    """完整战斗结果"""
+    enemy_id: str
+    enemy_name: str
+    victory: bool
+    fled: bool
+    turns: List[CombatTurn]
+    player_hp: int
+    enemy_hp: int
+    rewards: Dict[str, Any] = field(default_factory=dict)  # {灵石: X, item: "Y"}
+
+
+class CombatSystem:
+    """回合制战斗系统
+
+    玩家 vs 怪物（来自 monsters.yaml），
+    基于境界差 + 法器 + 灵根计算伤害。
+    """
+
+    # 境界（中→英）→ 基础血量
+    REALM_HP = {
+        # 中文名
+        "炼气期": 100, "筑基期": 200, "结丹期": 500,
+        "元婴期": 1000, "化神期": 2000, "炼虚期": 5000,
+        "合体期": 10000, "渡劫期": 20000, "大乘期": 50000,
+        # 英文 id
+        "lianqi": 100, "zhuji": 200, "jiedan": 500,
+        "yuanying": 1000, "huashen": 2000, "lianxu": 5000,
+        "heti": 10000, "dujie": 20000, "dacheng": 50000,
+    }
+
+    # 境界 → 基础攻击
+    REALM_ATK = {
+        "炼气期": 20, "筑基期": 50, "结丹期": 120,
+        "元婴期": 300, "化神期": 800, "炼虚期": 2000,
+        "合体期": 5000, "渡劫期": 12000, "大乘期": 30000,
+        "lianqi": 20, "zhuji": 50, "jiedan": 120,
+        "yuanying": 300, "huashen": 800, "lianxu": 2000,
+        "heti": 5000, "dujie": 12000, "dacheng": 30000,
+    }
+
+    def __init__(self, world: World, state: State, enemy_id: str):
+        self.world = world
+        self.state = state
+        self.enemy_id = enemy_id
+        self.enemy = world.find_by_id("monsters", enemy_id) or {
+            "id": enemy_id, "name": enemy_id,
+            "grade": "普通妖兽", "attribute": "wu",
+        }
+        self.player_hp = self.REALM_HP.get(state.get("境界", "lianqi"), 100)
+        self.player_atk = self.REALM_ATK.get(state.get("境界", "lianqi"), 20)
+        # 怪物血量与攻击（按 grade 推算）
+        grade_map = {
+            "普通妖兽": (50, 10), "灵兽": (80, 15), "妖王": (300, 60),
+            "妖圣": (1000, 200), "圣兽": (2000, 400), "上古凶兽": (5000, 1000),
+        }
+        ehp, eatk = grade_map.get(self.enemy.get("grade", "普通妖兽"), (50, 10))
+        self.enemy_hp = ehp
+        self.enemy_atk = eatk
+        self.turns: List[CombatTurn] = []
+        self.ended = False
+
+    def player_turn(self, action: str) -> CombatTurn:
+        """玩家一回合"""
+        if self.ended:
+            return CombatTurn("player", action, 0, False, "战斗已结束")
+        if action == "flee":
+            self.ended = True
+            turn = CombatTurn("player", "flee", 0, False, "你选择逃跑")
+            self.turns.append(turn)
+            return turn
+        if action == "defend":
+            self.enemy_atk = max(1, int(self.enemy_atk * 0.5))  # 下回合减伤
+            turn = CombatTurn("player", "defend", 0, False, "你严守防御")
+            self.turns.append(turn)
+            return turn
+        # attack / skill
+        crit = random.random() < 0.15
+        skill_mult = 1.5 if action == "skill" else 1.0
+        dmg = int(self.player_atk * skill_mult * (2 if crit else 1))
+        self.enemy_hp = max(0, self.enemy_hp - dmg)
+        turn = CombatTurn(
+            "player", action, dmg, crit,
+            f"你{'施法' if action == 'skill' else '攻击'}造成 {dmg} 伤害{'（暴击）' if crit else ''}"
+        )
+        self.turns.append(turn)
+        if self.enemy_hp == 0:
+            self.ended = True
+        return turn
+
+    def enemy_turn(self) -> Optional[CombatTurn]:
+        """敌人一回合"""
+        if self.ended:
+            return None
+        crit = random.random() < 0.1
+        dmg = int(self.enemy_atk * (2 if crit else 1))
+        self.player_hp = max(0, self.player_hp - dmg)
+        turn = CombatTurn(
+            "enemy", "attack", dmg, crit,
+            f"{self.enemy['name']}攻击你造成 {dmg} 伤害{'（暴击）' if crit else ''}"
+        )
+        self.turns.append(turn)
+        if self.player_hp == 0:
+            self.ended = True
+        return turn
+
+    def is_over(self) -> bool:
+        return self.ended
+
+    def victory(self) -> bool:
+        return self.ended and self.enemy_hp == 0 and self.player_hp > 0
+
+    def fled(self) -> bool:
+        return self.ended and self.player_hp > 0 and self.enemy_hp > 0
+
+    def result(self) -> CombatResult:
+        rewards = {}
+        if self.victory():
+            # 按 grade 给奖励
+            grade = self.enemy.get("grade", "普通妖兽")
+            reward_map = {
+                "普通妖兽": {"灵石": 5, "item": "妖丹碎"},
+                "灵兽": {"灵石": 15, "item": "灵兽角"},
+                "妖王": {"灵石": 50, "item": "妖王内丹"},
+                "妖圣": {"灵石": 200, "item": "妖圣精血"},
+                "圣兽": {"灵石": 1000, "item": "圣兽羽"},
+                "上古凶兽": {"灵石": 5000, "item": "凶兽魂"},
+            }
+            rewards = reward_map.get(grade, {"灵石": 5})
+        return CombatResult(
+            enemy_id=self.enemy_id, enemy_name=self.enemy.get("name", self.enemy_id),
+            victory=self.victory(), fled=self.fled(), turns=self.turns,
+            player_hp=self.player_hp, enemy_hp=self.enemy_hp, rewards=rewards,
+        )
+
+
+# ────────────────────────────────────────────────────────
+# 7. 随机事件（v2.8 新增）
+# ────────────────────────────────────────────────────────
+
+@dataclass
+class RandomEvent:
+    """随机事件结果"""
+    event_type: str  # "encounter" / "treasure" / "tribulation" / "npc" / "weather"
+    title: str
+    description: str
+    rewards: Dict[str, Any] = field(default_factory=dict)  # 获得
+    costs: Dict[str, Any] = field(default_factory=dict)    # 失去
+    choices: List[dict] = field(default_factory=list)      # 可选后续
+
+
+class RandomEventEngine:
+    """随机事件生成器
+
+    根据玩家境界、灵根、所在界面生成随机事件。
+    """
+
+    EVENT_POOL = {
+        "encounter": [
+            {"title": "偶遇妖兽", "desc": "前路遇到一只 {grade}{attribute}妖兽", "rewards": {"灵石": 5}, "choices": ["战斗", "绕道", "无视"]},
+            {"title": "山间遇险", "desc": "在山间遇到一只饥饿的狼妖", "rewards": {}, "costs": {"声望": -1}, "choices": ["战斗", "逃跑"]},
+            {"title": "发现奇兽", "desc": "偶遇一只灵智初开的灵兽", "rewards": {"item": "灵兽蛋"}, "choices": ["收养", "放生", "售卖"]},
+        ],
+        "treasure": [
+            {"title": "发现灵草", "desc": "在山崖下发现一株 {grade}灵草", "rewards": {"item": "灵草"}, "choices": ["采摘", "研究", "离开"]},
+            {"title": "古人洞府", "desc": "误入一处古人洞府，发现 {item}", "rewards": {"灵石": 100, "item": "古法宝"}, "choices": ["取走", "不动", "毁掉"]},
+            {"title": "天降灵石雨", "desc": "天上突然降下灵石雨", "rewards": {"灵石": 200}, "choices": ["拾取", "观望"]},
+        ],
+        "tribulation": [
+            {"title": "突降雷劫", "desc": "天空骤然黑云密布，雷劫将至", "costs": {"breakthrough_pills": -1}, "choices": ["应劫", "逃避"]},
+            {"title": "心魔试炼", "desc": "心魔忽然来袭", "costs": {"声望": -2}, "choices": ["坚定", "动摇"]},
+        ],
+        "npc": [
+            {"title": "偶遇散修", "desc": "路上遇到一位 {npc_kind} 散修", "rewards": {"favor": {"散修": 5}}, "choices": ["结交", "无视"]},
+            {"title": "仙人指路", "desc": "山中遇一白胡子老者指点", "rewards": {"声望": 5}, "choices": ["拜谢", "询问"]},
+        ],
+        "weather": [
+            {"title": "天降甘霖", "desc": "天降甘霖，万物滋润", "rewards": {"声望": 1}, "choices": ["享受"]},
+            {"title": "风暴来袭", "desc": "突遇灵气风暴", "costs": {"灵石": -10}, "choices": ["躲避", "硬抗"]},
+        ],
+    }
+
+    def __init__(self, world: World, state: State, seed: Optional[int] = None):
+        self.world = world
+        self.state = state
+        if seed is not None:
+            random.seed(seed)
+
+    def trigger(self, event_type: Optional[str] = None) -> RandomEvent:
+        """触发一个随机事件。event_type=None 时随机选。"""
+        if event_type is None:
+            event_type = random.choice(list(self.EVENT_POOL.keys()))
+        pool = self.EVENT_POOL.get(event_type, [])
+        if not pool:
+            return RandomEvent(event_type, "无事件", "无事发生")
+        ev = random.choice(pool)
+        # 简单模板替换
+        realm = self.state.get("境界", "lianqi")
+        linggen = self.state.get("灵根", "wei_ling_gen")
+        desc = ev["desc"].format(
+            grade=random.choice(["百", "千", "万", "十万"]),
+            attribute=random.choice(["金", "木", "水", "火", "土", "雷", "冰", "风"]),
+            npc_kind=random.choice(["炼气", "筑基", "结丹"]),
+            item=random.choice(["古剑", "古镜", "古玉简", "古宝"]),
+        )
+        return RandomEvent(
+            event_type=event_type,
+            title=ev["title"],
+            description=desc,
+            rewards=ev.get("rewards", {}),
+            costs=ev.get("costs", {}),
+            choices=ev.get("choices", []),
+        )
+
+    def apply(self, event: RandomEvent) -> Dict[str, Any]:
+        """应用事件到状态，返回状态变更"""
+        changes = {"rewards": dict(event.rewards), "costs": dict(event.costs)}
+        for k, v in event.rewards.items():
+            if k == "item":
+                self.state.add_item(v)
+            elif k == "favor" and isinstance(v, dict):
+                for npc, delta in v.items():
+                    self.state.modify_npc_favor(npc, delta)
+            else:
+                self.state.incr(k, v)
+        for k, v in event.costs.items():
+            if k == "breakthrough_pills":
+                self.state.attrs["breakthrough_pills"] = max(0, self.state.attrs.get("breakthrough_pills", 0) + v)
+            elif k == "favor" and isinstance(v, dict):
+                for npc, delta in v.items():
+                    self.state.modify_npc_favor(npc, delta)
+            else:
+                self.state.incr(k, v)
+        return changes
+
+
+# ────────────────────────────────────────────────────────
+# 8. 剧本解析（DSL）
 # ────────────────────────────────────────────────────────
 
 NODE_HEADER = re.compile(r"^##\s+节点\s+(\S+)(?:\s+\((\S+)\))?\s*$", re.MULTILINE)

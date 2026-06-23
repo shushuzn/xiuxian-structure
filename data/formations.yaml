@@ -1,100 +1,208 @@
-# formations.yaml — 阵法体系权威数据
-
-# 阵法类别
 categories:
-  - id: gong_ji
-    name: 攻击型阵法
-    description: 以阵法激发攻击法术
-  - id: fang_yu
-    name: 防御型阵法
-    description: 形成护罩阻挡攻击
-  - id: kun_di
-    name: 困敌型阵法
-    description: 困住敌人无法脱身
-  - id: ju_ling
-    name: 聚灵型阵法
-    description: 聚集天地灵气加速修炼
-  - id: huan_shu
-    name: 幻术型阵法
-    description: 制造幻境迷惑敌人
-  - id: fu_zhu
-    name: 辅助型阵法
-    description: 加速炼丹炼器、增幅法术
-
-# 阵法等级
-grades:
-  - id: fan_zhen
-    name: 凡阵
-    realm: lianqi
-    difficulty: low
-  - id: ling_zhen
-    name: 灵阵
-    realm: zhuji
-    difficulty: medium
-  - id: bao_zhen
-    name: 宝阵
-    realm: jiedan
-    difficulty: high
-  - id: xian_zhen
-    name: 仙阵
-    realm: yuanying_or_above
-    difficulty: extreme
-
-# 布阵方式
-deploy_types:
-  - id: lin_shi
-    name: 临时布阵
-    description: 战前快速布置
-  - id: yong_jiu
-    name: 永久布阵
-    description: 长期布设，威力大但成本高
-  - id: sui_shen
-    name: 随身布阵
-    description: 刻在法器上随身携带
-
-# 阵法构成要素
+- description: 以阵法激发攻击法术
+  id: gong_ji
+  name: 攻击型阵法
+- description: 形成护罩阻挡攻击
+  id: fang_yu
+  name: 防御型阵法
+- description: 困住敌人无法脱身
+  id: kun_di
+  name: 困敌型阵法
+- description: 聚集天地灵气加速修炼
+  id: ju_ling
+  name: 聚灵型阵法
+- description: 制造幻境迷惑敌人
+  id: huan_shu
+  name: 幻术型阵法
+- description: 加速炼丹炼器、增幅法术
+  id: fu_zhu
+  name: 辅助型阵法
 components:
-  - id: zhen_qi
-    name: 阵旗/阵盘
-    description: 布阵的物理媒介
-  - id: zhen_yan
-    name: 阵眼
-    description: 阵法核心，放置灵石或法器
-  - id: zhen_ji
-    name: 阵基
-    description: 阵法根基
-  - id: zhen_tu
-    name: 阵图
-    description: 布阵的图纸与规律
-
-# 示例阵法（待扩展）
+- description: 布阵的物理媒介
+  id: zhen_qi
+  name: 阵旗/阵盘
+- description: 阵法核心，放置灵石或法器
+  id: zhen_yan
+  name: 阵眼
+- description: 阵法根基
+  id: zhen_ji
+  name: 阵基
+- description: 布阵的图纸与规律
+  id: zhen_tu
+  name: 阵图
+deploy_types:
+- description: 战前快速布置
+  id: lin_shi
+  name: 临时布阵
+- description: 长期布设，威力大但成本高
+  id: yong_jiu
+  name: 永久布阵
+- description: 刻在法器上随身携带
+  id: sui_shen
+  name: 随身布阵
 examples:
-  - id: jing_hai_shen_deng_zhen
-    name: 净海神灯阵
-    category: fang_yu
-    grade: bao_zhen
-    deploy: yong_jiu
-    note: "顶级宗门的护山大阵示例"
-  - id: jiu_xiao_lei_zhen
-    name: 九霄雷阵
-    category: gong_ji
-    grade: bao_zhen
-    deploy: lin_shi
-    note: "雷属性攻击阵法示例"
-  - id: mi_tian_huan_zhen
-    name: 迷天幻阵
-    category: huan_shu
-    grade: ling_zhen
-    deploy: sui_shen
-    note: "幻术阵法示例"
-  - id: du_jie_zhen
-    name: 渡劫阵
-    category: fu_zhu
-    grade: bao_zhen
-    deploy: lin_shi
-    note: "修士突破大境界时使用的辅助阵法，可降低天劫威力"
-    references:
-      - ../阵法体系/渡劫阵.md
-
+- category: fang_yu
+  deploy: yong_jiu
+  grade: bao_zhen
+  id: jing_hai_shen_deng_zhen
+  name: 净海神灯阵
+  note: 顶级宗门的护山大阵示例
+- category: gong_ji
+  deploy: lin_shi
+  grade: bao_zhen
+  id: jiu_xiao_lei_zhen
+  name: 九霄雷阵
+  note: 雷属性攻击阵法示例
+- category: huan_shu
+  deploy: sui_shen
+  grade: ling_zhen
+  id: mi_tian_huan_zhen
+  name: 迷天幻阵
+  note: 幻术阵法示例
+- category: fu_zhu
+  deploy: lin_shi
+  grade: bao_zhen
+  id: du_jie_zhen
+  name: 渡劫阵
+  note: 修士突破大境界时使用的辅助阵法，可降低天劫威力
+  references:
+  - ../阵法体系/渡劫阵.md
+- category: gong_ji
+  deploy: lin_shi
+  grade: bao_zhen
+  id: tian_gang_zhen
+  name: 天罡阵
+  note: 三十六天罡排列，攻防一体
+- category: gong_ji
+  deploy: lin_shi
+  grade: bao_zhen
+  id: di_sha_zhen
+  name: 地煞阵
+  note: 七十二地煞排列，杀机四伏
+- category: gong_ji
+  deploy: yong_jiu
+  grade: xian_zhen
+  id: zhou_tian_xing_dou_zhen
+  name: 周天星斗阵
+  note: 引周天星斗之力，仙阵极品
+- category: fang_yu
+  deploy: yong_jiu
+  grade: bao_zhen
+  id: shi_fang_jin_gang_zhen
+  name: 十方金刚阵
+  note: 十方金刚护法，坚不可摧
+- category: fang_yu
+  deploy: yong_jiu
+  grade: bao_zhen
+  id: si_xiang_sheng_shou_zhen
+  name: 四象圣兽阵
+  note: 青龙白虎朱雀玄武四象镇守
+- category: kun_di
+  deploy: lin_shi
+  grade: ling_zhen
+  id: wu_xing_sheng_dun_zhen
+  name: 五行遁阵
+  note: 五行循环，困敌于内
+- category: kun_di
+  deploy: sui_shen
+  grade: ling_zhen
+  id: ba_gua_mi_zong_zhen
+  name: 八卦迷踪阵
+  note: 八卦方位变幻，入者迷失方向
+- category: ju_ling
+  deploy: yong_jiu
+  grade: fan_zhen
+  id: ju_ling_zhen
+  name: 聚灵阵
+  note: 最基础的灵气聚集阵法
+- category: ju_ling
+  deploy: yong_jiu
+  grade: ling_zhen
+  id: tian_di_ju_ling_zhen
+  name: 天地聚灵阵
+  note: 天地灵气汇聚，速度十倍于聚灵阵
+- category: ju_ling
+  deploy: yong_jiu
+  grade: bao_zhen
+  id: xian_ling_ju_ling_zhen
+  name: 仙灵聚灵阵
+  note: 可聚仙气，仙界宗门根本
+- category: huan_shu
+  deploy: lin_shi
+  grade: ling_zhen
+  id: wan_huan_zhen
+  name: 万幻阵
+  note: 千变万化，幻象丛生
+- category: huan_shu
+  deploy: sui_shen
+  grade: bao_zhen
+  id: qi_qing_huan_zhen
+  name: 七情幻阵
+  note: 引动七情六欲，心志不坚者陷落
+- category: fu_zhu
+  deploy: yong_jiu
+  grade: ling_zhen
+  id: lian_qi_zhen
+  name: 炼器阵
+  note: 辅助炼器，提升法器品质
+- category: fu_zhu
+  deploy: yong_jiu
+  grade: ling_zhen
+  id: lian_dan_zhen
+  name: 炼丹阵
+  note: 辅助炼丹，提升丹药成功率
+- category: fu_zhu
+  deploy: yong_jiu
+  grade: bao_zhen
+  id: tian_huo_lian_dan_zhen
+  name: 天火炼丹阵
+  note: 引天火炼丹，宗师级炼丹必备
+- category: kun_di
+  deploy: yong_jiu
+  grade: bao_zhen
+  id: xu_jie_zhen
+  name: 虚界阵
+  note: 开辟独立虚界空间，困锁强敌
+- category: fu_zhu
+  deploy: lin_shi
+  grade: ling_zhen
+  id: rou_shen_zhen
+  name: 肉身阵
+  note: 以修士自身为阵基，瞬间激发
+- category: huan_shu
+  deploy: sui_shen
+  grade: xian_zhen
+  id: sui_xin_zhen
+  name: 随心阵
+  note: 心意所动阵法即成，仙级手段
+- category: kun_di
+  deploy: lin_shi
+  grade: ling_zhen
+  id: jiu_gong_zhen
+  name: 九宫阵
+  note: 九宫格布阵，步步杀机
+- category: gong_ji
+  deploy: yong_jiu
+  grade: bao_zhen
+  id: mo_huang_zhen
+  name: 魔皇阵
+  note: 魔界皇级大阵，吞噬生灵气血
+grades:
+- difficulty: low
+  id: fan_zhen
+  name: 凡阵
+  realm: lianqi
+- difficulty: medium
+  id: ling_zhen
+  name: 灵阵
+  realm: zhuji
+- difficulty: high
+  id: bao_zhen
+  name: 宝阵
+  realm: jiedan
+- difficulty: extreme
+  id: xian_zhen
+  name: 仙阵
+  realm: yuanying_or_above
 references:
-  - ../阵法体系/阵法.md
+- ../阵法体系/阵法.md

@@ -62,6 +62,46 @@ concentrations:
   id: lin_yuan
   name: 麟源之地
   supports_realm: lianqi
+- description: 化液极致，灵气已近灵液
+  id: hua_ye_ji
+  name: 化液极
+  supports_realm: lianxu
+- description: 灵气已成灵液
+  id: ling_ye_cheng
+  name: 灵液成
+  supports_realm: hetong
+- description: 仙气之源已出
+  id: xian_yuan_chu
+  name: 仙源出
+  supports_realm: dacheng
+- description: 神气之源已出
+  id: shen_yuan_chu
+  name: 神源出
+  supports_realm: xian_jie
+- description: 天地合一的至高境界
+  id: tian_ti
+  name: 天地一体
+  supports_realm: shen_di
+- description: 无极无限
+  id: wu_ji
+  name: 无极
+  supports_realm: dao_zu
+- description: 太极归一
+  id: tai_ji
+  name: 太极
+  supports_realm: tai_yi
+- description: 阴阳两仪
+  id: liang_yi
+  name: 两仪
+  supports_realm: shen_di
+- description: 四象化生
+  id: si_xiang
+  name: 四象
+  supports_realm: lianxu
+- description: 八卦运转
+  id: ba_gua
+  name: 八卦
+  supports_realm: hetong
 realms:
 - default_concentration: xi_bao
   description: 灵气稀薄到普通，大型灵脉罕见
@@ -156,3 +196,53 @@ veins:
   name: 玉麟灵脉
   suitable_org: medium_sect
   supports_realm: jiedan
+- coverage_km: 150
+  id: feng_xue_lingmai
+  name: 凤穴灵脉
+  suitable_org: top_sect
+  supports_realm: hetong
+- coverage_km: 200
+  id: qi_lin_xue_lingmai
+  name: 麒麟穴灵脉
+  suitable_org: top_sect
+  supports_realm: hetong
+- coverage_km: 100
+  id: gui_xue_lingmai
+  name: 鬼穴灵脉
+  suitable_org: large_sect
+  supports_realm: yuanying
+- coverage_km: 800
+  id: shen_xue_lingmai_x
+  name: 神穴灵脉·高阶
+  suitable_org: divine
+  supports_realm: xian_jie
+- coverage_km: 500
+  id: xian_xue_lingmai_x
+  name: 仙穴灵脉·高阶
+  suitable_org: xian_sect
+  supports_realm: dacheng
+- coverage_km: 400
+  id: mo_xue_lingmai_x
+  name: 魔穴灵脉·高阶
+  suitable_org: mo_sect
+  supports_realm: hetong
+- coverage_km: 350
+  id: ming_xue_lingmai_x
+  name: 冥穴灵脉·高阶
+  suitable_org: ming_sect
+  supports_realm: hetong
+- coverage_km: 50
+  id: xu_kong_lingmai
+  name: 虚空灵脉
+  suitable_org: medium_sect
+  supports_realm: huashen
+- coverage_km: 30
+  id: shi_guang_lingmai
+  name: 时光灵脉
+  suitable_org: medium_sect
+  supports_realm: huashen
+- coverage_km: 40
+  id: kong_jian_lingmai
+  name: 空间灵脉
+  suitable_org: medium_sect
+  supports_realm: huashen

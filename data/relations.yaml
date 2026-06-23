@@ -482,3 +482,91 @@ relations:
     to: domains:tian_ting
     type: parallels
     description: "仙界天庭对应神界天庭"
+
+  # ── v2.4: 魔界 → 仙界（镜像关系）──
+  - from: demon_aether:xi_mo
+    to: concentrations:xi_bao
+    type: parallels
+    description: "稀薄魔气对应稀薄灵气"
+  - from: demon_titles:mo_di
+    to: titles:xian_di
+    type: parallels
+    description: "魔帝与仙帝同级"
+
+  # ── v2.4: 入魔路径 ──
+  - from: demon_races:ren_zu_mo
+    to: demon_ascension:voluntary_demon
+    type: triggers
+    description: "人族魔族后裔主动入魔概率高"
+
+  # ── v2.4: 魔界内部关系 ──
+  - from: demon_grades:fan_mo
+    to: demon_titles:san_mo
+    type: enables
+    description: "凡人魔格起步为散魔"
+
+  # ── v2.4: 冥界 → 仙界（死后世界）──
+  - from: underworld_titles:ming_di
+    to: titles:xian_di
+    type: parallels
+    description: "冥帝与仙帝同级"
+
+  # ── v2.4: 冥界内部 + 与心魔 ──
+  - from: underworld_tribulations:wan_hun_shi_xin_jie
+    to: types:chi_mo
+    type: triggers
+    description: "万魂噬心劫源自嗔魔"
+  - from: underworld_races:gui_zu
+    to: underworld_titles:you_hun
+    type: enables
+    description: "鬼族死后必为游魂起点"
+  - from: underworld_races:pan_guan_zu
+    to: underworld_domains:feng_du
+    type: enables
+    description: "判官族执掌酆都审判"
+
+  # ── v2.4: 冥界轮回 → 六道 ──
+  - from: underworld_domains:liu_dao_lun_hui_si
+    to: six_realms:ren_dao
+    type: enables
+    description: "六道轮回司掌管人道投胎"
+  - from: underworld_domains:liu_dao_lun_hui_si
+    to: six_realms:tian_dao
+    type: enables
+    description: "六道轮回司掌管天道投胎"
+  - from: underworld_domains:liu_dao_lun_hui_si
+    to: six_realms:sheng_chu_dao
+    type: enables
+    description: "六道轮回司掌管畜生道投胎"
+  - from: underworld_domains:liu_dao_lun_hui_si
+    to: six_realms:xiu_luo_dao
+    type: enables
+    description: "六道轮回司掌管修罗道投胎"
+  - from: underworld_domains:liu_dao_lun_hui_si
+    to: six_realms:e_gui_dao
+    type: enables
+    description: "六道轮回司掌管饿鬼道投胎"
+  - from: underworld_domains:liu_dao_lun_hui_si
+    to: six_realms:di_yu_dao
+    type: enables
+    description: "六道轮回司掌管地狱道投胎"
+
+  # ── v2.4: 魔界 → 神界 ──
+  - from: demon_aether:mo_yuan
+    to: aether:dao_qi
+    type: parallels
+    description: "魔源石等级对应道气"
+  - from: demon_tribulations:xin_mo_jie
+    to: tribulations:xin_mo_shen_jie
+    type: parallels
+    description: "魔界心魔界对应神界心魔神劫"
+
+  # ── v2.4: 冥界 → 神界 ──
+  - from: underworld_aether:si_yuan
+    to: aether:jing_hua_shen
+    type: parallels
+    description: "死源对应神气精华"
+  - from: underworld_domains:feng_du
+    to: domains:tian_ting
+    type: parallels
+    description: "酆都对应天庭（阴阳两界的权力中心）"

@@ -1,0 +1,296 @@
+# 魔界权威数据（v2.4 新增）
+# 魔界是修仙界的第四界面，仙人/神人入魔后跃迁至此
+# 魔界与仙界/神界/冥界并列，是天道法则的反面显化
+
+# 魔气浓度等级
+demon_aether:
+  - id: xi_mo
+    name: 稀薄魔气
+    level: 1
+    suitable_for: 散魔
+  - id: pu_tong_mo
+    name: 普通魔气
+    level: 2
+    suitable_for: 魔徒/魔使
+  - id: nong_yu_mo
+    name: 浓郁魔气
+    level: 3
+    suitable_for: 魔官/魔将
+  - id: hua_ye_mo
+    name: 化液魔气
+    level: 4
+    suitable_for: 魔君/魔王
+  - id: jing_hua_mo
+    name: 魔气精华
+    level: 5
+    suitable_for: 魔尊/魔帝
+  - id: mo_yuan
+    name: 魔源
+    level: 6
+    suitable_for: 魔祖（传说）
+
+# 魔石等级
+demon_stones:
+  - id: xia_pin_mo
+    name: 下品魔石
+    energy_unit: 1
+    usage: 普通魔修日常修炼
+  - id: zhong_pin_mo
+    name: 中品魔石
+    energy_unit: 100
+    usage: 高阶魔修修炼
+  - id: shang_pin_mo
+    name: 上品魔石
+    energy_unit: 10000
+    usage: 魔君/魔王
+  - id: ji_pin_mo
+    name: 极品魔石
+    energy_unit: 1000000
+    usage: 魔尊/魔帝
+  - id: mo_jing
+    name: 魔晶
+    energy_unit: 100000000
+    usage: 传说级
+  - id: mo_yuan_shi
+    name: 魔源石
+    energy_unit: 不可测
+    usage: 魔祖专属
+
+# 魔职等级（8 档，与仙职 8 档对称）
+demon_titles:
+  - id: san_mo
+    name: 散魔
+    level: 1
+    status: 最低
+    resources: 极少
+  - id: mo_tu
+    name: 魔徒
+    level: 2
+    status: 初阶
+    resources: 基础
+  - id: mo_shi
+    name: 魔使
+    level: 3
+    status: 下阶
+    resources: 较少
+  - id: mo_guan
+    name: 魔官
+    level: 4
+    status: 中阶
+    resources: 中等
+  - id: mo_jiang
+    name: 魔将
+    level: 5
+    status: 中高阶
+    resources: 较多
+  - id: mo_jun
+    name: 魔君
+    level: 6
+    status: 高阶
+    resources: 多
+  - id: mo_wang
+    name: 魔王
+    level: 7
+    status: 极高阶
+    resources: 极多
+  - id: mo_di
+    name: 魔帝
+    level: 8
+    status: 至高阶
+    resources: 无限
+
+# 魔格等级（6 档，与神格 6 档对称）
+demon_grades:
+  - id: fan_mo
+    name: 凡人魔格
+    title_limit: 散魔
+  - id: xian_mo
+    name: 仙级魔格
+    title_limit: 魔徒/魔使
+  - id: zhen_mo
+    name: 真魔格
+    title_limit: 魔官/魔将
+  - id: da_mo
+    name: 大魔格
+    title_limit: 魔君/魔王
+  - id: zhi_mo
+    name: 至魔格
+    title_limit: 魔帝
+  - id: dao_mo
+    name: 道魔格
+    title_limit: 魔祖（传说）
+
+# 魔劫（5 类）
+demon_tribulations:
+  - id: shi_xin_jie
+    name: 噬心魔劫
+    frequency: 必渡
+    effect: 斩断仙/神因果
+  - id: tian_mo_jie
+    name: 天魔劫
+    frequency: 5000
+    effect: 魔躯转化为魔体
+  - id: xue_mo_jie
+    name: 血魔劫
+    frequency: 10000
+    effect: 魔魂淬炼
+  - id: yu_mo_jie
+    name: 欲魔劫
+    frequency: 20000
+    effect: 斩断执念
+  - id: xin_mo_jie
+    name: 心魔劫
+    frequency: 50000
+    effect: 超脱仙/神道心
+
+# 魔域（4 大魔域）
+demon_domains:
+  - id: you_du
+    name: 幽都
+    type: 顶级魔朝
+    status: 魔界正统之一
+    scale: 数千万魔修
+    leader: 魔帝级
+  - id: xue_hai
+    name: 血海
+    type: 顶级魔门联盟
+    status: 幽都核心
+    scale: 数百万魔修
+    leader: 多位魔尊
+  - id: jiu_you
+    name: 九幽
+    type: 中立魔域
+    status: 万魔交汇
+    scale: 数百万魔修
+  - id: wan_mo_dian
+    name: 万魔殿
+    type: 隐秘魔域
+    status: 独立
+    scale: 不详
+
+# 魔兽
+demon_beasts:
+  - id: qiong_qi
+    name: 穷奇
+    grade: 魔兽王
+    ability: 凶兽之首
+  - id: tao_wu
+    name: 梼杌
+    grade: 魔兽王
+    ability: 混沌凶兽
+  - id: tao_tie
+    name: 饕餮
+    grade: 魔兽王
+    ability: 吞噬万物
+  - id: jiu_wei_mo_hu
+    name: 九尾魔狐
+    grade: 圣兽
+    ability: 幻术无双
+  - id: an_qi_lin
+    name: 暗麒麟
+    grade: 魔兽王
+    ability: 黑暗守护
+  - id: ming_she
+    name: 冥蛇
+    grade: 圣兽
+    ability: 剧毒无双
+
+# 魔器
+demon_artifacts:
+  - id: shi_shen_qiang
+    name: 弑神枪
+    grade: 至魔器
+    ability: 可伤神人
+  - id: you_ming_bai_gu_fan
+    name: 幽冥白骨幡
+    grade: 至魔器
+    ability: 召唤幽冥白骨大军
+  - id: lun_hui_jing
+    name: 轮回镜
+    grade: 至魔器
+    ability: 扭曲轮回
+  - id: wan_mo_ta
+    name: 万魔塔
+    grade: 至魔器
+    ability: 镇压万魔
+  - id: xue_hai_luo_pan
+    name: 血海罗盘
+    grade: 至魔器
+    ability: 指引血海方向
+  - id: a_bi_jian
+    name: 阿鼻剑
+    grade: 至魔器
+    ability: 杀伐第一魔器
+
+# 魔族
+demon_races:
+  - id: luo_sha_zu
+    name: 罗刹族
+    origin: 魔界古老种族
+    talent: 美貌/迷惑/幻术
+  - id: ye_cha_zu
+    name: 夜叉族
+    origin: 魔界守护者种族
+    talent: 飞行/火焰/战斗
+  - id: xiu_luo_zu
+    name: 修罗族
+    origin: 魔界战斗种族
+    talent: 战斗/嗜血/好战
+  - id: a_xiu_luo_zu
+    name: 阿修罗族
+    origin: 修罗族与神族混血
+    talent: 战斗+神力
+  - id: mo_zu
+    name: 魔族（广义）
+    origin: 魔界原住种族统称
+    talent: 杀戮/嗜血/欲望
+  - id: ren_zu_mo
+    name: 人族魔族后裔
+    origin: 飞魔者繁衍
+    talent: 学习能力强/悟性高
+
+# 入魔者类型
+demon_ascension:
+  - id: forced_demon
+    name: 被逼堕魔
+    rate: 50%
+    grade: 凡人魔格
+    note: 需重头开始
+  - id: voluntary_demon
+    name: 主动入魔
+    rate: 30%
+    grade: 仙级魔格
+    note: 可直接任魔官
+  - id: xian_ren_betray
+    name: 仙人叛入
+    rate: 15%
+    grade: 真魔格
+    note: 可开宗立派
+  - id: mo_di_reincarnation
+    name: 魔帝转世
+    rate: 5%
+    grade: 大魔格
+    note: 需谨慎培养
+
+# 魔界纪元（6 纪元）
+demon_eras:
+  - id: hong_meng
+    name: 鸿蒙纪元
+    time: 魔界诞生
+    key_event: 魔祖开魔辟地（传说）
+  - id: tai_gu
+    name: 太古纪元
+    key_event: 四大凶兽确立魔界方位
+  - id: yuan_gu
+    name: 远古纪元
+    key_event: 幽都成立，罗刹/修罗两族崛起
+  - id: shang_gu
+    name: 上古纪元
+    key_event: 阿修罗族诞生，人族魔帝出现
+  - id: zhong_gu
+    name: 中古纪元
+    key_event: 第 1 位下界入魔者渡魔劫
+  - id: dang_dai
+    name: 当代纪元
+    key_event: 近万年人魔交流增加
+    current: true

@@ -8,8 +8,10 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v2.0.0** · **19 体系** · **120 篇体系 .md** · 19 yaml · 33 PR 已 merge · [📖 阅读 v2.0.0 release notes](https://github.com/shushuzn/xiuxian-structure/releases/tag/v2.0.0)
+**v2.4.0** · **22 体系** · 21 yaml · [📖 阅读更新日志](docs/CHANGELOG.md)
 
+> 🆕 v2.4 大版本：新增 **魔界体系**（12 篇）+ **冥界体系**（12 篇）— 仙界背面 → 魔界 / 仙陨之后 → 冥界
+>
 > 🆕 v2.3 大版本：新增 **神界体系**（12 篇）— 仙帝之上 → 神界
 >
 > v2.0 大版本：新增 **飞升体系**（10 篇）— 大乘之上 → 仙界
@@ -166,7 +168,6 @@ xiuxian-structure/
 │   ├── 主从契约.md
 │   └── 魂契.md
 ├── 飞升体系/                   # 🆕 v2.0 大版本
-├── 神界体系/                   # 🆕 v2.3 大版本（仙帝之上 → 神界）
 │   ├── 飞升.md
 │   ├── 飞升之劫.md
 │   ├── 界面壁障.md
@@ -177,6 +178,9 @@ xiuxian-structure/
 │   ├── 仙界势力.md
 │   ├── 仙界功法.md
 │   └── 下界飞升者.md
+├── 神界体系/                   # 🆕 v2.3 大版本（仙帝之上 → 神界）
+├── 魔界体系/                   # 🆕 v2.4 大版本（仙界反面 → 魔界）
+├── 冥界体系/                   # 🆕 v2.4 大版本（死后世界 → 冥界）
 │
 ├── data/                       # 结构化数据（程序可读）
 │   ├── realms.yaml             # 境界

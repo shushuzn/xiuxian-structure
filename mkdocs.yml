@@ -137,8 +137,6 @@ nav:
           - 框架: 契约体系/契约.md
       - 飞升体系:
           - 框架: 飞升体系/飞升.md
-      - 仙界体系:
-          - 框架: 仙界体系/仙界.md
       - 神界体系:
           - 框架: 神界体系/神界.md
       - 魔界体系:
@@ -151,7 +149,6 @@ nav:
           - 框架: 时空体系/时空总览.md
   - 互动故事:
       - 测灵殿的选择: stories/demo_measuring_spirit.md
-      - 四大界面: stories/demo_sijie.md
       - v2.8 互动引擎: stories/v28_demo.md
       - v2.9 世界书/成就/AI 叙事: stories/v29_demo.md
       - v2.15 跨境界试炼: stories/v215_demo.md

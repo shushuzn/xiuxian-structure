@@ -25,15 +25,13 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: pip install -r requirements-dev.txt
-      - name: Build (non-strict: 项目内 22 个预存 warning)
+      - name: Build (strict: D.5 已修复所有 22 个预存 warning)
         run: |
-          # v2.18: 构建检查
-          # 使用非严格模式：项目内大量文档使用锚点引用（[#属性] 等），
-          # 部分锚点已迁移或重命名，mkdocs 视为 warning 但不影响站点功能。
-          # 严格模式会失败（D.4 计划后续逐步修复）。
-          echo "🔍 mkdocs build..."
-          mkdocs build
-          echo "✅ build success"
+          # D.5: 严格模式构建检查
+          # 22 个预存 warning 已全部修复 (新增 总览/魔格/魔职 文件 + 修复链接)
+          echo "🔍 mkdocs strict build..."
+          mkdocs build --strict
+          echo "✅ strict build passed (0 warnings)"
       - name: Verify build artifacts
         run: |
           echo "📊 构建产物统计："

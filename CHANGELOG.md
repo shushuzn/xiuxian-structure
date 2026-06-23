@@ -50,6 +50,30 @@
 
 ## [Unreleased]
 
+### D.5 mkdocs 预存 warning 修复
+- 🆕 **新增文件** (3)：
+  - `心魔体系/心魔劫.md` — 心魔劫专题
+  - `魔界体系/魔格.md` — 魔格等级体系
+  - `魔界体系/魔职.md` — 魔职职位体系
+- 🆕 **新增总览文件** (4)：
+  - `势力体系/势力总览.md` (= 势力.md)
+  - `功法体系/功法总览.md` (= 功法.md)
+  - `法器体系/法器总览.md` (= 法器.md)
+  - `器灵体系/器灵总览.md` (= 器灵.md)
+- 🔗 **docs_src symlinks** (8)：
+  - 3 体系总览软链
+  - 心魔劫/魔格/魔职 软链
+  - README_EN/CHANGELOG/CODE_OF_CONDUCT 软链
+- 🔧 **mkdocs.yml 修复**：
+  - 仙界体系 → 飞升体系/仙界
+  - 移除 四大界面 (demo_sijie.md)
+- 🔧 **README_EN.md 链接修复**：
+  - 修复 5 处相对路径
+  - 2 处改为 GitHub URL
+- ✅ **mkdocs build --strict 通过** (0 warnings, was 22)
+- ✅ **validate.py 警告**：17 → 7
+- 📊 **构建产物**：243 → 252 HTML pages (22MB)
+
 ### D.4 文档站 CI 增强
 - 📝 **mkdocs.yml 增强**：
   - 新增 6 个体系到 nav (天材地宝/宗门/战斗/因果/时空)

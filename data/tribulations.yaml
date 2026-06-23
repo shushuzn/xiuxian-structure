@@ -1,74 +1,203 @@
-# 雷劫体系权威数据（v1.5+）
-# 雷劫按强度分三档，每档与特定境界突破绑定
-
-# 雷劫档位
-grades:
-  - id: san_jiu_tian_jie
-    name: 三九天劫
-    rank: 中阶
-    thunder_count: 9
-    bind_realm: yuanying          # 突破到该境界时承受
-    references:
-      - ../雷劫体系/三九天劫.md
-
-  - id: liu_jiu_tian_jie
-    name: 六九天劫
-    rank: 高阶
-    thunder_count: 18
-    bind_realm: huashen           # 突破到该境界时承受
-    references:
-      - ../雷劫体系/六九天劫.md
-
-  - id: jiu_jiu_tian_jie
-    name: 九九天劫
-    rank: 至高阶
-    thunder_count: 27
-    bind_realm: dujie             # 突破到该境界时承受
-    references:
-      - ../雷劫体系/九九天劫.md
-
-# 特殊：飞升之劫（渡劫→大乘的最后阶段）
-special:
-  - id: jiu_jiu_tian_jie_feisheng
-    name: 九九天劫·飞升之劫
-    rank: 至高阶·特殊
-    thunder_count: 27
-    bind_realm: dacheng
-    note: "渡劫期→大乘的最后三道雷，渡过后须立即飞升仙界"
-    references:
-      - ../雷劫体系/九九天劫.md
-
-# 渡过收益
 benefits:
-  - id: lei_jie_cui_ti
-    name: 雷劫淬体
-    applies_to: [realm.body, realm.shenshi, realm.fali]
-    description: "肉身/神魂/法力三重升华"
-    references:
-      - ../雷劫体系/雷劫淬体.md
-
-# 失败代价
+- applies_to:
+  - realm.body
+  - realm.shenshi
+  - realm.fali
+  description: 肉身/神魂/法力三重升华
+  id: lei_jie_cui_ti
+  name: 雷劫淬体
+  references:
+  - ../雷劫体系/雷劫淬体.md
 costs:
-  - id: san_gong_qing
-    name: 轻散功
-    level: 1
-    consequence: "当前境界修为尽失，退回前一境界"
-    rate: 20
-    references:
-      - ../雷劫体系/散功.md
-
-  - id: san_gong_zhong
-    name: 重散功
-    level: 2
-    consequence: "当前境界、道基、根基尽毁，沦为废人"
-    rate: 50
-    references:
-      - ../雷劫体系/散功.md
-
-  - id: san_gong_wan
-    name: 形神俱灭
-    level: 3
-    consequence: "肉身、神魂、法力、元婴一同毁灭"
-    rate: 30
-    references:
-      - ../雷劫体系/散功.md
+- consequence: 当前境界修为尽失，退回前一境界
+  id: san_gong_qing
+  level: 1
+  name: 轻散功
+  rate: 20
+  references:
+  - ../雷劫体系/散功.md
+- consequence: 当前境界、道基、根基尽毁，沦为废人
+  id: san_gong_zhong
+  level: 2
+  name: 重散功
+  rate: 50
+  references:
+  - ../雷劫体系/散功.md
+- consequence: 肉身、神魂、法力、元婴一同毁灭
+  id: san_gong_wan
+  level: 3
+  name: 形神俱灭
+  rate: 30
+  references:
+  - ../雷劫体系/散功.md
+grades:
+- bind_realm: yuanying
+  id: san_jiu_tian_jie
+  name: 三九天劫
+  rank: 中阶
+  references:
+  - ../雷劫体系/三九天劫.md
+  thunder_count: 9
+- bind_realm: huashen
+  id: liu_jiu_tian_jie
+  name: 六九天劫
+  rank: 高阶
+  references:
+  - ../雷劫体系/六九天劫.md
+  thunder_count: 18
+- bind_realm: dujie
+  id: jiu_jiu_tian_jie
+  name: 九九天劫
+  rank: 至高阶
+  references:
+  - ../雷劫体系/九九天劫.md
+  thunder_count: 27
+- bind_realm: jiedan
+  id: xin_mie_tian_jie
+  name: 心灭天劫
+  note: 心魔化身之劫，结丹期必经
+  rank: 特殊
+  references: []
+  thunder_count: 3
+- bind_realm: yuanying
+  id: hun_po_tian_jie
+  name: 魂破天劫
+  note: 元婴期心魔化形之劫
+  rank: 特殊
+  references: []
+  thunder_count: 6
+- bind_realm: huashen
+  id: shen_luo_tian_jie
+  name: 神落天劫
+  note: 化神期神魂大劫
+  rank: 特殊
+  references: []
+  thunder_count: 9
+- bind_realm: lianqi_to_zhuji
+  id: wu_xing_tian_jie
+  name: 五行天劫
+  note: 五行合一之劫
+  rank: 中阶
+  references: []
+  thunder_count: 15
+- bind_realm: zhuji_to_jiedan
+  id: yin_yang_tian_jie
+  name: 阴阳天劫
+  note: 阴阳合运之劫
+  rank: 中阶
+  references: []
+  thunder_count: 12
+- bind_realm: jiedan
+  id: ba_gua_tian_jie
+  name: 八卦天劫
+  note: 八卦运转之劫
+  rank: 中阶
+  references: []
+  thunder_count: 8
+- bind_realm: zhuji
+  id: zhu_que_tian_jie
+  name: 朱雀天劫
+  note: 火凤凰形之劫
+  rank: 中阶
+  references: []
+  thunder_count: 9
+- bind_realm: zhuji
+  id: xuan_wu_tian_jie
+  name: 玄武天劫
+  note: 玄武玄水之劫
+  rank: 中阶
+  references: []
+  thunder_count: 9
+- bind_realm: zhuji
+  id: qing_long_tian_jie
+  name: 青龙天劫
+  note: 青龙雷木之劫
+  rank: 中阶
+  references: []
+  thunder_count: 9
+- bind_realm: zhuji
+  id: bai_hu_tian_jie
+  name: 白虎天劫
+  note: 白虎金杀之劫
+  rank: 中阶
+  references: []
+  thunder_count: 9
+- bind_realm: huashen
+  id: qiong_gong_tian_jie
+  name: 穷攻天劫
+  note: 化神期顶峰天劫
+  rank: 高阶
+  references: []
+  thunder_count: 21
+- bind_realm: lianxu
+  id: xu_kong_tian_jie
+  name: 虚空天劫
+  note: 炼虚期空间破碎之劫
+  rank: 高阶
+  references: []
+  thunder_count: 18
+- bind_realm: hetong
+  id: shi_jian_tian_jie
+  name: 时间天劫
+  note: 合体期时间法则之劫
+  rank: 至高阶
+  references: []
+  thunder_count: 24
+- bind_realm: dacheng
+  id: cao_yuan_tian_jie
+  name: 道源天劫
+  note: 大乘期道源感应之劫
+  rank: 至高阶
+  references: []
+  thunder_count: 27
+- bind_realm: dacheng_to_xian
+  id: xian_jie_tian_jie
+  name: 仙界天劫
+  note: 飞升仙界之最终天劫
+  rank: 至高阶
+  references: []
+  thunder_count: 30
+special:
+- bind_realm: dacheng
+  id: jiu_jiu_tian_jie_feisheng
+  name: 九九天劫·飞升之劫
+  note: 渡劫期→大乘的最后三道雷，渡过后须立即飞升仙界
+  rank: 至高阶·特殊
+  references:
+  - ../雷劫体系/九九天劫.md
+  thunder_count: 27
+- bind_realm: mo_huashen
+  id: mo_jie
+  name: 魔劫
+  note: 魔修独有，以心魔化天劫
+  rank: 至高阶·特殊
+  references: []
+  thunder_count: 24
+- bind_realm: ming_huashen
+  id: ming_jie
+  name: 冥劫
+  note: 冥修独有，魂飞魄散之危
+  rank: 至高阶·特殊
+  references: []
+  thunder_count: 24
+- bind_realm: shen_huashen
+  id: shen_jie
+  name: 神劫
+  note: 神修独有，神格重塑之劫
+  rank: 至高阶·特殊
+  references: []
+  thunder_count: 27
+- bind_realm: yao_xiu
+  id: hua_shou
+  name: 化兽劫
+  note: 妖兽化形时天劫
+  rank: 特殊
+  references: []
+  thunder_count: 9
+- bind_realm: jiedan
+  id: zhu_ling
+  name: 铸灵劫
+  note: 法器孕育器灵之劫
+  rank: 特殊
+  references: []
+  thunder_count: 12

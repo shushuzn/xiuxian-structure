@@ -1,301 +1,347 @@
-# 神界权威数据（v2.3 新增）
-# 神界是修仙之路的最高界面，仙人渡神劫后跃迁至此
-
-# 神气浓度等级
 aether:
-  - id: xi_shen
-    name: 稀薄神气
-    level: 1
-    suitable_for: 神民
-  - id: pu_tong_shen
-    name: 普通神气
-    level: 2
-    suitable_for: 神徒/神使
-  - id: nong_yu_shen
-    name: 浓郁神气
-    level: 3
-    suitable_for: 神官/神将
-  - id: hua_ye_shen
-    name: 化液神气
-    level: 4
-    suitable_for: 神君/神王
-  - id: jing_hua_shen
-    name: 神气精华
-    level: 5
-    suitable_for: 神尊/神帝
-  - id: dao_qi
-    name: 道气
-    level: 6
-    suitable_for: 道祖（传说）
-
-# 神石等级
-spirit_stones:
-  - id: xia_pin_shen
-    name: 下品神石
-    energy_unit: 1
-    usage: 普通神人日常修炼
-  - id: zhong_pin_shen
-    name: 中品神石
-    energy_unit: 100
-    usage: 高阶神人修炼
-  - id: shang_pin_shen
-    name: 上品神石
-    energy_unit: 10000
-    usage: 神君/神王
-  - id: ji_pin_shen
-    name: 极品神石
-    energy_unit: 1000000
-    usage: 神尊/神帝
-  - id: shen_jing
-    name: 神晶
-    energy_unit: 100000000
-    usage: 传说级
-  - id: dao_shi
-    name: 道石
-    energy_unit: 不可测
-    usage: 道祖专属
-
-# 神职等级（10 档）
-titles:
-  - id: shen_min
-    name: 神民
-    level: 1
-    status: 最低
-    resources: 极少
-  - id: shen_tu
-    name: 神徒
-    level: 2
-    status: 初阶
-    resources: 基础
-  - id: shen_shi
-    name: 神使
-    level: 3
-    status: 下阶
-    resources: 较少
-  - id: shen_guan
-    name: 神官
-    level: 4
-    status: 中阶
-    resources: 中等
-  - id: shen_jiang
-    name: 神将
-    level: 5
-    status: 中高阶
-    resources: 较多
-  - id: shen_jun
-    name: 神君
-    level: 6
-    status: 高阶
-    resources: 多
-  - id: shen_wang
-    name: 神王
-    level: 7
-    status: 极高阶
-    resources: 极多
-  - id: shen_zun
-    name: 神尊
-    level: 8
-    status: 至高阶
-    resources: 无限
-  - id: shen_di
-    name: 神帝
-    level: 9
-    status: 传说阶
-    resources: 无限
-  - id: dao_zu
-    name: 道祖
-    level: 10
-    status: 终极阶
-    resources: 不可测
-
-# 神格等级（6 档）
-divine_grades:
-  - id: fan_ren
-    name: 凡人神格
-    title_limit: 神民
-  - id: xian_ji
-    name: 仙级神格
-    title_limit: 神徒/神使
-  - id: zhen_shen
-    name: 真神格
-    title_limit: 神官/神将
-  - id: da_shen
-    name: 大神格
-    title_limit: 神君/神王
-  - id: zhi_shen
-    name: 至神格
-    title_limit: 神尊/神帝
-  - id: dao_shen
-    name: 道神格
-    title_limit: 道祖
-
-# 神劫（6 类）
-tribulations:
-  - id: lei_shen_jie
-    name: 雷神劫
-    frequency: 50000
-    effect: 肉身转化为神体
-  - id: huo_shen_jie
-    name: 火神劫
-    frequency: 80000
-    effect: 神魂淬炼
-  - id: feng_shen_jie
-    name: 风神劫
-    frequency: 120000
-    effect: 道心圆满
-  - id: xin_mo_shen_jie
-    name: 心魔神劫
-    frequency: 200000
-    effect: 斩断执念
-  - id: shi_kong_shen_jie
-    name: 时空神劫
-    frequency: 300000
-    effect: 超脱时间线
-  - id: fu_he_shen_jie
-    name: 复合神劫
-    frequency: 500000
-    effect: 直接成为神帝候选
-
-# 神域（4 大神域）
-domains:
-  - id: tian_ting
-    name: 天庭
-    type: 顶级神朝
-    status: 神界正统
-    scale: 数千万神人
-    leader: 神帝级
-  - id: jiu_tian_shen_gong
-    name: 九天神宫
-    type: 顶级神门联盟
-    status: 天庭核心
-    scale: 数百万神人
-    leader: 多位神尊
-  - id: wan_xiang_shen_yu
-    name: 万象神域
-    type: 中立神域
-    status: 万神交汇
-    scale: 数百万神人
-  - id: you_ming_shen_yu
-    name: 幽冥神域
-    type: 隐秘神域
-    status: 独立
-    scale: 不详
-
-# 神兽
-beasts:
-  - id: qing_long
-    name: 青龙
-    grade: 神兽王
-    direction: 东方
-    ability: 水神力、空间神力
-  - id: bai_hu
-    name: 白虎
-    grade: 神兽王
-    direction: 西方
-    ability: 杀伐神力
-  - id: zhu_que
-    name: 朱雀
-    grade: 神兽王
-    direction: 南方
-    ability: 火神力、涅槃重生
-  - id: xuan_wu
-    name: 玄武
-    grade: 神兽王
-    direction: 北方
-    ability: 水神力、防御
-  - id: kun_peng
-    name: 鲲鹏
-    grade: 圣兽
-    ability: 飞行神力
-  - id: zhu_long
-    name: 烛龙
-    grade: 圣兽
-    ability: 时间神力
-
-# 神器
+- id: xi_shen
+  level: 1
+  name: 稀薄神气
+  suitable_for: 神民
+- id: pu_tong_shen
+  level: 2
+  name: 普通神气
+  suitable_for: 神徒/神使
+- id: nong_yu_shen
+  level: 3
+  name: 浓郁神气
+  suitable_for: 神官/神将
+- id: hua_ye_shen
+  level: 4
+  name: 化液神气
+  suitable_for: 神君/神王
+- id: jing_hua_shen
+  level: 5
+  name: 神气精华
+  suitable_for: 神尊/神帝
+- id: dao_qi
+  level: 6
+  name: 道气
+  suitable_for: 道祖（传说）
 artifacts:
-  - id: zao_hua_yu_die
-    name: 造化玉碟
-    grade: 至神器
-    ability: 推演一切
-  - id: hun_dun_zhong
-    name: 混沌钟
-    grade: 至神器
-    ability: 镇压气运
-  - id: pan_gu_fan
-    name: 盘古幡
-    grade: 至神器
-    ability: 开辟之力
-  - id: zhu_xian_jian_zhen
-    name: 诛仙剑阵
-    grade: 至神器
-    ability: 杀伐第一
-
-# 神族
-races:
-  - id: long_zu
-    name: 龙族
-    origin: 神兽青龙繁衍
-    talent: 水神力、空间神力
-  - id: feng_zu
-    name: 凤族
-    origin: 神兽朱雀繁衍
-    talent: 火神力、涅槃重生
-  - id: qi_lin_zu
-    name: 麒麟族
-    origin: 上古神兽麒麟
-    talent: 祥瑞、治愈
-  - id: wu_zu
-    name: 巫族
-    origin: 上古神人繁衍
-    talent: 肉体强横、沟通天地
-  - id: ren_zu_shen
-    name: 人族（神界）
-    origin: 飞升神人繁衍
-    talent: 学习能力强、悟性高
-
-# 飞神者类型
+- ability: 推演一切
+  grade: 至神器
+  id: zao_hua_yu_die
+  name: 造化玉碟
+- ability: 镇压气运
+  grade: 至神器
+  id: hun_dun_zhong
+  name: 混沌钟
+- ability: 开辟之力
+  grade: 至神器
+  id: pan_gu_fan
+  name: 盘古幡
+- ability: 杀伐第一
+  grade: 至神器
+  id: zhu_xian_jian_zhen
+  name: 诛仙剑阵
 ascension_types:
-  - id: ordinary_ascension
-    name: 普通飞神者
-    rate: 80%
-    grade: 凡人神格
-    note: 需重头开始
-  - id: talented_ascension
-    name: 天才飞神者
-    rate: 15%
-    grade: 仙级神格
-    note: 可直接任神官
-  - id: legendary_ascension
-    name: 传说飞神者
-    rate: 4%
-    grade: 真神格
-    note: 可开宗立派
-  - id: divine_emperor_ascension
-    name: 神帝飞神者
-    rate: 1%
-    grade: 大神格
-    note: 需谨慎培养
-
-# 神界纪元
+- grade: 凡人神格
+  id: ordinary_ascension
+  name: 普通飞神者
+  note: 需重头开始
+  rate: 80%
+- grade: 仙级神格
+  id: talented_ascension
+  name: 天才飞神者
+  note: 可直接任神官
+  rate: 15%
+- grade: 真神格
+  id: legendary_ascension
+  name: 传说飞神者
+  note: 可开宗立派
+  rate: 4%
+- grade: 大神格
+  id: divine_emperor_ascension
+  name: 神帝飞神者
+  note: 需谨慎培养
+  rate: 1%
+beasts:
+- ability: 水神力、空间神力
+  direction: 东方
+  grade: 神兽王
+  id: qing_long
+  name: 青龙
+- ability: 杀伐神力
+  direction: 西方
+  grade: 神兽王
+  id: bai_hu
+  name: 白虎
+- ability: 火神力、涅槃重生
+  direction: 南方
+  grade: 神兽王
+  id: zhu_que
+  name: 朱雀
+- ability: 水神力、防御
+  direction: 北方
+  grade: 神兽王
+  id: xuan_wu
+  name: 玄武
+- ability: 飞行神力
+  grade: 圣兽
+  id: kun_peng
+  name: 鲲鹏
+- ability: 时间神力
+  grade: 圣兽
+  id: zhu_long
+  name: 烛龙
+divine_grades:
+- id: fan_ren
+  name: 凡人神格
+  title_limit: 神民
+- id: xian_ji
+  name: 仙级神格
+  title_limit: 神徒/神使
+- id: zhen_shen
+  name: 真神格
+  title_limit: 神官/神将
+- id: da_shen
+  name: 大神格
+  title_limit: 神君/神王
+- id: zhi_shen
+  name: 至神格
+  title_limit: 神尊/神帝
+- id: dao_shen
+  name: 道神格
+  title_limit: 道祖
+- id: wu_shen
+  name: 无神格
+  title_limit: 神民候选人
+- id: chu_shen
+  name: 初神格
+  title_limit: 神民
+- id: ming_shen
+  name: 名神格
+  title_limit: 神使
+- id: shang_shen
+  name: 上神格
+  title_limit: 神官
+- id: tian_shen
+  name: 天神格
+  title_limit: 神将
+- id: shen_wang_ge
+  name: 神王格
+  title_limit: 神君
+- id: zhi_shen_ge
+  name: 至神格
+  title_limit: 神王
+- id: di_shen
+  name: 帝神格
+  title_limit: 神帝
+- id: zun_shen
+  name: 尊神格
+  title_limit: 神尊
+- id: dao_zu_ge
+  name: 道祖格
+  title_limit: 道祖
+domains:
+- id: tian_ting
+  leader: 神帝级
+  name: 天庭
+  scale: 数千万神人
+  status: 神界正统
+  type: 顶级神朝
+- id: jiu_tian_shen_gong
+  leader: 多位神尊
+  name: 九天神宫
+  scale: 数百万神人
+  status: 天庭核心
+  type: 顶级神门联盟
+- id: wan_xiang_shen_yu
+  name: 万象神域
+  scale: 数百万神人
+  status: 万神交汇
+  type: 中立神域
+- id: you_ming_shen_yu
+  name: 幽冥神域
+  scale: 不详
+  status: 独立
+  type: 隐秘神域
 eras:
-  - id: tai_chu
-    name: 太初纪元
-    time: 神界诞生
-    key_event: 盘古开天辟地（传说）
-  - id: hong_huang
-    name: 洪荒纪元
-    key_event: 四方神兽确立神界方位
-  - id: shang_gu
-    name: 上古纪元
-    key_event: 天庭成立，龙凤两族崛起
-  - id: zhong_gu
-    name: 中古纪元
-    key_event: 巫族衰落、人族神帝出现
-  - id: jin_gu
-    name: 近古纪元
-    key_event: 第 1 位下界飞神者
-  - id: dang_dai
-    name: 当代纪元
-    key_event: 雷师飞神（8000 年前）
-    current: true
+- id: tai_chu
+  key_event: 盘古开天辟地（传说）
+  name: 太初纪元
+  time: 神界诞生
+- id: hong_huang
+  key_event: 四方神兽确立神界方位
+  name: 洪荒纪元
+- id: shang_gu
+  key_event: 天庭成立，龙凤两族崛起
+  name: 上古纪元
+- id: zhong_gu
+  key_event: 巫族衰落、人族神帝出现
+  name: 中古纪元
+- id: jin_gu
+  key_event: 第 1 位下界飞神者
+  name: 近古纪元
+- current: true
+  id: dang_dai
+  key_event: 雷师飞神（8000 年前）
+  name: 当代纪元
+races:
+- id: long_zu
+  name: 龙族
+  origin: 神兽青龙繁衍
+  talent: 水神力、空间神力
+- id: feng_zu
+  name: 凤族
+  origin: 神兽朱雀繁衍
+  talent: 火神力、涅槃重生
+- id: qi_lin_zu
+  name: 麒麟族
+  origin: 上古神兽麒麟
+  talent: 祥瑞、治愈
+- id: wu_zu
+  name: 巫族
+  origin: 上古神人繁衍
+  talent: 肉体强横、沟通天地
+- id: ren_zu_shen
+  name: 人族（神界）
+  origin: 飞升神人繁衍
+  talent: 学习能力强、悟性高
+spirit_stones:
+- energy_unit: 1
+  id: xia_pin_shen
+  name: 下品神石
+  usage: 普通神人日常修炼
+- energy_unit: 100
+  id: zhong_pin_shen
+  name: 中品神石
+  usage: 高阶神人修炼
+- energy_unit: 10000
+  id: shang_pin_shen
+  name: 上品神石
+  usage: 神君/神王
+- energy_unit: 1000000
+  id: ji_pin_shen
+  name: 极品神石
+  usage: 神尊/神帝
+- energy_unit: 100000000
+  id: shen_jing
+  name: 神晶
+  usage: 传说级
+- energy_unit: 不可测
+  id: dao_shi
+  name: 道石
+  usage: 道祖专属
+titles:
+- id: shen_min
+  level: 1
+  name: 神民
+  resources: 极少
+  status: 最低
+- id: shen_tu
+  level: 2
+  name: 神徒
+  resources: 基础
+  status: 初阶
+- id: shen_shi
+  level: 3
+  name: 神使
+  resources: 较少
+  status: 下阶
+- id: shen_guan
+  level: 4
+  name: 神官
+  resources: 中等
+  status: 中阶
+- id: shen_jiang
+  level: 5
+  name: 神将
+  resources: 较多
+  status: 中高阶
+- id: shen_jun
+  level: 6
+  name: 神君
+  resources: 多
+  status: 高阶
+- id: shen_wang
+  level: 7
+  name: 神王
+  resources: 极多
+  status: 极高阶
+- id: shen_zun
+  level: 8
+  name: 神尊
+  resources: 无限
+  status: 至高阶
+- id: shen_di
+  level: 9
+  name: 神帝
+  resources: 无限
+  status: 传说阶
+- id: dao_zu
+  level: 10
+  name: 道祖
+  resources: 不可测
+  status: 终极阶
+tribulations:
+- effect: 肉身转化为神体
+  frequency: 50000
+  id: lei_shen_jie
+  name: 雷神劫
+- effect: 神魂淬炼
+  frequency: 80000
+  id: huo_shen_jie
+  name: 火神劫
+- effect: 道心圆满
+  frequency: 120000
+  id: feng_shen_jie
+  name: 风神劫
+- effect: 斩断执念
+  frequency: 200000
+  id: xin_mo_shen_jie
+  name: 心魔神劫
+- effect: 超脱时间线
+  frequency: 300000
+  id: shi_kong_shen_jie
+  name: 时空神劫
+- effect: 直接成为神帝候选
+  frequency: 500000
+  id: fu_he_shen_jie
+  name: 复合神劫
+- effect: 阴阳调和
+  frequency: 40000
+  id: yin_yang_shen_jie
+  name: 阴阳神劫
+- effect: 五行圆满
+  frequency: 50000
+  id: wu_xing_shen_jie
+  name: 五行神劫
+- effect: 天意考验
+  frequency: 70000
+  id: tian_xing_shen_jie
+  name: 天刑神劫
+- effect: 世间之力
+  frequency: 100000
+  id: shi_li_shen_jie
+  name: 世力神劫
+- effect: 魂魄圆满
+  frequency: 150000
+  id: hun_po_shen_jie
+  name: 魂魄神劫
+- effect: 元神本原
+  frequency: 200000
+  id: yuan_ben_shen_jie
+  name: 元本神劫
+- effect: 超越时间
+  frequency: 250000
+  id: shi_jian_shen_jie
+  name: 时间神劫
+- effect: 超越空间
+  frequency: 250000
+  id: kong_jian_shen_jie
+  name: 空间神劫
+- effect: 天数感应
+  frequency: 400000
+  id: tian_shu_shen_jie
+  name: 天数神劫
+- effect: 超越神帝
+  frequency: 1000000
+  id: zong_jie_shen_jie
+  name: 终极神劫

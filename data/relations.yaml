@@ -728,3 +728,61 @@ relations:
     to: heart_demon:wu_mo
     type: blocks
     description: "炼魂契令悟魔难以侵扰"
+
+  # ── 体系深化 v4: 飞升/境界/仙界/器灵/神界 ──
+  - from: realms:dacheng
+    to: ascension:ascension_tribulation
+    type: requires
+    description: "大乘期需经历飞升之劫方可飞升"
+  - from: realms:ren_xian
+    to: immortal_realm:xian_pin
+    type: requires
+    description: "人仙期需仙品灵石辅助"
+  - from: realms:xian_di
+    to: immortal_realm:xian_di
+    type: enables
+    description: "仙帝期对应仙帝职位"
+  - from: realms:shen_di
+    to: divine_grades:dao_zu_ge
+    type: requires
+    description: "神帝期对应道祖格"
+  - from: ascension:legendary
+    to: realms:ren_xian
+    type: enables
+    description: "传说飞升者直入人仙期"
+  - from: ascension:ghost
+    to: ascension:join_empire
+    type: enables
+    description: "鬼修飞升者归入冥界仙朝"
+  - from: spirit_weapon:chu_ling
+    to: spirit_weapon:zi_yuan
+    type: enables
+    description: "初灵可经自愿认主而觉醒"
+  - from: spirit_weapon:wu_ji
+    to: realms:xian_di
+    type: requires
+    description: "无极器灵需仙帝期方可驾驭"
+  - from: divine_grades:dao_zu_ge
+    to: realms:shen_di
+    type: requires
+    description: "道祖格对应神帝期"
+  - from: divine_grades:zhi_shen
+    to: tribulations:fu_he_shen_jie
+    type: requires
+    description: "至神格需经复合神劫考验"
+  - from: ascension_tribulation:ascension_tribulation
+    to: realms:ren_xian
+    type: enables
+    description: "渡过飞升之劫者直升人仙期"
+  - from: paths:bei_pai
+    to: factions:tian_ting
+    type: enables
+    description: "被大教挑中者直接入天庭"
+  - from: ascension_types:evil
+    to: paths:bei_pai
+    type: parallels
+    description: "邪修飞升有专属通道"
+  - from: realms:tian_xian
+    to: spirit_weapon:dao_ru
+    type: enables
+    description: "天仙期可驾驭道入级器灵"

@@ -84,7 +84,7 @@ class World:
 
     def render_template(self, text: str) -> str:
         """把 {体系.记录.字段} 这种占位符替换为实际值"""
-        def repl(m: re.Match) -> str:
+        def repl(m) -> str:
             path = m.group(1).split(".")
             # 第一个 token 是体系名
             system = path[0]
@@ -167,7 +167,7 @@ class Story:
 # ────────────────────────────────────────────────────────
 
 class State:
-    """玩家状态：属性 + 物品 + 标志位"""
+    """玩家状态：属性 + 物品 + 标志位 + 界面"""
 
     def __init__(self, initial: Optional[Dict] = None):
         self.attrs: Dict[str, Any] = dict(initial or {})
@@ -175,6 +175,7 @@ class State:
         self.items: List[str] = []              # 背包（物品列表）
         self.npc_favor: Dict[str, int] = {}     # NPC 好感度（0-100）
         self.time: Dict[str, int] = {"年": 1, "月": 1, "日": 1}  # 游戏内时间
+        self.realm: str = "下界"                # v2.5 当前界面（下界/仙界/神界/魔界/冥界）
 
     def get(self, key: str, default: Any = None) -> Any:
         return self.attrs.get(key, default)
@@ -201,6 +202,7 @@ class State:
             "items": list(self.items),
             "npc_favor": dict(self.npc_favor),
             "time": dict(self.time),
+            "realm": self.realm,
             "score": self.score_breakdown(),
         }
 
@@ -211,6 +213,7 @@ class State:
         s.items = list(d.get("items", []))
         s.npc_favor = dict(d.get("npc_favor", {}))
         s.time = dict(d.get("time", {"年": 1, "月": 1, "日": 1}))
+        s.realm = d.get("realm", "下界")
         return s
 
     def save(self, path) -> None:
@@ -320,7 +323,7 @@ class State:
 
     def _substitute(self, expr: str) -> str:
         # 把 attr 名替换为其字符串表示（"伪灵根" / 10 / True）
-        def repl(m: re.Match) -> str:
+        def repl(m) -> str:
             name = m.group(1)
             v = self.attrs.get(name)
             if isinstance(v, str):
@@ -499,6 +502,8 @@ class Engine:
                 months=adv.get("months", 0),
                 days=adv.get("days", 0),
             )
+        if "realm" in chosen:
+            self.state.realm = chosen["realm"]
 
     def save(self) -> dict:
         """返回可序列化的存档"""

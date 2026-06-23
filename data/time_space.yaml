@@ -1,0 +1,279 @@
+# time_space.yaml — 时空体系权威数据（v2.14 新增体系，最后一个体系）
+
+# 法则等级
+law_levels:
+  - id: chu_ji
+    name: 初级法则
+    range: 化神期
+    manifestation: 初步感知
+  - id: zhong_ji
+    name: 中级法则
+    range: 炼虚期
+    manifestation: 初步运用
+  - id: gao_ji
+    name: 高级法则
+    range: 合体期
+    manifestation: 熟练运用
+  - id: jin_ji
+    name: 禁忌法则
+    range: 渡劫期
+    manifestation: 高度掌握
+  - id: zhi_gao
+    name: 至高法则
+    range: 大乘期
+    manifestation: 完全掌握
+  - id: chao_yue
+    name: 超越法则
+    range: 仙人+
+    manifestation: 超越法则束缚
+
+# 法则类型
+law_types:
+  - id: time
+    name: 时间法则
+    description: 掌控时间流速
+    related_powers: [刹那永恒, 岁月如梭, 光阴逆转]
+  - id: space
+    name: 空间法则
+    description: 操控空间维度
+    related_powers: [空间瞬移, 空间切割, 空间禁锢]
+  - id: space_time
+    name: 时空法则
+    description: 时间空间统一
+    related_powers: [时空静止, 时空错乱, 时空湮灭]
+  - id: void
+    name: 虚空法则
+    description: 界面之间
+    related_powers: [虚空行走, 虚空吞噬, 虚空之眼]
+
+# 时间类宝物
+time_artifacts:
+  - id: shi_guang_sha
+    name: 时光之沙
+    attribute: time
+    grade: shen
+    source: 时间之河
+    effect: 辅助时间法则修炼
+  - id: sui_yue_zhu
+    name: 岁月珠
+    attribute: time
+    grade: shang_pin
+    source: 时间系大能
+    effect: 延寿
+  - id: cha_na_hua
+    name: 刹那花
+    attribute: time
+    grade: xian
+    source: 刹那永恒之地
+    effect: 瞬间时间静止
+  - id: shi_guang_jing
+    name: 时光之镜
+    attribute: time
+    grade: shen
+    source: 时间系大能
+    effect: 回溯历史
+  - id: yong_heng_shi
+    name: 永恒之石
+    attribute: time
+    grade: shen
+    source: 传说
+    effect: 超脱时间
+
+# 空间类宝物
+space_artifacts:
+  - id: kong_jian_shi
+    name: 空间石
+    attribute: space
+    grade: shang_pin
+    source: 空间裂缝
+    effect: 炼制空间法器
+  - id: kong_jian_jing_he
+    name: 空间晶核
+    attribute: space
+    grade: shen
+    source: 空间秘境
+    effect: 空间系法宝核心
+  - id: dong_tian_zhu
+    name: 洞天珠
+    attribute: space
+    grade: shang_pin
+    source: 空间系大能
+    effect: 内含小世界
+  - id: xu_kong_zhi_yan
+    name: 虚空之眼
+    attribute: space
+    grade: shen
+    source: 虚空
+    effect: 看破空间幻象
+  - id: kong_jian_zhi_yao
+    name: 空间之钥
+    attribute: space
+    grade: shang_pin
+    source: 空间系大能
+    effect: 开任何空间
+
+# 时空双属性宝物
+dual_artifacts:
+  - id: shi_kong_zhi_lun
+    name: 时空之轮
+    attribute: space_time
+    grade: zhi_gao
+    effect: 穿越时空
+  - id: hun_dun_zhi_yan
+    name: 混沌之眼
+    attribute: chaos
+    grade: zhi_gao
+    effect: 看透过去未来
+
+# 时间类神通
+time_powers:
+  - id: cha_na_yong_heng
+    name: 刹那永恒
+    ability: 令时间静止
+    level: zhi_gao
+    range: 小范围
+    duration: 数息
+  - id: sui_yue_ru_suo
+    name: 岁月如梭
+    ability: 令敌人衰老
+    level: gao_ji
+    effect: 折寿数十年
+  - id: guang_yin_ni_zhuan
+    name: 光阴逆转
+    ability: 回溯攻击
+    level: gao_ji
+    effect: 攻击无效化
+  - id: shi_zhi_ren
+    name: 时之刃
+    ability: 以时间为刃
+    level: jin_ji
+    effect: 斩断时间
+  - id: shi_guang_dao_liu
+    name: 时光倒流
+    ability: 回溯小范围
+    level: jin_ji
+    effect: 事物逆转
+  - id: wei_lai_shi
+    name: 未来视
+    ability: 看透未来数息
+    level: gao_ji
+    effect: 预判攻击
+  - id: shi_guang_sha_shu
+    name: 时光之沙
+    ability: 撒出时间之沙
+    level: gao_ji
+    effect: 减速敌人
+  - id: yong_heng
+    name: 永恒
+    ability: 自身时间静止
+    level: zhi_gao
+    effect: 超脱时间
+
+# 空间类神通
+space_powers:
+  - id: kong_jian_shun_yi
+    name: 空间瞬移
+    ability: 瞬间移动
+    level: ji_chu
+    range: 千里
+  - id: kong_jian_zhe_die
+    name: 空间折叠
+    ability: 缩短空间距离
+    level: gao_ji
+    range: 万里
+  - id: kong_jian_qie_ge
+    name: 空间切割
+    ability: 以空间为刃
+    level: jin_ji
+    effect: 切割一切
+  - id: kong_jian_jin_gu
+    name: 空间禁锢
+    ability: 锁定敌人
+    level: gao_ji
+    effect: 禁锢数息
+  - id: kong_jian_cuo_luan
+    name: 空间错乱
+    ability: 扭曲敌位置
+    level: gao_ji
+    effect: 敌迷失方向
+  - id: kong_jian_min_jie
+    name: 空间湮灭
+    ability: 抹除空间
+    level: zhi_gao
+    effect: 敌从空间消失
+  - id: kong_jian_feng_bao
+    name: 空间风暴
+    ability: 引空间风暴
+    level: jin_ji
+    effect: 毁天灭地
+  - id: xu_kong_xing_zou
+    name: 虚空行走
+    ability: 在虚空中穿行
+    level: zhi_gao
+    effect: 跨界面
+
+# 时空秘境
+realms:
+  - id: shi_guang_he
+    name: 时光之河
+    type: time
+    location: 传说
+    feature: 时间如河可顺流逆流
+    resources: [shi_guang_sha]
+  - id: kong_jian_luan_liu
+    name: 空间乱流
+    type: space
+    location: 界面壁障附近
+    feature: 空间错乱
+    resources: [kong_jian_shi, kong_jian_jing_he]
+  - id: shi_guang_ta
+    name: 时光之塔
+    type: time
+    location: 传说
+    feature: 塔中时间流速不同层
+    resources: [time_artifacts]
+  - id: xu_kong
+    name: 虚空
+    type: void
+    location: 界面之间
+    feature: 无空间无时间
+    resources: [void_artifacts]
+
+# 著名时空大能
+masters:
+  - id: shi_kong_zu_shen
+    name: 时空祖神
+    realm: zhi_gao
+    ability: 超越时空
+    status: chuan_shuo
+  - id: shi_kong_dao_ren
+    name: 时空道人
+    realm: da_luo_jin_xian
+    ability: 时空统一
+    status: xia_jie_you_lv
+  - id: xiao_yao_xian_di
+    name: 逍遥仙帝
+    realm: xian_di
+    ability: 时空统一
+    status: xian_jie
+
+# 用途
+purposes:
+  - id: xiu_lian
+    name: 修炼
+    effect: 加速修炼 / 延寿
+  - id: zhan_dou
+    name: 战斗
+    effect: 概念级战斗
+  - id: fei_sheng
+    name: 飞升
+    effect: 助飞升
+  - id: chu_shen
+    name: 出神
+    effect: 跳出时空束缚
+  - id: qie_dao
+    name: 悟道
+    effect: 悟时空大道
+
+references:
+  - ../时空体系/时空总览.md

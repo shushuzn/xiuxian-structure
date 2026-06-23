@@ -1,0 +1,323 @@
+# 冥界权威数据（v2.4 新增）
+# 冥界是修仙界的第五界面，所有生命死亡后的归宿
+# 冥界与仙界/神界/魔界并列，由轮回大道统御
+
+# 死气浓度等级
+underworld_aether:
+  - id: ji_dan_si
+    name: 极淡死气
+    level: 1
+    suitable_for: 游魂
+  - id: dan_si
+    name: 淡死气
+    level: 2
+    suitable_for: 鬼徒/鬼使
+  - id: nong_si
+    name: 浓死气
+    level: 3
+    suitable_for: 鬼官/鬼将
+  - id: ji_nong_si
+    name: 极浓死气
+    level: 4
+    suitable_for: 鬼君/鬼王
+  - id: ye_hua_si
+    name: 液化死气
+    level: 5
+    suitable_for: 鬼尊/冥帝
+  - id: si_yuan
+    name: 死源
+    level: 6
+    suitable_for: 冥祖（传说）
+
+# 冥石等级
+underworld_stones:
+  - id: xia_pin_ming
+    name: 下品冥石
+    energy_unit: 1
+    usage: 普通鬼修日常修炼
+  - id: zhong_pin_ming
+    name: 中品冥石
+    energy_unit: 100
+    usage: 高阶鬼修修炼
+  - id: shang_pin_ming
+    name: 上品冥石
+    energy_unit: 10000
+    usage: 鬼君/鬼王
+  - id: ji_pin_ming
+    name: 极品冥石
+    energy_unit: 1000000
+    usage: 鬼尊/冥帝
+  - id: ming_jing
+    name: 冥晶
+    energy_unit: 100000000
+    usage: 传说级
+  - id: hun_shi
+    name: 魂石
+    energy_unit: 不可测
+    usage: 冥祖专属
+
+# 冥职等级（8 档，与仙职/魔职 8 档对称）
+underworld_titles:
+  - id: you_hun
+    name: 游魂
+    level: 1
+    status: 最低
+    resources: 极少
+  - id: gui_tu
+    name: 鬼徒
+    level: 2
+    status: 初阶
+    resources: 基础
+  - id: gui_shi
+    name: 鬼使
+    level: 3
+    status: 下阶
+    resources: 较少
+  - id: gui_guan
+    name: 鬼官
+    level: 4
+    status: 中阶
+    resources: 中等
+  - id: gui_jiang
+    name: 鬼将
+    level: 5
+    status: 中高阶
+    resources: 较多
+  - id: gui_jun
+    name: 鬼君
+    level: 6
+    status: 高阶
+    resources: 多
+  - id: gui_wang
+    name: 鬼王
+    level: 7
+    status: 极高阶
+    resources: 极多
+  - id: ming_di
+    name: 冥帝
+    level: 8
+    status: 至高阶
+    resources: 无限
+
+# 冥格等级（6 档，与神格/魔格 6 档对称）
+underworld_grades:
+  - id: fan_ming
+    name: 凡人冥格
+    title_limit: 游魂
+  - id: xian_ming
+    name: 仙级冥格
+    title_limit: 鬼徒/鬼使
+  - id: zhen_ming
+    name: 真冥格
+    title_limit: 鬼官/鬼将
+  - id: da_ming
+    name: 大冥格
+    title_limit: 鬼君/鬼王
+  - id: zhi_ming
+    name: 至冥格
+    title_limit: 冥帝
+  - id: dao_ming
+    name: 道冥格
+    title_limit: 冥祖（传说）
+
+# 冥劫（4 类）
+underworld_tribulations:
+  - id: yin_huo_jie
+    name: 阴火劫
+    frequency: 必渡
+    effect: 游魂晋升为鬼徒/鬼使
+  - id: tian_lei_yin_jie
+    name: 天雷阴劫
+    frequency: 鬼君晋升时
+    effect: 鬼躯转化为鬼体
+  - id: lun_hui_jie
+    name: 轮回劫
+    frequency: 鬼王晋升时
+    effect: 鬼魂淬炼
+  - id: wan_hun_shi_xin_jie
+    name: 万魂噬心劫
+    frequency: 冥帝晋升时
+    effect: 超脱万魂，重塑冥道心
+
+# 冥域（6 大冥域）
+underworld_domains:
+  - id: feng_du
+    name: 酆都
+    type: 顶级冥朝
+    status: 冥界正统
+    scale: 数千万鬼修
+    leader: 冥帝级
+  - id: liu_dao_lun_hui_si
+    name: 六道轮回司
+    type: 顶级冥司
+    status: 冥界核心
+    scale: 数百万鬼修
+    leader: 冥帝直属
+  - id: huang_quan
+    name: 黄泉
+    type: 中立冥域
+    status: 万鬼交汇
+    scale: 数百万鬼修
+  - id: wang_chuan
+    name: 忘川
+    type: 中立冥域
+    status: 轮回必经之地
+    scale: 数百万鬼修
+  - id: wang_si_cheng
+    name: 枉死城
+    type: 特殊冥域
+    status: 关押冤死鬼之地
+    scale: 不详
+  - id: nie_jing_tai
+    name: 孽镜台
+    type: 特殊冥域
+    status: 审判之地
+    scale: 不详
+
+# 六道轮回（冥界专属）
+six_realms:
+  - id: tian_dao
+    name: 天道
+    description: 福报最厚，天人居所
+  - id: ren_dao
+    name: 人道
+    description: 凡人世界，修仙起点
+  - id: xiu_luo_dao
+    name: 阿修罗道
+    description: 修罗战争之道
+  - id: sheng_chu_dao
+    name: 畜生道
+    description: 愚痴业报
+  - id: e_gui_dao
+    name: 饿鬼道
+    description: 贪欲业报
+  - id: di_yu_dao
+    name: 地狱道
+    description: 极恶业报，刑罚无尽
+
+# 冥兽
+underworld_beasts:
+  - id: di_ting
+    name: 谛听
+    grade: 冥兽王
+    ability: 聆听万物
+  - id: bi_fang_ming_zhong
+    name: 毕方冥种
+    grade: 圣兽
+    ability: 阴火之鸟
+  - id: jiu_you_ming_she
+    name: 九幽冥蛇
+    grade: 圣兽
+    ability: 剧毒无双
+  - id: huang_quan_ming_die
+    name: 黄泉冥蝶
+    grade: 圣兽
+    ability: 幻术无双
+  - id: wang_chuan_ming_yu
+    name: 忘川冥鱼
+    grade: 圣兽
+    ability: 忘川之主
+  - id: san_zu_ming_ya
+    name: 三足冥鸦
+    grade: 冥兽王
+    ability: 死亡预言
+
+# 冥器
+underworld_artifacts:
+  - id: pan_guan_bi
+    name: 判官笔
+    grade: 至冥器
+    ability: 判定生死/书写轮回
+  - id: sheng_si_bu
+    name: 生死簿
+    grade: 至冥器
+    ability: 记录万物生死
+  - id: lun_hui_pan
+    name: 轮回盘
+    grade: 至冥器
+    ability: 运转六道轮回
+  - id: meng_po_tang_shao
+    name: 孟婆汤勺
+    grade: 至冥器
+    ability: 赐予忘川之水
+  - id: you_ming_jian
+    name: 幽冥剑
+    grade: 至冥器
+    ability: 杀伐第一冥器
+  - id: wan_gui_ling
+    name: 万鬼令
+    grade: 至冥器
+    ability: 召唤万鬼
+
+# 冥族
+underworld_races:
+  - id: gui_zu
+    name: 鬼族
+    origin: 冥界基础种族
+    talent: 死寂/魂魄
+  - id: you_hun_zu
+    name: 幽魂族
+    origin: 冥界古老种族
+    talent: 幻化/无形
+  - id: ming_long_zu
+    name: 冥龙族
+    origin: 冥兽冥龙繁衍
+    talent: 阴寒/轮回
+  - id: ming_feng_zu
+    name: 冥凤族
+    origin: 冥兽冥凤繁衍
+    talent: 阴火/涅槃（冥界版）
+  - id: ye_you_shen
+    name: 夜游神
+    origin: 冥界守护者种族
+    talent: 飞行/夜视/战斗
+  - id: pan_guan_zu
+    name: 判官族
+    origin: 冥界审判者种族
+    talent: 审判/轮回
+
+# 飞冥者类型（罕见，多为意外死亡）
+underworld_ascension:
+  - id: ordinary_death
+    name: 普通死亡
+    rate: 70%
+    grade: 凡人冥格
+    note: 需经六道轮回
+  - id: cultivator_death
+    name: 修仙者死亡
+    rate: 20%
+    grade: 仙级冥格
+    note: 可留冥界任鬼官
+  - id: tragic_death
+    name: 冤死
+    rate: 8%
+    grade: 真冥格
+    note: 关押枉死城
+  - id: ming_di_reincarnation
+    name: 冥帝转世
+    rate: 2%
+    grade: 大冥格
+    note: 需谨慎培养
+
+# 冥界纪元（6 纪元）
+underworld_eras:
+  - id: hun_dun
+    name: 混沌纪元
+    time: 冥界诞生
+    key_event: 冥祖开冥辟地（传说）
+  - id: tai_shi
+    name: 太始纪元
+    key_event: 四大圣兽确立冥界方位
+  - id: you_ming_kai_pi
+    name: 幽冥开辟纪元
+    key_event: 酆都成立，冥龙/冥凤两族崛起
+  - id: liu_dao_li
+    name: 六道立纪元
+    key_event: 六道轮回正式确立
+  - id: lun_hui_cheng
+    name: 轮回成纪元
+    key_event: 孟婆汤勺炼制完成
+  - id: dang_dai
+    name: 当代纪元
+    key_event: 当代冥帝继位
+    current: true

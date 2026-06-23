@@ -1,0 +1,389 @@
+# tian_cai.yaml — 天材地宝体系权威数据（v2.11 新增体系）
+
+# 形态分类
+categories:
+  - id: ling_cao
+    name: 灵草类
+    description: 草本灵药
+    examples: [jiu_you_huan_hun_cao, qian_nian_xue_shen, qian_nian_ling_zhi, wan_nian_tai_sui]
+  - id: ling_mu
+    name: 灵木类
+    description: 木本灵材
+    examples: [wan_nian_ling_mu, lei_ji_mu, yang_hun_mu, hua_xing_ling_mu]
+  - id: ling_jin_shu
+    name: 灵金属类
+    description: 金属矿石
+    examples: [xuan_tie, wan_nian_han_tie, xing_chen_tie, jiu_tian_xuan_tie, shen_tie]
+  - id: ling_shui_huo
+    name: 灵水灵火类
+    description: 液态/火焰型
+    examples: [xuan_bing_zhen_shui, san_mei_zhen_huo, huang_quan_shui, nie_pan_huo]
+  - id: ling_shou_chong
+    name: 灵兽灵虫类
+    description: 活物资源
+    examples: [hua_xing_yao_dan, jiu_you_ming_she_dan, feng_huang_jing_xue, shi_jin_chong, long_ni_lin]
+  - id: tian_wai
+    name: 天外奇珍
+    description: 跨界之物
+    examples: [tian_wai_yun_tie, xing_chen_sui_pian, kua_jie_ling_wu, shi_guang_sha, kong_jian_jing_he]
+  - id: xian_shen
+    name: 仙材神材
+    description: 仙神专属
+    examples: [xian_shi, xian_yu, shen_shi, shen_yu, shen_cao, shen_tie]
+
+# 等级（按年份/品质）
+grades:
+  - id: bai_nian
+    name: 百年
+    min_year: 100
+    max_year: 999
+    suitable_realm: zhuji
+    value_multiplier: 1
+  - id: qian_nian
+    name: 千年
+    min_year: 1000
+    max_year: 9999
+    suitable_realm: jiedan
+    value_multiplier: 10
+  - id: wan_nian
+    name: 万年
+    min_year: 10000
+    max_year: 99999
+    suitable_realm: huashen
+    value_multiplier: 100
+  - id: shi_wan_nian
+    name: 十万年
+    min_year: 100000
+    max_year: 999999
+    suitable_realm: dujie
+    value_multiplier: 1000
+  - id: xian
+    name: 仙材
+    min_year: 1000000
+    suitable_realm: dacheng
+    value_multiplier: 10000
+  - id: shen
+    name: 神材
+    suitable_realm: xian_jie
+    value_multiplier: 100000
+
+# 五行属性
+attributes:
+  - id: jin
+    name: 金
+  - id: mu
+    name: 木
+  - id: shui
+    name: 水
+  - id: huo
+    name: 火
+  - id: tu
+    name: 土
+  - id: lei
+    name: 雷
+  - id: bing
+    name: 冰
+  - id: feng
+    name: 风
+  - id: xian
+    name: 仙
+  - id: shen
+    name: 神
+  - id: mo
+    name: 魔
+  - id: ming
+    name: 冥
+  - id: hun
+    name: 魂
+  - id: kong_jian
+    name: 空间
+  - id: shi_jian
+    name: 时间
+  - id: xue
+    name: 血
+  - id: long
+    name: 龙
+
+# 著名灵草
+herb_examples:
+  - id: jiu_you_huan_hun_cao
+    name: 九幽还魂草
+    category: ling_cao
+    grade: qian_nian
+    attribute: ming
+    effect: "还魂续命"
+    source: ling_yao_dao
+    used_for: [jiu_zhuan_huan_hun_dan]
+  - id: qian_nian_xue_shen
+    name: 千年血参
+    category: ling_cao
+    grade: qian_nian
+    attribute: xue
+    effect: "补血养气"
+    source: 乱星海域
+    used_for: [jiedan_dan]
+  - id: qian_nian_ling_zhi
+    name: 千年灵芝
+    category: ling_cao
+    grade: qian_nian
+    attribute: mu
+    effect: "延年益寿"
+    source: 灵草谷
+    used_for: [yuanying_dan]
+  - id: wan_nian_tai_sui
+    name: 万年太岁
+    category: ling_cao
+    grade: wan_nian
+    attribute: mu
+    effect: "延寿数百年"
+    source: 极深灵脉
+    used_for: [huashen_auxiliary]
+  - id: xian_cao
+    name: 仙草
+    category: ling_cao
+    grade: xian
+    attribute: xian
+    effect: "仙丹主料"
+    source: xian_cao_pu
+
+# 著名灵木
+wood_examples:
+  - id: wan_nian_ling_mu
+    name: 万年灵木
+    category: ling_mu
+    grade: wan_nian
+    attribute: mu
+    effect: "高阶法器主料"
+    source: 灵脉深处
+    used_for: [fa_qi_gao_jie]
+  - id: lei_ji_mu
+    name: 雷击木
+    category: ling_mu
+    grade: qian_nian
+    attribute: lei
+    effect: "雷属性法器"
+    source: 雷师之墓
+    used_for: [lei_shi_yin]
+  - id: yang_hun_mu
+    name: 养魂木
+    category: ling_mu
+    grade: wan_nian
+    attribute: hun
+    effect: "续命、养魂"
+    source: 冥界边缘
+    used_for: [xu_ming_dan]
+  - id: hua_xing_ling_mu
+    name: 化形灵木
+    category: ling_mu
+    grade: shi_wan_nian
+    attribute: mu
+    effect: "传说级法器核心"
+    source: 上古森林
+
+# 著名灵金属
+metal_examples:
+  - id: xuan_tie
+    name: 玄铁
+    category: ling_jin_shu
+    grade: qian_nian
+    attribute: jin
+    effect: "结丹级法器"
+    source: xuan_tie_kuang_mai
+    used_for: [qing_feng_jian, wu_xing_huan]
+  - id: wan_nian_han_tie
+    name: 万年寒铁
+    category: ling_jin_shu
+    grade: wan_nian
+    attribute: bing
+    effect: "冰属性法宝"
+    source: wan_nian_han_tie_kuang
+    used_for: [zi_wei_jian]
+  - id: xing_chen_tie
+    name: 星辰铁
+    category: ling_jin_shu
+    grade: xian
+    attribute: kong_jian
+    effect: "仙器核心"
+    source: xing_chen_tie_kuang
+    used_for: [hao_tian_ta, dong_huang_zhong]
+  - id: jiu_tian_xuan_tie
+    name: 九天玄铁
+    category: ling_jin_shu
+    grade: shi_wan_nian
+    attribute: jin
+    effect: "剑修至宝"
+    source: 上古神山
+    used_for: [xian_jian_ji_pin]
+  - id: shen_tie
+    name: 神铁
+    category: ling_jin_shu
+    grade: shen
+    attribute: shen
+    effect: "传说神器"
+    source: 神界
+
+# 著名灵水灵火
+element_examples:
+  - id: xuan_bing_zhen_shui
+    name: 玄冰真水
+    category: ling_shui_huo
+    grade: wan_nian
+    attribute: bing
+    effect: "冰属性炼丹、淬体"
+    source: 北极冰川
+  - id: san_mei_zhen_huo
+    name: 三昧真火
+    category: ling_shui_huo
+    grade: xian
+    attribute: huo
+    effect: "炼制仙器、炼丹"
+    source: 仙界
+  - id: huang_quan_shui
+    name: 黄泉水
+    category: ling_shui_huo
+    grade: qian_nian
+    attribute: ming
+    effect: "冥界炼丹"
+    source: 忘川
+  - id: nie_pan_huo
+    name: 涅槃之火
+    category: ling_shui_huo
+    grade: shen
+    attribute: huo
+    effect: "凤凰涅槃"
+    source: feng_huang_ling
+
+# 著名灵兽灵虫
+beast_examples:
+  - id: hua_xing_yao_dan
+    name: 化形期妖丹
+    category: ling_shou_chong
+    grade: wan_nian
+    attribute: 万
+    effect: "高阶炼丹"
+    source: 化形妖修
+  - id: jiu_you_ming_she_dan
+    name: 九幽冥蛇胆
+    category: ling_shou_chong
+    grade: qian_nian
+    attribute: ming
+    effect: "冥属性炼丹"
+    source: 冥界
+  - id: feng_huang_jing_xue
+    name: 凤凰精血
+    category: ling_shou_chong
+    grade: shen
+    attribute: huo
+    effect: "血脉觉醒"
+    source: feng_huang_ling
+  - id: shi_jin_chong
+    name: 噬金虫
+    category: ling_shou_chong
+    grade: qian_nian
+    attribute: jin
+    effect: "炼器、阵法"
+    source: 上古矿区
+  - id: long_ni_lin
+    name: 龙族逆鳞
+    category: ling_shou_chong
+    grade: shen
+    attribute: long
+    effect: "传说炼器、防具"
+    source: tian_long_shan
+
+# 著名天外奇珍
+exotic_examples:
+  - id: tian_wai_yun_tie
+    name: 天外陨铁
+    category: tian_wai
+    grade: wan_nian
+    attribute: kong_jian
+    effect: "空间法器"
+    source: 天外
+  - id: xing_chen_sui_pian
+    name: 星辰碎片
+    category: tian_wai
+    grade: wan_nian
+    attribute: 星辰
+    effect: "星辰属性法器"
+    source: 星辰崩解
+  - id: kua_jie_ling_wu
+    name: 跨界灵物
+    category: tian_wai
+    grade: shen
+    attribute: 不定
+    effect: "炼丹、炼器"
+    source: 跨界秘境
+  - id: shi_guang_sha
+    name: 时光之沙
+    category: tian_wai
+    grade: shen
+    attribute: shi_jian
+    effect: "时间系法宝"
+    source: 传说
+  - id: kong_jian_jing_he
+    name: 空间晶核
+    category: tian_wai
+    grade: shen
+    attribute: kong_jian
+    effect: "空间系法宝"
+    source: 空间秘境
+
+# 著名仙材神材
+celestial_examples:
+  - id: xian_shi
+    name: 仙石
+    category: xian_shen
+    grade: xian
+    attribute: xian
+    effect: "仙器主料"
+    source: 仙界
+  - id: xian_yu
+    name: 仙玉
+    category: xian_shen
+    grade: xian
+    attribute: xian
+    effect: "阵法、法器"
+    source: 仙界
+  - id: shen_shi
+    name: 神石
+    category: xian_shen
+    grade: shen
+    attribute: shen
+    effect: "神器主料"
+    source: 神界
+  - id: shen_yu
+    name: 神玉
+    category: xian_shen
+    grade: shen
+    attribute: shen
+    effect: "神器、阵法"
+    source: 神界
+  - id: shen_cao
+    name: 神草
+    category: xian_shen
+    grade: shen
+    attribute: shen
+    effect: "神丹"
+    source: 神界
+
+# 用途
+purposes:
+  - id: lian_dan
+    name: 炼丹
+    examples: [jiu_you_huan_hun_cao, xian_cao, shen_cao]
+  - id: lian_qi
+    name: 炼器
+    examples: [xuan_tie, xing_chen_tie, shen_tie]
+  - id: bu_zhen
+    name: 布阵
+    examples: [xian_yu, shen_yu]
+  - id: hui_fu
+    name: 绘符
+    examples: [lei_ji_mu, yang_hun_mu]
+  - id: zhi_jie_fu_yong
+    name: 直接服用
+    examples: [wan_nian_tai_sui, feng_huang_jing_xue]
+
+references:
+  - ../天材地宝体系/天材地宝.md

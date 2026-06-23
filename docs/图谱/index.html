@@ -1,0 +1,4003 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="基于《凡人修仙传》的修仙世界观架构知识库">
+      
+      
+        <meta name="author" content="shushuzn">
+      
+      
+      
+        <link rel="prev" href="../BRANCH_PROTECTION/">
+      
+      
+        <link rel="next" href="../../CONTRIBUTING/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>关系图谱 - 修仙体系结构 · xiuxian-structure</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="修仙体系结构 · xiuxian-structure" class="md-header__button md-logo" aria-label="修仙体系结构 · xiuxian-structure" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            修仙体系结构 · xiuxian-structure
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              关系图谱
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到夜间模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到夜间模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到日间模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到日间模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/shushuzn/xiuxian-structure" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    shushuzn/xiuxian-structure
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E7%B4%A2%E5%BC%95/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  总索引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E5%A2%83%E7%95%8C/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  体系
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../%E6%A6%82%E5%BF%B5%E6%B1%87%E6%80%BB/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  文档
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CONTRIBUTING/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  贡献
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../CHANGELOG/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  更新日志
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../SECURITY/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  安全
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../LICENSE" class="md-tabs__link">
+        
+  
+  
+    
+  
+  许可
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="修仙体系结构 · xiuxian-structure" class="md-nav__button md-logo" aria-label="修仙体系结构 · xiuxian-structure" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    修仙体系结构 · xiuxian-structure
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/shushuzn/xiuxian-structure" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    shushuzn/xiuxian-structure
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    境界体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    境界体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E5%A2%83%E7%95%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E7%82%BC%E6%B0%94%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    炼气期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E7%AD%91%E5%9F%BA%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    筑基期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E7%BB%93%E4%B8%B9%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结丹期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E5%85%83%E5%A9%B4%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    元婴期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E5%8C%96%E7%A5%9E%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    化神期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E7%82%BC%E8%99%9A%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    炼虚期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E5%90%88%E4%BD%93%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    合体期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E6%B8%A1%E5%8A%AB%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    渡劫期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A2%83%E7%95%8C%E4%BD%93%E7%B3%BB/%E5%A4%A7%E4%B9%98%E6%9C%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大乘期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%81%B5%E6%A0%B9%E4%BD%93%E7%B3%BB/%E7%81%B5%E6%A0%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    灵根体系
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    天地灵气
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    天地灵气
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A4%A9%E5%9C%B0%E7%81%B5%E6%B0%94/%E7%81%B5%E6%B0%94/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    妖兽体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    妖兽体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A6%96%E5%85%BD%E4%BD%93%E7%B3%BB/%E5%A6%96%E5%85%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    妖修体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    妖修体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A6%96%E4%BF%AE%E4%BD%93%E7%B3%BB/%E5%A6%96%E4%BF%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    势力体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    势力体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%8A%BF%E5%8A%9B%E4%BD%93%E7%B3%BB/%E5%8A%BF%E5%8A%9B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    灵石体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    灵石体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%81%B5%E7%9F%B3%E4%BD%93%E7%B3%BB/%E7%81%B5%E7%9F%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    阵法体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    阵法体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%98%B5%E6%B3%95%E4%BD%93%E7%B3%BB/%E9%98%B5%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    符箓体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    符箓体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AC%A6%E7%AE%93%E4%BD%93%E7%B3%BB/%E7%AC%A6%E7%AE%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    功法体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    功法体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%8A%9F%E6%B3%95%E4%BD%93%E7%B3%BB/%E5%8A%9F%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    丹药体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    丹药体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%B9%E8%8D%AF%E4%BD%93%E7%B3%BB/%E4%B8%B9%E8%8D%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    法器体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    法器体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B3%95%E5%99%A8%E4%BD%93%E7%B3%BB/%E6%B3%95%E5%99%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_13" id="__nav_3_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    秘境体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    秘境体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A7%98%E5%A2%83%E4%BD%93%E7%B3%BB/%E7%A7%98%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_14" id="__nav_3_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    心魔体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    心魔体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BF%83%E9%AD%94%E4%BD%93%E7%B3%BB/%E5%BF%83%E9%AD%94/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_15" id="__nav_3_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷劫体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    雷劫体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%9B%B7%E5%8A%AB%E4%BD%93%E7%B3%BB/%E9%9B%B7%E5%8A%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_16" id="__nav_3_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    神识体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    神识体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%A5%9E%E8%AF%86%E4%BD%93%E7%B3%BB/%E7%A5%9E%E8%AF%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_17" id="__nav_3_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    器灵体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    器灵体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%99%A8%E7%81%B5%E4%BD%93%E7%B3%BB/%E5%99%A8%E7%81%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_18" id="__nav_3_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    契约体系
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_18">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    契约体系
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A5%91%E7%BA%A6%E4%BD%93%E7%B3%BB/%E5%A5%91%E7%BA%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文档
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    文档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A6%82%E5%BF%B5%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概念汇总
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    元文档
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    元文档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    模板
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SCHEMA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BRANCH_PROTECTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分支保护
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关系图谱
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关系图谱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        境界晋升图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        灵根 → 修炼速度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        丹药-境界映射
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功法-境界映射
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        体系全景图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        灵脉等级-势力规模
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-v15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        雷劫-境界映射（v1.5 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-v15_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        心魔-境界映射（v1.5 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-v17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        器灵-法器映射（v1.7 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-v17_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        契约-对象映射（v1.7 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        神识攻击（v1.6 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        飞升 / 仙界（v2.0 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        飞升之劫 vs 雷劫对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自动生成的全图（v2.9 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贡献
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    更新日志
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SECURITY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安全
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LICENSE" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    许可
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        境界晋升图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        灵根 → 修炼速度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        丹药-境界映射
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功法-境界映射
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        体系全景图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        灵脉等级-势力规模
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-v15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        雷劫-境界映射（v1.5 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-v15_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        心魔-境界映射（v1.5 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-v17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        器灵-法器映射（v1.7 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-v17_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        契约-对象映射（v1.7 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        神识攻击（v1.6 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        飞升 / 仙界（v2.0 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        飞升之劫 vs 雷劫对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自动生成的全图（v2.9 新增）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">修仙体系关系图<a class="headerlink" href="#_1" title="永久链接">&para;</a></h1>
+<p>本目录包含从 <code>data/relations.yaml</code> 自动/手工绘制的 mermaid 图。</p>
+<h2 id="_2">境界晋升图<a class="headerlink" href="#_2" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    LQ[炼气期&lt;br/&gt;120年] --&gt;|筑基丹| ZJ[筑基期&lt;br/&gt;200年]
+    ZJ --&gt;|结丹丹| JD[结丹期&lt;br/&gt;500年]
+    JD --&gt;|培婴丹| YY[元婴期&lt;br/&gt;1000年]
+    YY --&gt;|化神辅助| HS[化神期&lt;br/&gt;2000年]
+    HS --&gt; LX[炼虚期&lt;br/&gt;5000年]
+    LX --&gt; HT[合体期&lt;br/&gt;10000年]
+    HT --&gt; DJ[渡劫期]
+    DJ --&gt; DC[大乘期]
+
+    style LQ fill:#e3f2fd
+    style ZJ fill:#bbdefb
+    style JD fill:#90caf9
+    style YY fill:#64b5f6
+    style HS fill:#42a5f5
+    style LX fill:#2196f3
+    style HT fill:#1e88e5
+    style DJ fill:#ff9800
+    style DC fill:#f57c00</code></pre>
+<h2 id="_3">灵根 → 修炼速度<a class="headerlink" href="#_3" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    FLG[废灵根&lt;br/&gt;0.1x] --&gt; WLG[伪灵根&lt;br/&gt;1x]
+    WLG --&gt; ZLG[真灵根&lt;br/&gt;3x]
+    ZLG --&gt; TLG[天灵根&lt;br/&gt;10x]
+    TLG --&gt; BYLG[变异灵根&lt;br/&gt;8x]
+
+    style FLG fill:#ffcdd2
+    style WLG fill:#ef9a9a
+    style ZLG fill:#fff59d
+    style TLG fill:#a5d6a7
+    style BYLG fill:#80cbc4</code></pre>
+<h2 id="-">丹药-境界映射<a class="headerlink" href="#-" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    subgraph 丹药品级
+        FP[凡品] --&gt; LP[灵品]
+        LP --&gt; BP[宝品]
+        BP --&gt; XP[仙品]
+    end
+
+    subgraph 适用境界
+        LQ2[炼气期]
+        ZJ2[筑基期]
+        JD2[结丹期]
+        YY2[元婴期+]
+    end
+
+    FP ==&gt; LQ2
+    LP ==&gt; ZJ2
+    BP ==&gt; JD2
+    XP ==&gt; YY2
+
+    style FP fill:#fff3e0
+    style LP fill:#ffe0b2
+    style BP fill:#ffcc80
+    style XP fill:#ffb74d</code></pre>
+<h2 id="-_1">功法-境界映射<a class="headerlink" href="#-_1" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    HJ[黄级&lt;br/&gt;→ 筑基] --&gt; XJ[玄级&lt;br/&gt;→ 结丹]
+    XJ --&gt; DJ[地级&lt;br/&gt;→ 化神]
+    DJ --&gt; TJ[天级&lt;br/&gt;→ 大乘]
+
+    style HJ fill:#f5f5f5
+    style XJ fill:#e0e0e0
+    style DJ fill:#bdbdbd
+    style TJ fill:#9e9e9e</code></pre>
+<h2 id="_4">体系全景图<a class="headerlink" href="#_4" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TB
+    ROOT[修仙体系] --&gt; LG[灵根体系]
+    ROOT --&gt; YQ[天地灵气]
+    ROOT --&gt; GF[功法体系]
+    ROOT --&gt; DD[丹药体系]
+    ROOT --&gt; FQ[法器体系]
+    ROOT --&gt; JJ[境界体系]
+    ROOT --&gt; YS[妖兽体系]
+    ROOT --&gt; SL[势力体系]
+    ROOT --&gt; LS[灵石体系]
+    ROOT --&gt; ZS[阵法体系]
+    ROOT --&gt; FL[符箓体系]
+
+    LG --&gt;|决定| JJ
+    YQ --&gt;|影响| JJ
+    YQ --&gt;|决定势力| YQ2[灵脉-势力]
+    GF --&gt;|决定上限| JJ
+    DD --&gt;|辅助突破| JJ
+    FQ --&gt;|战斗工具| JJ
+    YQ --&gt;|产出| LS
+    LS --&gt;|支撑经济| SL
+    YS --&gt;|可建立| SL
+    YS --&gt;|提供资源| DD
+    YS --&gt;|提供材料| FQ
+    LS --&gt;|驱动| ZS
+    ZS --&gt;|防御| SL
+    FL --&gt;|补足| JJ
+    FL --&gt;|便携版| ZS
+
+    style ROOT fill:#37474f,color:#fff
+    style JJ fill:#42a5f5,color:#fff</code></pre>
+<h2 id="-_2">灵脉等级-势力规模<a class="headerlink" href="#-_2" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    WX[微型灵脉&lt;br/&gt;5km] --&gt; XX[小型灵脉&lt;br/&gt;50km]
+    XX --&gt; ZX[中型灵脉&lt;br/&gt;100km]
+    ZX --&gt; DX[大型灵脉&lt;br/&gt;500km]
+    DX --&gt; CJ[超级灵脉&lt;br/&gt;1000km]
+
+    WX -.-&gt; SX[散修]
+    XX -.-&gt; XS[小型宗门]
+    ZX -.-&gt; ZS[中型宗门]
+    DX -.-&gt; DS[大型宗门]
+    CJ -.-&gt; TS[顶级宗门]</code></pre>
+<h2 id="-v15">雷劫-境界映射（v1.5 新增）<a class="headerlink" href="#-v15" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    subgraph 三九天劫[三九天劫 · 9 道]
+        S1[第 1-3 道&lt;br/&gt;肉身] --&gt; S2[第 4-6 道&lt;br/&gt;神魂]
+        S2 --&gt; S3[第 7-9 道&lt;br/&gt;法则初窥]
+    end
+
+    subgraph 六九天劫[六九天劫 · 18 道]
+        L1[第 1-6 道&lt;br/&gt;肉身+神魂] --&gt; L2[第 7-12 道&lt;br/&gt;法则感悟]
+        L2 --&gt; L3[第 13-18 道&lt;br/&gt;神魂法则融合]
+    end
+
+    subgraph 九九天劫[九九天劫 · 27 道]
+        J1[第 1-9 道&lt;br/&gt;脱胎换骨] --&gt; J2[第 10-18 道&lt;br/&gt;神魂法则化]
+        J2 --&gt; J3[第 19-27 道&lt;br/&gt;三者合一]
+    end
+
+    JIEDAN[结丹期] ==&gt;|结丹→元婴| S3
+    YUANYING[元婴期] ==&gt;|元婴→化神| L3
+    HUASHEN[化神期] ==&gt;|化神→炼虚| L3
+    LIANXU[炼虚期] ==&gt;|炼虚→合体| J3
+    HETI[合体期] ==&gt;|合体→渡劫| J3
+    DUJIE[渡劫期] ==&gt;|渡劫→大乘&lt;br/&gt;飞升之劫| J3
+
+    style S3 fill:#90caf9
+    style L3 fill:#42a5f5,color:#fff
+    style J3 fill:#1e88e5,color:#fff</code></pre>
+<h2 id="-v15_1">心魔-境界映射（v1.5 新增）<a class="headerlink" href="#-v15_1" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    TAN[贪魔&lt;br/&gt;贪图权势/资源] --&gt; ZHUJI[筑基→结丹&lt;br/&gt;常见]
+    TAN --&gt; JIEDAN[结丹→元婴&lt;br/&gt;高发]
+
+    CHI[嗔魔&lt;br/&gt;怨愤/杀心] --&gt; YYHS[元婴→化神&lt;br/&gt;对天道之愤]
+    CHI --&gt; HSLX[化神→炼虚&lt;br/&gt;对法则之疑]
+
+    ZHI[执念魔&lt;br/&gt;执念于人/事] --&gt; JDYY[结丹→元婴&lt;br/&gt;高发]
+    ZHI --&gt; YYHS2[元婴→化神&lt;br/&gt;情债/因果]
+
+    CIN[痴魔&lt;br/&gt;执迷于道] --&gt; YYHS3[元婴→化神&lt;br/&gt;自创道者]
+    CIN --&gt; LXHT[化神→炼虚&lt;br/&gt;法则之痴]
+
+    DUJIE2[渡劫期] ==&gt;|所有心魔并发| ALL[贪嗔痴执&lt;br/&gt;同时爆发]
+
+    style ALL fill:#ff5252,color:#fff</code></pre>
+<h2 id="-v17">器灵-法器映射（v1.7 新增）<a class="headerlink" href="#-v17" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    subgraph 法器品级
+        DI[低阶法器&lt;br/&gt;无器灵] --&gt; ZHONG[中阶法器&lt;br/&gt;无器灵]
+        ZHONG --&gt; GAO[高阶法器&lt;br/&gt;无器灵]
+        GAO --&gt; FA[法宝&lt;br/&gt;器灵雏形]
+        FA --&gt; LING[灵宝&lt;br/&gt;器灵完整]
+        LING --&gt; CHUAN[传说级&lt;br/&gt;器灵大成]
+        CHUAN --&gt; XIAN[仙器&lt;br/&gt;器灵至臻]
+    end
+
+    subgraph 器灵等级
+        CHU[雏形&lt;br/&gt;微弱意识] --&gt; XIAO[小成&lt;br/&gt;较完整意识]
+        XIAO --&gt; WAN[完整&lt;br/&gt;完整意识]
+        WAN --&gt; DA[大成&lt;br/&gt;心意相通]
+        DA --&gt; ZHI[至臻&lt;br/&gt;灵魂融合]
+    end
+
+    FA ==&gt; CHU
+    LING ==&gt; WAN
+    CHUAN ==&gt; DA
+    XIAN ==&gt; ZHI
+
+    style CHU fill:#fff3e0
+    style WAN fill:#ffe0b2
+    style DA fill:#ffcc80
+    style ZHI fill:#ffb74d</code></pre>
+<h2 id="-v17_1">契约-对象映射（v1.7 新增）<a class="headerlink" href="#-v17_1" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    subgraph 契约类型
+        ZHU[主从契约&lt;br/&gt;强者压制] --&gt; PING[平等契约&lt;br/&gt;双方自由]
+        PING --&gt; LING2[灵魂契约&lt;br/&gt;本命绑定]
+        LING2 --&gt; HUN[魂契&lt;br/&gt;极端禁忌]
+    end
+
+    subgraph 适用对象
+        BEAST[灵兽&lt;br/&gt;4 种契约皆可] --&gt; YAOXIU[妖修&lt;br/&gt;平等/灵魂]
+        YAOXIU --&gt; PERSON[修士&lt;br/&gt;平等/魂契]
+        PERSON --&gt; FACTION[势力&lt;br/&gt;平等盟约]
+        PERSON --&gt; ARTIFACT[法器&lt;br/&gt;魂契极少]
+    end
+
+    ZHU --&gt;|强制| BEAST
+    PING --&gt;|自愿| BEAST
+    PING --&gt;|道友| YAOXIU
+    LING2 --&gt;|本命| BEAST
+    HUN --&gt;|道侣| PERSON
+    HUN --&gt;|禁忌| ARTIFACT
+
+    style HUN fill:#ff5252,color:#fff</code></pre>
+<h2 id="v16">神识攻击（v1.6 新增）<a class="headerlink" href="#v16" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    subgraph 神识等级
+        WEI[微神识&lt;br/&gt;炼气期&lt;br/&gt;3-10丈] --&gt; XIAO2[小神识&lt;br/&gt;筑基期&lt;br/&gt;30-100丈]
+        XIAO2 --&gt; DA2[大神识&lt;br/&gt;结丹期&lt;br/&gt;100-500丈]
+        DA2 --&gt; YUAN[元神识&lt;br/&gt;元婴期+&lt;br/&gt;数里-数十里]
+    end
+
+    subgraph 神识攻击4档
+        CI[识刺&lt;br/&gt;基础&lt;br/&gt;消耗 5%]
+        BAO[识爆&lt;br/&gt;中级&lt;br/&gt;消耗 20-30%]
+        YU[识域&lt;br/&gt;高级&lt;br/&gt;消耗 5-10%/刻钟]
+        MIE[识灭&lt;br/&gt;禁忌&lt;br/&gt;同归于尽]
+    end
+
+    DA2 --&gt; CI
+    YUAN --&gt; CI
+    YUAN --&gt; BAO
+    YUAN --&gt; YU
+    YUAN2[化神期+] --&gt; MIE
+
+    CI -.-&gt;|神识弱于50%| 刺穿
+    BAO -.-&gt;|神识弱于30%| 重创
+    YU -.-&gt;|领域内低阶| 压制
+
+    style YUAN fill:#42a5f5,color:#fff
+    style MIE fill:#ff5252,color:#fff</code></pre>
+<h2 id="v20">飞升 / 仙界（v2.0 新增）<a class="headerlink" href="#v20" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TB
+    subgraph 下界
+        DACHENG[大乘期&lt;br/&gt;飞升起点]
+    end
+
+    subgraph 飞升之劫3道
+        L28[第 28 道&lt;br/&gt;肉身成仙]
+        L29[第 29 道&lt;br/&gt;神魂飞升]
+        L30[第 30 道&lt;br/&gt;法则融合]
+    end
+
+    subgraph 仙界
+        JIETAI[接引台&lt;br/&gt;飞升者落地]
+        SXX[散仙&lt;br/&gt;飞升即得]
+        XT[仙徒 → 仙使 → 仙官&lt;br/&gt;→ 仙将 → 仙君&lt;br/&gt;→ 仙王 → 仙帝]
+        XZ[仙灵石&lt;br/&gt;仙气结晶]
+    end
+
+    subgraph 仙界规则
+        XJIE[5 种仙劫&lt;br/&gt;5000-50000年一次]
+        BI[界面壁障&lt;br/&gt;几乎不可返回]
+        RX[4 个势力&lt;br/&gt;天庭/九重天宫&lt;br/&gt;长生仙宗/逍遥仙盟]
+    end
+
+    DACHENG ==&gt; L28
+    L28 --&gt; L29
+    L29 --&gt; L30
+    L30 ==&gt; JIETAI
+    JIETAI --&gt; SXX
+    SXX --&gt; XT
+    XT --&gt; XZ
+
+    XT -.-&gt;|每数千年| XJIE
+    XT -.-&gt;|管理| RX
+    DACHENG -.-&gt;|不可逆| BI
+    SXX -.-&gt;|单向壁障| BI
+
+    style L30 fill:#ff5252,color:#fff
+    style JIETAI fill:#42a5f5,color:#fff
+    style XZ fill:#7e57c2,color:#fff</code></pre>
+<h2 id="vs">飞升之劫 vs 雷劫对比<a class="headerlink" href="#vs" title="永久链接">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    subgraph 雷劫
+        TJ_SAN[三九天劫&lt;br/&gt;9 道&lt;br/&gt;结丹→元婴]
+        TJ_LIU[六九天劫&lt;br/&gt;18 道&lt;br/&gt;元婴→化神/炼虚]
+        TJ_JIU[九九天劫&lt;br/&gt;27 道&lt;br/&gt;炼虚→合体/渡劫]
+    end
+
+    subgraph 飞升之劫
+        FS[飞升之劫&lt;br/&gt;3 道&lt;br/&gt;渡劫→大乘&lt;br/&gt;仙帝之始]
+    end
+
+    TJ_SAN -.-&gt;|最高| 元婴
+    TJ_LIU -.-&gt;|最高| 化神
+    TJ_JIU -.-&gt;|最高| 渡劫期
+    FS -.-&gt;|最高| 大乘期
+
+    TJ_JIU --&gt;|最后 3 道| FS
+
+    style FS fill:#ff5252,color:#fff</code></pre>
+<blockquote>
+<p>提示：GitHub / VS Code / Typora 等支持 mermaid 的渲染器会直接显示图。
+渲染失败时检查 <code>data/relations.yaml</code> 中的 id 是否对应 <code>data/*.yaml</code> 中实际存在的 id。</p>
+</blockquote>
+<h2 id="v29">自动生成的全图（v2.9 新增）<a class="headerlink" href="#v29" title="永久链接">&para;</a></h2>
+<p>通过 <code>python3 scripts/build_graph.py --mermaid &lt;输出&gt;</code> 自动从 <code>data/relations.yaml</code> + <code>data/*.yaml</code> 生成：</p>
+<ul>
+<li><strong>节点数</strong>：161</li>
+<li><strong>边数</strong>：221</li>
+<li><strong>体系数</strong>：45+</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    subgraph spirit_root ["spirit_root (9)"]
+        spirit_root_tian_ling_gen["tian_ling_gen"]
+        spirit_root_wei_ling_gen["wei_ling_gen"]
+        spirit_root_jian_gen["jian_gen"]
+        spirit_root_ji_yang_gen["ji_yang_gen"]
+        spirit_root_zhao_yao_gen["zhao_yao_gen"]
+        spirit_root_ming_gen["ming_gen"]
+        spirit_root_ji_yin_gen["ji_yin_gen"]
+        spirit_root_yu_lei_gen["yu_lei_gen"]
+        spirit_root_han_bing_gen["han_bing_gen"]
+    end
+    subgraph attributes ["attributes (1)"]
+        attributes_jin["jin"]
+    end
+    subgraph aether ["aether (3)"]
+        aether_xi_bao["xi_bao"]
+        aether_nong_yu["nong_yu"]
+        aether_wei_xing_lingmai["wei_xing_lingmai"]
+    end
+    subgraph technique ["technique (12)"]
+        technique_huang["huang"]
+        technique_xuan["xuan"]
+        technique_di["di"]
+        technique_tian["tian"]
+        technique_jin_gang_gong["jin_gang_gong"]
+        technique_lei_dian_jue["lei_dian_jue"]
+        technique_you_ming_jue["you_ming_jue"]
+        technique_mo_shen_jue["mo_shen_jue"]
+        technique_tai_yi_jue["tai_yi_jue"]
+        technique_cang_lang_jue["cang_lang_jue"]
+        technique_hun_yuan_gong["hun_yuan_gong"]
+        technique_tian_di_jue["tian_di_jue"]
+    end
+    subgraph elixir ["elixir (12)"]
+        elixir_fan_pin["fan_pin"]
+        elixir_ling_pin["ling_pin"]
+        elixir_bao_pin["bao_pin"]
+        elixir_xian_pin["xian_pin"]
+        elixir_zhuji_dan["zhuji_dan"]
+        elixir_jiedan_dan["jiedan_dan"]
+        elixir_peiyu_dan["peiyu_dan"]
+        elixir_qing_xin_dan["qing_xin_dan"]
+        elixir_qing_xin_dan_advanced["qing_xin_dan_advanced"]
+        elixir_ning_shen_dan["ning_shen_dan"]
+        elixir_du_e_dan["du_e_dan"]
+        elixir_hu_shen_dan["hu_shen_dan"]
+    end
+    subgraph realm ["realm (9)"]
+        realm_jiedan["jiedan"]
+        realm_yuanying["yuanying"]
+        realm_huashen["huashen"]
+        realm_lianxu["lianxu"]
+        realm_heti["heti"]
+        realm_dujie["dujie"]
+        realm_zhuji["zhuji"]
+        realm_lianqi["lianqi"]
+        realm_dacheng["dacheng"]
+    end
+    subgraph tribulation ["tribulation (6)"]
+        tribulation_san_jiu_tian_jie["san_jiu_tian_jie"]
+        tribulation_liu_jiu_tian_jie["liu_jiu_tian_jie"]
+        tribulation_jiu_jiu_tian_jie["jiu_jiu_tian_jie"]
+        tribulation_jiu_jiu_tian_jie_feisheng["jiu_jiu_tian_jie_feisheng"]
+        tribulation_hua_shou["hua_shou"]
+        tribulation_xian_jie_tian_jie["xian_jie_tian_jie"]
+    end
+    subgraph formation ["formation (3)"]
+        formation_du_jie_zhen["du_jie_zhen"]
+        formation_tian_gang_zhen["tian_gang_zhen"]
+        formation_ju_ling_zhen["ju_ling_zhen"]
+    end
+    subgraph divine_sense ["divine_sense (4)"]
+        divine_sense_jiedan["jiedan"]
+        divine_sense_yuanying["yuanying"]
+        divine_sense_zhuji["zhuji"]
+        divine_sense_huashen["huashen"]
+    end
+    subgraph heart_demon ["heart_demon (10)"]
+        heart_demon_chi_mo["chi_mo"]
+        heart_demon_zhi_nian_mo["zhi_nian_mo"]
+        heart_demon_wu_mo["wu_mo"]
+        heart_demon_ai_mo["ai_mo"]
+        heart_demon_e_mo["e_mo"]
+        heart_demon_sheng_si_mo["sheng_si_mo"]
+        heart_demon_qie_mo["qie_mo"]
+        heart_demon_ai_guo_mo["ai_guo_mo"]
+        heart_demon_tan_mo["tan_mo"]
+        heart_demon_yu_mo["yu_mo"]
+    end
+    subgraph artifact ["artifact (3)"]
+        artifact_fa_bao["fa_bao"]
+        artifact_ling_bao["ling_bao"]
+        artifact_ling_shou_dai["ling_shou_dai"]
+    end
+    subgraph spirit_weapon ["spirit_weapon (3)"]
+        spirit_weapon_zi_yuan["zi_yuan"]
+        spirit_weapon_chu_ling["chu_ling"]
+        spirit_weapon_wu_ji["wu_ji"]
+    end
+    subgraph spirit_beast ["spirit_beast (1)"]
+        spirit_beast_ling_pin["ling_pin"]
+    end
+    subgraph yao_xiu ["yao_xiu (1)"]
+        yao_xiu_hua_xing["hua_xing"]
+    end
+    subgraph org ["org (1)"]
+        org_top_sect["top_sect"]
+    end
+    subgraph contract ["contract (5)"]
+        contract_master_servant["master_servant"]
+        contract_soul_bond["soul_bond"]
+        contract_blood_contract["blood_contract"]
+        contract_tian_dao_contract["tian_dao_contract"]
+        contract_lian_hun_contract["lian_hun_contract"]
+    end
+    subgraph ascension ["ascension (6)"]
+        ascension_ascension_tribulation["ascension_tribulation"]
+        ascension_unidirectional["unidirectional"]
+        ascension_ordinary["ordinary"]
+        ascension_talented["talented"]
+        ascension_legendary["legendary"]
+        ascension_ghost["ghost"]
+    end
+    subgraph realms ["realms (6)"]
+        realms_xian_jie["xian_jie"]
+        realms_dacheng["dacheng"]
+        realms_ren_xian["ren_xian"]
+        realms_xian_di["xian_di"]
+        realms_shen_di["shen_di"]
+        realms_tian_xian["tian_xian"]
+    end
+    subgraph spirit_stone ["spirit_stone (7)"]
+        spirit_stone_ji_pin["ji_pin"]
+        spirit_stone_xian_pin["xian_pin"]
+        spirit_stone_long["long"]
+        spirit_stone_shen["shen"]
+        spirit_stone_mo["mo"]
+        spirit_stone_ming["ming"]
+        spirit_stone_tian_lei["tian_lei"]
+    end
+    subgraph factions ["factions (1)"]
+        factions_tian_ting["tian_ting"]
+    end
+    subgraph immortal_tribulations ["immortal_tribulations (1)"]
+        immortal_tribulations_lei_xian_jie["lei_xian_jie"]
+    end
+    subgraph barrier_types ["barrier_types (1)"]
+        barrier_types_sealed["sealed"]
+    end
+    subgraph titles ["titles (1)"]
+        titles_xian_di["xian_di"]
+    end
+    subgraph divine_grades ["divine_grades (3)"]
+        divine_grades_fan_ren["fan_ren"]
+        divine_grades_zhi_shen["zhi_shen"]
+        divine_grades_dao_zu_ge["dao_zu_ge"]
+    end
+    subgraph spirit_stones ["spirit_stones (1)"]
+        spirit_stones_xian_jing["xian_jing"]
+    end
+    subgraph demon_aether ["demon_aether (2)"]
+        demon_aether_xi_mo["xi_mo"]
+        demon_aether_mo_yuan["mo_yuan"]
+    end
+    subgraph demon_titles ["demon_titles (1)"]
+        demon_titles_mo_di["mo_di"]
+    end
+    subgraph demon_races ["demon_races (1)"]
+        demon_races_ren_zu_mo["ren_zu_mo"]
+    end
+    subgraph demon_grades ["demon_grades (1)"]
+        demon_grades_fan_mo["fan_mo"]
+    end
+    subgraph underworld_titles ["underworld_titles (1)"]
+        underworld_titles_ming_di["ming_di"]
+    end
+    subgraph underworld_tribulations ["underworld_tribulations (1)"]
+        underworld_tribulations_wan_hun_shi_xin_jie["wan_hun_shi_xin_jie"]
+    end
+    subgraph underworld_races ["underworld_races (2)"]
+        underworld_races_gui_zu["gui_zu"]
+        underworld_races_pan_guan_zu["pan_guan_zu"]
+    end
+    subgraph underworld_domains ["underworld_domains (2)"]
+        underworld_domains_liu_dao_lun_hui_si["liu_dao_lun_hui_si"]
+        underworld_domains_feng_du["feng_du"]
+    end
+    subgraph demon_tribulations ["demon_tribulations (1)"]
+        demon_tribulations_xin_mo_jie["xin_mo_jie"]
+    end
+    subgraph underworld_aether ["underworld_aether (1)"]
+        underworld_aether_si_yuan["si_yuan"]
+    end
+    subgraph shen_tong ["shen_tong (4)"]
+        shen_tong_zi_dian_shen_lei["zi_dian_shen_lei"]
+        shen_tong_wan_xiang_tian_yin["wan_xiang_tian_yin"]
+        shen_tong_zhu_shen_jian_jue["zhu_shen_jian_jue"]
+        shen_tong_hun_yuan_shen_li["hun_yuan_shen_li"]
+    end
+    subgraph dun_shu ["dun_shu (2)"]
+        dun_shu_jin_dun["jin_dun"]
+        dun_shu_shui_dun["shui_dun"]
+    end
+    subgraph fa_xiang ["fa_xiang (2)"]
+        fa_xiang_jin_gang_fa_xiang["jin_gang_fa_xiang"]
+        fa_xiang_qing_lian_fa_xiang["qing_lian_fa_xiang"]
+    end
+    subgraph examples ["examples (12)"]
+        examples_jiu_xiao_lei_zhen["jiu_xiao_lei_zhen"]
+        examples_huo_yan_dong["huo_yan_dong"]
+        examples_tian_shan_school["tian_shan_school"]
+        examples_tian_long_shan["tian_long_shan"]
+        examples_qi_lin_ting["qi_lin_ting"]
+        examples_feng_huang_ling["feng_huang_ling"]
+        examples_wan_yao_lin["wan_yao_lin"]
+        examples_qi_lin["qi_lin"]
+        examples_feng_huang["feng_huang"]
+        examples_jin_chi_da_peng["jin_chi_da_peng"]
+        examples_tai_yi_gong["tai_yi_gong"]
+        examples_ji_yin_si["ji_yin_si"]
+    end
+    subgraph divine_power ["divine_power (10)"]
+        divine_power_fa_tian_xiang_di["fa_tian_xiang_di"]
+        divine_power_ling_yu_zhan_kai["ling_yu_zhan_kai"]
+        divine_power_lun_hui_zhi_yan["lun_hui_zhi_yan"]
+        divine_power_xian_di_wei_ya["xian_di_wei_ya"]
+        divine_power_shi_jian_jing_zhi["shi_jian_jing_zhi"]
+        divine_power_shen_wang_li_zhi["shen_wang_li_zhi"]
+        divine_power_san_tou_liu_bi["san_tou_liu_bi"]
+        divine_power_kong_jian_yi_dong["kong_jian_yi_dong"]
+        divine_power_bu_xiu_shen["bu_xiu_shen"]
+        divine_power_qian_li_chuan_yin["qian_li_chuan_yin"]
+    end
+    subgraph talisman ["talisman (2)"]
+        talisman_wan_fu_fu["wan_fu_fu"]
+        talisman_du_jie_fu["du_jie_fu"]
+    end
+    subgraph ascension_tribulation ["ascension_tribulation (1)"]
+        ascension_tribulation_ascension_tribulation["ascension_tribulation"]
+    end
+    subgraph paths ["paths (1)"]
+        paths_bei_pai["bei_pai"]
+    end
+    subgraph ascension_types ["ascension_types (1)"]
+        ascension_types_evil["evil"]
+    end
+    subgraph counter_elixirs ["counter_elixirs (3)"]
+        counter_elixirs_ji_kong_dan["ji_kong_dan"]
+        counter_elixirs_wu_ruo_dan["wu_ruo_dan"]
+        counter_elixirs_duan_yu_dan["duan_yu_dan"]
+    end
+    spirit_root_tian_ling_gen --&gt;|influences| realm_lianqi
+    spirit_root_wei_ling_gen --&gt;|blocks| realm_zhuji
+    spirit_root_tian_ling_gen --&gt;|enables| technique_chang_sheng_jue
+    attributes_jin --&gt;|enables| technique_jin_jian_jue
+    aether_xi_bao --&gt;|enables| realm_lianqi
+    aether_nong_yu --&gt;|enables| realm_jiedan
+    aether_wei_xing_lingmai --&gt;|enables| org_san_xiu
+    technique_huang --&gt;|blocks| realm_zhuji
+    technique_xuan --&gt;|enables| realm_jiedan
+    technique_di --&gt;|enables| realm_huashen
+    technique_tian --&gt;|enables| realm_dacheng
+    elixir_fan_pin --&gt;|enables| realm_lianqi
+    elixir_ling_pin --&gt;|enables| realm_zhuji
+    elixir_bao_pin --&gt;|enables| realm_jiedan
+    elixir_xian_pin --&gt;|enables| realm_yuanying
+    elixir_zhuji_dan --&gt;|enables| realm_zhuji
+    elixir_jiedan_dan --&gt;|enables| realm_jiedan
+    elixir_peiyu_dan --&gt;|enables| realm_yuanying
+    realm_jiedan --&gt;|requires| tribulation_san_jiu_tian_jie
+    realm_yuanying --&gt;|requires| tribulation_liu_jiu_tian_jie
+    realm_huashen --&gt;|requires| tribulation_liu_jiu_tian_jie
+    realm_lianxu --&gt;|requires| tribulation_jiu_jiu_tian_jie
+    realm_heti --&gt;|requires| tribulation_jiu_jiu_tian_jie
+    realm_dujie --&gt;|requires| tribulation_jiu_jiu_tian_jie_feisheng
+    realm_zhuji --&gt;|blocks| heart_demon_tan_mo
+    realm_jiedan --&gt;|blocks| heart_demon_zhi_nian_mo
+    realm_yuanying --&gt;|blocks| heart_demon_chi_mo
+    realm_huashen --&gt;|blocks| heart_demon_chi_mo
+    tribulation_san_jiu_tian_jie --&gt;|triggers| heart_demon_tan_mo
+    tribulation_liu_jiu_tian_jie --&gt;|triggers| heart_demon_chi_mo
+    tribulation_jiu_jiu_tian_jie --&gt;|triggers| heart_demon_all
+    elixir_qing_xin_dan --&gt;|enables| heart_demon_tan_mo
+    elixir_qing_xin_dan_advanced --&gt;|enables| heart_demon_zhi_nian_mo
+    elixir_ning_shen_dan --&gt;|enables| heart_demon_chi_mo
+    formation_du_jie_zhen --&gt;|all_aggregate| tribulation_san_jiu_tian_jie
+    formation_du_jie_zhen --&gt;|all_aggregate| tribulation_liu_jiu_tian_jie
+    formation_du_jie_zhen --&gt;|all_aggregate| tribulation_jiu_jiu_tian_jie
+    realm_lianqi --&gt;|enables| divine_sense_lianqi
+    realm_zhuji --&gt;|enables| divine_sense_zhuji
+    realm_jiedan --&gt;|enables| divine_sense_jiedan
+    realm_yuanying --&gt;|enables| divine_sense_yuanying
+    divine_sense_jiedan --&gt;|enables| artifact_gao_jie
+    divine_sense_yuanying --&gt;|enables| artifact_fa_bao
+    divine_sense_zhuji --&gt;|enables| talisman_ling_fu
+    divine_sense_jiedan --&gt;|enables| talisman_bao_fu
+    divine_sense_zhuji --&gt;|enables| elixir_ling_pin
+    divine_sense_jiedan --&gt;|enables| elixir_bao_pin
+    divine_sense_zhuji --&gt;|enables| formation_ling_zhen
+    divine_sense_jiedan --&gt;|enables| formation_bao_zhen
+    divine_sense_yuanying --&gt;|blocks| heart_demon_all</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../BRANCH_PROTECTION/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 分支保护">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                分支保护
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../CONTRIBUTING/" class="md-footer__link md-footer__link--next" aria-label="下一页: 贡献">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                贡献
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/shushuzn/xiuxian-structure" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.footer", "search.highlight", "search.share", "search.suggest", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

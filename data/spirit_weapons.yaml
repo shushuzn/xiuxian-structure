@@ -1,0 +1,375 @@
+backlash_levels:
+- description: 所有反噬等级的总和，用于跨体系关联的占位
+  id: backlash
+  name: 反噬（聚合）
+  references:
+  - ../器灵体系/器灵反噬.md
+- consequence: 战斗效率下降
+  id: qing
+  manifestation: 偶有不服从，拒绝配合
+  mitigation: 加强沟通
+  name: 轻反噬
+  references:
+  - ../器灵体系/器灵反噬.md
+- consequence: 错过战机，可能被牵制
+  id: zhong
+  manifestation: 主动抗拒操控，关键时刻掉链子
+  mitigation: 神识压制或解除契约
+  name: 中反噬
+  references:
+  - ../器灵体系/器灵反噬.md
+- consequence: 神魂重创，修为倒退
+  id: zhong_da
+  manifestation: 开始吞噬主人神识
+  mitigation: 同阶修士协助镇压
+  name: 重反噬
+  references:
+  - ../器灵体系/器灵反噬.md
+- consequence: 主人神魂俱灭，肉身成为器灵傀儡
+  id: wan_quan
+  manifestation: 完全吞噬主人神魂，夺取法器
+  mitigation: 高阶修士抹杀器灵意识
+  name: 完全反噬
+  references:
+  - ../器灵体系/器灵反噬.md
+communication_methods:
+- capability: 传递基本信号（危险/敌意/灵物）
+  id: jing_shi
+  name: 警示
+  references:
+  - ../器灵体系/器灵沟通.md
+  spirit_grade_min: chu_xing
+- capability: 传递复杂信息片段
+  id: chuan_xin
+  name: 单向传信
+  references:
+  - ../器灵体系/器灵沟通.md
+  spirit_grade_min: xiao_cheng
+- capability: 双向对话复杂想法、战术、情感
+  id: dui_hua
+  name: 神识对话
+  references:
+  - ../器灵体系/器灵沟通.md
+  requirement: 主人神识强度足够
+  spirit_grade_min: wan_zheng
+- capability: 无需语言即可感知彼此意图
+  id: xin_xi
+  name: 心意相通
+  references:
+  - ../器灵体系/器灵沟通.md
+  requirement: 长期相处（数十年以上）
+  spirit_grade_min: da_cheng
+- capability: 意识寄存、记忆继承
+  id: rong_he
+  name: 灵魂融合
+  references:
+  - ../器灵体系/器灵沟通.md
+  spirit_grade_min: zhi_zhen
+grades:
+- artifact_tier: fa_bao
+  capabilities:
+  - 传信
+  - 警示
+  consciousness: 微弱
+  growth_years_typical: 0
+  id: chu_xing
+  name: 雏形
+  references:
+  - ../器灵体系/器灵.md
+  required_realm_min: yuanying
+- artifact_tier: fa_bao_to_ling_bao
+  capabilities:
+  - 单向传信
+  - 辅助操控
+  consciousness: 较完整
+  growth_years_typical: 100-500
+  id: xiao_cheng
+  name: 小成
+  references:
+  - ../器灵体系/器灵.md
+  required_realm_min: yuanying
+- artifact_tier: ling_bao
+  capabilities:
+  - 神识对话
+  - 部分自主行动
+  consciousness: 完整
+  growth_years_typical: 500-2000
+  id: wan_zheng
+  name: 完整
+  references:
+  - ../器灵体系/器灵.md
+  required_realm_min: huashen
+- artifact_tier: chuan_shuo
+  capabilities:
+  - 心意相通
+  - 独立战斗
+  - 自主护主
+  consciousness: 与主人心意相通
+  growth_years_typical: 2000-5000
+  id: da_cheng
+  name: 大成
+  references:
+  - ../器灵体系/器灵.md
+  required_realm_min: huashen
+- artifact_tier: xian_qi
+  capabilities:
+  - 灵魂融合
+  - 意识寄存
+  - 记忆继承
+  consciousness: 灵魂融合
+  growth_years_typical: 10000+
+  id: zhi_zhen
+  name: 至臻
+  references:
+  - ../器灵体系/器灵.md
+  required_realm_min: feisheng
+- artifact_tier: fa_qi
+  capabilities:
+  - 微弱感应
+  consciousness: 原始
+  growth_years_typical: 0
+  id: chu_ling
+  name: 初灵
+  references: []
+  required_realm_min: lianqi
+- artifact_tier: ling_bao
+  capabilities:
+  - 传递意向
+  - 识别敌友
+  consciousness: 初步
+  growth_years_typical: 50-100
+  id: qi_xiang
+  name: 气象
+  references: []
+  required_realm_min: zhuji
+- artifact_tier: ling_bao
+  capabilities:
+  - 自主战斗
+  - 认主培养
+  consciousness: 完整
+  growth_years_typical: 100-500
+  id: qi_yu
+  name: 气御
+  references: []
+  required_realm_min: jiedan
+- artifact_tier: fa_bao
+  capabilities:
+  - 精微操控
+  - 法则配合
+  consciousness: 精锐
+  growth_years_typical: 500-2000
+  id: jing_rui
+  name: 精锐
+  references: []
+  required_realm_min: yuanying
+- artifact_tier: tong_tian_ling_bao
+  capabilities:
+  - 神识共鸣
+  - 法则领悟
+  consciousness: 神蕴
+  growth_years_typical: 2000-5000
+  id: shen_yun
+  name: 神蕴
+  references: []
+  required_realm_min: huashen
+- artifact_tier: tong_tian_ling_bao
+  capabilities:
+  - 天意感应
+  consciousness: 天蕴
+  growth_years_typical: 5000-10000
+  id: tian_yun
+  name: 天蕴
+  references: []
+  required_realm_min: lianxu
+- artifact_tier: xian_qi
+  capabilities:
+  - 道意融合
+  consciousness: 道入
+  growth_years_typical: 10000-50000
+  id: dao_ru
+  name: 道入
+  references: []
+  required_realm_min: hetong
+- artifact_tier: xian_qi
+  capabilities:
+  - 仙力运用
+  - 法则具象
+  consciousness: 仙蕴
+  growth_years_typical: 50000+
+  id: xian_yun
+  name: 仙蕴
+  references: []
+  required_realm_min: dacheng
+- artifact_tier: shen_qi
+  capabilities:
+  - 神祇化
+  consciousness: 神魂
+  growth_years_typical: 10万+
+  id: shen_hun
+  name: 神魂
+  references: []
+  required_realm_min: xian_jie
+- artifact_tier: chuan_shuo
+  capabilities:
+  - 超越极道
+  consciousness: 无极
+  growth_years_typical: 无穷
+  id: wu_ji
+  name: 无极
+  references: []
+  required_realm_min: xian_di
+growth_methods:
+- description: 法器长期存放于灵脉之上自然温养
+  duration_years: 数千
+  id: zi_ran
+  name: 自然孕育
+  probability: 极低
+  references:
+  - ../器灵体系/器灵成长.md
+- description: 炼制时加入万年灵木、化形期妖丹等
+  duration_years: 数百
+  id: tian_cai
+  name: 天材地宝催化
+  probability: 中
+  references:
+  - ../器灵体系/器灵成长.md
+- description: 主人渡劫时法器受劫雷激发
+  duration_years: 1 次雷劫
+  id: du_jie
+  name: 雷劫淬炼
+  probability: 高
+  references:
+  - ../器灵体系/器灵成长.md
+- description: 生死之战中激发潜能
+  duration_years: 关键时刻
+  id: zhan_dou
+  name: 战斗觉醒
+  probability: 中
+  references:
+  - ../器灵体系/器灵成长.md
+- description: 以修士精血或魂魄强行灌注（多为凶器）
+  duration_years: 即时
+  id: xie_xue
+  name: 血祭邪法
+  probability: 极高
+  references:
+  - ../器灵体系/器灵成长.md
+  taboo: true
+recognition_methods:
+- backlash_probability: <5%
+  combat_synergy: +50%
+  description: 器灵认可主人后自愿结契
+  id: zi_yuan
+  name: 自愿认主
+  rarity: 极低
+  references:
+  - ../器灵体系/器灵认主.md
+  stability: 极稳固
+- backlash_probability: 10-20%
+  combat_synergy: 标准
+  description: 通过特定仪式（血祭、神识烙印、魂契）让器灵被动接受
+  id: yi_shi
+  name: 仪式认主
+  rarity: 常见
+  references:
+  - ../器灵体系/器灵认主.md
+  stability: 稳固
+- backlash_probability: 30-50%
+  combat_synergy: -20%
+  description: 主人以绝对实力压制器灵意识，强行打上烙印
+  id: qiang_po
+  name: 强迫认主
+  rarity: 少
+  references:
+  - ../器灵体系/器灵认主.md
+  stability: 紧张
+- backlash_probability: <1%
+  combat_synergy: +100%
+  description: 主人与器灵平等契约，类似道友
+  id: ping_deng
+  name: 平等共生
+  rarity: 传说级
+  references:
+  - ../器灵体系/器灵认主.md
+  stability: 最理想
+- backlash_probability: 0%
+  combat_synergy: +200%
+  description: 主器因缘契合，自发认主
+  id: yin_yuan_ren_zhu
+  name: 因缘认主
+  rarity: 传说级
+  references: []
+  stability: 极稳固
+- backlash_probability: <5%
+  combat_synergy: +80%
+  description: 主器有血缘关系
+  id: xian_yuan_ren_zhu
+  name: 血缘认主
+  rarity: 稀有
+  references: []
+  stability: 稳固
+- backlash_probability: 0%
+  combat_synergy: +150%
+  description: 天意指定的主人
+  id: tian_yi_ren_zhu
+  name: 天意认主
+  rarity: 传说
+  references: []
+  stability: 极稳固
+- backlash_probability: 5%
+  combat_synergy: +50%
+  description: 原主人传承之器
+  id: yuan_ji_ren_zhu
+  name: 原籍认主
+  rarity: 稀有
+  references: []
+  stability: 稳固
+- backlash_probability: <1%
+  combat_synergy: +100%
+  description: 主器道意契合
+  id: dao_yi_ren_zhu
+  name: 道意认主
+  rarity: 传说
+  references: []
+  stability: 极稳固
+- backlash_probability: 10%
+  combat_synergy: +70%
+  description: 以神魂长期炼化
+  id: hun_lian_ren_zhu
+  name: 魂炼认主
+  rarity: 罕见
+  references: []
+  stability: 稳固
+- backlash_probability: 20%
+  combat_synergy: 标准
+  description: 特定时刻认定主人
+  id: shi_yong_ren_zhu
+  name: 时运认主
+  rarity: 常见
+  references: []
+  stability: 中等
+- backlash_probability: 40%
+  combat_synergy: -30%
+  description: 魔道强行认主
+  id: mo_yi_ren_zhu
+  name: 魔意认主
+  rarity: 少
+  references: []
+  stability: 紧张
+  taboo: true
+- backlash_probability: 0%
+  combat_synergy: +120%
+  description: 虚空锚定永不脱离
+  id: xu_kong_ren_zhu
+  name: 虚空认主
+  rarity: 传说
+  references: []
+  stability: 极稳固
+- backlash_probability: 30%
+  combat_synergy: 标准
+  description: 末世之际认主
+  id: mo_shi_ren_zhu
+  name: 末世认主
+  rarity: 罕见
+  references: []
+  stability: 中等

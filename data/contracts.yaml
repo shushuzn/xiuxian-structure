@@ -1,0 +1,346 @@
+applicable_targets:
+- common_contracts:
+  - soul_contract
+  - equal_contract
+  - master_servant
+  id: ling_beast
+  name: 灵兽
+  note: 本命灵兽多走灵魂契约
+- common_contracts:
+  - equal_contract
+  - soul_bond
+  id: yao_xiu
+  name: 妖修（化形期+）
+  note: 极少接受主从契约
+- common_contracts:
+  - equal_contract
+  - soul_bond
+  id: person
+  name: 其他修士
+  note: 平等契约多用于合作，魂契多用于道侣/至亲
+- common_contracts:
+  - soul_bond
+  id: artifact
+  name: 法器
+  note: 法器多走器灵认主，魂契极少
+- common_contracts:
+  - equal_contract
+  id: faction
+  name: 势力
+  note: 平等盟约
+- common_contracts:
+  - master_servant
+  id: monster
+  name: 妖兽（未化形）
+  note: 未化形妖兽多走主从契约
+dissolution_cost:
+  equal_contract:
+    by_breach: 违约方赔偿
+    by_mutual_consent: 几乎无代价
+    by_neglect: 自动失效
+  master_servant:
+    by_beast_escape: 极难
+    by_master_active: 仪式简单
+    by_master_death: 灵兽恢复自由
+  soul_bond:
+    by_force: 传说级秘法，双方修为大损
+    by_mutual_death: 双方同死
+    note: 几乎不可解除
+  soul_contract:
+    by_beast_death: 主人神魂重创
+    by_force: 极难（需化神期以上介入）
+    by_master_death: 灵兽重伤
+    by_mutual_consent: 中（灵兽修为倒退）
+effects:
+  combat_synergy:
+    equal_contract: 中
+    master_servant: 低
+    soul_bond: 超越灵魂契约
+    soul_contract: 极高
+  perception:
+    equal_contract: 感知大致位置、状态
+    master_servant: 主人可感知灵兽位置与状态
+    soul_bond: 心灵感应级别（完全同步）
+    soul_contract: 远程感知位置、状态、生死
+  resource_sharing:
+    equal_contract: 可约定共享部分资源
+    master_servant: 灵兽资源归主人支配
+    soul_bond: 法力互通，寿元共享
+    soul_contract: 共同修炼时速度 +20%
+forbidden_methods:
+- consequence: 被签者必死
+  description: 强行从对方灵魂中抽取碎片签订魂契
+  id: forced_soul_bond
+  name: 强行魂契
+  rarity: 极罕见
+  taboo_level: 极重
+- consequence: 原双方重创，第三方可能死亡
+  description: 将已有魂契转嫁到第三方
+  id: soul_bond_transfer
+  name: 魂契转嫁
+  rarity: 传说级
+  taboo_level: 重
+- consequence: 被吞噬者必死
+  description: 利用魂契共享灵魂的特性，吞噬对方灵魂
+  id: soul_bond_devour
+  name: 魂契吞噬
+  rarity: 极罕见
+  taboo_level: 重
+- consequence: 被签者必死
+  description: 以活人血祭签订魂契
+  id: blood_sacrifice_soul_bond
+  name: 血祭魂契
+  rarity: 极罕见
+  taboo_level: 极重
+- consequence: 天罚
+  description: 以炼化之魂与天地交感
+  id: lian_hun_invocation
+  name: 炼魂请降
+  rarity: 传说
+  taboo_level: 极重
+- consequence: 双方法力流失
+  description: 将魂契转为魔道契约
+  id: yin_yang_mo_hun
+  name: 阴阳魔魂
+  rarity: 极罕见
+  taboo_level: 重
+- consequence: 灵兽死亡
+  description: 以灵兽精血强行签订契约
+  id: ling_yao_sacrifice
+  name: 灵妖献祭
+  rarity: 罕见
+  taboo_level: 重
+- consequence: 对方重创
+  description: 强行以神识入侵签订魂契
+  id: shen_shi_invasion
+  name: 神识入侵
+  rarity: 常见
+  taboo_level: 重
+- consequence: 双方魂魄反噬
+  description: 以速成之法强行签订契约
+  id: hun_po_su_lian
+  name: 魂魄速炼
+  rarity: 常见
+  taboo_level: 中
+- consequence: 天罚降临
+  description: 以谎言签订天道契约
+  id: tian_dao_wei_pian
+  name: 天道违骗
+  rarity: 传说
+  taboo_level: 极重
+- consequence: 反噬
+  description: 强行入侵妖兽心志
+  id: yao_xin_invasion
+  name: 妖心入侵
+  rarity: 常见
+  taboo_level: 中
+- consequence: 双方修为倒退
+  description: 以邪门双修签订契约
+  id: shuang_xiu_yi_jue
+  name: 双修异诀
+  rarity: 常见
+  taboo_level: 重
+- consequence: 迟发反噬
+  description: 延迟触发的魂链陷阱
+  id: hun_lian_chi_xiao
+  name: 魂链迟效
+  rarity: 稀有
+  taboo_level: 中
+types:
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  combat_synergy: 极高
+  cost: 主人死则灵兽亡，灵兽死则主人重创
+  forbidden: false
+  freedom: 灵兽受限
+  id: soul_contract
+  name: 灵魂契约（本命契约）
+  perception: 远程感知位置、状态、生死
+  rarity: 常见
+  references:
+  - ../契约体系/灵魂契约.md
+  relationship_strength: 极强
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  - person
+  - faction
+  combat_synergy: 中
+  cost: 关系易破裂
+  forbidden: false
+  freedom: 双方自由
+  id: equal_contract
+  name: 平等契约
+  perception: 感知大致位置、状态
+  rarity: 常见
+  references:
+  - ../契约体系/平等契约.md
+  relationship_strength: 弱-中
+- applicable_to:
+  - ling_beast
+  - monster
+  combat_synergy: 低（灵兽消极怠工）
+  cost: 灵兽常反抗、需频繁维护
+  forbidden: false
+  freedom: 灵兽严重受限
+  id: master_servant
+  name: 主从契约
+  perception: 主人可感知灵兽位置与状态
+  rarity: 常见
+  references:
+  - ../契约体系/主从契约.md
+  relationship_strength: 中
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  - person
+  - artifact
+  combat_synergy: 超越灵魂契约
+  cost: 修为倒退 1-3 小境界 + 折寿 + 突破概率降低
+  forbidden: true
+  freedom: 双方深度绑定
+  id: soul_bond
+  name: 魂契
+  note: 一方死亡，另一方必然重创或同死
+  perception: 心灵感应级别
+  rarity: 极罕见
+  references:
+  - ../契约体系/魂契.md
+  relationship_strength: 最强（极端）
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  - person
+  combat_synergy: 高
+  cost: 以血为媒
+  forbidden: false
+  freedom: 受限
+  id: blood_contract
+  name: 血契
+  perception: 血气感应
+  rarity: 常见
+  references: []
+  relationship_strength: 强
+- applicable_to:
+  - ling_beast
+  - artifact
+  combat_synergy: 中
+  cost: 以灵力为媒
+  forbidden: false
+  freedom: 受限
+  id: ling_li_contract
+  name: 灵力契约
+  perception: 灵力感应
+  rarity: 常见
+  references: []
+  relationship_strength: 中
+- applicable_to:
+  - person
+  - faction
+  combat_synergy: 极高
+  cost: 证道之誓
+  forbidden: false
+  freedom: 受限
+  id: tian_dao_contract
+  name: 天道契约
+  perception: 道心感应
+  rarity: 罕见
+  references: []
+  relationship_strength: 极强
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  combat_synergy: 高
+  cost: 神魂交融
+  forbidden: false
+  freedom: 受限
+  id: hun_hai_contract
+  name: 魂海契约
+  perception: 魂海感应
+  rarity: 罕见
+  references: []
+  relationship_strength: 极强
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  - artifact
+  combat_synergy: 中
+  cost: 空间锚定
+  forbidden: false
+  freedom: 受限
+  id: xu_kong_contract
+  name: 虚空契约
+  perception: 空间感应
+  rarity: 稀有
+  references: []
+  relationship_strength: 强
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  - person
+  combat_synergy: 高
+  cost: 寿元换取
+  forbidden: false
+  freedom: 受限
+  id: shi_jian_contract
+  name: 时间契约
+  perception: 时间感应
+  rarity: 传说
+  references: []
+  relationship_strength: 极强
+- applicable_to:
+  - person
+  combat_synergy: 中
+  cost: 阴阳互补
+  forbidden: false
+  freedom: 双方自由
+  id: yin_yang_contract
+  name: 阴阳契约
+  perception: 阴阳感应
+  rarity: 常见
+  references: []
+  relationship_strength: 强
+- applicable_to:
+  - yao_xiu
+  - monster
+  combat_synergy: 高
+  cost: 魔气侵蚀
+  forbidden: true
+  freedom: 灵兽受限
+  id: mo_shi_contract
+  name: 魔噬契约
+  note: 魔道契约
+  perception: 魔气感应
+  rarity: 罕见
+  references: []
+  relationship_strength: 强
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  combat_synergy: 高
+  cost: 灵魂煞气
+  forbidden: true
+  freedom: 受限
+  id: hun_sha_contract
+  name: 魂煞契约
+  note: 邪道契约
+  perception: 煞气感应
+  rarity: 稀有
+  references: []
+  relationship_strength: 极强
+- applicable_to:
+  - ling_beast
+  - yao_xiu
+  - monster
+  combat_synergy: 极高
+  cost: 灵魂被炼化
+  forbidden: true
+  freedom: 灵兽完全受控
+  id: lian_hun_contract
+  name: 炼魂契约
+  note: 邪道极致手段
+  perception: 魂链感应
+  rarity: 极罕见
+  references: []
+  relationship_strength: 最强

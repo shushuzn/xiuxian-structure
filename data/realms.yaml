@@ -1,0 +1,390 @@
+realms:
+- abilities:
+    can_fly: false
+    can_use_high_tier_pills: false
+    can_wield_high_tier: false
+    divine_sense_range: 数丈
+  breakthrough:
+    recommended_env: lingmai_micro_or_above
+    requires:
+    - zhuji_dan
+    risk: 经脉受损，修为倒退
+    to: zhuji
+  id: lianqi
+  lifespan: 120
+  name: 炼气期
+  order: 1
+  references:
+  - ../境界体系/炼气期.md
+  restrictions:
+  - 不能御空飞行
+  - 神识无法离体
+  - 无法驱动中高阶法器
+  - 无法承受高阶丹药药力
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 短暂御器飞行
+    can_use_high_tier_pills: false
+    can_wield_high_tier: 可驱动中阶法器
+    divine_sense_range: 数十丈
+  breakthrough:
+    recommended_env: lingmai_small_or_above
+    requires:
+    - jiedan_dan
+    risk: 道基受损，需重修
+    to: jiedan
+  id: zhuji
+  lifespan: 200
+  name: 筑基期
+  order: 2
+  references:
+  - ../境界体系/筑基期.md
+  restrictions:
+  - 无法长时间御空飞行
+  - 神识探查范围有限
+  - 无法驱动高阶法器
+  - 无法承受高阶丹药药力
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: true
+    can_use_high_tier_pills: 宝品丹药
+    can_wield_high_tier: 可驱动高阶法器
+    divine_sense_range: 数百丈
+  breakthrough:
+    heart_demon_risk: 中（贪魔、执念魔常见）
+    recommended_env: lingmai_medium_or_above
+    requires:
+    - peiyu_dan
+    risk: 金丹碎裂，魂飞魄散
+    to: yuanying
+    tribulation: san_jiu_tian_jie
+  id: jiedan
+  lifespan: 500
+  name: 结丹期
+  order: 3
+  references:
+  - ../境界体系/结丹期.md
+  restrictions:
+  - 神识仍受肉身局限
+  - 无法触及空间法则
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 长时间御空
+    can_use_high_tier_pills: 仙品丹药
+    can_wield_high_tier: 可驱动法宝
+    divine_sense_range: 数里
+  breakthrough:
+    heart_demon_risk: 高（执念魔、嗔魔高发）
+    recommended_env: lingmai_large
+    requires:
+    - huashen_auxiliary
+    risk: 元婴溃散，转世难成
+    to: huashen
+    tribulation: liu_jiu_tian_jie
+  id: yuanying
+  lifespan: 1000
+  name: 元婴期
+  order: 4
+  references:
+  - ../境界体系/元婴期.md
+  restrictions:
+  - 元婴离体有时间限制
+  - 无法突破天地法则压制
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 瞬移 / 空间挪移
+    can_use_high_tier_pills: 仙品丹药
+    can_wield_high_tier: 可驱动灵宝
+    divine_sense_range: 数十里
+  breakthrough:
+    heart_demon_risk: 高（嗔魔、痴魔高发：对天道之愤）
+    recommended_env: lingmai_super
+    risk: 神魂俱灭
+    to: lianxu
+    tribulation: liu_jiu_tian_jie
+  id: huashen
+  lifespan: 2000
+  name: 化神期
+  order: 5
+  references:
+  - ../境界体系/化神期.md
+  restrictions:
+  - 每次瞬移消耗极大，不可滥用
+  - 法则运用仍属"入门"，无法创造法则
+  - 肉身仍是软肋，受重创仍会陨落
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 撕裂虚空
+    can_wield_high_tier: 灵宝
+    divine_sense_range: 数百里
+  breakthrough:
+    heart_demon_risk: 高（痴魔、嗔魔高发：对法则之疑）
+    risk: 神魂被法则反噬，轻则重伤，重则身死道消
+    to: heti
+    tribulation: jiu_jiu_tian_jie
+  id: lianxu
+  lifespan: 5000
+  name: 炼虚期
+  order: 6
+  references:
+  - ../境界体系/炼虚期.md
+  restrictions:
+  - 撕裂虚空消耗巨大，不可作为常规手段
+  - 法则融合尚浅，无法改变法则本身
+  - 跨界面穿行仍受界面壁障限制
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 法则运用
+    divine_sense_range: 千里
+  breakthrough:
+    heart_demon_risk: 极高（所有心魔并发）
+    recommended_env: ling_jie_or_above
+    risk: 神肉分离，修为倒退
+    to: dujie
+    tribulation: jiu_jiu_tian_jie
+  id: heti
+  lifespan: 10000
+  name: 合体期
+  order: 7
+  references:
+  - ../境界体系/合体期.md
+  restrictions:
+  - 界面壁障仍是软肋
+  - 法则领域范围有限
+  - 仍需渡劫才能真正踏入大乘
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 界域穿梭
+    divine_sense_range: 万里
+  breakthrough:
+    heart_demon_risk: 至高（所有心魔并发）
+    recommended_env: xian_jie
+    risk: 形神俱灭，连转世机会都没有
+    to: dacheng
+    tribulation: jiu_jiu_tian_jie_feisheng
+  id: dujie
+  lifespan: 近乎无限
+  name: 渡劫期
+  order: 8
+  references:
+  - ../境界体系/渡劫期.md
+  restrictions:
+  - 每次渡劫都是生死关
+  - 天地压制最强，凡界停留过久会招来更强天劫
+  - 无法规避天劫，只能选择何时何地承受
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- breakthrough:
+    risk: 飞升过程本身也是一种渡劫
+    to: feisheng
+  id: dacheng
+  lifespan: 近乎无限
+  name: 大乘期
+  order: 9
+  references:
+  - ../境界体系/大乘期.md
+  restrictions:
+  - 凡界停留越久，天地压制越强
+  - 不可干预凡界运转（否则遭天谴）
+  - 飞升仙界后需重新适应仙界法则
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 界域穿梭
+    can_wield_high_tier: 仙器
+    divine_sense_range: 万里之上
+  id: ren_xian
+  lifespan: 近乎无限
+  name: 人仙期
+  order: 10
+  references:
+  - ../境界体系/人仙期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 法则运用
+    can_wield_high_tier: 仙器
+    divine_sense_range: 十万里
+  id: di_xian
+  lifespan: 近乎无限
+  name: 地仙期
+  order: 11
+  references:
+  - ../境界体系/地仙期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 神速飞行
+    can_wield_high_tier: 高阶仙器
+    divine_sense_range: 百万里
+  id: tian_xian
+  lifespan: 永恒
+  name: 天仙期
+  order: 12
+  references:
+  - ../境界体系/天仙期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 空间法则
+    can_wield_high_tier: 顶阶仙器
+    divine_sense_range: 界域级
+  id: xuan_xian
+  lifespan: 永恒
+  name: 玄仙期
+  order: 13
+  references:
+  - ../境界体系/玄仙期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 时间法则
+    can_wield_high_tier: 神器
+    divine_sense_range: 界域级
+  id: zhen_xian
+  lifespan: 永恒
+  name: 真仙期
+  order: 14
+  references:
+  - ../境界体系/真仙期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 宇宙级
+    can_wield_high_tier: 高阶神器
+    divine_sense_range: 多元界域
+  id: xian_jun
+  lifespan: 永恒
+  name: 仙君期
+  order: 15
+  references:
+  - ../境界体系/仙君期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 宇宙穿梭
+    can_wield_high_tier: 至高神器
+    divine_sense_range: 宇宙级
+  id: xian_wang
+  lifespan: 永恒
+  name: 仙王期
+  order: 16
+  references:
+  - ../境界体系/仙王期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 超越
+    can_wield_high_tier: 传说神器
+    divine_sense_range: 无限
+  id: xian_di
+  lifespan: 永恒
+  name: 仙帝期
+  order: 17
+  references:
+  - ../境界体系/仙帝期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 神行
+    can_wield_high_tier: 神物
+    divine_sense_range: 神域
+  id: shen_ren
+  lifespan: 永恒
+  name: 神人期
+  order: 18
+  references:
+  - ../境界体系/神人期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 神界穿梭
+    can_wield_high_tier: 至高神物
+    divine_sense_range: 神界域
+  id: shen_wang
+  lifespan: 永恒
+  name: 神王期
+  order: 19
+  references:
+  - ../境界体系/神王期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng
+- abilities:
+    can_fly: 神祇级
+    can_wield_high_tier: 传说神物
+    divine_sense_range: 无限
+  id: shen_di
+  lifespan: 永恒
+  name: 神帝期
+  order: 20
+  references:
+  - ../境界体系/神帝期.md
+  sub_stages:
+  - chuqi
+  - zhongqi
+  - houqi
+  - fengfeng

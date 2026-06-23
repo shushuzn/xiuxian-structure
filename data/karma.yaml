@@ -1,0 +1,275 @@
+# karma.yaml — 因果体系权威数据（v2.13 新增体系）
+
+# 因果法则等级
+law_levels:
+  - id: xian_shi_bao
+    name: 现世报
+    range: 今生
+    manifestation: 立即
+    severity: 轻
+  - id: lai_shi_bao
+    name: 来世报
+    range: 转世后
+    manifestation: 死后
+    severity: 中
+  - id: lei_shi_bao
+    name: 累世报
+    range: 多世累加
+    manifestation: 数百世
+    severity: 重
+  - id: yong_heng_bao
+    name: 永恒报
+    range: 不可消
+    manifestation: 永远
+    severity: 极重
+
+# 功德等级
+merit_levels:
+  - id: xiao_gong_de
+    name: 小功德
+    description: 单一善行
+    effect: 一年好运
+    value: 1
+  - id: zhong_gong_de
+    name: 中功德
+    description: 持续善行
+    effect: 十年好运
+    value: 10
+  - id: da_gong_de
+    name: 大功德
+    description: 重大善行
+    effect: 百年好运
+    value: 100
+  - id: yuan_man_gong_de
+    name: 圆满功德
+    description: 无量大功德
+    effect: 飞升契机
+    value: 10000
+
+# 业力等级
+karma_levels:
+  - id: xiao_e_ye
+    name: 小恶业
+    description: 轻微恶行
+    effect: 短期不顺
+    value: -1
+  - id: zhong_e_ye
+    name: 中恶业
+    description: 持续恶行
+    effect: 十年厄运
+    value: -10
+  - id: da_e_ye
+    name: 大恶业
+    description: 重大恶行
+    effect: 百年厄运
+    value: -100
+  - id: ji_e_ye
+    name: 极恶业
+    description: 滔天大罪
+    effect: 天谴降临
+    value: -10000
+
+# 六道轮回
+six_realms:
+  - id: tian_dao
+    name: 天道
+    source: 大功德者
+    trait: 享乐无量
+    risk: 享乐消福
+  - id: ren_dao
+    name: 人道
+    source: 中善业
+    trait: 苦乐参半
+    advantage: 便于修行
+  - id: a_xiu_luo
+    name: 阿修罗道
+    source: 善恶交织
+    trait: 好斗
+    risk: 嗔恨重
+  - id: chu_sheng
+    name: 畜生道
+    source: 愚痴恶业
+    trait: 被奴役
+    pain: 最大
+  - id: e_gui
+    name: 饿鬼道
+    source: 贪吝恶业
+    trait: 饥渴
+    pain: 长劫
+  - id: di_yu
+    name: 地狱道
+    source: 极恶业
+    trait: 刑罚
+    pain: 最重
+
+# 因果类神通
+divine_powers:
+  - id: yin_guo_zhi_yan
+    name: 因果之眼
+    ability: 看透因果
+    level: gao_ji
+    source: 冥界/佛门
+  - id: yin_guo_zhi_ren
+    name: 因果之刃
+    ability: 斩断因果
+    level: gao_ji
+    source: 剑道
+  - id: yin_guo_lun_hui
+    name: 因果轮回
+    ability: 操纵轮回
+    level: jin_ji
+    source: 冥道
+  - id: ye_huo
+    name: 业火
+    ability: 以业力为火
+    level: gao_ji
+    source: 佛门/地狱
+  - id: gong_de_jin_shen
+    name: 功德金身
+    ability: 功德护体
+    level: gao_ji
+    source: 佛门
+  - id: yin_guo_ni_zhuan
+    name: 因果逆转
+    ability: 逆转因果
+    level: jin_ji
+    source: 时间系
+  - id: ming_yun_si_xian
+    name: 命运丝线
+    ability: 操纵命运
+    level: zhi_gao
+    source: 命运法则
+  - id: ye_hai
+    name: 业海
+    ability: 以业海淹没敌人
+    level: zhi_gao
+    source: 地狱
+
+# 业障类型
+karmic_obsructions:
+  - id: xiu_xing_zhang
+    name: 修行障
+    manifestation: 修为停滞
+    cause: 杀生业重
+    solution: 放生、护生
+  - id: zhi_hui_zhang
+    name: 智慧障
+    manifestation: 悟性降低
+    cause: 邪淫业重
+    solution: 持咒、清心
+  - id: fu_de_zhang
+    name: 福德障
+    manifestation: 穷困潦倒
+    cause: 偷盗业重
+    solution: 布施
+  - id: jian_kang_zhang
+    name: 健康障
+    manifestation: 多病短命
+    cause: 杀生业重
+    solution: 放生、医人
+  - id: qian_shu_zhang
+    name: 眷属障
+    manifestation: 亲人离散
+    cause: 感情业重
+    solution: 修和合
+  - id: xiu_xing_huan_jing_zhang
+    name: 修行环境障
+    manifestation: 遇恶师
+    cause: 谤法业重
+    solution: 忏悔
+
+# 善报
+good_karma_effects:
+  - id: chang_shou
+    name: 长寿
+  - id: jian_kang
+    name: 健康
+  - id: fu_zu
+    name: 富足
+  - id: zi_sun_xian_xiao
+    name: 子女贤孝
+  - id: si_hou_shan_dao
+    name: 死后善道
+
+# 恶报
+bad_karma_effects:
+  - id: duan_ming
+    name: 短命
+  - id: duo_bing
+    name: 多病
+  - id: pin_jian
+    name: 贫贱
+  - id: bu_xiao_zi_sun
+    name: 不孝子孙
+  - id: si_hou_e_dao
+    name: 死后恶道
+
+# 因果业报机制
+mechanisms:
+  - id: xian_shi_bao
+    name: 现世报
+    description: 今生直接显现
+  - id: lai_shi_bao
+    name: 来世报
+    description: 转世后显现
+  - id: lei_shi_bao
+    name: 累世报
+    description: 多世累加
+  - id: si_hou_qing_suan
+    name: 死后清算
+    description: 阎王审判
+
+# 化解方法
+solutions:
+  - id: chan_hui
+    name: 忏悔
+    methods: [八十八佛大忏悔, 三十五佛名]
+  - id: chi_zhou
+    name: 持咒
+    methods: [六字大明咒, 大悲咒, 往生咒]
+  - id: xing_shan
+    name: 行善
+    methods: [布施, 护生放生, 印经造像]
+  - id: xiu_xing
+    name: 修行
+    methods: [闭关禅修, 持戒修行, 念佛求生]
+
+# 五戒十善
+precepts:
+  - id: wu_jie
+    name: 五戒
+    items: [不杀生, 不偷盗, 不邪淫, 不妄语, 不饮酒]
+  - id: shi_shan
+    name: 十善
+    items: [不杀生, 不偷盗, 不邪淫, 不妄语, 不两舌, 不恶口, 不绮语, 不贪, 不嗔, 不痴]
+
+# 著名因果修士
+famous_practitioners:
+  - id: fo_zu
+    name: 佛祖
+    realm: 至高
+    karma_status: 圆满功德
+    achievement: 创立佛教
+  - id: gui_lai
+    name: 观世音菩萨
+    realm: 至高
+    karma_status: 大功德
+    achievement: 度化众生
+  - id: di_zang_wang
+    name: 地藏王菩萨
+    realm: 至高
+    karma_status: 大愿
+    achievement: "地狱不空，誓不成佛"
+  - id: yan_wang
+    name: 阎王
+    realm: 至高
+    karma_status: 大功德
+    achievement: 执掌冥界审判
+  - id: tian_shen
+    name: 天神
+    realm: 高
+    karma_status: 大功德
+    achievement: 监察下界
+
+references:
+  - ../因果体系/因果总览.md

@@ -93,7 +93,7 @@ xiuxian-structure/
 契约 ──绑定──→ 灵兽/妖修/人/势力
 ```
 
-Full diagram: see [docs/图谱.md](docs/图谱.md).
+Full diagram: see [图谱.md](图谱.md).
 
 ## Interactive Fiction Engine (v1.2+)
 
@@ -109,7 +109,7 @@ python scripts/interactive.py --story stories/demo_measuring_spirit.md --headles
 
 - **Data-driven**: YAML is the single source of truth; scripts use `{realms.炼气期.lifespan}` placeholders
 - **Conditional branching**: `if: 灵石 >= 3` / `flag.拜师`
-- **DSL**: lightweight markdown-based script format, see [interactive/README.md](interactive/README.md)
+- **DSL**: lightweight markdown-based script format, see [interactive/README.md](../interactive/README.md)
 
 ## LLM Collaboration (v1.3+)
 
@@ -147,7 +147,7 @@ python scripts/web_app.py
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Core rules:
+See [CONTRIBUTING.md](../CONTRIBUTING.md). Core rules:
 
 1. All .md files must contain a `## 关联` section
 2. Each system must have a corresponding `data/*.yaml`
@@ -167,5 +167,5 @@ For Chinese readers: see [README.md](README.md) for the full Chinese version.
 - 中文主文档：[README.md](README.md)
 - 总索引：[索引.md](索引.md)
 - 更新日志：[CHANGELOG.md](CHANGELOG.md)
-- 贡献指南：[CONTRIBUTING.md](CONTRIBUTING.md)
-- 安全策略：[SECURITY.md](SECURITY.md)
+- 贡献指南：[CONTRIBUTING.md](../CONTRIBUTING.md)
+- 安全策略：[SECURITY.md](../SECURITY.md)

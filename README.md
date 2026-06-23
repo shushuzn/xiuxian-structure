@@ -72,7 +72,7 @@
 >
 > v1.5/v1.6/v1.7：心魔 + 雷劫 + 神识 + 器灵 + 契约（27 篇）
 
-English readers: see [README_EN.md](README_EN.md).
+English readers: see [README_EN.md](https://github.com/shushuzn/xiuxian-structure/blob/main/docs/README_EN.md).
 
 📖 **文档站**：<https://shushuzn.github.io/xiuxian-structure/>（mkdocs 自动部署）
 
@@ -461,7 +461,7 @@ python3 scripts/export.py --output /tmp/xiuxian
 
 - 📐 [ARCHITECTURE.md](docs/ARCHITECTURE.md) — 7 个架构决策的来龙去脉
 - 🔒 [SECURITY.md](SECURITY.md) — 安全漏洞报告流程
-- 🤝 [.github/CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md) — 社区公约
+- 🤝 [贡献者公约](https://github.com/shushuzn/xiuxian-structure/blob/main/.github/CODE_OF_CONDUCT.md) — 社区公约
 - 🛡️ [BRANCH_PROTECTION.md](docs/BRANCH_PROTECTION.md) — 分支保护建议
 
 ## 示例作品

@@ -50,6 +50,27 @@
 
 ## [Unreleased]
 
+### v3.1 新故事: 综合演示
+- 📖 **stories/v31_demo.md** (v3.1 综合演示 · 跨体系大冒险)
+  - 246 行 / 11 节点 / 5 种结局
+  - 综合应用 v2.10-v2.17 所有新系统：
+    - 秘境体系 (灵药岛/雷师之墓/蓬莱仙岛)
+    - 天材地宝体系 (灵草/灵石/时光之沙)
+    - 宗门体系 (落云宗)
+    - 因果体系 (功德+500 / 因果感悟+500)
+    - 时空体系 (空间秘境/时光之沙/时空之灵)
+    - 跨境界试炼副本 (元婴期·地狱)
+    - 世界书 + 成就 + AI 叙事
+  - 主角: 化神期韩立后期
+  - 4 大路径：空间秘境 / 落云宗 / 灵药岛 / 独自渡劫
+  - 5 种结局：combat_temporal / karma_persuade / ling_cao_qu / island_pick / shendan_guodu
+- ✅ 故事 headless 模式测试通过
+- 📊 **互动故事总数**：5 → 6
+  - demo_measuring_spirit / demo_sijie / hanli_vol1 / hanli_vol2 / aoyue / v28 / v29 / v215 / v31
+- ✅ **238 tests** 通过
+- ✅ **mkdocs strict** 通过 (0 warnings)
+- ✅ **validate.py** 通过 (0 warnings)
+
 ### D.5 mkdocs 预存 warning 修复
 - 🆕 **新增文件** (3)：
   - `心魔体系/心魔劫.md` — 心魔劫专题

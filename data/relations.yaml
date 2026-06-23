@@ -670,3 +670,61 @@ relations:
     to: formation:du_jie_zhen
     type: parallels
     description: "渡劫符与渡劫阵异曲同工"
+
+  # ── 体系深化 v3: 灵气/灵根/心魔/雷劫/灵石/妖修/势力/契约/神识 ──
+  - from: spirit_root:jian_gen
+    to: technique:jian_xiu_jue
+    type: enables
+    description: "剑灵根与剑修诀完美契合"
+  - from: spirit_root:ji_yang_gen
+    to: tribulation:san_jiu_tian_jie
+    type: blocks
+    description: "极阳灵根渡三九天劫时为雷火所克"
+  - from: heart_demon:wu_mo
+    to: technique:hun_yuan_gong
+    type: correlates
+    description: "混元功修炼者最易受悟魔侵袭"
+  - from: heart_demon:ai_mo
+    to: contract:yin_yang_contract
+    type: enables
+    description: "阴阳契约可助修士抵御爱魔"
+  - from: tribulation:hua_shou
+    to: yao_xiu:hua_xing
+    type: requires
+    description: "妖兽化形期必须经化兽劫"
+  - from: tribulation:xian_jie_tian_jie
+    to: spirit_stone:xian_pin
+    type: correlates
+    description: "渡仙界天劫需仙品灵石辅助"
+  - from: spirit_stone:long
+    to: examples:tian_long_shan
+    type: enables
+    description: "天龙山以龙属性灵石为核心"
+  - from: examples:huo_yan_dong
+    to: spirit_stone:tian_lei
+    type: specializes_in
+    description: "火焰洞引天雷属性灵石为火源"
+  - from: examples:tian_shan_school
+    to: spirit_root:bian_yi_ling_gen
+    type: specializes_in
+    description: "天山派专收变异灵根弟子"
+  - from: contract:blood_contract
+    to: heart_demon:yu_mo
+    type: correlates
+    description: "血契签订者易生欲魔"
+  - from: contract:tian_dao_contract
+    to: technique:tai_yi_jue
+    type: enables
+    description: "太一诀修炼者方能签订天道契约"
+  - from: divine_sense:huashen
+    to: tribulation:qiong_gong_tian_jie
+    type: requires
+    description: "化神神识是穷攻天劫的前提"
+  - from: divine_sense:yuanying
+    to: contract:soul_bond
+    type: enables
+    description: "元婴神识方能承载魂契之重"
+  - from: contract:lian_hun_contract
+    to: heart_demon:wu_mo
+    type: blocks
+    description: "炼魂契令悟魔难以侵扰"

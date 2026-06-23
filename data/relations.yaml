@@ -1514,3 +1514,93 @@ relations:
     to: divine_grades:dao_zu_ge
     type: parallels
     description: "时空祖神配道祖格"
+
+  # ── 数据深化 v5：yao_xiu / spirit_stones / heart_demons / artifacts / aether ──
+
+  # 妖修 ↔ 妖兽
+  - from: forms:long_xing
+    to: examples:tian_long_shan
+    type: parallels
+    description: "天龙形态与天龙山同源"
+  - from: stages:hua_long_jing
+    to: examples:yun_du_jian_he
+    type: parallels
+    description: "化龙境与云渡剑鹤同源"
+
+  # 妖修 ↔ 灵根
+  - from: forms:feng_xing
+    to: spirit_root:jian_gen
+    type: parallels
+    description: "凤形与剑灵根同源"
+
+  # 心魔 ↔ 境界
+  - from: types:shi_mo
+    to: realm:zhuji
+    type: parallels
+    description: "失魔触发于筑基期"
+  - from: types:quan_mo
+    to: realm:dujie
+    type: parallels
+    description: "权魔触发于渡劫期"
+  - from: types:sheng_mo_x
+    to: realm:dacheng
+    type: parallels
+    description: "生灭魔触发于大乘期"
+
+  # 心魔 ↔ 应对丹药
+  - from: types:ming_mo
+    to: counter_elixirs:wu_ruo_dan
+    type: blocks
+    description: "名魔配悟若丹"
+  - from: types:li_mo
+    to: elixir:qing_xin_dan
+    type: blocks
+    description: "利魔配清心丹"
+
+  # 法器 ↔ 灵根
+  - from: artifacts:yu_que_qiang
+    to: spirit_root:huo
+    type: parallels
+    description: "御雀枪配火灵根"
+  - from: artifacts:qing_long_ren
+    to: spirit_root:mu
+    type: parallels
+    description: "青龙刃配木灵根"
+
+  # 势力 ↔ 宗门
+  - from: examples:zhu_que_men
+    to: zong_men:han_yan_zong
+    type: parallels
+    description: "朱雀门与寒焰宗同源"
+
+  # 灵气 ↔ 灵脉
+  - from: concentrations:hua_ye_ji
+    to: veins:chao_ji_lingmai
+    type: parallels
+    description: "化液极致在超级灵脉"
+  - from: concentrations:ling_ye_cheng
+    to: veins:feng_xue_lingmai
+    type: parallels
+    description: "灵液成与凤穴灵脉同源"
+
+  # 灵气 ↔ 灵石
+  - from: concentrations:tian_ti
+    to: attributes:tian_lei
+    type: parallels
+    description: "天地一体产出天雷灵石"
+
+  # 灵脉 ↔ 灵脉
+  - from: veins:feng_xue_lingmai
+    to: examples:tian_long_shan
+    type: parallels
+    description: "凤穴灵脉被天龙山占据"
+  - from: veins:qi_lin_xue_lingmai
+    to: examples:qi_lin_ting
+    type: parallels
+    description: "麒麟穴灵脉被麒麟亭占据"
+
+  # 灵石属性 ↔ 神通
+  - from: attributes:long
+    to: divine_power:fa_tian_xiang_di
+    type: parallels
+    description: "龙灵与法天象地同源"

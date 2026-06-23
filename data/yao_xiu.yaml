@@ -39,6 +39,36 @@ forms:
 - description: 远古神兽形态
   id: gu_shou
   name: 古兽
+- description: 化龙为妖修之极
+  id: long_xing
+  name: 龙形
+- description: 化凤为火之妖
+  id: feng_xing
+  name: 凤形
+- description: 化麒麟为瑞兽之极
+  id: qi_lin_xing
+  name: 麒麟形
+- description: 化鬼为阴之极
+  id: gui_xing
+  name: 鬼形
+- description: 化魔为邪之极
+  id: mo_xing
+  name: 魔形
+- description: 化神为至高形态
+  id: shen_xing
+  name: 神形
+- description: 化仙为升天形态
+  id: xian_xing
+  name: 仙形
+- description: 化为魔器形态
+  id: mo_qi_xing
+  name: 魔器形
+- description: 无形无相
+  id: wu_xing
+  name: 无形
+- description: 多种形态并存
+  id: duo_ji_xing
+  name: 多极形
 stages:
 - description: 妖兽开启灵智，可口吐人言
   id: kai_lei
@@ -123,4 +153,54 @@ stages:
   id: tai_yao
   name: 太妖期
   order: 6
+  references: []
+- description: 妖修化龙，与龙族比肩
+  id: tian_long_jing
+  name: 天龙境
+  order: 8
+  references: []
+- description: 妖修入冥界，统御万鬼
+  id: di_fu_jing
+  name: 地府境
+  order: 9
+  references: []
+- description: 妖修登天，受天庭册封
+  id: tian_guan_jing
+  name: 天官境
+  order: 10
+  references: []
+- description: 妖修证仙道
+  id: xian_yao_jing
+  name: 仙妖境
+  order: 11
+  references: []
+- description: 妖修证神道
+  id: shen_yao_jing
+  name: 神妖境
+  order: 12
+  references: []
+- description: 穷尽妖道之极
+  id: qiong_yao_jing
+  name: 穷妖境
+  order: 13
+  references: []
+- description: 妖道即天道
+  id: dao_yao_jing
+  name: 道妖境
+  order: 14
+  references: []
+- description: 妖魂入冥
+  id: hun_ming_jing
+  name: 魂冥境
+  order: 6
+  references: []
+- description: 袖中炼化，万妖归一
+  id: xiu_lu_jing
+  name: 袖炉境
+  order: 7
+  references: []
+- description: 鱼蛇化龙，妖道巅峰
+  id: hua_long_jing
+  name: 化龙境
+  order: 7
   references: []

@@ -1340,3 +1340,95 @@ relations:
     to: formation:shi_fang_jin_gang_zhen
     type: enables
     description: "落云宗布十方金刚阵"
+
+  # ── v2.13 因果体系（26 体系） ──
+
+  # 因果 ↔ 心魔
+  - from: karmic_obsructions:xiu_xing_zhang
+    to: heart_demon:chi_mo
+    type: triggers
+    description: "修行障引发痴魔"
+  - from: merit_levels:da_gong_de
+    to: heart_demon:wu_mo
+    type: blocks
+    description: "大功德者不受悟魔"
+  - from: karmic_obsructions:zhi_hui_zhang
+    to: heart_demon:qie_mo
+    type: parallels
+    description: "智慧障与怯魔同源"
+
+  # 因果 ↔ 雷劫
+  - from: karma_levels:da_e_ye
+    to: tribulation:san_jiu_tian_jie
+    type: triggers
+    description: "大恶业加重三九天劫"
+  - from: merit_levels:yuan_man_gong_de
+    to: ascension_tribulation:ascension_tribulation
+    type: blocks
+    description: "圆满功德减轻飞升劫"
+
+  # 因果 ↔ 飞升
+  - from: merit_levels:yuan_man_gong_de
+    to: ascension:legendary
+    type: enables
+    description: "圆满功德者出传说飞升"
+  - from: karma_levels:ji_e_ye
+    to: ascension:evil
+    type: parallels
+    description: "极恶业者堕入魔道"
+
+  # 因果 ↔ 轮回/冥界
+  - from: six_realms:tian_dao
+    to: six_realms:tian_dao
+    type: parallels
+    description: "天道对应大功德者"
+  - from: six_realms:ren_dao
+    to: six_realms:ren_dao
+    type: parallels
+    description: "人道对应中善业"
+  - from: six_realms:di_yu
+    to: six_realms:di_yu
+    type: parallels
+    description: "地狱道对应极恶业"
+
+  # 因果 ↔ 神通
+  - from: divine_powers:yin_guo_zhi_yan
+    to: divine_power:su_wei_zhi_gan
+    type: parallels
+    description: "因果之眼与宿位感知同属感知"
+  - from: divine_powers:gong_de_jin_shen
+    to: divine_power:bu_xiu_shen
+    type: parallels
+    description: "功德金身与不朽身同属防御"
+
+  # 因果 ↔ 功法
+  - from: solutions:chan_hui
+    to: technique:wei_wo_du_zun_gong
+    type: parallels
+    description: "忏悔与唯我独尊功同属内心修炼"
+  - from: solutions:chi_zhou
+    to: technique:cang_lang_jue
+    type: parallels
+    description: "持咒与沧浪诀同属心法"
+
+  # 因果 ↔ 丹药
+  - from: merit_levels:da_gong_de
+    to: elixir:qing_xin_dan
+    type: parallels
+    description: "大功德者配清心丹"
+
+  # 因果 ↔ 灵根
+  - from: solutions:xing_shan
+    to: spirit_root:bian_yi_ling_gen
+    type: parallels
+    description: "行善与变异灵根同属稀有"
+
+  # 因果 ↔ 势力
+  - from: divine_powers:yin_guo_lun_hui
+    to: examples:ming_jiao
+    type: parallels
+    description: "因果轮回与冥教同源"
+  - from: divine_powers:gong_de_jin_shen
+    to: zong_men:tian_shan_school
+    type: parallels
+    description: "功德金身与天山派同源"

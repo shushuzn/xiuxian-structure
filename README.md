@@ -8,8 +8,10 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v2.12.0** · **25 体系** · 27 yaml · [📖 阅读更新日志](docs/CHANGELOG.md)
+**v2.13.0** · **26 体系** · 28 yaml · [📖 阅读更新日志](docs/CHANGELOG.md)
 
+> 🆕 v2.13 新增体系 — **因果体系**（8 篇 .md + karma.yaml）— 功德/业力/因果律/因果业报/天道轮回/因果神通/因果业障/因果修炼
+>
 > 🆕 v2.12 新增体系 — **宗门体系**（11 篇 .md + zong_men.yaml）— 等级/架构/弟子/长老/掌门/任务/经济/外交/联盟/散修
 >
 > 🆕 v2.11 新增体系 — **天材地宝体系**（9 篇 .md + tian_cai.yaml）— 灵草/灵木/灵金属/灵水灵火/灵兽灵虫/天外奇珍/仙材神材

@@ -51,6 +51,8 @@ EXPECTED_SYSTEMS = [
     "天材地宝体系",
     # v2.12
     "宗门体系",
+    # v2.13
+    "因果体系",
 ]
 
 
@@ -263,3 +265,52 @@ def test_zong_men_directory_has_at_least_10_files():
     """v2.12 后宗门体系/ 应至少有 10 篇 .md"""
     md_files = list((ROOT / "宗门体系").glob("*.md"))
     assert len(md_files) >= 10, f"宗门体系/ 仅有 {len(md_files)} 篇 .md，应 ≥10"
+
+
+# ── v2.13 因果体系 ──
+
+def test_karma_directory_exists():
+    """v2.13 因果体系目录必须存在"""
+    path = ROOT / "因果体系"
+    assert path.is_dir(), "因果体系/ 目录必须存在"
+
+
+def test_karma_yaml_exists():
+    """data/karma.yaml 必须存在"""
+    path = ROOT / "data" / "karma.yaml"
+    assert path.is_file(), "data/karma.yaml 必须存在"
+
+
+def test_karma_yaml_has_six_realms():
+    """karma.yaml 必须含 6 道"""
+    import yaml
+    with open(ROOT / "data" / "karma.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "six_realms" in data
+    assert len(data["six_realms"]) == 6
+
+
+def test_karma_yaml_has_divine_powers():
+    """karma.yaml 必须含 8+ 因果类神通"""
+    import yaml
+    with open(ROOT / "data" / "karma.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "divine_powers" in data
+    assert len(data["divine_powers"]) >= 8
+
+
+def test_karma_yaml_has_merit_and_karma_levels():
+    """karma.yaml 必须含功德与业力等级"""
+    import yaml
+    with open(ROOT / "data" / "karma.yaml") as f:
+        data = yaml.safe_load(f)
+    assert "merit_levels" in data
+    assert "karma_levels" in data
+    assert len(data["merit_levels"]) >= 4
+    assert len(data["karma_levels"]) >= 4
+
+
+def test_karma_directory_has_at_least_8_files():
+    """v2.13 后因果体系/ 应至少有 8 篇 .md"""
+    md_files = list((ROOT / "因果体系").glob("*.md"))
+    assert len(md_files) >= 8, f"因果体系/ 仅有 {len(md_files)} 篇 .md，应 ≥8"

@@ -1030,3 +1030,97 @@ relations:
     to: tribulation:xin_mie_tian_jie
     type: blocks
     description: "护神丹护神魂渡心灭劫"
+
+  # ── v2.10 秘境体系（24 体系） ──
+
+  # 秘境 ↔ 境界
+  - from: realm:lianqi
+    to: secret_realm:fan_pin
+    type: enables
+    description: "炼气期可入凡品秘境"
+  - from: realm:zhuji
+    to: secret_realm:ling_pin
+    type: enables
+    description: "筑基期可入灵品秘境"
+  - from: realm:jiedan
+    to: secret_realm:bao_pin
+    type: enables
+    description: "结丹期可入宝品秘境"
+  - from: realm:yuanying
+    to: secret_realm:xian_pin
+    type: enables
+    description: "元婴期可入仙品秘境"
+  - from: realm:dacheng
+    to: secret_realm:shen_pin
+    type: enables
+    description: "大乘期可入神品秘境"
+
+  # 秘境 ↔ 丹药
+  - from: secret_realm:ling_yao_dao
+    to: elixir:jiu_zhuan_huan_hun_dan
+    type: enables
+    description: "灵药岛产九幽还魂草炼制九转还魂丹"
+  - from: secret_realm:xian_cao_pu
+    to: elixir:cui_xian_dan
+    type: enables
+    description: "仙草圃产淬仙丹原料"
+
+  # 秘境 ↔ 法器
+  - from: secret_realm:xuan_tie_kuang_mai
+    to: artifact:wu_xing_huan
+    type: enables
+    description: "玄铁矿脉可炼五行环"
+  - from: secret_realm:wan_nian_han_tie_kuang
+    to: artifact:zi_wei_jian
+    type: enables
+    description: "万年寒铁炼紫薇剑"
+  - from: secret_realm:xing_chen_tie_kuang
+    to: artifact:hao_tian_ta
+    type: enables
+    description: "星辰铁炼昊天塔"
+
+  # 秘境 ↔ 传承
+  - from: secret_realm:lei_shi_zhi_mu
+    to: technique:lei_dian_jue
+    type: enables
+    description: "雷师之墓传雷电诀"
+  - from: secret_realm:luo_yun_zong_zu_ting
+    to: technique:chang_sheng_jue
+    type: enables
+    description: "落云宗祖庭传长生诀"
+  - from: secret_realm:san_xiu_yi_ji
+    to: technique:hun_yuan_gong
+    type: enables
+    description: "散修遗迹传混元功"
+
+  # 秘境 ↔ 妖兽
+  - from: secret_realm:hai_yao_shen_yuan
+    to: examples:chi_mu_mo_yuan
+    type: parallels
+    description: "海妖深渊藏赤目魔猿"
+  - from: secret_realm:jiu_you_yan
+    to: examples:san_tou_di_yu_quan
+    type: parallels
+    description: "九幽岩藏三头地狱犬"
+
+  # 秘境 ↔ 飞升
+  - from: secret_realm:peng_lai_xian_dao
+    to: ascension:legendary
+    type: enables
+    description: "蓬莱仙岛助传说飞升"
+  - from: secret_realm:xuan_du_dong_tian
+    to: ascension:emperor
+    type: enables
+    description: "玄都洞天助仙帝飞升"
+
+  # 秘境 ↔ 神识
+  - from: secret_realm:kong_jian
+    to: divine_sense:yuanying
+    type: requires
+    description: "空间秘境需元婴神识导航"
+
+  # 秘境 ↔ 势力
+  - from: examples:qing_lian_jian_zong
+    to: secret_realm:san_xiu_yi_ji
+    type: parallels
+    description: "青莲剑宗承袭散修遗迹"

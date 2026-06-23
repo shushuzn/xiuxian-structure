@@ -136,6 +136,36 @@ def build_graph(yaml_dir, filter_system=None):
     }
 
 
+def build_mermaid(graph: dict, max_edges: int = 100) -> str:
+    """从 graph dict 生成 Mermaid flowchart 代码（v2.9 新增）"""
+    lines = ["```mermaid", "flowchart LR"]
+    # 节点样式
+    for node in graph["nodes"]:
+        nid = node["id"].replace(":", "_").replace("-", "_")
+        label = f"{node['name']}<br/>({node['system']})"
+        color = node.get("color", "#666666")
+        # 用 subgraph 按体系分组
+    # 按 system 分组
+    by_system: Dict[str, list] = {}
+    for node in graph["nodes"]:
+        by_system.setdefault(node["system"], []).append(node)
+    for system, nodes in by_system.items():
+        lines.append(f"    subgraph {system} [\"{system} ({len(nodes)})\"]")
+        for node in nodes[:20]:  # 每组最多 20 个
+            nid = node["id"].replace(":", "_").replace("-", "_")
+            label = node["name"].replace('"', '\\"').replace("[", "(").replace("]", ")")
+            lines.append(f"        {nid}[\"{label}\"]")
+        lines.append("    end")
+    # 边
+    for edge in graph["edges"][:max_edges]:
+        src = edge["source"].replace(":", "_").replace("-", "_")
+        tgt = edge["target"].replace(":", "_").replace("-", "_")
+        rel = edge.get("type", "link")
+        lines.append(f"    {src} -->|{rel}| {tgt}")
+    lines.append("```")
+    return "\n".join(lines)
+
+
 def main(argv=None):
     """CLI 入口"""
     p = argparse.ArgumentParser(description="关系图数据生成器")
@@ -145,6 +175,10 @@ def main(argv=None):
     p.add_argument("--filter-system", type=str, default=None,
                    help="只输出某体系（如 realm / elixir / artifact）")
     p.add_argument("--stats", action="store_true", help="只打印统计")
+    p.add_argument("--mermaid", type=Path, default=None,
+                   help="输出 Mermaid 代码到指定文件")
+    p.add_argument("--max-edges", type=int, default=100,
+                   help="Mermaid 图最多渲染的边数")
     args = p.parse_args(argv)
 
     graph = build_graph(args.yaml_dir, args.filter_system)
@@ -165,6 +199,13 @@ def main(argv=None):
     print(f"💾 已生成: {args.output}")
     print(f"   节点: {graph['metadata']['total_nodes']}")
     print(f"   边: {graph['metadata']['total_edges']}")
+
+    if args.mermaid:
+        md = build_mermaid(graph, args.max_edges)
+        args.mermaid.parent.mkdir(parents=True, exist_ok=True)
+        with open(args.mermaid, "w", encoding="utf-8") as f:
+            f.write(md)
+        print(f"🧜 已生成 Mermaid: {args.mermaid}")
     return 0
 
 

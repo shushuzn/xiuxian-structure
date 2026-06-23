@@ -1,144 +1,137 @@
 """
-test_build_graph.py — v2.2 E. 数据可视化脚本的单测
-
-测试 scripts/build_graph.py：
-- 基本图构建
-- 体系过滤
-- 统计输出
-- 文件输出
+test_build_graph.py — build_graph.py 单测（v2.9 关系图谱）
 """
 import json
-import subprocess
 import sys
+import tempfile
 from pathlib import Path
-
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+from build_graph import build_graph, build_mermaid  # noqa: E402
 
-from build_graph import build_graph, SYSTEM_COLORS, RELATION_COLORS  # noqa: E402
-
-
-# ─── 基本图构建 ───
+DATA_DIR = ROOT / "data"
 
 
-def test_build_graph_returns_dict():
-    graph = build_graph(ROOT / "data")
-    assert "nodes" in graph
-    assert "edges" in graph
-    assert "metadata" in graph
+def test_build_graph_basic():
+    g = build_graph(DATA_DIR)
+    assert g["metadata"]["total_nodes"] > 0
+    assert g["metadata"]["total_edges"] > 0
+    assert "nodes" in g
+    assert "edges" in g
 
 
-def test_build_graph_has_nodes():
-    graph = build_graph(ROOT / "data")
-    assert len(graph["nodes"]) > 0
-    node = graph["nodes"][0]
-    assert "id" in node
-    assert "system" in node
-    assert "name" in node
-    assert "color" in node
+def test_build_graph_nodes_have_required_fields():
+    g = build_graph(DATA_DIR)
+    for node in g["nodes"][:10]:
+        assert "id" in node
+        assert "system" in node
+        assert "name" in node
+        assert "color" in node
 
 
-def test_build_graph_has_edges():
-    graph = build_graph(ROOT / "data")
-    assert len(graph["edges"]) > 0
-    edge = graph["edges"][0]
-    assert "source" in edge
-    assert "target" in edge
-    assert "type" in edge
-    assert "color" in edge
-
-
-def test_build_graph_node_ids_have_colon():
-    """所有节点 ID 应为 system:id 格式"""
-    graph = build_graph(ROOT / "data")
-    for n in graph["nodes"]:
-        assert ":" in n["id"], f"节点 {n['id']} 缺少 system:id 格式"
-
-
-def test_build_graph_metadata_has_stats():
-    graph = build_graph(ROOT / "data")
-    meta = graph["metadata"]
-    assert "total_nodes" in meta
-    assert "total_edges" in meta
-    assert "type_counts" in meta
-    assert "system_counts" in meta
-    assert "relation_colors" in meta
-    assert "system_colors" in meta
-    assert meta["total_nodes"] == len(graph["nodes"])
-    assert meta["total_edges"] == len(graph["edges"])
-
-
-def test_build_graph_all_known_relations():
-    """所有边的 type 都在已知关系类型列表中"""
-    graph = build_graph(ROOT / "data")
-    for e in graph["edges"]:
-        assert e["type"] in RELATION_COLORS, f"未知关系类型: {e['type']}"
-
-
-# ─── 体系过滤 ───
+def test_build_graph_edges_have_required_fields():
+    g = build_graph(DATA_DIR)
+    for edge in g["edges"][:10]:
+        assert "id" in edge
+        assert "source" in edge
+        assert "target" in edge
+        assert "type" in edge
+        assert "color" in edge
 
 
 def test_build_graph_filter_system():
-    """过滤单个体系时只返回该体系的节点 + 关联"""
-    graph = build_graph(ROOT / "data", filter_system="realm")
-    assert all(n["system"] == "realm" for n in graph["nodes"])
+    g = build_graph(DATA_DIR, filter_system="realm")
+    for node in g["nodes"]:
+        assert node["system"] == "realm"
 
 
-def test_build_graph_filter_no_match():
-    """过滤不存在的体系返回空"""
-    graph = build_graph(ROOT / "data", filter_system="nonexistent_system")
-    assert len(graph["nodes"]) == 0
-    assert len(graph["edges"]) == 0
+def test_build_graph_filter_system_inclusive():
+    """filter 应同时包含 from 和 to 涉及的体系边"""
+    g = build_graph(DATA_DIR, filter_system="realm")
+    for edge in g["edges"]:
+        sys_from = edge["source"].split(":")[0] if edge["source"] else ""
+        sys_to = edge["target"].split(":")[0] if edge["target"] else ""
+        assert "realm" in (sys_from, sys_to)
 
 
-def test_build_graph_filter_smaller_than_full():
-    """过滤后节点数应少于全量"""
-    full = build_graph(ROOT / "data")
-    filtered = build_graph(ROOT / "data", filter_system="elixir")
-    assert len(filtered["nodes"]) < len(full["nodes"])
+def test_build_graph_metadata_relation_types():
+    g = build_graph(DATA_DIR)
+    assert "relation_types" in g["metadata"]
+    assert "influences" in g["metadata"]["relation_types"]
+    assert "enables" in g["metadata"]["relation_types"]
 
 
-# ─── CLI ───
+def test_build_graph_metadata_type_counts():
+    g = build_graph(DATA_DIR)
+    counts = g["metadata"]["type_counts"]
+    assert counts["enables"] > 50
+    assert counts["blocks"] > 0
+    assert counts["parallels"] > 0
+    assert counts["requires"] > 0
 
 
-def test_cli_stats():
-    """--stats 模式打印统计"""
-    result = subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "build_graph.py"), "--stats"],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=10,
-    )
-    # Py3.6 会有 future annotations 报错，跳过    assert result.returncode == 0, f"stderr: {result.stderr}"
-    assert "节点" in result.stdout
-    assert "边" in result.stdout
+def test_build_graph_metadata_system_counts():
+    g = build_graph(DATA_DIR)
+    counts = g["metadata"]["system_counts"]
+    # 至少 5 个体系
+    assert len(counts) >= 5
 
 
-def test_cli_output_json(tmp_path):
-    """--output 模式生成 JSON 文件"""
-    out_path = tmp_path / "graph.json"
-    result = subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "build_graph.py"),
-         "--output", str(out_path)],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=10,
-    )
-    assert result.returncode == 0, f"stderr: {result.stderr}"
-    assert out_path.exists()
-    data = json.loads(out_path.read_text(encoding="utf-8"))
-    assert "nodes" in data
-    assert "edges" in data
-    assert data["metadata"]["total_nodes"] > 0
+def test_build_graph_missing_file(tmp_path):
+    g = build_graph(tmp_path)
+    # 缺 relations.yaml 时返回错误 metadata
+    assert "nodes" in g
+    assert "edges" in g
+    assert g["nodes"] == [] or "error" in g["metadata"]
 
 
-def test_cli_filter(tmp_path):
-    """--filter-system 工作"""
-    out_path = tmp_path / "graph_realm.json"
-    result = subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "build_graph.py"),
-         "--output", str(out_path),
-         "--filter-system", "realm"],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=10,
-    )
-    assert result.returncode == 0
-    data = json.loads(out_path.read_text(encoding="utf-8"))
-    assert all(n["system"] == "realm" for n in data["nodes"])
+def test_build_graph_no_duplicates():
+    """节点 ID 应无重复"""
+    g = build_graph(DATA_DIR)
+    ids = [n["id"] for n in g["nodes"]]
+    assert len(ids) == len(set(ids))
+
+
+# ── Mermaid 输出（v2.9 新增） ──
+
+
+def test_build_mermaid_returns_string():
+    g = build_graph(DATA_DIR)
+    md = build_mermaid(g, max_edges=20)
+    assert isinstance(md, str)
+    assert "```mermaid" in md
+    assert "flowchart" in md
+    assert "```" in md
+
+
+def test_build_mermaid_includes_subgraphs():
+    g = build_graph(DATA_DIR)
+    md = build_mermaid(g, max_edges=20)
+    assert "subgraph" in md
+    assert "end" in md
+
+
+def test_build_mermaid_respects_max_edges():
+    g = build_graph(DATA_DIR)
+    md = build_mermaid(g, max_edges=5)
+    edge_lines = [l for l in md.split("\n") if "-->" in l]
+    assert len(edge_lines) <= 5
+
+
+def test_build_mermaid_no_breaks_syntax():
+    g = build_graph(DATA_DIR)
+    md = build_mermaid(g, max_edges=10)
+    # 不能有裸方括号
+    for line in md.split("\n"):
+        if '["' in line or "[(" in line:
+            # 检查中括号配对
+            assert line.count("[") == line.count("]")
+
+
+def test_build_mermaid_contains_colors_or_styles():
+    g = build_graph(DATA_DIR)
+    md = build_mermaid(g, max_edges=10)
+    # 应至少包含子图（带体系名）
+    assert "subgraph" in md

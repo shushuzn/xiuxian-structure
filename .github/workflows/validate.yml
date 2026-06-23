@@ -34,6 +34,12 @@ jobs:
           ruff check scripts/ tests/
           echo "✅ ruff 通过"
 
+      - name: Mypy type check
+        run: |
+          echo "🔍 mypy 类型检查（D.3 新增）："
+          mypy scripts/interactive.py scripts/build_graph.py
+          echo "✅ mypy 通过"
+
       - name: Run pytest unit tests
         run: |
           echo "🧪 跑 pytest 单测（v1.7+ D. 工程化补强）："
@@ -43,15 +49,15 @@ jobs:
 
       - name: Coverage report
         run: |
-          echo "📊 覆盖率报告（fail-under=70）："
+          echo "📊 覆盖率报告（fail-under=80, D.3 提升）："
           python -m pytest tests/ \
             --cov=scripts \
             --cov-config=pyproject.toml \
             --cov-report=term-missing \
             --cov-report=xml:coverage.xml \
-            --cov-fail-under=70
+            --cov-fail-under=80
           echo ""
-          echo "✅ coverage.xml 已生成，覆盖率 >= 70%"
+          echo "✅ coverage.xml 已生成，覆盖率 >= 80%"
 
       - name: Run export (smoke test)
         run: |

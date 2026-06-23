@@ -45,7 +45,7 @@ omit = ["scripts/batch_generate.py", "scripts/build_graph.py", "scripts/eval_llm
 
 [tool.coverage.report]
 show_missing = true
-fail_under = 70
+fail_under = 80
 skip_empty = true
 exclude_lines = [
     "pragma: no cover",
@@ -53,6 +53,30 @@ exclude_lines = [
     "raise NotImplementedError",
     "raise AssertionError",
     "return NotImplemented",
+]
+
+[tool.mypy]
+python_version = 3.6
+ignore_missing_imports = true
+no_implicit_optional = true
+warn_unused_ignores = true
+warn_return_any = false
+warn_redundant_casts = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = false
+exclude = [
+    "tests/",
+    "site/",
+    "docs_src/",
+    "interactive/",
+    "examples/",
+    "scripts/batch_generate.py",
+    "scripts/eval_llm.py",
+    "scripts/export.py",
+    "scripts/generate_node.py",
+    "scripts/validate.py",
+    "scripts/web_app.py",
 ]
 
 [tool.pytest.ini_options]

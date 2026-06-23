@@ -14,4 +14,4 @@ ruff>=0.1
 mypy>=0.991
 
 # Coverage 上传（CI 用）
-codecov>=2.1
+codecov>=2.1.13

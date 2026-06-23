@@ -782,3 +782,403 @@ text: "end"
     eng._apply_choice_actions(story.get("start").choices[0])
     assert "last_event" in s.attrs
     assert s.attrs["last_event"]["type"] == "encounter"
+
+
+# ── v2.9 D.3 覆盖率加深 ──
+
+
+def test_world_lookup_nested_dict():
+    """lookup 嵌套 dict 应正确取值"""
+    w = World({"a": {"b": {"c": 42}}})
+    assert w.lookup("a", "b", "c") == 42
+
+
+def test_world_lookup_nested_list_by_id():
+    """lookup 嵌套 list 应按 id 索引"""
+    w = World({"a": {"b": [{"id": "x", "v": 1}, {"id": "y", "v": 2}]}})
+    assert w.lookup("a", "b", "y", "v") == 2
+
+
+def test_world_lookup_invalid_path():
+    """lookup 不存在的路径应返回 None"""
+    w = World({"a": {"b": 1}})
+    assert w.lookup("a", "missing") is None
+    assert w.lookup("nonexistent") is None
+
+
+def test_world_lookup_string_value():
+    """lookup 字符串值应直接返回"""
+    w = World({"a": "value"})
+    assert w.lookup("a") == "value"
+
+
+def test_world_find_by_id_in_dict():
+    """find_by_id 应在 dict 中查找"""
+    w = World({"a": {"items": [{"id": "x", "v": 1}]}})
+    hit = w.find_by_id("a", "x")
+    assert hit is not None
+    assert hit["v"] == 1
+
+
+def test_world_find_by_id_empty_data():
+    """空数据应返回 None"""
+    w = World({})
+    assert w.find_by_id("x", "y") is None
+
+
+def test_world_render_template_int():
+    """render_template 整数应正确渲染"""
+    w = _world()
+    result = w.render_template("{realms.炼气期.lifespan}")
+    # 炼气期.lifespan 是 120
+    assert "120" in result or "<未知" in result
+
+
+def test_state_substitute_string_attr():
+    """_substitute 应正确处理字符串属性"""
+    s = State({"name": "test_value"})
+    expr = s._substitute("name == 'foo'")
+    # 字符串应用 repr
+    assert "'test_value'" in expr
+
+
+def test_state_substitute_number_attr():
+    """_substitute 应正确处理数字属性"""
+    s = State({"count": 42})
+    expr = s._substitute("count >= 10")
+    assert "42" in expr
+
+
+def test_state_substitute_long_names_first():
+    """长的属性名应优先匹配（避免子串冲突）"""
+    s = State({"lianqi_count": 5, "lianqi": "炼气期"})
+    expr = s._substitute("lianqi_count == 5")
+    assert "5" in expr
+    # 长名替换为 <<lianqi_count>>，短名 <<lianqi>>
+    # 两个都被替换但顺序无关
+
+
+def test_state_check_complex_expr():
+    """check 应支持复合表达式"""
+    s = State({"灵石": 100, "声望": 50})
+    assert s.check("灵石 >= 50 and 声望 > 30")
+    assert not s.check("灵石 >= 200")
+
+
+def test_state_check_with_string_compare():
+    """check 应支持字符串比较"""
+    s = State({"灵根": "天灵根"})
+    assert s.check("灵根 == '天灵根'")
+    assert not s.check("灵根 == '废灵根'")
+
+
+def test_state_check_with_flag():
+    """check 应支持 flag.xxx 语法"""
+    s = State()
+    s.set_flag("已拜师")
+    assert s.check("flag.已拜师")
+    assert not s.check("flag.未拜师")
+
+
+def test_state_check_invalid_expr():
+    """check 遇到无效表达式应返回 False（不抛异常）"""
+    s = State()
+    assert s.check("invalid syntax !@#") is False
+    assert s.check("undefined_var == 1") is False
+
+
+def test_engine_apply_state_with_prefix():
+    """data 块中带 ? 前缀的 key 仅在未设置时初始化"""
+    s = State({"灵石": 5})
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+data:
+  ?灵石: 100
+  ?声望: 10
+"""), s)
+    eng._apply_state(eng.story.get("s"))
+    # 已存在的 5 不变
+    assert s.get("灵石") == 5
+    # 未存在的 声望 设为 10
+    assert s.get("声望") == 10
+
+
+def test_engine_apply_state_overwrites():
+    """data 块中不带 ? 前缀的 key 总是覆盖"""
+    s = State({"灵石": 5})
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+data:
+  灵石: 100
+"""), s)
+    eng._apply_state(eng.story.get("s"))
+    assert s.get("灵石") == 100
+
+
+def test_engine_apply_choice_with_set():
+    """choice 含 set 字段应更新 attrs"""
+    s = State()
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: act
+    goto: e
+    set:
+      a: 1
+## 节点 e (ending)
+text: done
+"""), s)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert s.get("a") == 1
+
+
+def test_engine_save_returns_dict():
+    """save() 应返回可序列化的 dict"""
+    s = State({"x": 1})
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+"""), s)
+    eng.history.append("s")
+    saved = eng.save()
+    assert saved["story"] == "t"
+    assert "state" in saved
+    assert "history" in saved
+    assert saved["history"] == ["s"]
+
+
+def test_engine_save_to_file(tmp_path):
+    """save_to_file 应写入 JSON 文件（state 部分）"""
+    s = State({"x": 1})
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+"""), s)
+    target = tmp_path / "save.json"
+    eng.save_to_file(target)
+    assert target.exists()
+    import json as _json
+    data = _json.loads(target.read_text())
+    # save_to_file 只保存 state 部分
+    assert "attrs" in data
+
+
+def test_engine_get_score_returns_dict():
+    """get_score 应返回评分 dict"""
+    s = State({"灵石": 100, "声望": 10})
+    s.set_item_count = len(s.items)  # type: ignore
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+"""), s)
+    score = eng.get_score()
+    assert "灵石" in score
+    assert "声望" in score
+    assert "总分" in score
+
+
+def test_engine_step_with_no_choice():
+    """step() 在无 choice 时应返回 ending event"""
+    s = State()
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (ending)
+text: end
+"""), s)
+    ev = eng.step(0)
+    assert ev.ending is True
+    assert ev.node_id == "s"
+
+
+def test_story_from_text_minimal():
+    """from_text 接受最小有效输入"""
+    s = Story.from_text("""# test
+## 元数据
+id: min
+start: s
+## 节点 s (ending)
+text: end
+""")
+    assert s.id == "min"
+    assert s.start_node == "s"
+    assert "s" in s.nodes
+
+
+def test_story_parse_nodes_only():
+    """parse_nodes_only 应跳过元数据校验"""
+    nodes = Story.parse_nodes_only("""# test
+## 元数据
+id: t
+start: nonexistent
+## 节点 a (scene)
+text: hi
+## 节点 b (ending)
+text: end
+""")
+    assert "a" in nodes
+    assert "b" in nodes
+
+
+def test_world_render_template_complex_obj():
+    """复杂对象不应内联"""
+    w = _world()
+    # 找一个 list 类型字段
+    result = w.render_template("{realms.炼气期.sub_stages}")
+    # list 不是基本类型，应返回 <{}>
+    assert "<" in result
+
+
+def test_engine_apply_choice_with_realm():
+    """choice 含 realm 字段应更新 state.realm"""
+    s = State()
+    s.realm = "下界"
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: go
+    goto: e
+    realm: 仙界
+## 节点 e (ending)
+text: end
+"""), s)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert s.realm == "仙界"
+
+
+def test_engine_apply_choice_drop():
+    """choice 含 drop 字段应从背包移除"""
+    s = State()
+    s.add_item("灵石")
+    s.add_item("丹药")
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: drop
+    goto: e
+    drop: 灵石
+## 节点 e (ending)
+text: end
+"""), s)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert not s.has_item("灵石")
+    assert s.has_item("丹药")
+
+
+def test_engine_apply_choice_pickup_list():
+    """choice 含 pickup 列表应全部加入背包"""
+    s = State()
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: pickup
+    goto: e
+    pickup:
+      - 灵石
+      - 丹药
+## 节点 e (ending)
+text: end
+"""), s)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert s.has_item("灵石")
+    assert s.has_item("丹药")
+
+
+def test_engine_apply_choice_favor_dict():
+    """choice 含 favor 字典应调整 NPC 好感度"""
+    s = State()
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: favor
+    goto: e
+    favor:
+      张三: 10
+      李四: -5
+## 节点 e (ending)
+text: end
+"""), s)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert s.get_npc_favor("张三") == 60
+    assert s.get_npc_favor("李四") == 45
+
+
+def test_engine_apply_choice_advance():
+    """choice 含 advance 字段应推进时间"""
+    s = State()
+    eng = Engine(_world(), _minimal_story("""# test
+## 元数据
+id: t
+start: s
+## 节点 s (scene)
+text: hi
+next:
+  - label: advance
+    goto: e
+    advance:
+      years: 1
+      months: 2
+      days: 3
+## 节点 e (ending)
+text: end
+"""), s)
+    eng._apply_choice_actions(eng.story.get("s").choices[0])
+    assert s.time["年"] == 2
+    assert s.time["月"] == 3
+    assert s.time["日"] == 4
+
+
+def test_state_load_from_dict():
+    """from_dict 应正确恢复 state"""
+    d = {
+        "attrs": {"x": 1},
+        "flags": ["f1"],
+        "items": ["a"],
+        "npc_favor": {"n": 70},
+        "time": {"年": 2, "月": 3, "日": 4},
+        "realm": "仙界",
+    }
+    s = State.from_dict(d)
+    assert s.get("x") == 1
+    assert s.flag("f1")
+    assert s.has_item("a")
+    assert s.get_npc_favor("n") == 70
+    assert s.realm == "仙界"

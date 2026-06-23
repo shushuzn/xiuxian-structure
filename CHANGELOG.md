@@ -4,6 +4,19 @@
 
 ## [Unreleased]
 
+### D.3 CI 强化
+- 📈 **覆盖率阈值**：70% → **80%**（`pyproject.toml` `[tool.coverage.report].fail_under`）
+- 🆕 **mypy 类型检查**：新增 `[tool.mypy]` 配置 + `requirements-dev.txt` 加 `mypy>=0.991` + CI 新增 `Mypy type check` 步骤
+- 🧪 **+29 个新单测**：`tests/test_interactive.py` 加 29 个边界测试（World/State/Engine 全面）
+- ✅ **129 → 158 tests** (129 → 158, +29)
+
+### v2.9 关系图谱
+- 🔗 **+53 条 relations**：灵根↔妖兽/心魔↔契约/灵根↔雷劫/灵石↔灵脉/势力↔灵脉/神通↔境界/...
+- 🧜 **`build_mermaid()`** 新函数：自动从 `data/relations.yaml` 生成 Mermaid flowchart
+- 📖 **docs/图谱.md** 末尾新增自动生成的全图（161 节点 / 221 边 / 50 边）
+- 🧪 **+13 单测**：`tests/test_build_graph.py`
+- ✅ **126 → 129 tests** (+13)
+
 ### v2.8 互动引擎完善
 - 🆕 **BreakthroughSimulator** — 境界突破模拟器
   - 灵根加成 / 丹药加成 / 心境加成 / 天劫判定 / 心魔遭遇

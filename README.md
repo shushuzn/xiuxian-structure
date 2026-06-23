@@ -8,15 +8,20 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v2.4.0** · **22 体系** · 21 yaml · [📖 阅读更新日志](docs/CHANGELOG.md)
+**v2.8.0** · **23 体系** · 24 yaml · [📖 阅读更新日志](docs/CHANGELOG.md)
 
-> 🆕 v2.6 大版本：新增 **战斗体系**（10 篇）— 神通 / 法相 / 领域 / 遁术 / 遁法 / 阵法战
+> 🆕 v2.8 互动引擎完善 — **境界突破模拟** / **回合制战斗** / **随机事件** 三大模块
 >
-> 🆕 v2.4 大版本：新增 **魔界体系**（12 篇）+ **冥界体系**（12 篇）— 仙界背面 → 魔界 / 仙陨之后 → 冥界
+> 🆕 v2.7 数据深化 — 4 轮扩展（阵法/符箓/功法/神通/灵气/灵根/心魔/雷劫/灵石/妖修/势力/契约/神识/飞升/境界/仙界/器灵/神界 9 大体系 +280 条）
 >
-> 🆕 v2.3 大版本：新增 **神界体系**（12 篇）— 仙帝之上 → 神界
+> 🆕 v2.6 战斗体系 — 跨 6 界面的通用战斗规则（10 篇 .md + combat.yaml 93 条）
 >
-> v2.0 大版本：新增 **飞升体系**（10 篇）— 大乘之上 → 仙界
+> v2.4 魔界 + 冥界体系（24 篇）— 仙界背面 / 仙陨之后
+>
+> v2.3 神界体系（12 篇）— 仙帝之上
+>
+> v2.0 飞升体系（10 篇）— 大乘之上 → 仙界
+>
 > v1.5/v1.6/v1.7：心魔 + 雷劫 + 神识 + 器灵 + 契约（27 篇）
 
 English readers: see [README_EN.md](README_EN.md).
@@ -253,7 +258,7 @@ python3 scripts/validate.py
 
 ## 互动小说（v1.2.0+）
 
-把 11 体系 yaml 当作运行时世界数据库，状态机驱动修仙互动叙事：
+把 23 体系 yaml 当作运行时世界数据库，状态机驱动修仙互动叙事：
 
 ```bash
 # 试玩 demo 故事
@@ -285,7 +290,7 @@ python3 scripts/generate_node.py \
   --requirement "..."
 ```
 
-- **自动喂 yaml**：脚本读 `data/*.yaml` 生成世界摘要（11 体系 + 关键 ID）
+- **自动喂 yaml**：脚本读 `data/*.yaml` 生成世界摘要（23 体系 + 关键 ID）
 - **NodeValidator 5 项校验**：id 冲突 / 解析 / goto 存在 / refs 文件 / 数值范围
 - **失败自动反馈重试**：3 轮内把错误传给 LLM 修复
 - **示例**：`examples/feed-to-llm.md`（工作流）+ `examples/generated/夜探禁地.md`（mock 输出）
@@ -353,7 +358,7 @@ stats = analyze_story("stories/hanli_vol1_mochui.md")
 
 ## 导出与消费
 
-把 11 个 yaml 转换为可分发的产物：
+把 23 个 yaml 转换为可分发的产物：
 
 ```bash
 # 导出全部格式到 dist/

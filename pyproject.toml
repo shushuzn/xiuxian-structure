@@ -41,7 +41,7 @@ line-ending = "lf"
 
 [tool.coverage.run]
 source = ["scripts"]
-omit = ["scripts/batch_generate.py", "scripts/eval_llm.py", "scripts/export.py", "scripts/generate_node.py", "scripts/web_app.py"]
+omit = ["scripts/batch_generate.py", "scripts/build_graph.py", "scripts/eval_llm.py", "scripts/export.py", "scripts/generate_node.py", "scripts/validate.py", "scripts/web_app.py"]
 
 [tool.coverage.report]
 show_missing = true

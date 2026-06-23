@@ -4,6 +4,32 @@
 
 ## [Unreleased]
 
+### v2.8 互动引擎完善
+- 🆕 **BreakthroughSimulator** — 境界突破模拟器
+  - 灵根加成 / 丹药加成 / 心境加成 / 天劫判定 / 心魔遭遇
+  - 支持中英文境界名（炼气期/lianqi）
+- 🆕 **CombatSystem** — 回合制战斗系统
+  - 玩家 vs 怪物（来自 monsters.yaml）
+  - attack / defend / skill / flee 四种动作
+  - 暴击系统 + 战利品奖励
+- 🆕 **RandomEventEngine** — 随机事件生成器
+  - 5 类事件：encounter / treasure / tribulation / npc / weather
+  - 奖励/消耗/好感度变动
+- 🎮 **3 个新选项动作**：`breakthrough` / `combat` / `random_event`
+- 📖 **stories/v28_demo.md** — v2.8 演示故事
+- 🧪 **25 个新单测**：覆盖三个模块 + Engine 集成
+- ✅ **126 tests** passing (101 → 126, +25)
+
+### v2.7 数据深化（v2-v4 合并）
+- 数据深化 v2 (PR #58): 阵法/符箓/功法/神通 +20
+- 数据深化 v3 (PR #59): 灵气/灵根/心魔/雷劫/灵石/妖修/势力/契约/神识 +20
+- 数据深化 v4 (PR #60): 飞升/境界/仙界/器灵/神界 +20
+
+### v2.6 战斗体系
+- 📚 **10 篇新 .md**：战斗体系（武器/招式/阵法/策略/...）
+- 🗂️ **data/combat.yaml**（93 条记录 / 8 字段）
+- 🔗 **16 条 relations**
+
 ### v2.5 互动引擎扩四大界面
 - **State.realm** 字段 + `realm:` 选项动作 — 引擎现在感知角色所在界面
 - 📖 **`stories/demo_sijie.md`** — 四大界面跨界史诗 demo（14 节点 / 4 条路径）

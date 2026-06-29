@@ -4,337 +4,337 @@
 
 relations:
   # ── 灵根 → 境界 ──
-  - from: spirit_root:tian_ling_gen
-    to: realm:lianqi
+  - from: spirit_roots:tian_ling_gen
+    to: realms:lianqi
     type: influences
     description: "天灵根突破瓶颈天生占优"
-  - from: spirit_root:wei_ling_gen
-    to: realm:zhuji
+  - from: spirit_roots:wei_ling_gen
+    to: realms:zhuji
     type: blocks
     description: "伪灵根每突破一个境界都比天灵根难数倍"
 
   # ── 灵根 → 功法 ──
-  - from: spirit_root:tian_ling_gen
-    to: technique:chang_sheng_jue
+  - from: spirit_roots:tian_ling_gen
+    to: techniques:chang_sheng_jue
     type: enables
     description: "天灵根与天级无属性功法匹配"
   - from: attributes:jin
-    to: technique:jin_jian_jue
+    to: techniques:jin_jian_jue
     type: enables
     description: "金属性灵根与金属性功法匹配"
 
   # ── 灵气 → 境界 ──
   - from: aether:xi_bao
-    to: realm:lianqi
+    to: realms:lianqi
     type: enables
     description: "稀薄灵气下炼气期尚可"
   - from: aether:nong_yu
-    to: realm:jiedan
+    to: realms:jiedan
     type: enables
     description: "浓郁灵气支持高阶修士修炼"
 
   # ── 灵气 → 灵脉 → 势力 ──
   - from: aether:wei_xing_lingmai
-    to: org:san_xiu
+    to: factions:san_xiu
     type: enables
     description: "微型灵脉支持散修或小家族"
 
   # ── 功法 → 境界 ──
-  - from: technique:huang
-    to: realm:zhuji
+  - from: techniques:huang
+    to: realms:zhuji
     type: blocks
     description: "黄级功法最高到筑基"
-  - from: technique:xuan
-    to: realm:jiedan
+  - from: techniques:xuan
+    to: realms:jiedan
     type: enables
     description: "玄级可到结丹"
-  - from: technique:di
-    to: realm:huashen
+  - from: techniques:di
+    to: realms:huashen
     type: enables
     description: "地级可到元婴甚至化神"
-  - from: technique:tian
-    to: realm:dacheng
+  - from: techniques:tian
+    to: realms:dacheng
     type: enables
     description: "天级才能走得更远"
 
   # ── 丹药 → 境界 ──
-  - from: elixir:fan_pin
-    to: realm:lianqi
+  - from: elixirs:fan_pin
+    to: realms:lianqi
     type: enables
     description: "凡品丹药 → 炼气期"
-  - from: elixir:ling_pin
-    to: realm:zhuji
+  - from: elixirs:ling_pin
+    to: realms:zhuji
     type: enables
     description: "灵品丹药 → 筑基期"
-  - from: elixir:bao_pin
-    to: realm:jiedan
+  - from: elixirs:bao_pin
+    to: realms:jiedan
     type: enables
     description: "宝品丹药 → 结丹期"
-  - from: elixir:xian_pin
-    to: realm:yuanying
+  - from: elixirs:xian_pin
+    to: realms:yuanying
     type: enables
     description: "仙品丹药 → 元婴期及以上"
 
   # ── 丹药 → 突破 ──
-  - from: elixir:zhuji_dan
-    to: realm:zhuji
+  - from: elixirs:zhuji_dan
+    to: realms:zhuji
     type: enables
     description: "筑基丹辅助炼气突破筑基"
-  - from: elixir:jiedan_dan
-    to: realm:jiedan
+  - from: elixirs:jiedan_dan
+    to: realms:jiedan
     type: enables
     description: "结丹丹辅助筑基突破结丹"
-  - from: elixir:peiyu_dan
-    to: realm:yuanying
+  - from: elixirs:peiyu_dan
+    to: realms:yuanying
     type: enables
     description: "培婴丹辅助结丹突破元婴"
 
   # ── v1.5: 境界 → 雷劫 ──
-  - from: realm:jiedan
-    to: tribulation:san_jiu_tian_jie
+  - from: realms:jiedan
+    to: tribulations:san_jiu_tian_jie
     type: requires
     description: "结丹突破元婴必经三九天劫（9 道雷）"
-  - from: realm:yuanying
-    to: tribulation:liu_jiu_tian_jie
+  - from: realms:yuanying
+    to: tribulations:liu_jiu_tian_jie
     type: requires
     description: "元婴突破化神必经六九天劫（18 道雷）"
-  - from: realm:huashen
-    to: tribulation:liu_jiu_tian_jie
+  - from: realms:huashen
+    to: tribulations:liu_jiu_tian_jie
     type: requires
     description: "化神突破炼虚亦经六九天劫"
-  - from: realm:lianxu
-    to: tribulation:jiu_jiu_tian_jie
+  - from: realms:lianxu
+    to: tribulations:jiu_jiu_tian_jie
     type: requires
     description: "炼虚突破合体必经九九天劫（27 道雷）"
-  - from: realm:heti
-    to: tribulation:jiu_jiu_tian_jie
+  - from: realms:heti
+    to: tribulations:jiu_jiu_tian_jie
     type: requires
     description: "合体突破渡劫亦经九九天劫"
-  - from: realm:dujie
-    to: tribulation:jiu_jiu_tian_jie_feisheng
+  - from: realms:dujie
+    to: tribulations:jiu_jiu_tian_jie_feisheng
     type: requires
     description: "渡劫突破大乘经飞升之劫（九九天劫的极巅）"
 
   # ── v1.5: 境界 → 心魔 ──
-  - from: realm:zhuji
-    to: heart_demon:tan_mo
+  - from: realms:zhuji
+    to: heart_demons:tan_mo
     type: blocks
     description: "筑基突破结丹时贪魔较常见"
-  - from: realm:jiedan
-    to: heart_demon:zhi_nian_mo
+  - from: realms:jiedan
+    to: heart_demons:zhi_nian_mo
     type: blocks
     description: "结丹突破元婴时执念魔高发"
-  - from: realm:yuanying
-    to: heart_demon:chi_mo
+  - from: realms:yuanying
+    to: heart_demons:chi_mo
     type: blocks
     description: "元婴突破化神时嗔魔高发（对天道之愤）"
-  - from: realm:huashen
-    to: heart_demon:chi_mo
+  - from: realms:huashen
+    to: heart_demons:chi_mo
     type: blocks
     description: "化神突破炼虚亦高发嗔魔、痴魔"
 
   # ── v1.5: 雷劫 ↔ 心魔 ──
-  - from: tribulation:san_jiu_tian_jie
-    to: heart_demon:tan_mo
+  - from: tribulations:san_jiu_tian_jie
+    to: heart_demons:tan_mo
     type: triggers
     description: "三九天劫常与贪魔、执念魔并发"
-  - from: tribulation:liu_jiu_tian_jie
-    to: heart_demon:chi_mo
+  - from: tribulations:liu_jiu_tian_jie
+    to: heart_demons:chi_mo
     type: triggers
     description: "六九天劫常与嗔魔、痴魔并发"
-  - from: tribulation:jiu_jiu_tian_jie
-    to: heart_demon:all
+  - from: tribulations:jiu_jiu_tian_jie
+    to: heart_demons:all
     type: triggers
     description: "九九天劫常与所有心魔并发"
 
   # ── v1.5: 丹药 → 心魔（新增抗心魔类） ──
-  - from: elixir:qing_xin_dan
-    to: heart_demon:tan_mo
+  - from: elixirs:qing_xin_dan
+    to: heart_demons:tan_mo
     type: enables
     description: "清心丹压制贪魔、嗔魔、痴魔"
-  - from: elixir:qing_xin_dan_advanced
-    to: heart_demon:zhi_nian_mo
+  - from: elixirs:qing_xin_dan_advanced
+    to: heart_demons:zhi_nian_mo
     type: enables
     description: "宝品清心丹可抵御执念魔"
-  - from: elixir:ning_shen_dan
-    to: heart_demon:chi_mo
+  - from: elixirs:ning_shen_dan
+    to: heart_demons:chi_mo
     type: enables
     description: "凝神丹稳固神魂，抵御痴魔、执念魔"
 
   # ── v1.5: 阵法 → 雷劫 ──
-  - from: formation:du_jie_zhen
-    to: tribulation:san_jiu_tian_jie
+  - from: formations:du_jie_zhen
+    to: tribulations:san_jiu_tian_jie
     type: weakens
     description: "渡劫阵可削弱三九天劫 30% 威力"
-  - from: formation:du_jie_zhen
-    to: tribulation:liu_jiu_tian_jie
+  - from: formations:du_jie_zhen
+    to: tribulations:liu_jiu_tian_jie
     type: weakens
     description: "仙阵级别渡劫阵可削弱六九天劫"
-  - from: formation:du_jie_zhen
-    to: tribulation:jiu_jiu_tian_jie
+  - from: formations:du_jie_zhen
+    to: tribulations:jiu_jiu_tian_jie
     type: weakens
     description: "高阶渡劫阵可削弱九九天劫（仅部分）"
 
   # ── v1.6: 境界 → 神识 ──
-  - from: realm:lianqi
+  - from: realms:lianqi
     to: divine_sense:lianqi
     type: enables
     description: "炼气期开启微神识（3-10 丈，模糊感知）"
-  - from: realm:zhuji
+  - from: realms:zhuji
     to: divine_sense:zhuji
     type: enables
     description: "筑基期神识扩展至 30-100 丈，可画符/炼丹/布阵"
-  - from: realm:jiedan
+  - from: realms:jiedan
     to: divine_sense:jiedan
     type: enables
     description: "结丹期神识质变（穿墙透视、可附身低阶）"
-  - from: realm:yuanying
+  - from: realms:yuanying
     to: divine_sense:yuanying
     type: enables
     description: "元婴期神识离体化（识战、夺舍、可触及天地法则）"
 
   # ── v1.6: 神识 → 应用 ──
   - from: divine_sense:jiedan
-    to: artifact:gao_jie
+    to: artifacts:gao_jie
     type: enables
     description: "结丹神识可驱动高阶法器"
   - from: divine_sense:yuanying
-    to: artifact:fa_bao
+    to: artifacts:fa_bao
     type: enables
     description: "元婴神识可驱动法宝，可与器灵沟通"
   - from: divine_sense:zhuji
-    to: talisman:ling_fu
+    to: talismans:ling_fu
     type: enables
     description: "筑基神识可画制灵品符箓"
   - from: divine_sense:jiedan
-    to: talisman:bao_fu
+    to: talismans:bao_fu
     type: enables
     description: "结丹神识可画制宝品符箓"
   - from: divine_sense:zhuji
-    to: elixir:ling_pin
+    to: elixirs:ling_pin
     type: enables
     description: "筑基神识可炼制灵品丹药"
   - from: divine_sense:jiedan
-    to: elixir:bao_pin
+    to: elixirs:bao_pin
     type: enables
     description: "结丹神识可炼制宝品丹药"
   - from: divine_sense:zhuji
-    to: formation:ling_zhen
+    to: formations:ling_zhen
     type: enables
     description: "筑基神识可布置灵阵"
   - from: divine_sense:jiedan
-    to: formation:bao_zhen
+    to: formations:bao_zhen
     type: enables
     description: "结丹神识可布置宝阵"
 
   # ── v1.6: 心魔 ↔ 神识 ──
   - from: divine_sense:yuanying
-    to: heart_demon:all
+    to: heart_demons:all
     type: blocks
     description: "元婴期强大神识更难被心魔攻破"
-  - from: heart_demon:chi_mo
+  - from: heart_demons:chi_mo
     to: divine_sense:yuanying
     type: weakens
     description: "嗔魔爆发可短暂削弱神识强度"
 
   # ── v1.7: 法器 → 器灵 ──
-  - from: artifact:fa_bao
-    to: spirit_weapon:chu_xing
+  - from: artifacts:fa_bao
+    to: spirit_weapons:chu_xing
     type: enables
     description: "法宝级法器可蕴含器灵雏形"
-  - from: artifact:ling_bao
-    to: spirit_weapon:wan_zheng
+  - from: artifacts:ling_bao
+    to: spirit_weapons:wan_zheng
     type: enables
     description: "灵宝级法器蕴含完整器灵，可自主行动"
-  - from: artifact:fa_bao
-    to: spirit_weapon:yi_shi
+  - from: artifacts:fa_bao
+    to: spirit_weapons:yi_shi
     type: requires
     description: "法宝级以上法器需仪式认主"
 
   # ── v1.7: 器灵 ↔ 心魔 ──
-  - from: heart_demon:chi_mo
-    to: spirit_weapon:backlash
+  - from: heart_demons:chi_mo
+    to: spirit_weapons:backlash
     type: triggers
     description: "嗔魔爆发可激发器灵反噬"
-  - from: heart_demon:zhi_nian_mo
-    to: spirit_weapon:backlash
+  - from: heart_demons:zhi_nian_mo
+    to: spirit_weapons:backlash
     type: triggers
     description: "执念魔爆发可激发器灵反噬"
-  - from: spirit_weapon:zi_yuan
-    to: heart_demon:all
+  - from: spirit_weapons:zi_yuan
+    to: heart_demons:all
     type: blocks
     description: "自愿认主的器灵关系稳固，不易受心魔激发反噬"
 
   # ── v1.7: 雷劫 → 器灵成长 ──
-  - from: tribulation:san_jiu_tian_jie
-    to: spirit_weapon:du_jie
+  - from: tribulations:san_jiu_tian_jie
+    to: spirit_weapons:du_jie
     type: enables
     description: "三九天劫可催生器灵雏形"
-  - from: tribulation:liu_jiu_tian_jie
-    to: spirit_weapon:du_jie
+  - from: tribulations:liu_jiu_tian_jie
+    to: spirit_weapons:du_jie
     type: enables
     description: "六九天劫可使器灵跃升至完整"
-  - from: tribulation:jiu_jiu_tian_jie
-    to: spirit_weapon:du_jie
+  - from: tribulations:jiu_jiu_tian_jie
+    to: spirit_weapons:du_jie
     type: enables
     description: "九九天劫可使器灵跃升至大成"
 
   # ── v1.7: 神识 → 器灵沟通 ──
   - from: divine_sense:yuanying
-    to: spirit_weapon:dui_hua
+    to: spirit_weapons:dui_hua
     type: enables
     description: "元婴神识可与完整器灵神识对话"
-  - from: realm:huashen
-    to: spirit_weapon:xin_xi
+  - from: realms:huashen
+    to: spirit_weapons:xin_xi
     type: enables
     description: "化神神识可与大成器灵心意相通"
 
   # ── v1.7: 灵兽 → 契约 ──
   - from: spirit_beast:ling_pin
-    to: contract:soul_contract
+    to: contracts:soul_contract
     type: enables
     description: "灵兽多走灵魂契约（本命契约）"
   - from: spirit_beast:ling_pin
-    to: contract:master_servant
+    to: contracts:master_servant
     type: enables
     description: "被俘灵兽多走主从契约"
   - from: yao_xiu:hua_xing
-    to: contract:equal_contract
+    to: contracts:equal_contract
     type: enables
     description: "化形期妖修与人类修士多走平等契约"
-  - from: org:top_sect
-    to: contract:equal_contract
+  - from: factions:top_sect
+    to: contracts:equal_contract
     type: enables
     description: "宗门之间多走平等盟约"
 
   # ── v1.7: 契约 ↔ 心魔 ──
-  - from: contract:master_servant
-    to: heart_demon:chi_mo
+  - from: contracts:master_servant
+    to: heart_demons:chi_mo
     type: triggers
     description: "主从契约的灵兽易积怨，激发嗔魔"
-  - from: contract:soul_bond
-    to: heart_demon:zhi_nian_mo
+  - from: contracts:soul_bond
+    to: heart_demons:zhi_nian_mo
     type: triggers
     description: "魂契的极端绑定易转化为执念魔"
 
   # ── v1.7: 法器 → 灵兽袋（主从契约载体） ──
-  - from: artifact:ling_shou_dai
-    to: contract:master_servant
+  - from: artifacts:ling_shou_dai
+    to: contracts:master_servant
     type: requires
     description: "灵兽袋内的灵兽自动签主从契约"
 
 # ── v1.7: 魂契 ↔ 器灵认主 ──
-  - from: contract:soul_bond
+  - from: contracts:soul_bond
     to: recognition_methods:ping_deng
     type: parallels
     description: "魂契是契约体系的极致，与器灵体系的平等共生互为镜像"
 
   # ── v2.0: 境界 → 飞升 ──
-  - from: realm:dujie
+  - from: realms:dujie
     to: ascension:ascension_tribulation
     type: requires
     description: "渡劫期→大乘期突破时需渡飞升之劫"
-  - from: realm:dacheng
+  - from: realms:dacheng
     to: ascension:ascension_tribulation
     type: triggers
     description: "大乘期成功渡过飞升之劫方可飞升"
@@ -350,17 +350,17 @@ relations:
     description: "穿越单向壁障后进入仙界"
 
   # ── v2.0: 雷劫 → 飞升之劫 ──
-  - from: tribulation:jiu_jiu_tian_jie_feisheng
+  - from: tribulations:jiu_jiu_tian_jie_feisheng
     to: ascension:ascension_tribulation
     type: equals
     description: "飞升之劫即九九天劫的最后 3 道（28-30 道）"
 
   # ── v2.0: 心魔 → 飞升 ──
-  - from: heart_demon:zhi_nian_mo
+  - from: heart_demons:zhi_nian_mo
     to: ascension:ascension_tribulation
     type: blocks
     description: "执念魔未除者无法成功飞升"
-  - from: heart_demon:chi_mo
+  - from: heart_demons:chi_mo
     to: ascension:ascension_tribulation
     type: blocks
     description: "嗔魔爆发可使飞升失败（道消）"
@@ -376,19 +376,19 @@ relations:
     description: "仙界正统王朝管理所有飞升者"
 
   # ── v2.0: 仙灵石 ↔ 下界灵石 ──
-  - from: spirit_stone:ji_pin
-    to: spirit_stone:xian_pin
+  - from: spirit_stones:ji_pin
+    to: spirit_stones:xian_pin
     type: parallels
     description: "极品灵石是仙灵石的下界对应物"
 
   # ── v2.0: 功法 → 仙界功法 ──
-  - from: technique:tian
+  - from: techniques:tian
     to: techniques:tian_yan_xian_dian
     type: parallels
     description: "下界天级功法是仙界仙级功法的雏形"
 
 # ── v2.0: 下界势力 → 飞升 ──
-  - from: org:top_sect
+  - from: factions:top_sect
     to: immortal_realm:tian_ting
     type: parallels
     description: "下界顶级宗门对应仙界天庭"
@@ -412,7 +412,7 @@ relations:
     description: "雷仙劫需要法则感悟类功法应对"
 
   # ── v2.0: 仙灵石 → 仙界功法 ──
-  - from: spirit_stone:xian_pin
+  - from: spirit_stones:xian_pin
     to: techniques:jiu_zhuan_xuan_xian_jue
     type: enables
     description: "仙灵石是修炼九转玄仙诀的资源基础"
@@ -458,11 +458,11 @@ relations:
     description: "浓郁灵气对应浓郁神气"
 
   # ── v2.3: 神劫 ↔ 心魔 ──
-  - from: heart_demon:chi_mo
+  - from: heart_demons:chi_mo
     to: tribulations:xin_mo_shen_jie
     type: triggers
     description: "嗔魔在心魔神劫中具象化"
-  - from: heart_demon:zhi_nian_mo
+  - from: heart_demons:zhi_nian_mo
     to: tribulations:xin_mo_shen_jie
     type: blocks
     description: "执念魔未除者无法渡心魔神劫"
@@ -614,118 +614,118 @@ relations:
     description: "九霄雷阵在战斗与阵法中通用"
 
   # ── 体系深化 v2: 阵法 ← → 功法 / 符箓 / 神通 ──
-  - from: formation:tian_gang_zhen
-    to: technique:lei_dian_jue
+  - from: formations:tian_gang_zhen
+    to: techniques:lei_dian_jue
     type: enables
     description: "天罡阵引雷，配合雷电诀修炼者威力倍增"
-  - from: formation:ju_ling_zhen
-    to: technique:huang
+  - from: formations:ju_ling_zhen
+    to: techniques:huang
     type: enhances
     description: "聚灵阵提高黄级功法修炼速度"
-  - from: formation:du_jie_zhen
-    to: technique:tian
+  - from: formations:du_jie_zhen
+    to: techniques:tian
     type: complements
     description: "渡劫阵辅助天级功法修士渡劫"
-  - from: technique:jin_gang_gong
-    to: talisman:jin_gang_fu
+  - from: techniques:jin_gang_gong
+    to: talismans:jin_gang_fu
     type: enables
     description: "金刚功修士使用金刚符防御翻倍"
-  - from: technique:lei_dian_jue
-    to: talisman:zi_dian_fu
+  - from: techniques:lei_dian_jue
+    to: talismans:zi_dian_fu
     type: enables
     description: "雷电诀修士激发紫电符威力更强"
-  - from: technique:you_ming_jue
-    to: talisman:jie_zhou_fu
+  - from: techniques:you_ming_jue
+    to: talismans:jie_zhou_fu
     type: complements
     description: "幽冥诀配合解咒符破除诅咒禁制"
-  - from: technique:mo_shen_jue
-    to: formation:mo_huang_zhen
+  - from: techniques:mo_shen_jue
+    to: formations:mo_huang_zhen
     type: enables
     description: "魔神诀修炼者可布魔皇阵"
-  - from: divine_power:fa_tian_xiang_di
-    to: technique:wei_wo_du_zun_gong
+  - from: divine_powers:fa_tian_xiang_di
+    to: techniques:wei_wo_du_zun_gong
     type: correlates
     description: "唯我独尊功大成者多领悟法天象地"
-  - from: divine_power:ling_yu_zhan_kai
-    to: technique:xian_jue
+  - from: divine_powers:ling_yu_zhan_kai
+    to: techniques:xian_jue
     type: enables
     description: "仙诀修炼者可领悟领域展开"
-  - from: divine_power:lun_hui_zhi_yan
-    to: technique:you_ming_jue
+  - from: divine_powers:lun_hui_zhi_yan
+    to: techniques:you_ming_jue
     type: enables
     description: "幽冥诀大成者可开轮回之眼"
-  - from: divine_power:xian_di_wei_ya
-    to: technique:xian_jue
+  - from: divine_powers:xian_di_wei_ya
+    to: techniques:xian_jue
     type: requires
     description: "仙诀圆满方可施展仙帝威压"
-  - from: technique:tai_yi_jue
-    to: divine_power:shi_jian_jing_zhi
+  - from: techniques:tai_yi_jue
+    to: divine_powers:shi_jian_jing_zhi
     type: enables
     description: "太一诀至高境界可触及时间法则"
-  - from: talisman:wan_fu_fu
-    to: formation:zhou_tian_xing_dou_zhen
+  - from: talismans:wan_fu_fu
+    to: formations:zhou_tian_xing_dou_zhen
     type: parallels
     description: "万符符如同符箓版的周天星斗阵"
-  - from: talisman:du_jie_fu
-    to: formation:du_jie_zhen
+  - from: talismans:du_jie_fu
+    to: formations:du_jie_zhen
     type: parallels
     description: "渡劫符与渡劫阵异曲同工"
 
   # ── 体系深化 v3: 灵气/灵根/心魔/雷劫/灵石/妖修/势力/契约/神识 ──
-  - from: spirit_root:jian_gen
-    to: technique:jian_xiu_jue
+  - from: spirit_roots:jian_gen
+    to: techniques:jian_xiu_jue
     type: enables
     description: "剑灵根与剑修诀完美契合"
-  - from: spirit_root:ji_yang_gen
-    to: tribulation:san_jiu_tian_jie
+  - from: spirit_roots:ji_yang_gen
+    to: tribulations:san_jiu_tian_jie
     type: blocks
     description: "极阳灵根渡三九天劫时为雷火所克"
-  - from: heart_demon:wu_mo
-    to: technique:hun_yuan_gong
+  - from: heart_demons:wu_mo
+    to: techniques:hun_yuan_gong
     type: correlates
     description: "混元功修炼者最易受悟魔侵袭"
-  - from: heart_demon:ai_mo
-    to: contract:yin_yang_contract
+  - from: heart_demons:ai_mo
+    to: contracts:yin_yang_contract
     type: enables
     description: "阴阳契约可助修士抵御爱魔"
-  - from: tribulation:hua_shou
+  - from: tribulations:hua_shou
     to: yao_xiu:hua_xing
     type: requires
     description: "妖兽化形期必须经化兽劫"
-  - from: tribulation:xian_jie_tian_jie
-    to: spirit_stone:xian_pin
+  - from: tribulations:xian_jie_tian_jie
+    to: spirit_stones:xian_pin
     type: correlates
     description: "渡仙界天劫需仙品灵石辅助"
-  - from: spirit_stone:long
+  - from: spirit_stones:long
     to: examples:tian_long_shan
     type: enables
     description: "天龙山以龙属性灵石为核心"
   - from: examples:huo_yan_dong
-    to: spirit_stone:tian_lei
+    to: spirit_stones:tian_lei
     type: specializes_in
     description: "火焰洞引天雷属性灵石为火源"
   - from: examples:tian_shan_school
-    to: spirit_root:bian_yi_ling_gen
+    to: spirit_roots:bian_yi_ling_gen
     type: specializes_in
     description: "天山派专收变异灵根弟子"
-  - from: contract:blood_contract
-    to: heart_demon:yu_mo
+  - from: contracts:blood_contract
+    to: heart_demons:yu_mo
     type: correlates
     description: "血契签订者易生欲魔"
-  - from: contract:tian_dao_contract
-    to: technique:tai_yi_jue
+  - from: contracts:tian_dao_contract
+    to: techniques:tai_yi_jue
     type: enables
     description: "太一诀修炼者方能签订天道契约"
   - from: divine_sense:huashen
-    to: tribulation:qiong_gong_tian_jie
+    to: tribulations:qiong_gong_tian_jie
     type: requires
     description: "化神神识是穷攻天劫的前提"
   - from: divine_sense:yuanying
-    to: contract:soul_bond
+    to: contracts:soul_bond
     type: enables
     description: "元婴神识方能承载魂契之重"
-  - from: contract:lian_hun_contract
-    to: heart_demon:wu_mo
+  - from: contracts:lian_hun_contract
+    to: heart_demons:wu_mo
     type: blocks
     description: "炼魂契令悟魔难以侵扰"
 
@@ -754,11 +754,11 @@ relations:
     to: ascension:join_empire
     type: enables
     description: "鬼修飞升者归入冥界仙朝"
-  - from: spirit_weapon:chu_ling
-    to: spirit_weapon:zi_yuan
+  - from: spirit_weapons:chu_ling
+    to: spirit_weapons:zi_yuan
     type: enables
     description: "初灵可经自愿认主而觉醒"
-  - from: spirit_weapon:wu_ji
+  - from: spirit_weapons:wu_ji
     to: realms:xian_di
     type: requires
     description: "无极器灵需仙帝期方可驾驭"
@@ -783,105 +783,105 @@ relations:
     type: parallels
     description: "邪修飞升有专属通道"
   - from: realms:tian_xian
-    to: spirit_weapon:dao_ru
+    to: spirit_weapons:dao_ru
     type: enables
     description: "天仙期可驾驭道入级器灵"
 
   # ── v2.9 关系图谱补全（50+ 条） ──
 
   # 灵根 ↔ 妖兽
-  - from: spirit_root:jian_gen
-    to: technique:jian_xiu_jue
+  - from: spirit_roots:jian_gen
+    to: techniques:jian_xiu_jue
     type: enables
     description: "剑灵根完美匹配剑修诀"
-  - from: spirit_root:zhao_yao_gen
+  - from: spirit_roots:zhao_yao_gen
     to: examples:wan_yao_lin
     type: blocks
     description: "照妖灵根天然克制万妖林妖修"
 
   # 灵根 ↔ 妖修
-  - from: spirit_root:ming_gen
+  - from: spirit_roots:ming_gen
     to: yao_xiu:di_yao
     type: parallels
     description: "冥灵根与地妖期气息相通"
 
   # 心魔 ↔ 契约
-  - from: heart_demon:e_mo
-    to: contract:mo_shi_contract
+  - from: heart_demons:e_mo
+    to: contracts:mo_shi_contract
     type: triggers
     description: "恶魔触发魔噬契约反噬"
-  - from: heart_demon:sheng_si_mo
-    to: contract:yin_yang_contract
+  - from: heart_demons:sheng_si_mo
+    to: contracts:yin_yang_contract
     type: blocks
     description: "生死魔可破阴阳契约"
-  - from: heart_demon:qie_mo
-    to: contract:soul_bond
+  - from: heart_demons:qie_mo
+    to: contracts:soul_bond
     type: blocks
     description: "怯魔导致魂契中途瓦解"
-  - from: heart_demon:wu_mo
-    to: contract:tian_dao_contract
+  - from: heart_demons:wu_mo
+    to: contracts:tian_dao_contract
     type: parallels
     description: "悟魔与天道契约同源于道"
-  - from: heart_demon:ai_guo_mo
-    to: contract:equal_contract
+  - from: heart_demons:ai_guo_mo
+    to: contracts:equal_contract
     type: enables
     description: "爱国魔者多以平等契约维系信义"
 
   # 心魔 ↔ 雷劫
-  - from: heart_demon:tan_mo
-    to: tribulation:san_jiu_tian_jie
+  - from: heart_demons:tan_mo
+    to: tribulations:san_jiu_tian_jie
     type: triggers
     description: "贪魔在结丹期三九天劫时高发"
-  - from: heart_demon:yu_mo
-    to: tribulation:xin_mie_tian_jie
+  - from: heart_demons:yu_mo
+    to: tribulations:xin_mie_tian_jie
     type: parallels
     description: "欲魔与心灭天劫同源"
-  - from: heart_demon:chi_mo
-    to: tribulation:shi_jian_tian_jie
+  - from: heart_demons:chi_mo
+    to: tribulations:shi_jian_tian_jie
     type: parallels
     description: "痴魔与时间天劫相通"
-  - from: heart_demon:ai_mo
+  - from: heart_demons:ai_mo
     to: tribulations:huo_shen_jie
     type: parallels
     description: "爱魔与火神劫同源于欲"
-  - from: heart_demon:e_mo
+  - from: heart_demons:e_mo
     to: tribulations:fu_he_shen_jie
     type: parallels
     description: "恶魔与复合神劫同源"
 
   # 灵根 ↔ 雷劫
-  - from: spirit_root:ji_yang_gen
+  - from: spirit_roots:ji_yang_gen
     to: tribulations:lei_shen_jie
     type: blocks
     description: "极阳灵根过雷神劫时为雷所克"
-  - from: spirit_root:ji_yin_gen
+  - from: spirit_roots:ji_yin_gen
     to: tribulations:huo_shen_jie
     type: blocks
     description: "极阴灵根渡火神劫时为火所克"
-  - from: spirit_root:yu_lei_gen
+  - from: spirit_roots:yu_lei_gen
     to: immortal_tribulations:tian_lei_xian_jie
     type: enables
     description: "玉雷灵根修士渡天雷仙劫有加成"
-  - from: spirit_root:han_bing_gen
+  - from: spirit_roots:han_bing_gen
     to: immortal_tribulations:jian_jin_xian_jie
     type: parallels
     description: "寒冰灵根与剑禁仙劫同寒"
 
   # 妖兽 ↔ 势力
   - from: examples:tian_long_shan
-    to: org:top_sect
+    to: factions:top_sect
     type: enables
     description: "天龙山是顶级妖修势力"
   - from: examples:qi_lin_ting
-    to: org:da_sect
+    to: factions:da_sect
     type: enables
     description: "麒麟亭是大型妖修势力"
   - from: examples:feng_huang_ling
-    to: org:da_sect
+    to: factions:da_sect
     type: enables
     description: "凤凰岭是大型妖修势力"
   - from: examples:wan_yao_lin
-    to: org:da_sect
+    to: factions:da_sect
     type: enables
     description: "万妖林是大型妖修势力"
 
@@ -900,23 +900,23 @@ relations:
     description: "金翅大鹏是天生天妖"
 
   # 灵石 ↔ 灵脉
-  - from: spirit_stone:long
+  - from: spirit_stones:long
     to: aether:long_xue_lingmai
     type: parallels
     description: "龙属性灵石与龙穴灵脉共生"
-  - from: spirit_stone:shen
+  - from: spirit_stones:shen
     to: aether:shen_xue_lingmai
     type: parallels
     description: "神属性灵石产自神穴灵脉"
-  - from: spirit_stone:mo
+  - from: spirit_stones:mo
     to: aether:mo_xue_lingmai
     type: parallels
     description: "魔属性灵石产自魔穴灵脉"
-  - from: spirit_stone:ming
+  - from: spirit_stones:ming
     to: aether:ming_xue_lingmai
     type: parallels
     description: "冥属性灵石产自冥穴灵脉"
-  - from: spirit_stone:tian_lei
+  - from: spirit_stones:tian_lei
     to: aether:chao_ji_lingmai
     type: enables
     description: "天雷灵石在超级灵脉处富集"
@@ -940,156 +940,156 @@ relations:
     description: "火焰洞占中型灵脉"
 
   # 神通 ↔ 境界
-  - from: divine_power:fa_tian_xiang_di
+  - from: divine_powers:fa_tian_xiang_di
     to: realms:heti
     type: requires
     description: "法天象地需合体期以上"
-  - from: divine_power:ling_yu_zhan_kai
+  - from: divine_powers:ling_yu_zhan_kai
     to: realms:dacheng
     type: requires
     description: "领域展开需大乘期"
-  - from: divine_power:shi_jian_jing_zhi
+  - from: divine_powers:shi_jian_jing_zhi
     to: realms:xian_di
     type: requires
     description: "时间静止需仙帝期"
-  - from: divine_power:lun_hui_zhi_yan
+  - from: divine_powers:lun_hui_zhi_yan
     to: realms:heti
     type: requires
     description: "轮回之眼需合体期"
-  - from: divine_power:shen_wang_li_zhi
+  - from: divine_powers:shen_wang_li_zhi
     to: realms:shen_di
     type: requires
     description: "神王领域需神帝期"
 
   # 神通 ↔ 功法
-  - from: divine_power:san_tou_liu_bi
-    to: technique:tian_di_jue
+  - from: divine_powers:san_tou_liu_bi
+    to: techniques:tian_di_jue
     type: enables
     description: "天地诀修炼者易修三头六臂"
-  - from: divine_power:kong_jian_yi_dong
-    to: technique:lei_dian_jue
+  - from: divine_powers:kong_jian_yi_dong
+    to: techniques:lei_dian_jue
     type: enables
     description: "空间移动需雷电诀根基"
-  - from: divine_power:bu_xiu_shen
-    to: technique:hun_yuan_gong
+  - from: divine_powers:bu_xiu_shen
+    to: techniques:hun_yuan_gong
     type: enables
     description: "不朽身需混元功基础"
-  - from: divine_power:qian_li_chuan_yin
-    to: technique:men_ren_gong
+  - from: divine_powers:qian_li_chuan_yin
+    to: techniques:men_ren_gong
     type: enables
     description: "千里传音是门人功进阶"
 
   # 功法 ↔ 阵法
-  - from: technique:cang_lang_jue
-    to: formation:wu_xing_sheng_dun_zhen
+  - from: techniques:cang_lang_jue
+    to: formations:wu_xing_sheng_dun_zhen
     type: enables
     description: "沧浪诀可布五行遁阵"
-  - from: technique:jin_gang_gong
-    to: formation:zhou_tian_xing_dou_zhen
+  - from: techniques:jin_gang_gong
+    to: formations:zhou_tian_xing_dou_zhen
     type: enables
     description: "金刚功可布周天星斗阵"
-  - from: technique:hun_yuan_gong
-    to: formation:ju_ling_zhen
+  - from: techniques:hun_yuan_gong
+    to: formations:ju_ling_zhen
     type: enables
     description: "混元功可布聚灵阵"
 
   # 功法 ↔ 符箓
-  - from: technique:tian_di_jue
-    to: talisman:jie_zhou_fu
+  - from: techniques:tian_di_jue
+    to: talismans:jie_zhou_fu
     type: enables
     description: "天地诀可激发解咒符"
-  - from: technique:lei_dian_jue
-    to: talisman:zi_dian_fu
+  - from: techniques:lei_dian_jue
+    to: talismans:zi_dian_fu
     type: enables
     description: "雷电诀配合紫电符"
-  - from: technique:you_ming_jue
-    to: talisman:yao_li_fu
+  - from: techniques:you_ming_jue
+    to: talismans:yao_li_fu
     type: enables
     description: "幽冥诀可画妖力符"
 
   # 应对心魔丹药 ↔ 心魔
   - from: counter_elixirs:ji_kong_dan
-    to: heart_demon:all
+    to: heart_demons:all
     type: blocks
     description: "极空丹克制所有心魔"
   - from: counter_elixirs:wu_ruo_dan
-    to: heart_demon:wu_mo
+    to: heart_demons:wu_mo
     type: blocks
     description: "悟若丹专门治悟魔"
   - from: counter_elixirs:duan_yu_dan
-    to: heart_demon:yu_mo
+    to: heart_demons:yu_mo
     type: blocks
     description: "断欲丹克制欲魔"
 
   # 丹药 ↔ 雷劫
-  - from: elixir:du_e_dan
-    to: tribulation:san_jiu_tian_jie
+  - from: elixirs:du_e_dan
+    to: tribulations:san_jiu_tian_jie
     type: blocks
     description: "渡厄丹可削弱三九天劫"
-  - from: elixir:hu_shen_dan
-    to: tribulation:xin_mie_tian_jie
+  - from: elixirs:hu_shen_dan
+    to: tribulations:xin_mie_tian_jie
     type: blocks
     description: "护神丹护神魂渡心灭劫"
 
   # ── v2.10 秘境体系（24 体系） ──
 
   # 秘境 ↔ 境界
-  - from: realm:lianqi
+  - from: realms:lianqi
     to: secret_realm:fan_pin
     type: enables
     description: "炼气期可入凡品秘境"
-  - from: realm:zhuji
+  - from: realms:zhuji
     to: secret_realm:ling_pin
     type: enables
     description: "筑基期可入灵品秘境"
-  - from: realm:jiedan
+  - from: realms:jiedan
     to: secret_realm:bao_pin
     type: enables
     description: "结丹期可入宝品秘境"
-  - from: realm:yuanying
+  - from: realms:yuanying
     to: secret_realm:xian_pin
     type: enables
     description: "元婴期可入仙品秘境"
-  - from: realm:dacheng
+  - from: realms:dacheng
     to: secret_realm:shen_pin
     type: enables
     description: "大乘期可入神品秘境"
 
   # 秘境 ↔ 丹药
   - from: secret_realm:ling_yao_dao
-    to: elixir:jiu_zhuan_huan_hun_dan
+    to: elixirs:jiu_zhuan_huan_hun_dan
     type: enables
     description: "灵药岛产九幽还魂草炼制九转还魂丹"
   - from: secret_realm:xian_cao_pu
-    to: elixir:cui_xian_dan
+    to: elixirs:cui_xian_dan
     type: enables
     description: "仙草圃产淬仙丹原料"
 
   # 秘境 ↔ 法器
   - from: secret_realm:xuan_tie_kuang_mai
-    to: artifact:wu_xing_huan
+    to: artifacts:wu_xing_huan
     type: enables
     description: "玄铁矿脉可炼五行环"
   - from: secret_realm:wan_nian_han_tie_kuang
-    to: artifact:zi_wei_jian
+    to: artifacts:zi_wei_jian
     type: enables
     description: "万年寒铁炼紫薇剑"
   - from: secret_realm:xing_chen_tie_kuang
-    to: artifact:hao_tian_ta
+    to: artifacts:hao_tian_ta
     type: enables
     description: "星辰铁炼昊天塔"
 
   # 秘境 ↔ 传承
   - from: secret_realm:lei_shi_zhi_mu
-    to: technique:lei_dian_jue
+    to: techniques:lei_dian_jue
     type: enables
     description: "雷师之墓传雷电诀"
   - from: secret_realm:luo_yun_zong_zu_ting
-    to: technique:chang_sheng_jue
+    to: techniques:chang_sheng_jue
     type: enables
     description: "落云宗祖庭传长生诀"
   - from: secret_realm:san_xiu_yi_ji
-    to: technique:hun_yuan_gong
+    to: techniques:hun_yuan_gong
     type: enables
     description: "散修遗迹传混元功"
 
@@ -1129,37 +1129,37 @@ relations:
 
   # 天材地宝 ↔ 丹药
   - from: tian_cai:jiu_you_huan_hun_cao
-    to: elixir:jiu_zhuan_huan_hun_dan
+    to: elixirs:jiu_zhuan_huan_hun_dan
     type: enables
     description: "九幽还魂草炼九转还魂丹"
   - from: tian_cai:qian_nian_xue_shen
-    to: elixir:jiedan_dan
+    to: elixirs:jiedan_dan
     type: enables
     description: "千年血参炼结丹丹"
   - from: tian_cai:qian_nian_ling_zhi
-    to: elixir:peiyu_dan
+    to: elixirs:peiyu_dan
     type: enables
     description: "千年灵芝炼培婴丹"
   - from: tian_cai:wan_nian_tai_sui
-    to: elixir:hu_shen_dan
+    to: elixirs:hu_shen_dan
     type: enables
     description: "万年太岁炼护神丹"
 
   # 天材地宝 ↔ 法器
   - from: tian_cai:xuan_tie
-    to: artifact:qing_feng_jian
+    to: artifacts:qing_feng_jian
     type: enables
     description: "玄铁炼青锋剑"
   - from: tian_cai:wan_nian_han_tie
-    to: artifact:zi_wei_jian
+    to: artifacts:zi_wei_jian
     type: enables
     description: "万年寒铁炼紫薇剑"
   - from: tian_cai:xing_chen_tie
-    to: artifact:hao_tian_ta
+    to: artifacts:hao_tian_ta
     type: enables
     description: "星辰铁炼昊天塔"
   - from: tian_cai:jiu_tian_xuan_tie
-    to: artifact:qi_xing_jian
+    to: artifacts:qi_xing_jian
     type: enables
     description: "九天玄铁炼七星剑"
 
@@ -1197,15 +1197,15 @@ relations:
 
   # 天材地宝 ↔ 境界
   - from: tian_cai:bai_nian
-    to: realm:zhuji
+    to: realms:zhuji
     type: enables
     description: "百年灵材适合筑基期"
   - from: tian_cai:qian_nian
-    to: realm:jiedan
+    to: realms:jiedan
     type: enables
     description: "千年灵材适合结丹期"
   - from: tian_cai:wan_nian
-    to: realm:huashen
+    to: realms:huashen
     type: enables
     description: "万年灵材适合化神期"
 
@@ -1227,7 +1227,7 @@ relations:
 
   # 天材地宝 ↔ 心魔
   - from: tian_cai:wan_nian_tai_sui
-    to: heart_demon:sheng_si_mo
+    to: heart_demons:sheng_si_mo
     type: blocks
     description: "万年太岁延寿以避生死魔"
 
@@ -1235,19 +1235,19 @@ relations:
 
   # 宗门 ↔ 境界
   - from: zong_men:luo_yun_zong
-    to: realm:huashen
+    to: realms:huashen
     type: parallels
     description: "落云宗最高化神期坐镇"
   - from: zong_men:tai_yi_gong
-    to: realm:huashen
+    to: realms:huashen
     type: parallels
     description: "太一宫化神期坐镇"
   - from: zong_men:han_yan_zong
-    to: realm:yuanying
+    to: realms:yuanying
     type: parallels
     description: "寒焰宗元婴期坐镇"
   - from: zong_men:ji_yin_si
-    to: realm:yuanying
+    to: realms:yuanying
     type: parallels
     description: "极阴寺元婴期坐镇"
 
@@ -1271,15 +1271,15 @@ relations:
 
   # 宗门 ↔ 功法
   - from: zong_men:luo_yun_zong
-    to: technique:tian
+    to: techniques:tian
     type: enables
     description: "落云宗传天级功法"
   - from: zong_men:qing_lian_jian_zong
-    to: technique:jian_xiu_jue
+    to: techniques:jian_xiu_jue
     type: enables
     description: "青莲剑宗传剑修诀"
   - from: zong_men:han_yan_zong
-    to: technique:cang_lang_jue
+    to: techniques:cang_lang_jue
     type: enables
     description: "寒焰宗传沧浪诀（冰水）"
 
@@ -1303,11 +1303,11 @@ relations:
 
   # 宗门 ↔ 心魔
   - from: zong_men:mo_jiao
-    to: heart_demon:e_mo
+    to: heart_demons:e_mo
     type: triggers
     description: "魔教弟子易生恶魔"
   - from: zong_men:ji_yin_si
-    to: heart_demon:chi_mo
+    to: heart_demons:chi_mo
     type: parallels
     description: "极阴寺与痴魔同源"
 
@@ -1327,17 +1327,17 @@ relations:
 
   # 宗门 ↔ 灵根
   - from: zong_men:tian_shan_school
-    to: spirit_root:bian_yi_ling_gen
+    to: spirit_roots:bian_yi_ling_gen
     type: specializes_in
     description: "天山派专收变异灵根"
   - from: zong_men:qing_lian_jian_zong
-    to: spirit_root:jian_gen
+    to: spirit_roots:jian_gen
     type: specializes_in
     description: "青莲剑宗专收剑灵根"
 
   # 宗门 ↔ 阵法
   - from: zong_men:luo_yun_zong
-    to: formation:shi_fang_jin_gang_zhen
+    to: formations:shi_fang_jin_gang_zhen
     type: enables
     description: "落云宗布十方金刚阵"
 
@@ -1345,21 +1345,21 @@ relations:
 
   # 因果 ↔ 心魔
   - from: karmic_obsructions:xiu_xing_zhang
-    to: heart_demon:chi_mo
+    to: heart_demons:chi_mo
     type: triggers
     description: "修行障引发痴魔"
   - from: merit_levels:da_gong_de
-    to: heart_demon:wu_mo
+    to: heart_demons:wu_mo
     type: blocks
     description: "大功德者不受悟魔"
   - from: karmic_obsructions:zhi_hui_zhang
-    to: heart_demon:qie_mo
+    to: heart_demons:qie_mo
     type: parallels
     description: "智慧障与怯魔同源"
 
   # 因果 ↔ 雷劫
   - from: karma_levels:da_e_ye
-    to: tribulation:san_jiu_tian_jie
+    to: tribulations:san_jiu_tian_jie
     type: triggers
     description: "大恶业加重三九天劫"
   - from: merit_levels:yuan_man_gong_de
@@ -1393,33 +1393,33 @@ relations:
 
   # 因果 ↔ 神通
   - from: divine_powers:yin_guo_zhi_yan
-    to: divine_power:su_wei_zhi_gan
+    to: divine_powers:su_wei_zhi_gan
     type: parallels
     description: "因果之眼与宿位感知同属感知"
   - from: divine_powers:gong_de_jin_shen
-    to: divine_power:bu_xiu_shen
+    to: divine_powers:bu_xiu_shen
     type: parallels
     description: "功德金身与不朽身同属防御"
 
   # 因果 ↔ 功法
   - from: solutions:chan_hui
-    to: technique:wei_wo_du_zun_gong
+    to: techniques:wei_wo_du_zun_gong
     type: parallels
     description: "忏悔与唯我独尊功同属内心修炼"
   - from: solutions:chi_zhou
-    to: technique:cang_lang_jue
+    to: techniques:cang_lang_jue
     type: parallels
     description: "持咒与沧浪诀同属心法"
 
   # 因果 ↔ 丹药
   - from: merit_levels:da_gong_de
-    to: elixir:qing_xin_dan
+    to: elixirs:qing_xin_dan
     type: parallels
     description: "大功德者配清心丹"
 
   # 因果 ↔ 灵根
   - from: solutions:xing_shan
-    to: spirit_root:bian_yi_ling_gen
+    to: spirit_roots:bian_yi_ling_gen
     type: parallels
     description: "行善与变异灵根同属稀有"
 
@@ -1451,25 +1451,25 @@ relations:
 
   # 时空 ↔ 神通
   - from: time_powers:cha_na_yong_heng
-    to: divine_power:shi_jian_jing_zhi
+    to: divine_powers:shi_jian_jing_zhi
     type: parallels
     description: "刹那永恒与时间静止同源"
   - from: space_powers:kong_jian_shun_yi
-    to: divine_power:kong_jian_yi_dong
+    to: divine_powers:kong_jian_yi_dong
     type: parallels
     description: "空间瞬移与空间移动同源"
   - from: space_powers:kong_jian_min_jie
-    to: divine_power:ling_yu_zhan_kai
+    to: divine_powers:ling_yu_zhan_kai
     type: parallels
     description: "空间湮灭与领域展开同源"
 
   # 时空 ↔ 法器
   - from: space_artifacts:kong_jian_shi
-    to: artifact:hao_tian_ta
+    to: artifacts:hao_tian_ta
     type: enables
     description: "空间石炼昊天塔"
   - from: time_artifacts:shi_guang_sha
-    to: artifact:qi_xing_jian
+    to: artifacts:qi_xing_jian
     type: enables
     description: "时光之沙炼七星剑"
 
@@ -1529,21 +1529,21 @@ relations:
 
   # 妖修 ↔ 灵根
   - from: forms:feng_xing
-    to: spirit_root:jian_gen
+    to: spirit_roots:jian_gen
     type: parallels
     description: "凤形与剑灵根同源"
 
   # 心魔 ↔ 境界
   - from: types:shi_mo
-    to: realm:zhuji
+    to: realms:zhuji
     type: parallels
     description: "失魔触发于筑基期"
   - from: types:quan_mo
-    to: realm:dujie
+    to: realms:dujie
     type: parallels
     description: "权魔触发于渡劫期"
   - from: types:sheng_mo_x
-    to: realm:dacheng
+    to: realms:dacheng
     type: parallels
     description: "生灭魔触发于大乘期"
 
@@ -1553,17 +1553,17 @@ relations:
     type: blocks
     description: "名魔配悟若丹"
   - from: types:li_mo
-    to: elixir:qing_xin_dan
+    to: elixirs:qing_xin_dan
     type: blocks
     description: "利魔配清心丹"
 
   # 法器 ↔ 灵根
   - from: artifacts:yu_que_qiang
-    to: spirit_root:huo
+    to: spirit_roots:huo
     type: parallels
     description: "御雀枪配火灵根"
   - from: artifacts:qing_long_ren
-    to: spirit_root:mu
+    to: spirit_roots:mu
     type: parallels
     description: "青龙刃配木灵根"
 
@@ -1601,6 +1601,6 @@ relations:
 
   # 灵石属性 ↔ 神通
   - from: attributes:long
-    to: divine_power:fa_tian_xiang_di
+    to: divine_powers:fa_tian_xiang_di
     type: parallels
     description: "龙灵与法天象地同源"

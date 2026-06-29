@@ -176,23 +176,63 @@ def check_index_consistency():
 # 主入口
 # ────────────────────────────────────────────────────────
 
+def audit_relations():
+    """审计 data/relations.yaml 中 from/to 引用的 id 是否真实存在"""
+    import yaml
+    from collections import defaultdict
+
+    ids_by_system = defaultdict(set)
+    for f in sorted((ROOT / "data").glob("*.yaml")):
+        sys = f.stem
+        data = yaml.safe_load(f.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            continue
+        for section, content in data.items():
+            if isinstance(content, list):
+                for item in content:
+                    if isinstance(item, dict) and "id" in item:
+                        ids_by_system[sys].add(item["id"])
+
+    rels_path = ROOT / "data" / "relations.yaml"
+    if not rels_path.exists():
+        return
+    rels = yaml.safe_load(rels_path.read_text(encoding="utf-8")).get("relations", [])
+    broken = []
+    for r in rels:
+        for side in ("from", "to"):
+            s = r.get(side, "")
+            if ":" not in s:
+                continue
+            sys_, id_ = s.split(":", 1)
+            if id_ not in ids_by_system.get(sys_, set()):
+                broken.append((r.get("type", "?"), side, s))
+    if broken:
+        warn("data/relations.yaml", f"存在 {len(broken)} 条失效端点引用（详见 docs/RELATIONS_AUDIT.md）")
+    else:
+        print(f"  ✓ data/relations.yaml：{len(rels)} 条关系均有效")
+
+
+
 def main():
     print("🔍 开始校验修仙体系知识库...\n")
 
-    print("  [1/5] .md 文件结构...")
+    print("  [1/6] .md 文件结构...")
     check_md_structure()
 
-    print("  [2/5] .md 链接完整性...")
+    print("  [2/6] .md 链接完整性...")
     check_md_links()
 
-    print("  [3/5] YAML 解析...")
+    print("  [3/6] YAML 解析...")
     check_yaml()
 
-    print("  [4/5] Mermaid 代码块...")
+    print("  [4/6] Mermaid 代码块...")
     check_mermaid()
 
-    print("  [5/5] 索引一致性...")
+    print("  [5/6] 索引一致性...")
     check_index_consistency()
+
+    print("  [6/6] relations.yaml 端点校验...")
+    audit_relations()
 
     print("\n" + "─" * 50)
     if WARNINGS:

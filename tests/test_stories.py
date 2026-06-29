@@ -126,33 +126,14 @@ def test_v32_demo_headless_path():
 
 
 def test_v32_demo_yaml_ids_resolved():
-    """v32_demo 中所有 refs 引用的 .md 文件内 id 必须在对应 yaml 中存在"""
-    import yaml as pyyaml
-
+    """v32_demo 中所有 refs 引用的 .md 文件必须存在"""
     story_path = STORIES_DIR / "v32_demo.md"
     story = Story.from_file(story_path)
 
-    # 收集每个 system 的 id 索引
-    ids_by_system = {}
-    for f in sorted(DATA_DIR.glob("*.yaml")):
-        sys_name = f.stem
-        data = pyyaml.safe_load(f.read_text(encoding="utf-8"))
-        ids = set()
-        if isinstance(data, dict):
-            for section, content in data.items():
-                if isinstance(content, list):
-                    for item in content:
-                        if isinstance(item, dict) and "id" in item:
-                            ids.add(item["id"])
-        ids_by_system[sys_name] = ids
-
-    # 检查每个 ref（如 "灵根体系/灵根.md"）
     all_node_refs = []
     for nid, node in story.nodes.items():
         all_node_refs.extend(node.refs)
 
-    # 因为 v32_demo 引用的 ref 是 .md 文档（不是 yaml id），
-    # 这里仅做"路径在 docs_src 镜像或根目录存在" 检查
     missing = [
         ref for ref in all_node_refs
         if not (ROOT / ref).exists()
@@ -161,4 +142,31 @@ def test_v32_demo_yaml_ids_resolved():
     assert not missing, (
         f"v32_demo refs 不存在的文件 ({len(missing)} 处)：\n  " +
         "\n  ".join(missing[:5])
+    )
+
+
+@pytest.mark.parametrize("story_name", ["v31_demo", "v32_demo"])
+def test_story_all_endings_reachable(story_name):
+    """从 start_node 可达所有 ending（BFS 完整性）"""
+    from collections import deque
+
+    story = Story.from_file(STORIES_DIR / f"{story_name}.md")
+    start = story.start_node
+    endings = [nid for nid, n in story.nodes.items() if n.type == "ending"]
+
+    # BFS 找所有 reachable 节点
+    reachable = {start}
+    queue = deque([start])
+    while queue:
+        c = queue.popleft()
+        for choice in story.nodes[c].choices:
+            t = choice.get("goto")
+            if t and t in story.nodes and t not in reachable:
+                reachable.add(t)
+                queue.append(t)
+
+    unreachable = [e for e in endings if e not in reachable]
+    assert not unreachable, (
+        f"{story_name}.md 有 ending 节点不可达：{unreachable}\n"
+        f"（从 {start} 出发无法走到）"
     )

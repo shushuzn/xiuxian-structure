@@ -130,8 +130,8 @@ next:
   - label: 暗中向【寒焰宗】求借灵丹（剧情延伸）
     goto: ying_lei_jie_jie_dan
     narrate: 你密会寒焰宗长老借得灵丹，重回正轨。
-  - label: 作弊 — 借主 (走剧本外流程)
-    goto: 开局
+  - label: 作弊 — 借主 (走剧本外流程，浪费一世)
+    goto: 结局_散修归宿
     flag.cheat: true
 
 refs:
@@ -319,8 +319,8 @@ data:
 next:
   - label: 接受仙界招引，飞升前往 **tian_ting**
     goto: feisheng_xianjie
-  - label: 留在下界统领【落云宗】分支
-    goto: 开局
+  - label: 留在下界统领【落云宗】分支（终成圣修圆满）
+    goto: 结局_圣修圆满
     flag.stay: true
 
 refs:

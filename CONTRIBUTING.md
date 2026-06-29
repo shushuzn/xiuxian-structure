@@ -2,6 +2,40 @@
 
 欢迎为 `xiuxian-structure` 添砖加瓦！本指南说明如何规范地提交修改。
 
+## 本地开发环境
+
+```bash
+# 克隆 + 装依赖（含 dev 工具）
+git clone https://github.com/shushuzn/xiuxian-structure
+cd xiuxian-structure
+pip install -r requirements.txt -r requirements-dev.txt
+
+# Windows 用户注意：见"Windows 用户常见错误"小节
+```
+
+### 启用 pre-commit hooks（推荐）
+
+仓库根目录有 `.pre-commit-config.yaml`，启用后 **每次 `git commit` 都会自动跑**：
+
+```bash
+pip install pre-commit
+pre-commit install
+
+# 测试一次（不实际 commit）
+pre-commit run --all-files
+```
+
+`pre-commit` 集成：
+- **ruff check**（语法 / 风格 + 自动修复）
+- **scripts/validate.py**（7 步知识库完整性校验）
+- **pytest tests/**（300+ 单元测试）
+
+如果 hook 失败，commit 会被拦截，开发者必须先修问题。
+
+## Windows 用户常见错误
+
+在 Windows 控制台默认 GBK 编码下，**所有 python 调用必须显式设 `PYTHONIOENCODING=utf-8`**，否则会触发 `UnicodeDecodeError: 'gbk' codec`。
+
 ## 目录约定
 
 - `境界体系/` `灵根体系/` `天地灵气/` `功法体系/` `丹药体系/` `法器体系/` —— 六大核心体系

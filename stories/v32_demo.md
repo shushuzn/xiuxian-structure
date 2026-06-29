@@ -127,8 +127,9 @@ data:
 next:
   - label: 买青锋剑 (500)，稳扎稳打
     goto: ying_lei_jie_jie_dan
-  - label: 暗中向【寒焰宗】求借灵丹
-    goto: han_yan_zong_qiu_jie
+  - label: 暗中向【寒焰宗】求借灵丹（剧情延伸）
+    goto: ying_lei_jie_jie_dan
+    narrate: 你密会寒焰宗长老借得灵丹，重回正轨。
   - label: 作弊 — 借主 (走剧本外流程)
     goto: 开局
     flag.cheat: true
@@ -350,7 +351,7 @@ refs:
   - 法器体系/雷师印.md
   - 功法体系/雷法.md
 
-## 节点 feisheng_xianjie (scene)
+## 节点 feisheng_xianjie (ending)
 text: |
   【飞升仙界】
 

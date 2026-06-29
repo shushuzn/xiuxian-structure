@@ -1,5 +1,6 @@
 # v2.9 互动引擎演示（世界书 + 成就 + AI 叙事）
 
+## 元数据
 id: v29_demo
 title: v2.9 互动引擎演示
 description: |

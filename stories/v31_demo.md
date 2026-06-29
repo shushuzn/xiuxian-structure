@@ -44,9 +44,9 @@ next:
     goto: lingyaodao
   - label: 独自【渡飞升之劫】
     goto: shendan_guodu
-  - label: 查看世界书「飞升」
-    goto: worldbook_feisheng
+  - label: 查看世界书「飞升」（不切换章节，仅触发查看）
     worldbook: feisheng_guide
+    narrate: 世界书弹出补充设定：飞升需飞升之劫 + 渡劫阵 + 飞升丹三件套。
 
 refs:
   - 飞升体系/飞升.md

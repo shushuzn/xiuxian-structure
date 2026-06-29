@@ -1,0 +1,64 @@
+# 跨平台 UI 标签
+# 用于 export.py 生成的中文文档（HANDBOOK.md 等）
+# 维护：与 docs/CONTRIBUTING.md 同步，新增/删除 system 时同步
+
+systems:
+  realms:            {title: "境界", description: "9 大境界 + 突破规则"}
+  spirit_roots:      {title: "灵根", description: "5 品级 + 8 属性 + 3 变异"}
+  aether:            {title: "天地灵气", description: "4 浓度 + 5 灵脉 + 3 界面"}
+  elixirs:           {title: "丹药", description: "6 品级 + 9 丹药"}
+  techniques:        {title: "功法", description: "4 品级 + 3 功法"}
+  artifacts:         {title: "法器", description: "5 品级 + 4 法器"}
+  factions:          {title: "势力", description: "5 规模 + 5 形态 + 3 范例"}
+  spirit_stones:     {title: "灵石", description: "5 品级 + 3 属性 + 4 来源"}
+  monsters:          {title: "妖兽", description: "5 品级 + 灵兽 + 契约"}
+  formations:        {title: "阵法", description: "6 类别 + 4 等级 + 3 例"}
+  talismans:         {title: "符箓", description: "4 品级 + 6 类别 + 3 例"}
+  heart_demons:      {title: "心魔", description: "贪/嗔/痴/执念四魔"}
+  tribulations:      {title: "雷劫", description: "三六九九天劫与淬体"}
+  divine_sense:      {title: "神识", description: "神识范围与攻击方式"}
+  spirit_weapons:    {title: "器灵", description: "器灵等级/认主/成长/反噬"}
+  contracts:         {title: "契约", description: "主从/平等/灵魂/魂契"}
+  ascension:         {title: "飞升", description: "大乘 → 仙界全链路"}
+  immortal_realm:    {title: "仙界", description: "仙职/仙灵石/仙劫/仙界功法"}
+  divine_realm:      {title: "神界", description: "仙帝之上 → 神格/神职/神域"}
+  demon_realm:       {title: "魔界", description: "魔气/魔格/魔修/魔器"}
+  underworld_realm:  {title: "冥界", description: "死后世界/轮回/冥修/冥器"}
+  combat:            {title: "战斗", description: "神通/法相/领域/遁术/阵法战"}
+  divine_powers:     {title: "神通", description: "神通分类与典型神通"}
+  secret_realm:      {title: "秘境", description: "秘境形态/规则/示例"}
+  tian_cai:          {title: "天材地宝", description: "灵草/灵木/灵矿/灵水灵火"}
+  zong_men:          {title: "宗门", description: "宗门等级/架构/经济/任务/外交"}
+  karma:             {title: "因果", description: "因果律/功德/业力/业报"}
+  time_space:        {title: "时空", description: "时间/空间法则与神通"}
+  yao_xiu:           {title: "妖修", description: "妖修身份与化形规则"}
+
+sections:
+  realms: "境界"
+  spirit_roots: "灵根品级"
+  attributes: "属性"
+  concentrations: "灵气浓度"
+  veins: "灵脉等级"
+  attribute_modifiers: "灵气属性"
+  elixirs: "丹药"
+  tiers: "品级"
+  styles: "风格"
+  inheritances: "传承"
+  techniques: "功法"
+  recognitions: "灵识认证"
+  artifacts: "法器"
+  scales: "势力规模"
+  forms: "势力形态"
+  disciple_levels: "弟子等级"
+  examples: "示例"
+  purposes: "用途"
+  sources: "来源"
+  grades: "品级"
+  intelligence: "灵智"
+  contracts: "契约"
+  spirit_beast_tiers: "灵兽品级"
+  categories: "类别"
+  deploy_types: "布阵方式"
+  components: "构成要素"
+  production: "制作方式"
+  relations: "关联"

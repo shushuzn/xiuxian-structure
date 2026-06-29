@@ -140,37 +140,21 @@ def export_csv(data, out_dir):
 # ────────────────────────────────────────────────────────
 def export_handbook(data, out_dir):
     """把所有 yaml 拼成一本单文件 MD 手册"""
-    # 章节名英→中映射（让手册更可读）
-    SECTION_LABELS = {
-        "realms":            "境界",
-        "spirit_roots":      "灵根品级",
-        "attributes":        "属性",
-        "concentrations":    "灵气浓度",
-        "veins":             "灵脉等级",
-        "attribute_modifiers":"灵气属性",
-        "elixirs":           "丹药",
-        "tiers":             "品级",
-        "styles":            "风格",
-        "inheritances":      "传承",
-        "techniques":        "功法",
-        "recognitions":      "灵识认证",
-        "artifacts":         "法器",
-        "scales":            "势力规模",
-        "forms":             "势力形态",
-        "disciple_levels":   "弟子等级",
-        "examples":          "示例",
-        "purposes":          "用途",
-        "sources":           "来源",
-        "grades":            "品级",
-        "intelligence":      "灵智",
-        "contracts":         "契约",
-        "spirit_beast_tiers":"灵兽品级",
-        "categories":        "类别",
-        "deploy_types":      "布阵方式",
-        "components":        "构成要素",
-        "production":        "制作方式",
-        "relations":         "关联",
-    }
+    # 章节名英→中映射：自动从 data/_labels.yaml 加载
+    # 维护：见 docs/CONTRIBUTING.md 中"添加新境界/丹药/法器"流程
+    labels_path = ROOT / "data" / "_labels.yaml"
+    if labels_path.exists():
+        labels_data = yaml.safe_load(labels_path.read_text(encoding="utf-8"))
+        SECTION_LABELS = labels_data.get("sections", {})
+        # SYSTEMS 字典也用 labels 覆盖（确保 export 用同一份中文名）
+        global SYSTEMS
+        for sys_id, meta in labels_data.get("systems", {}).items():
+            if sys_id in SYSTEMS and "title" in meta:
+                # 保留原来 description 优先级
+                old_title, old_desc = SYSTEMS[sys_id]
+                SYSTEMS[sys_id] = (meta["title"], meta.get("description", old_desc))
+    else:
+        SECTION_LABELS = {}
 
     lines = [
         "# 修仙体系手册",

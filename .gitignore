@@ -27,3 +27,4 @@ __pycache__/
 .coverage
 htmlcov/
 site/  # mkdocs build 输出
+docs_src/  # 由 scripts/build_docs_src.py 同步生成（已 LF 化）

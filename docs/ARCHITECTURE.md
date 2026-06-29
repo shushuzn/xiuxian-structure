@@ -122,6 +122,78 @@
 
 ---
 
+## ADR-008：data/schema.json — 30 个 yaml 的机器校验层
+
+**日期**：2026-06-29
+
+**状态**：✅ 已采纳
+
+**背景**：data/*.yaml 的结构此前只在 ADR-002 文字描述 + 测试枚举中约定。任何 PR 都可以把 `elixirs.yaml` 改成 `elixirs:{elixir: [...]}` 而 CI 不报。
+
+**决策**：在 `data/schema.json` 提供 30 个 yaml 的 JSON Schema（Draft-07），`scripts/validate.py` 第 [4/6] 步 `check_yaml_schema()` 在每次 CI 自动校验：
+- 顶层 key 必须在白名单（如 `realms.yaml` 顶层只能是 `realms`、`references`）
+- `list-of-dicts` 项必须有 `id` 字段
+- `relations.yaml` 的 from/to 必须含 `:`，且引用 id 必须真实存在（由 `[6/6] audit_relations()` 负责）
+
+**理由**：
+- 防止 schema drift（yaml 结构变形不会被发现）
+- 提供 LLM 工作流的 ground truth：喂给 LLM 的 yaml 知道"它的合法结构"
+- 让 contribute PR 在 review 前自动校验
+
+**后果**：
+- ✅ 增删 section 时必须同步 schema.json（可机械化）
+- ⚠️ schema.json 维护成本（25 个体系 × 5-15 section = ~150 行）
+- 历史效果：v3.0 → v3.0.1 修复了 0 yaml 结构错误（基线已正确），但 `relations.yaml` 端点 193 条无效全部修正（`#6/6` 端点审计）
+
+---
+
+## ADR-009：scripts/build_docs_src.py — 跨平台 mkdocs 源同步
+
+**日期**：2026-06-29
+
+**状态**：✅ 已采纳
+
+**背景**：原始设计 `docs_src/` 用 Git symbolic link 指向根目录 .md。在 Windows 上，symbolic link 需要开发者模式权限；mock clone 在 Windows 上会回退为"只包含路径文本"的占位文件，mkdocs build 全部失败。
+
+**决策**：写 `scripts/build_docs_src.py` 直接 `shutil.copy2` 把根目录的 .md 复制到 `docs_src/` 镜像。每次 CI 在 `mkdocs build` 前自动 sync。
+
+**理由**：
+- 跨平台一致：Windows / macOS / Linux 都跑同一份 Python
+- 不依赖 git clone 用户环境（开发者无需打开 dev mode）
+- 可控：ignore 规则清晰（README / LICENSE / CHANGELOG 等元文件不复制）
+
+**后果**：
+- ✅ mkdocs build 在 Windows 本地 + Linux CI 都 0 警告（strict mode）
+- ⚠️ 复制时间开销 ~0.5s（260 个 .md）
+- ⚠️ `docs_src/` 不入仓（.gitignore 排除），本地同步状态作为生成产物
+
+---
+
+## ADR-010：tests/test_*.py 显式 encoding='utf-8' + PYTHONIOENCODING=utf-8
+
+**日期**：2026-06-29
+
+**状态**：✅ 已采纳
+
+**背景**：在 Windows 控制台默认 GBK 编码下，`open(path)` 不带参数会以 GBK 解码 UTF-8 中文 yaml/.md 文件，失败；`subprocess.run()` 的 stdout/stderr 若子进程输出 emoji（如 `🔍`、`✅`）也会失败。原本的 33 个测试失败都是这个原因。
+
+**决策**：
+- 所有 `open(path)` 调用显式加 `encoding='utf-8'`
+- `subprocess.run()` 的 `stdout=PIPE / stderr=PIPE` 加 `encoding='utf-8'`（替代 `universal_newlines=True`）
+- `subprocess.run()` 调用 validate.py 时设 `env={**os.environ, "PYTHONIOENCODING": "utf-8"}`，确保子进程内部 print 也不走 GBK
+
+**理由**：
+- 代码可读性：显式 encoding > 默认编码（PEP 263）
+- 跨平台一致：Windows / Linux / macOS 都用 UTF-8
+- 不增加依赖（不引 tox 或 pytest-env）
+
+**后果**：
+- ✅ 本地 Windows：245/245 passed
+- ✅ CI Linux（ubuntu-latest）：245/245 passed
+- ⚠️ Python 3.14 升级到 pytest 9.x 后，部分 capture 行为变了（已修复）
+
+---
+
 ## 如何新增 ADR
 
 复制本节，命名为 `ADR-NNN：标题`，填入日期、状态、背景、决策、理由、后果。

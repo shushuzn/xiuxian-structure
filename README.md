@@ -459,7 +459,7 @@ python3 scripts/export.py --output /tmp/xiuxian
 
 ## 决策与治理
 
-- 📐 [ARCHITECTURE.md](docs/ARCHITECTURE.md) — 7 个架构决策的来龙去脉
+- 📐 [ARCHITECTURE.md](docs/ARCHITECTURE.md) — 10 个架构决策的来龙去脉
 - 🔒 [SECURITY.md](SECURITY.md) — 安全漏洞报告流程
 - 🤝 [贡献者公约](https://github.com/shushuzn/xiuxian-structure/blob/main/.github/CODE_OF_CONDUCT.md) — 社区公约
 - 🛡️ [BRANCH_PROTECTION.md](docs/BRANCH_PROTECTION.md) — 分支保护建议

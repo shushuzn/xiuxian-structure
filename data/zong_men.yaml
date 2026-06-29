@@ -128,21 +128,27 @@ foreign_relations:
   - pair: 落云宗 ↔ 太一宫
     type: friendly
     note: 正道友好
+    id: luo_yun_tai_yi
   - pair: 落云宗 ↔ 寒焰宗
     type: competitive
     note: 资源竞争
+    id: luo_yun_han_yan
   - pair: 落云宗 ↔ 潮汐宫
     type: hostile
     note: 妖修敌对
+    id: luo_yun_chao_xi
   - pair: 太一宫 ↔ 魔教
     type: hostile
     note: 正邪对立
+    id: tai_yi_mo_jiao
   - pair: 落云宗 ↔ 天星城商会
     type: economic
     note: 经济合作
+    id: luo_yun_tian_xing
   - pair: 海上门派 ↔ 潮汐宫
     type: hostile
     note: 海妖威胁
+    id: hai_shang_chao_xi
 
 # 宗盟
 alliances:

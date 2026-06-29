@@ -1,0 +1,350 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "修仙体系知识库 YAML Schema",
+  "description": "校验 data/*.yaml 的顶层结构与必需字段",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "aether": {
+      "type": "object",
+      "properties": {
+        "concentrations": { "$ref": "#/definitions/listOfDicts" },
+        "veins": { "$ref": "#/definitions/listOfDicts" },
+        "realms": { "$ref": "#/definitions/listOfDicts" },
+        "attribute_modifiers": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "artifacts": { "$ref": "#/definitions/listOfDicts" },
+        "tiers": { "$ref": "#/definitions/listOfDicts" },
+        "recognitions": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "ascension": {
+      "type": "object",
+      "properties": {
+        "ascension_tribulation": { "$ref": "#/definitions/listOfDicts" },
+        "ascension_types": { "$ref": "#/definitions/listOfDicts" },
+        "barrier_strengths": { "$ref": "#/definitions/listOfDicts" },
+        "barrier_types": { "$ref": "#/definitions/listOfDicts" },
+        "paths": { "$ref": "#/definitions/listOfDicts" },
+        "realms": { "$ref": "#/definitions/listOfDicts" },
+        "thunders": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "combat": {
+      "type": "object",
+      "properties": {
+        "shen_tong": { "$ref": "#/definitions/listOfDicts" },
+        "fa_xiang": { "$ref": "#/definitions/listOfDicts" },
+        "ling_yu": { "$ref": "#/definitions/listOfDicts" },
+        "dun_shu": { "$ref": "#/definitions/listOfDicts" },
+        "dun_fa": { "$ref": "#/definitions/listOfDicts" },
+        "zhen_fa_zhan": { "$ref": "#/definitions/listOfDicts" },
+        "combat_realms": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "properties": {
+        "types": { "$ref": "#/definitions/listOfDicts" },
+        "applicable_targets": { "$ref": "#/definitions/listOfDicts" },
+        "effects": { "$ref": "#/definitions/listOfDicts" },
+        "dissolution_cost": { "$ref": "#/definitions/listOfDicts" },
+        "forbidden_methods": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "demon_realm": {
+      "type": "object",
+      "properties": {
+        "demon_aether": { "$ref": "#/definitions/listOfDicts" },
+        "demon_stones": { "$ref": "#/definitions/listOfDicts" },
+        "demon_titles": { "$ref": "#/definitions/listOfDicts" },
+        "demon_grades": { "$ref": "#/definitions/listOfDicts" },
+        "demon_tribulations": { "$ref": "#/definitions/listOfDicts" },
+        "demon_domains": { "$ref": "#/definitions/listOfDicts" },
+        "demon_beasts": { "$ref": "#/definitions/listOfDicts" },
+        "demon_artifacts": { "$ref": "#/definitions/listOfDicts" },
+        "demon_races": { "$ref": "#/definitions/listOfDicts" },
+        "demon_ascension": { "$ref": "#/definitions/listOfDicts" },
+        "demon_eras": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "divine_powers": {
+      "type": "object",
+      "properties": {
+        "categories": { "$ref": "#/definitions/listOfDicts" },
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "examples": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "divine_realm": {
+      "type": "object",
+      "properties": {
+        "aether": { "$ref": "#/definitions/listOfDicts" },
+        "artifacts": { "$ref": "#/definitions/listOfDicts" },
+        "ascension_types": { "$ref": "#/definitions/listOfDicts" },
+        "beasts": { "$ref": "#/definitions/listOfDicts" },
+        "divine_grades": { "$ref": "#/definitions/listOfDicts" },
+        "domains": { "$ref": "#/definitions/listOfDicts" },
+        "eras": { "$ref": "#/definitions/listOfDicts" },
+        "races": { "$ref": "#/definitions/listOfDicts" },
+        "spirit_stones": { "$ref": "#/definitions/listOfDicts" },
+        "titles": { "$ref": "#/definitions/listOfDicts" },
+        "tribulations": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "divine_sense": {
+      "type": "object",
+      "properties": {
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "stages": { "$ref": "#/definitions/listOfDicts" },
+        "attacks": { "$ref": "#/definitions/listOfDicts" },
+        "techniques_categories": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "elixirs": {
+      "type": "object",
+      "properties": {
+        "elixirs": { "$ref": "#/definitions/listOfDicts" },
+        "tiers": { "$ref": "#/definitions/listOfDicts" },
+        "purposes": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "factions": {
+      "type": "object",
+      "properties": {
+        "scales": { "$ref": "#/definitions/listOfDicts" },
+        "forms": { "$ref": "#/definitions/listOfDicts" },
+        "examples": { "$ref": "#/definitions/listOfDicts" },
+        "disciple_levels": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "formations": {
+      "type": "object",
+      "properties": {
+        "categories": { "$ref": "#/definitions/listOfDicts" },
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "examples": { "$ref": "#/definitions/listOfDicts" },
+        "components": { "$ref": "#/definitions/listOfDicts" },
+        "deploy_types": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "heart_demons": {
+      "type": "object",
+      "properties": {
+        "types": { "$ref": "#/definitions/listOfDicts" },
+        "counter_elixirs": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "immortal_realm": {
+      "type": "object",
+      "properties": {
+        "divine_techniques": { "$ref": "#/definitions/listOfDicts" },
+        "factions": { "$ref": "#/definitions/listOfDicts" },
+        "immortal_tribulations": { "$ref": "#/definitions/listOfDicts" },
+        "spirit_stones": { "$ref": "#/definitions/listOfDicts" },
+        "techniques": { "$ref": "#/definitions/listOfDicts" },
+        "titles": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "karma": {
+      "type": "object",
+      "properties": {
+        "law_levels": { "$ref": "#/definitions/listOfDicts" },
+        "merit_levels": { "$ref": "#/definitions/listOfDicts" },
+        "karma_levels": { "$ref": "#/definitions/listOfDicts" },
+        "six_realms": { "$ref": "#/definitions/listOfDicts" },
+        "divine_powers": { "$ref": "#/definitions/listOfDicts" },
+        "karmic_obsructions": { "$ref": "#/definitions/listOfDicts" },
+        "good_karma_effects": { "$ref": "#/definitions/listOfDicts" },
+        "bad_karma_effects": { "$ref": "#/definitions/listOfDicts" },
+        "mechanisms": { "$ref": "#/definitions/listOfDicts" },
+        "solutions": { "$ref": "#/definitions/listOfDicts" },
+        "precepts": { "$ref": "#/definitions/listOfDicts" },
+        "famous_practitioners": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "monsters": {
+      "type": "object",
+      "properties": {
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "attributes": { "$ref": "#/definitions/listOfDicts" },
+        "intelligence": { "$ref": "#/definitions/listOfDicts" },
+        "contracts": { "$ref": "#/definitions/listOfDicts" },
+        "spirit_beast_tiers": { "$ref": "#/definitions/listOfDicts" },
+        "examples": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "realms": {
+      "type": "object",
+      "properties": {
+        "realms": { "$ref": "#/definitions/listOfDicts" }
+      },
+      "required": ["realms"]
+    },
+    "relations": {
+      "type": "object",
+      "properties": {
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "type"],
+            "properties": {
+              "from": { "type": "string" },
+              "to": { "type": "string" },
+              "type": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["relations"]
+    },
+    "secret_realm": {
+      "type": "object",
+      "properties": {
+        "forms": { "$ref": "#/definitions/listOfDicts" },
+        "access_types": { "$ref": "#/definitions/listOfDicts" },
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "resource_types": { "$ref": "#/definitions/listOfDicts" },
+        "dangers": { "$ref": "#/definitions/listOfDicts" },
+        "examples": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "spirit_roots": {
+      "type": "object",
+      "properties": {
+        "spirit_roots": { "$ref": "#/definitions/listOfDicts" },
+        "attributes": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "spirit_stones": {
+      "type": "object",
+      "properties": {
+        "tiers": { "$ref": "#/definitions/listOfDicts" },
+        "attributes": { "$ref": "#/definitions/listOfDicts" },
+        "sources": { "$ref": "#/definitions/listOfDicts" },
+        "purposes": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "spirit_weapons": {
+      "type": "object",
+      "properties": {
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "recognition_methods": { "$ref": "#/definitions/listOfDicts" },
+        "growth_methods": { "$ref": "#/definitions/listOfDicts" },
+        "communication_methods": { "$ref": "#/definitions/listOfDicts" },
+        "backlash_levels": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "talismans": {
+      "type": "object",
+      "properties": {
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "categories": { "$ref": "#/definitions/listOfDicts" },
+        "examples": { "$ref": "#/definitions/listOfDicts" },
+        "components": { "$ref": "#/definitions/listOfDicts" },
+        "production": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "techniques": {
+      "type": "object",
+      "properties": {
+        "techniques": { "$ref": "#/definitions/listOfDicts" },
+        "tiers": { "$ref": "#/definitions/listOfDicts" },
+        "styles": { "$ref": "#/definitions/listOfDicts" },
+        "inheritances": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "tian_cai": {
+      "type": "object",
+      "properties": {
+        "categories": { "$ref": "#/definitions/listOfDicts" },
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "attributes": { "$ref": "#/definitions/listOfDicts" },
+        "herb_examples": { "$ref": "#/definitions/listOfDicts" },
+        "wood_examples": { "$ref": "#/definitions/listOfDicts" },
+        "metal_examples": { "$ref": "#/definitions/listOfDicts" },
+        "element_examples": { "$ref": "#/definitions/listOfDicts" },
+        "beast_examples": { "$ref": "#/definitions/listOfDicts" },
+        "exotic_examples": { "$ref": "#/definitions/listOfDicts" },
+        "celestial_examples": { "$ref": "#/definitions/listOfDicts" },
+        "purposes": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "time_space": {
+      "type": "object",
+      "properties": {
+        "law_levels": { "$ref": "#/definitions/listOfDicts" },
+        "law_types": { "$ref": "#/definitions/listOfDicts" },
+        "time_artifacts": { "$ref": "#/definitions/listOfDicts" },
+        "space_artifacts": { "$ref": "#/definitions/listOfDicts" },
+        "dual_artifacts": { "$ref": "#/definitions/listOfDicts" },
+        "time_powers": { "$ref": "#/definitions/listOfDicts" },
+        "space_powers": { "$ref": "#/definitions/listOfDicts" },
+        "realms": { "$ref": "#/definitions/listOfDicts" },
+        "masters": { "$ref": "#/definitions/listOfDicts" },
+        "purposes": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "tribulations": {
+      "type": "object",
+      "properties": {
+        "grades": { "$ref": "#/definitions/listOfDicts" },
+        "benefits": { "$ref": "#/definitions/listOfDicts" },
+        "costs": { "$ref": "#/definitions/listOfDicts" },
+        "special": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "underworld_realm": {
+      "type": "object",
+      "properties": {
+        "underworld_aether": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_stones": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_titles": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_grades": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_tribulations": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_domains": { "$ref": "#/definitions/listOfDicts" },
+        "six_realms": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_beasts": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_artifacts": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_races": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_ascension": { "$ref": "#/definitions/listOfDicts" },
+        "underworld_eras": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "yao_xiu": {
+      "type": "object",
+      "properties": {
+        "core": { "$ref": "#/definitions/listOfDicts" },
+        "forms": { "$ref": "#/definitions/listOfDicts" },
+        "stages": { "$ref": "#/definitions/listOfDicts" }
+      }
+    },
+    "zong_men": {
+      "type": "object",
+      "properties": {
+        "levels": { "$ref": "#/definitions/listOfDicts" },
+        "disciple_levels": { "$ref": "#/definitions/listOfDicts" },
+        "elder_types": { "$ref": "#/definitions/listOfDicts" },
+        "succession_methods": { "$ref": "#/definitions/listOfDicts" },
+        "task_types": { "$ref": "#/definitions/listOfDicts" },
+        "foreign_relations": { "$ref": "#/definitions/listOfDicts" },
+        "alliances": { "$ref": "#/definitions/listOfDicts" },
+        "examples": { "$ref": "#/definitions/listOfDicts" }
+      }
+    }
+  },
+  "definitions": {
+    "listOfDicts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

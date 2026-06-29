@@ -56,15 +56,19 @@ barrier_strengths:
 - breakthrough: 需合体期以上
   pair: 人界↔灵界
   strength: 中
+  id: ren_jie_ling_jie
 - breakthrough: 需大乘期
   pair: 灵界↔仙界
   strength: 高
+  id: ling_jie_xian_jie
 - breakthrough: 几乎不可
   pair: 仙界↔神界
   strength: 极高
+  id: xian_jie_shen_jie
 - breakthrough: 几乎不可
   pair: 人界↔魔界
   strength: 极高
+  id: ren_jie_mo_jie
 barrier_types:
 - example: 人界→仙界（飞升）
   id: unidirectional

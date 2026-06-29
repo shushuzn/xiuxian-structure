@@ -41,7 +41,7 @@ def test_yaml_load_all_performance():
     """所有 yaml 加载性能"""
     def load_all():
         for f in sorted(DATA_DIR.glob("*.yaml")):
-            with open(f) as fh:
+            with open(f, encoding="utf-8") as fh:
                 yaml.safe_load(fh)
     _, elapsed = _time_func(load_all)
     assert elapsed < THRESHOLDS["yaml_load_all"], \
@@ -138,7 +138,7 @@ def test_performance_summary(capsys):
     # 测 yaml 全部
     start = time.time()
     for f in sorted(DATA_DIR.glob("*.yaml")):
-        with open(f) as fh:
+        with open(f, encoding="utf-8") as fh:
             yaml.safe_load(fh)
     measurements["yaml_all"] = time.time() - start
 

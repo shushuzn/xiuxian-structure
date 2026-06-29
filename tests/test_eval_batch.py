@@ -27,7 +27,7 @@ def test_eval_prompts_yaml_exists():
 
 def test_eval_prompts_yaml_loadable():
     """评测集 YAML 应能正确解析"""
-    with open(ROOT / "tests" / "eval_prompts.yaml") as f:
+    with open(ROOT / "tests" / "eval_prompts.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "prompts" in data
     assert "defaults" in data
@@ -36,7 +36,7 @@ def test_eval_prompts_yaml_loadable():
 
 def test_eval_prompts_have_required_fields():
     """每个 prompt 必含字段：id, story, requirement, expected_refs"""
-    with open(ROOT / "tests" / "eval_prompts.yaml") as f:
+    with open(ROOT / "tests" / "eval_prompts.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     for p in data["prompts"]:
         assert "id" in p, f"missing id: {p}"
@@ -49,7 +49,7 @@ def test_eval_prompts_have_required_fields():
 
 def test_eval_prompts_stories_exist():
     """每个 prompt 引用的 story 应在 stories/ 存在"""
-    with open(ROOT / "tests" / "eval_prompts.yaml") as f:
+    with open(ROOT / "tests" / "eval_prompts.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     for p in data["prompts"]:
         story_path = ROOT / "stories" / f"{p['story']}.md"
@@ -58,7 +58,7 @@ def test_eval_prompts_stories_exist():
 
 def test_eval_prompts_unique_ids():
     """prompt id 应唯一"""
-    with open(ROOT / "tests" / "eval_prompts.yaml") as f:
+    with open(ROOT / "tests" / "eval_prompts.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     ids = [p["id"] for p in data["prompts"]]
     assert len(ids) == len(set(ids)), f"重复 id: {ids}"
@@ -66,7 +66,7 @@ def test_eval_prompts_unique_ids():
 
 def test_eval_prompts_v1_v2_coverage():
     """评测集应覆盖 v1.5-v2.1 新体系"""
-    with open(ROOT / "tests" / "eval_prompts.yaml") as f:
+    with open(ROOT / "tests" / "eval_prompts.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     tags = set()
     for p in data["prompts"]:
@@ -88,7 +88,7 @@ def test_eval_llm_dry_run():
          "--prompts", str(ROOT / "tests" / "eval_prompts.yaml"),
          "--models", "gpt-4o-mini,deepseek-chat",
          "--dry-run"],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=30,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding="utf-8", timeout=30,
     )
     assert result.returncode == 0, f"stderr: {result.stderr}"
     # 报告应包含 10 prompts × 2 models = 20 results
@@ -107,7 +107,7 @@ def test_eval_llm_missing_key():
         [sys.executable, str(ROOT / "scripts" / "eval_llm.py"),
          "--prompts", str(ROOT / "tests" / "eval_prompts.yaml"),
          "--models", "gpt-4o-mini"],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=30, env=env,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding="utf-8", timeout=30, env=env,
     )
     assert result.returncode != 0
     assert "API key" in result.stdout or "API key" in result.stderr
@@ -123,7 +123,7 @@ def test_batch_generate_dry_run():
          "--prompts", str(ROOT / "tests" / "eval_prompts.yaml"),
          "--dry-run",
          "--output", "/tmp/batch_test/"],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=30,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding="utf-8", timeout=30,
     )
     assert result.returncode == 0, f"stderr: {result.stderr}"
     assert "批量生成" in result.stdout

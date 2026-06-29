@@ -982,7 +982,7 @@ text: hi
     eng.save_to_file(target)
     assert target.exists()
     import json as _json
-    data = _json.loads(target.read_text())
+    data = _json.loads(target.read_text(encoding="utf-8"))
     # save_to_file 只保存 state 部分
     assert "attrs" in data
 

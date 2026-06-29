@@ -124,7 +124,7 @@ def test_secret_realm_yaml_exists():
 def test_secret_realm_yaml_has_forms():
     """secret_realm.yaml 必须含 forms 字段"""
     import yaml
-    with open(ROOT / "data" / "secret_realm.yaml") as f:
+    with open(ROOT / "data" / "secret_realm.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "forms" in data
     assert len(data["forms"]) >= 5
@@ -133,7 +133,7 @@ def test_secret_realm_yaml_has_forms():
 def test_secret_realm_yaml_has_grades():
     """secret_realm.yaml 必须含 5 个等级"""
     import yaml
-    with open(ROOT / "data" / "secret_realm.yaml") as f:
+    with open(ROOT / "data" / "secret_realm.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "grades" in data
     assert len(data["grades"]) >= 5
@@ -142,7 +142,7 @@ def test_secret_realm_yaml_has_grades():
 def test_secret_realm_yaml_has_examples():
     """secret_realm.yaml 必须含至少 15 个实例"""
     import yaml
-    with open(ROOT / "data" / "secret_realm.yaml") as f:
+    with open(ROOT / "data" / "secret_realm.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "examples" in data
     assert len(data["examples"]) >= 15
@@ -171,7 +171,7 @@ def test_tian_cai_yaml_exists():
 def test_tian_cai_yaml_has_categories():
     """tian_cai.yaml 必须含 7 个 categories"""
     import yaml
-    with open(ROOT / "data" / "tian_cai.yaml") as f:
+    with open(ROOT / "data" / "tian_cai.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "categories" in data
     assert len(data["categories"]) >= 7
@@ -180,7 +180,7 @@ def test_tian_cai_yaml_has_categories():
 def test_tian_cai_yaml_has_grades():
     """tian_cai.yaml 必须含 6 个等级"""
     import yaml
-    with open(ROOT / "data" / "tian_cai.yaml") as f:
+    with open(ROOT / "data" / "tian_cai.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "grades" in data
     assert len(data["grades"]) >= 6
@@ -189,7 +189,7 @@ def test_tian_cai_yaml_has_grades():
 def test_tian_cai_yaml_has_attributes():
     """tian_cai.yaml 必须含 15+ 属性"""
     import yaml
-    with open(ROOT / "data" / "tian_cai.yaml") as f:
+    with open(ROOT / "data" / "tian_cai.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "attributes" in data
     assert len(data["attributes"]) >= 15
@@ -198,7 +198,7 @@ def test_tian_cai_yaml_has_attributes():
 def test_tian_cai_yaml_has_examples():
     """tian_cai.yaml 必须含 herb/wood/metal/element/beast/exotic/celestial examples 各 ≥ 4"""
     import yaml
-    with open(ROOT / "data" / "tian_cai.yaml") as f:
+    with open(ROOT / "data" / "tian_cai.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     for field in ("herb_examples", "wood_examples", "metal_examples",
                   "element_examples", "beast_examples",
@@ -230,7 +230,7 @@ def test_zong_men_yaml_exists():
 def test_zong_men_yaml_has_levels():
     """zong_men.yaml 必须含 4+ 等级"""
     import yaml
-    with open(ROOT / "data" / "zong_men.yaml") as f:
+    with open(ROOT / "data" / "zong_men.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "levels" in data
     assert len(data["levels"]) >= 4
@@ -239,7 +239,7 @@ def test_zong_men_yaml_has_levels():
 def test_zong_men_yaml_has_disciple_levels():
     """zong_men.yaml 必须含 4 弟子级别"""
     import yaml
-    with open(ROOT / "data" / "zong_men.yaml") as f:
+    with open(ROOT / "data" / "zong_men.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "disciple_levels" in data
     assert len(data["disciple_levels"]) >= 4
@@ -248,7 +248,7 @@ def test_zong_men_yaml_has_disciple_levels():
 def test_zong_men_yaml_has_examples():
     """zong_men.yaml 必须含 10+ 宗门实例"""
     import yaml
-    with open(ROOT / "data" / "zong_men.yaml") as f:
+    with open(ROOT / "data" / "zong_men.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "examples" in data
     assert len(data["examples"]) >= 10
@@ -257,7 +257,7 @@ def test_zong_men_yaml_has_examples():
 def test_zong_men_yaml_has_alliances():
     """zong_men.yaml 必须含 5+ 宗盟"""
     import yaml
-    with open(ROOT / "data" / "zong_men.yaml") as f:
+    with open(ROOT / "data" / "zong_men.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "alliances" in data
     assert len(data["alliances"]) >= 5
@@ -286,7 +286,7 @@ def test_karma_yaml_exists():
 def test_karma_yaml_has_six_realms():
     """karma.yaml 必须含 6 道"""
     import yaml
-    with open(ROOT / "data" / "karma.yaml") as f:
+    with open(ROOT / "data" / "karma.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "six_realms" in data
     assert len(data["six_realms"]) == 6
@@ -295,7 +295,7 @@ def test_karma_yaml_has_six_realms():
 def test_karma_yaml_has_divine_powers():
     """karma.yaml 必须含 8+ 因果类神通"""
     import yaml
-    with open(ROOT / "data" / "karma.yaml") as f:
+    with open(ROOT / "data" / "karma.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "divine_powers" in data
     assert len(data["divine_powers"]) >= 8
@@ -304,7 +304,7 @@ def test_karma_yaml_has_divine_powers():
 def test_karma_yaml_has_merit_and_karma_levels():
     """karma.yaml 必须含功德与业力等级"""
     import yaml
-    with open(ROOT / "data" / "karma.yaml") as f:
+    with open(ROOT / "data" / "karma.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "merit_levels" in data
     assert "karma_levels" in data
@@ -335,7 +335,7 @@ def test_time_space_yaml_exists():
 def test_time_space_yaml_has_law_levels():
     """time_space.yaml 必须含 6 法则等级"""
     import yaml
-    with open(ROOT / "data" / "time_space.yaml") as f:
+    with open(ROOT / "data" / "time_space.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "law_levels" in data
     assert len(data["law_levels"]) >= 6
@@ -344,7 +344,7 @@ def test_time_space_yaml_has_law_levels():
 def test_time_space_yaml_has_powers():
     """time_space.yaml 必须含时间+空间类神通各 8+"""
     import yaml
-    with open(ROOT / "data" / "time_space.yaml") as f:
+    with open(ROOT / "data" / "time_space.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "time_powers" in data
     assert "space_powers" in data
@@ -355,7 +355,7 @@ def test_time_space_yaml_has_powers():
 def test_time_space_yaml_has_artifacts():
     """time_space.yaml 必须含 10+ 时空宝物"""
     import yaml
-    with open(ROOT / "data" / "time_space.yaml") as f:
+    with open(ROOT / "data" / "time_space.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "time_artifacts" in data
     assert "space_artifacts" in data
@@ -367,7 +367,7 @@ def test_time_space_yaml_has_artifacts():
 def test_time_space_yaml_has_realms():
     """time_space.yaml 必须含 4+ 时空秘境"""
     import yaml
-    with open(ROOT / "data" / "time_space.yaml") as f:
+    with open(ROOT / "data" / "time_space.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "realms" in data
     assert len(data["realms"]) >= 4
@@ -382,7 +382,7 @@ def test_time_space_directory_has_at_least_9_files():
 def test_time_space_yaml_has_masters():
     """time_space.yaml 必须含著名时空大能"""
     import yaml
-    with open(ROOT / "data" / "time_space.yaml") as f:
+    with open(ROOT / "data" / "time_space.yaml", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     assert "masters" in data
     assert len(data["masters"]) >= 3

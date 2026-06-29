@@ -7,6 +7,7 @@ test_validate.py — scripts/validate.py 的单元测试
 3. 链接目标不存在时能警告
 4. mermaid 代码块格式
 """
+import os
 import shutil
 import subprocess
 import sys
@@ -17,6 +18,10 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "validate.py"
+
+# Windows 控制台默认 GBK，子进程输出 emoji/中文会解码失败
+UTF8_ENV = os.environ.copy()
+UTF8_ENV["PYTHONIOENCODING"] = "utf-8"
 
 
 def test_validate_script_exists():
@@ -31,8 +36,9 @@ def test_validate_passes_on_current_repo():
         cwd=ROOT,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        universal_newlines=True,
+        encoding="utf-8",
         timeout=60,
+        env=UTF8_ENV,
     )
     assert result.returncode == 0, (
         f"validate.py 失败:\nSTDOUT: {result.stdout}\nSTDERR: {result.stderr}"
@@ -72,8 +78,9 @@ def test_validate_detects_missing_md_section(temp_repo):
         cwd=test_root,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        universal_newlines=True,
+        encoding="utf-8",
         timeout=30,
+        env=UTF8_ENV,
     )
     assert result.returncode != 0, "缺少 ## 关联 时 validate.py 应失败"
     assert "缺少 `## 关联`" in result.stdout + result.stderr, (
@@ -98,8 +105,9 @@ def test_validate_detects_bad_yaml(temp_repo):
         cwd=test_root,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        universal_newlines=True,
+        encoding="utf-8",
         timeout=30,
+        env=UTF8_ENV,
     )
     assert result.returncode != 0, "坏 YAML 应导致 validate.py 失败"
     assert "YAML 解析失败" in result.stdout + result.stderr, (

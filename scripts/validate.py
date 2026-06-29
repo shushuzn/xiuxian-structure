@@ -183,20 +183,26 @@ def audit_relations():
 
     ids_by_system = defaultdict(set)
     for f in sorted((ROOT / "data").glob("*.yaml")):
-        sys = f.stem
-        data = yaml.safe_load(f.read_text(encoding="utf-8"))
+        try:
+            data = yaml.safe_load(f.read_text(encoding="utf-8"))
+        except yaml.YAMLError:
+            continue  # 跳过的 yaml 由 check_yaml 步骤处理
         if not isinstance(data, dict):
             continue
+        sys_name = f.stem
         for section, content in data.items():
             if isinstance(content, list):
                 for item in content:
                     if isinstance(item, dict) and "id" in item:
-                        ids_by_system[sys].add(item["id"])
+                        ids_by_system[sys_name].add(item["id"])
 
     rels_path = ROOT / "data" / "relations.yaml"
     if not rels_path.exists():
         return
-    rels = yaml.safe_load(rels_path.read_text(encoding="utf-8")).get("relations", [])
+    try:
+        rels = yaml.safe_load(rels_path.read_text(encoding="utf-8")).get("relations", [])
+    except yaml.YAMLError:
+        return
     broken = []
     for r in rels:
         for side in ("from", "to"):

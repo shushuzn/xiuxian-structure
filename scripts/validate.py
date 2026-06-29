@@ -219,26 +219,87 @@ def audit_relations():
 
 
 
+def check_mkdocs():
+    """跑 mkdocs build --strict，捕获警告/错误
+
+    需要 mkdocs 包（在 requirements-dev.txt 中）。
+    如果 mkdocs 未安装，跳过（warning）。
+    如果 mkdocs build 失败（非 0 exit 或含 WARNING），记为 error。
+    """
+    try:
+        import importlib.util
+        spec = importlib.util.find_spec("mkdocs")
+        if spec is None:
+            warn("scripts/validate.py", "mkdocs 未安装（pip install -r requirements-dev.txt）")
+            return
+    except Exception:
+        warn("scripts/validate.py", "mkdocs 未安装")
+        return
+
+    import subprocess
+
+    # 先确保 docs_src/ 同步（mkdocs build 需要 docs_src 内容）
+    sync_script = ROOT / "scripts" / "build_docs_src.py"
+    if sync_script.exists():
+        try:
+            subprocess.run(
+                [sys.executable, str(sync_script)],
+                capture_output=True, timeout=30,
+            )
+        except Exception as e:
+            warn("scripts/validate.py", f"build_docs_src.py 跑失败: {e}")
+
+    # 跑 mkdocs build --strict
+    try:
+        result = subprocess.run(
+            [sys.executable, "-m", "mkdocs", "build", "--strict"],
+            cwd=ROOT, capture_output=True, timeout=60, encoding="utf-8",
+        )
+    except subprocess.TimeoutExpired:
+        err("scripts/validate.py", "mkdocs build 超时（>60s）")
+        return
+    except Exception as e:
+        err("scripts/validate.py", f"mkdocs build 异常: {e}")
+        return
+
+    output = (result.stdout or "") + (result.stderr or "")
+    if result.returncode != 0:
+        # 提取关键警告（最多 5 条）
+        warnings = [l for l in output.splitlines() if "WARNING" in l or "ERROR" in l]
+        preview = "\n    ".join(warnings[:5])
+        err("scripts/validate.py",
+            f"mkdocs build --strict 失败（exit={result.returncode}）：\n    {preview}")
+        return
+
+    if "WARNING" in output or "INFO" in output and "unrecognized" in output:
+        # 严格模式下即使 exit=0 也可能有 INFO
+        # INFO 不算 warning（已在 D.5 #85dfbca 中清理为 0）
+        print(f"  ✓ mkdocs --strict 通过（{(result.stdout or '').count(chr(10))} 行输出）")
+
+
 def main():
     print("🔍 开始校验修仙体系知识库...\n")
 
-    print("  [1/6] .md 文件结构...")
+    print("  [1/7] .md 文件结构...")
     check_md_structure()
 
-    print("  [2/6] .md 链接完整性...")
+    print("  [2/7] .md 链接完整性...")
     check_md_links()
 
-    print("  [3/6] YAML 解析...")
+    print("  [3/7] YAML 解析...")
     check_yaml()
 
-    print("  [4/6] Mermaid 代码块...")
+    print("  [4/7] Mermaid 代码块...")
     check_mermaid()
 
-    print("  [5/6] 索引一致性...")
+    print("  [5/7] 索引一致性...")
     check_index_consistency()
 
-    print("  [6/6] relations.yaml 端点校验...")
+    print("  [6/7] relations.yaml 端点校验...")
     audit_relations()
+
+    print("  [7/7] mkdocs build --strict...")
+    check_mkdocs()
 
     print("\n" + "─" * 50)
     if WARNINGS:

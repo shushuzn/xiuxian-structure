@@ -2,6 +2,50 @@
 
 本仓库所有重要变更会记录在此。格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [3.0.1] - 2026-06-29
+
+### 指标同步 + 跨平台修复 + 依赖升级
+
+**新增工具**：
+- 📄 `data/schema.json` — 30 个 yaml 的结构校验 schema，供 `validate.py` 第 4 步使用
+- 🐍 `scripts/build_docs_src.py` — 跨平台同步 `docs_src/`（Windows 兼容）
+
+**数据 ID 规范化**（中文 → 英文）：
+- `data/ascension.yaml` `barrier_strengths` — `ren_jie_ling_jie` 等 4 项
+- `data/zong_men.yaml` `foreign_relations` — `luo_yun_tai_yi` 等 6 项
+
+**链接修复**：
+- 魔界/冥界 8 个 `.md` 文件中的 `#总览` 失效链接 → 指向真实框架文件（10 处替换）
+
+**测试跨平台兼容**：
+- `tests/test_*.py` 给 `open()` 加 `encoding='utf-8'`（Windows GBK 解码失败修复）
+- `tests/test_validate.py` 给 `subprocess.run()` 加 `encoding='utf-8'` + `env=PYTHONIOENCODING=utf-8`
+
+**依赖升级**（10 个 dependabot PR + 2 个 actions）：
+- pydantic 2.5 → 2.13.4
+- starlette <1.0 → <2.0
+- pytest 7.4 → 9.1.1
+- pytest-cov 4.1 → 7.1.0
+- pyyaml 6.0 → 6.0.3
+- uvicorn 0.27 → 0.49.0
+- mkdocs 1.5 → 1.6.1
+- mkdocs-material 9.4 → 9.7
+- ruff 0.1 → 0.15.18
+- codecov 2.1 → 2.1.13
+- actions/checkout 4 → 7
+- actions/setup-python 5 → 6
+
+**指标同步**（README 与实际状态对齐）：
+- 数据文件：29 → 30 yaml
+- 文档数：445 → 269 个 .md
+- 单测：238 → 245 个
+
+**验证结果**：
+- ✅ `validate.py`：0 警告通过
+- ✅ `pytest tests/`：245 passed
+
+---
+
 ## [3.0.0] - 2026-06-23
 
 ### v3.0 收官总结 🎉

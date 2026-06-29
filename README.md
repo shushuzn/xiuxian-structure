@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/github/license/shushuzn/xiuxian-structure)](LICENSE)
 [![PRs](https://img.shields.io/github/issues-pr-closed/shushuzn/xiuxian-structure)](https://github.com/shushuzn/xiuxian-structure/pulls?q=is%3Apr+is%3Aclosed)
 
-**v3.0.0** · **27 体系** · 29 yaml · 445 .md · 336 关系 · 238 tests · [📖 阅读更新日志](CHANGELOG.md)
+**v3.0.1** · **27 体系** · 30 yaml · 269 .md · 336 关系 · 245 tests · [📖 阅读更新日志](CHANGELOG.md)
 
 ---
 
@@ -19,12 +19,12 @@
 | 指标 | 数值 |
 |---|---|
 | **体系数** | 27 个 (含 9 大主体系) |
-| **数据文件** | 29 个 yaml |
-| **文档数** | 445 个 .md |
+| **数据文件** | 30 个 yaml |
+| **文档数** | 269 个 .md（根目录，docs_src/ 由 mkdocs 同步） |
 | **关系图** | 336 关系 / 249 节点 |
-| **单测** | 238 个 (coverage 83.69%) |
-| **互动故事** | 5 个演示 (含 v28/v29/v215) |
-| **演示小说** | 3 个 (韩立 vol1/vol2 + 敖越) |
+| **单测** | 245 个（pytest 9.x，coverage 83.69%） |
+| **互动故事** | 9 个演示（含 v28/v29/v215/v31 + demo_sijie） |
+| **演示小说** | 3 个（韩立 vol1/vol2 + 敖越） |
 | **CI 流水线** | validate (Python 3.9+3.12) + docs (mkdocs) |
 | **文档站** | https://shushuzn.github.io/xiuxian-structure/ |
 

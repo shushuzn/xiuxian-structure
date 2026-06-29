@@ -152,6 +152,8 @@ nav:
       - v2.8 互动引擎: stories/v28_demo.md
       - v2.9 世界书/成就/AI 叙事: stories/v29_demo.md
       - v2.15 跨境界试炼: stories/v215_demo.md
+      - v3.1 跨体系大冒险: stories/v31_demo.md
+      - v3.2 schema.json 校验的体系穿越: stories/v32_demo.md
   - 文档:
       - 概念汇总: docs/概念汇总.md
       - 元文档:

@@ -14,7 +14,7 @@ pymdown-extensions>=10.0
 
 # Lint / Format
 ruff>=0.15.18
-mypy>=0.991
+mypy>=2.1.0
 
 # Coverage 上传（CI 用）
 codecov>=2.1.13

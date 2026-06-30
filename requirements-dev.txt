@@ -13,7 +13,7 @@ pymdown-extensions>=10.0
 # v2.18: sitemap 内置在 mkdocs-material 中
 
 # Lint / Format
-ruff>=0.15.18
+ruff>=0.15.20
 mypy>=0.991
 
 # Coverage 上传（CI 用）

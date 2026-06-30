@@ -9,7 +9,7 @@ pytest-cov>=7.1.0
 mkdocs>=1.6.1
 mkdocs-material>=9.7.6
 mkdocs-material[imaging]>=9.7.6
-pymdown-extensions>=10.0
+pymdown-extensions>=11.0
 # v2.18: sitemap 内置在 mkdocs-material 中
 
 # Lint / Format
